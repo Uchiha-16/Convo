@@ -1,0 +1,233 @@
+html {
+    scroll-behavior: smooth;
+}
+body{
+    margin: 0;
+    background: #19758D;
+    mix-blend-mode: normal;
+    font-family: 'Inter';
+    font-style: normal;
+    color: white;
+    width: 100%;
+    height: 100%;
+}
+#body{
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(63.35% 100% at 50% 0%, rgba(255, 255, 255, 0.17) 0%, rgba(0, 0, 0, 0.31) 100%);
+    mix-blend-mode: overlay;
+}
+::placeholder{
+    text-align: center;
+    color: #828282;
+}
+
+/* or, for legacy browsers */
+
+::-webkit-input-placeholder{
+    text-align: center;
+    color: #828282;
+}
+
+:-moz-placeholder{ /* Firefox 18- */
+    text-align: center; 
+    color: #828282;
+}
+
+::-moz-placeholder{  /* Firefox 19+ */
+    text-align: center; 
+    color: #828282;
+}
+
+:-ms-input-placeholder{  
+    text-align: center; 
+    color: #828282;
+}
+input:focus::-webkit-input-placeholder { color:transparent; }
+input:focus:-moz-placeholder { color:transparent; } /* FF 4-18 */
+input:focus::-moz-placeholder { color:transparent; } /* FF 19+ */
+input:focus:-ms-input-placeholder { color:transparent; } /* IE 10+ */
+textarea:focus::-webkit-input-placeholder { color:transparent; }
+textarea:focus:-moz-placeholder { color:transparent; }
+textarea:focus::-moz-placeholder { color:transparent; }
+textarea:focus:-ms-input-placeholder { color:transparent; }
+input[type=date]::-webkit-calendar-picker-indicator {
+    position: absolute;
+    padding-left: 20%;
+}
+a:hover{
+    color: black;
+    transition: 0.2s
+}
+input, textarea{
+    font-weight: 400;
+    font-size: 20px;
+    text-align: center;
+    border-bottom: 4px solid #00A7AE;
+    box-shadow: rgba(81, 203, 238, 1);
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    width: 65%;
+    height: 3rem;
+}
+input[type=text], input[type=password], input[type=email], input[type=date], input[type=number], textarea{
+    transition: all .3s ease-in-out;
+}
+input[type=submit], input[type=button]{
+    background: #19758D;
+    border-radius: 10px;
+    cursor: pointer;
+    border: none;
+    color: white;
+    font-family: 'Raleway';
+    font-weight: 700;
+}
+input[type=submit]:hover, input[type=button]:hover{
+    background: #0c5e73;
+    transition: 0.2s;
+}
+input[type=text]:focus, input[type=password]:focus, input[type=email]:focus, input[type=date]:focus, input[type=number]:focus, textarea:focus{
+    outline: none;
+    border-radius: 10px;
+}
+p{
+    color: black;
+}
+a{
+    color: #19758D;
+    text-decoration: none;
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+a:after{
+    display: block;
+    content: '';
+    border-bottom: solid 1px black;  
+    transform: scaleX(0);  
+    transition: transform 250ms ease-in-out;
+    transform-origin:100% 50%;
+}
+a:hover:after{ 
+    transform: scaleX(1);
+    transform-origin:0 50%;
+}
+/*================================================= LOGIN PAGE ===================================================*/
+.grid-container{
+    z-index: 10;
+    position: absolute;
+    left: 10%;
+    right: 10%;
+    top: 12.31%;
+    bottom: 13.33%;
+    background: #FFFFFF;
+    box-shadow: 0px 9px 10px 2px rgba(0, 0, 0, 0.23);
+    border-radius: 50px;
+    display: grid;
+    grid-template-columns: 60% 40%;
+    text-align: center;
+}
+.title{
+    font-family: 'Raleway';
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 56px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #19758D;
+}
+.c1 form{
+    margin-top: 7rem;
+}
+.c2{
+    display: grid;
+    grid-template-rows: auto auto;
+    padding-right: 8rem;
+}
+#gif{
+    Width:398px;
+    Height:398px;
+    margin: 2rem;
+    margin-bottom: 0;
+    margin-left: 0;
+}
+#logo{
+    width: 55%;
+    margin-right: 6rem;
+}
+.c2 p{
+    left: 69.86%;
+    top: 78.22%;
+    font-family: 'Raleway';
+    font-style: italic;
+    font-weight: 600;
+    font-size: 14px;
+    text-align: center;
+    color: #3B555D;
+    margin-right: 6rem;
+}
+.c2-c2{
+    position: absolute;
+    top: 400px;
+}
+/*==================================================== SIGN UP ===================================================*/
+#choose{
+    font-style: italic;
+    font-weight: 400;
+    font-size: 14px;
+    color: #3B555D;
+}
+#Stitle{
+    line-height: 0;
+}
+.tag-border{
+    border-bottom: 4px solid #00A7AE;
+    box-shadow: rgba(81, 203, 238, 1);
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+
+.flash-msg {
+    color: black;
+    padding: 10px;
+    cursor: pointer;
+    text-align: center;
+    margin-top: -17px;
+}
+
+.error {
+    color: red;
+    font-size: 12px;
+    margin-top: 1rem;
+    margin-left: 1rem;
+}
+/*==================================================== FOOTER ===================================================*/
+footer{
+    z-index: 1;
+    text-align: center;
+    position: absolute;
+    width: 100%;
+    height: 65px;
+    bottom: 0;
+    font-size: 14px;
+}
+footer a{
+    z-index: 20;
+    color: white;
+}
+footer a:hover{
+    color: white;
+}
+footer a:after{
+    border-bottom: solid 1px white;
+}
+footer p{
+    display: inline;
+    font-size: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    color: #0D5F75;
+}

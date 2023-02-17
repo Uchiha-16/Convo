@@ -1,0 +1,244 @@
+body{
+    overflow: hidden;
+}
+#body{
+    position: absolute;
+}
+.grid{
+    position: absolute;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 40% 50% 10%;
+    text-align: center;
+}
+.c1{
+    grid-column-start: 1;
+    width: 100%;
+    margin: auto;
+}
+.c1 p, #choose{
+    color: white;
+}
+.icon{
+    width: 70%;
+}
+#logo{
+    width: 50%;
+    margin: 0;
+}
+.quote{
+    font-family: 'Raleway';
+    font-style: italic;
+    font-size: 14px;
+    color: #3B555D;
+    margin-right: 6rem;
+    text-align: center;
+    margin: 0;
+    margin-top: 5px;
+}
+.c1 h2{
+    font-style: italic;
+    color: white;    
+    text-shadow: 1.5px 0 white;
+    letter-spacing:1px;
+    font-weight:bold;
+    line-height: 48px;
+    margin: 0;
+}
+.desc{
+    font-weight: lighter;
+    font-size: 17px;
+    margin: 0;
+    line-height: 20px;
+}
+#choose{
+    text-decoration: none;
+    position: relative;
+    display: inline-block;
+}
+#choose:after, #choose p:hover{
+    border-bottom: none;
+    color: lightskyblue;
+    transition: .2s;
+}
+.grid-container-seeker{
+    background: white;
+    box-shadow: 0px 9px 10px 2px rgba(0, 0, 0, 0.23);
+    text-align: center;
+    padding-top: 28px;
+    overflow: scroll;
+    scroll-behavior: smooth;
+}
+.grid-container-seeker div{
+    margin: auto;
+}
+.user-img{
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin: 15% 45%;
+}
+
+#photo{
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+}
+#file{
+    display: none;
+}
+#uploadbtn{
+    border-radius: 50%;
+    cursor: pointer;
+}
+table{
+    margin: auto;
+    text-align: center;
+    margin-top: 20px;
+    width: 60%;
+}
+td, td ul li label{
+    padding-bottom: 10px;
+}
+input{
+    font-size: 16px;
+    height: 30px;
+    width: 100%;
+}
+input[type=checkbox]{
+    width: 16px;
+    height: 16px;
+}
+input[type=submit]{
+    height: 45px;
+    font-weight: 600;
+}
+.right{
+    padding-right: 25px;
+}
+.left{
+    padding-left: 25px;
+}
+.dropdown-div{
+    height: 2.7rem;
+    font-family: 'Inter';
+    font-size: 13px;
+    margin-bottom: 10px;
+}
+::-webkit-scrollbar {
+    width: 20px;
+    cursor: pointer;
+}
+.dropdown::-webkit-scrollbar-thumb {
+    background-color: #19758D;
+    cursor: pointer;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #828282;
+    border-radius: 20px;
+    border: 6px solid transparent;
+    background-clip: content-box;
+    cursor: pointer;
+}
+.dropdown::-webkit-scrollbar-track {
+    background-color: #e6e6e6;
+    opacity: .5;
+    border-radius: 10px;
+}
+table label{
+    color: #828282;
+}
+#clarify{
+    position: absolute;
+    width: 17px;
+    height: 17px;
+    left: 1200px;
+    top: 545px;
+    cursor: pointer;
+}
+.text{
+    position: absolute;
+    right: 11.5%;
+    top: 490px;
+    width: 9%;
+    color: black;
+    font-size: 12px;
+    padding: 8px;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    display: none;
+}
+.tag-border{
+    padding-bottom: 11.5rem;
+}
+.dropdown-div{
+    user-select: none;
+    font-size: 14px;
+}
+ul.dropdown{
+    list-style: none;
+    height: 155px;
+    padding: 15px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+ul.dropdown li{
+    display: inline;
+}
+ul.dropdown li label{
+    display: inline-block;
+    background-color: rgba(255, 255, 255, .9);
+    border: 2px solid rgba(139, 139, 139, .3);
+    color: #828282;
+    border-radius: 25px;
+    white-space: nowrap;
+    margin: 3px 0px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    transition: all .2s;
+}
+ul.dropdown li label {
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 12px;
+}
+ul.dropdown li label::before {
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    padding: 2px 6px 2px 2px;
+    content: "\f067";
+    transition: transform .3s ease-in-out;
+}
+
+ul.dropdown li input[type="checkbox"]:checked + label::before {
+    content: "\f00c";
+    transform: rotate(-360deg);
+    transition: transform .3s ease-in-out;
+}
+
+ul.dropdown li input[type="checkbox"]:checked + label {
+    background-color: #19758d;
+    color: #fff;
+    transition: all .2s;
+}
+
+ul.dropdown li input[type="checkbox"] {
+    position: absolute;
+    top: 36rem;
+    opacity: 0;
+}
+ul.dropdown li input[type="checkbox"]:focus + label {
+    border: 2px solid #9fa4a8;
+    display: absolute;
+}

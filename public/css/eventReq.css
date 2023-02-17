@@ -1,0 +1,298 @@
+/*============================ LHS =========================*/
+.question-div{
+    margin-right: 3rem;
+    margin-bottom: 3rem;
+    height: auto;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 21px rgba(0, 0, 0, 0.07);
+    display: grid;
+    grid-template-columns: 10% 70% 20%;
+    border-radius: 15px;
+    padding: 1rem 0rem 1rem 1rem;
+}
+.info{
+    display: grid;
+    grid-template-rows: 20% 60% 20%;
+    justify-content: center;
+}
+.qdp{
+    display: grid;
+    grid-template-columns: 60px auto;
+}
+.qdp img{
+    border-radius: 50%;
+    width: 60px;
+}
+.qdp-1{
+    font-weight: 600;
+    font-size: 14px;
+    padding-left: 1rem;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.qdp-1-2{
+    color: #7E7E7E;
+    font-size: 12px;
+}
+.tags{
+    padding-top: 1rem;
+    padding-top: 1rem;
+    padding-right: 1rem;
+    margin-top: .5rem;
+}
+.tags label{
+    font-size: 14px;
+    color: #7E7E7E;
+}
+.tag{
+    background: #DEDEDE;
+    border-radius: 5px;
+    border: none;
+    height: 20px;
+    width: auto;
+    font-size: 14px;
+    line-height: 20px;
+    padding: 4px 25px 4px 25px;
+    text-align: center;
+    color: #6B6B6B;
+    margin-right: 1rem;
+    margin-top: .5rem;
+    display: inline-block;
+}
+.tag label{
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.date-count{
+    color: #7E7E7E;
+    font-size: 14px;
+}
+.content-display{
+    border-left: 1px solid rgba(128,128,128, .2);
+    padding-left: 1rem;
+}
+.content-display p{
+    font-size: 14px;
+    color: #232323;
+    font-weight: 100;
+}
+
+.read-more:hover{
+    background: #166981;
+    color: #FFFFFF;
+}
+.RHS{
+    padding: 0 1.5rem 0 3rem;
+}
+.filter-div{ 
+    color: black;
+    background: white;
+    box-shadow: 0px 4px 21px rgb(0 0 0 / 7%);
+    border-radius: 20px;
+    padding: 2rem;
+    height: 85.6%;
+}
+.filter-div img{
+    width: 22px;
+    margin-right: 1rem;
+}
+.filter-div label{
+    font-size: 18px;
+}
+.checkbox-1{
+    width: 100%;
+    padding: 10px 10px 10px 0;
+    margin: 0 auto;
+    user-select: none;
+    margin-top: 1rem;
+}
+.checkbox-title{
+    cursor: pointer;
+    font-size: 14px;
+}
+.arrow{
+    border: solid #7E7E7E;
+    border-width: 0 3px 3px 0;
+    border-radius: 2px;
+    margin-left: 5.6rem;
+}
+.down{
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+.up{
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+    display: none;
+}
+#checkbox-1, #checkbox-2, #checkbox-3{
+    display: none;
+    padding: 0;
+    overflow: scroll;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    height: 130px;
+}
+#checkbox-2, #checkbox-3{
+    overflow: hidden;
+    height: auto;
+}
+#checkbox-1 li, #checkbox-2 li, #checkbox-3 li{
+    list-style-type: none;
+}
+#checkbox-1 li label, #checkbox-2 li label, #checkbox-3 li label{
+    font-size: 13px;
+}
+#checkbox-1 li label input, #checkbox-2 li label input, #checkbox-3 li label input{
+    height: .9rem;
+    width: .9rem;
+    margin: 0;
+    margin-right: .5rem;
+}
+.go{
+    margin: 0;
+    padding: 3px 10px 3px 10px;
+    margin-left: 1.5rem;
+}
+
+/*============================ Event Req =========================*/
+
+.calander{
+    height: 9vh;
+    width: 1vw;
+    background: #FFFFFF;
+    border-radius: 0 0.5vw 0.5vw;
+    display: grid;
+    grid-template-rows: 40% 60%;
+    width: 5vw;
+    text-align: center;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    margin-top: 23%;
+}
+.cal1{
+    background-color: #0D5F75;
+    border-radius:0.5vw 0.5vw 0 0;
+    color: white;
+    font-size: 1vw;
+    font-weight: 600;
+    position: relative;
+    padding: 4px;
+}
+.cal2{
+    position: relative;
+    font-size: 1.75vw;
+    font-weight: 700;
+    color: #0D5F75;
+    padding-top: 2px;
+
+}
+
+.name-label {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 2px 40px 3px 40px;
+    background-color: rgba(0, 167, 174, 0.5);
+    color: #12667B;
+    border-radius: 3px;
+}
+
+.time-label {
+    font-size: 12px;
+    font-weight: 500;
+    padding: 2px 40px 2px 40px;
+    margin-left: 10px;
+    color: #5A5A5A;
+    border: 1px solid rgba(102,97,97,0.5);
+    border-radius: 3px;
+}
+.accept {
+    width: 48%;
+    color: #ffffff;
+    font-weight: 500;
+    font-size: 15px;
+    border: 1px solid rgba(22, 105, 129, .2);
+    border-radius: 5px;
+    padding: 5px 20px 5px 20px;
+    /* filter: drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.25)); */
+    cursor: pointer;
+    transition: .3s;
+    border-color: #1D8FAC;
+    background-color: #0D5F75;
+}
+.decline{
+    width: 48%;
+    color: #1D8FAC;
+    font-weight: 500;
+    font-size: 15px;
+    border: 1px solid rgba(22, 105, 129, .2);
+    border-radius: 5px;
+    padding: 5px 20px 5px 20px;
+    filter: drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.25));
+    cursor: pointer;
+    transition: .3s;
+    border-color: #1D8FAC;
+    background-color: white;
+}
+.appointment {
+    width: 10.29rem;
+    color: #FFFFFF;
+    font-weight: 500;
+    font-size: 15px;
+    background-color: #166981;
+    border-radius: 50px 0px 0px 50px;
+    padding: 7px 20px 5px 20px;
+    text-align: center;
+    height: 22px;
+    margin-top: 15px;
+}
+
+.attend{
+    font-size: 18px;
+    background: #19758D;
+    color: #FFFFFF;
+}
+.accept{
+    background: #166981;
+    color: #FFFFFF;
+    border: 1px solid rgba(25, 117, 141, 0.14);
+}
+.decline:hover{
+    background: #166981;
+    color: #FFFFFF;
+    border: 1px solid rgba(25, 117, 141, 0.14);
+}
+.accept:hover{
+    color: #1D8FAC;
+    background: white;
+    border: 1px solid rgba(22, 105, 129, .2);
+    border-color: #1D8FAC;
+}
+/*========================= footer =======================*/
+footer{
+    position: relative;
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem; 
+}
+footer, footer a, footer a:hover{
+    color: black;
+}
+footer a:after{
+    border-bottom: solid 1px black;
+    color: black;
+}
+
+/*========================= helppage =======================*/
+
+.p1 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 1px;
+}
+
+.p2 {
+    font-size: 14px;
+    font-weight: 500;
+    color: #5A5A5A;
+    margin-bottom: 10px;
+}

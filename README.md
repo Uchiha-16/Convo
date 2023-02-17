@@ -1,3 +1,3 @@
-# Convo
-SCS 2202 - 2nd Year Group Project -
+# Convo-2.0
+2nd Year Group Project
 Group CS04
