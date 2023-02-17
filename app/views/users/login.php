@@ -29,7 +29,7 @@
     <body>
         <div class="grid-container">
             <div class="c1">
-                <form action="" method="POST">
+                <form action="<?php echo URLROOT;?>/Users/login" method="POST">
                     <p class="title">log-in</p>
                     <input type="text" placeholder="Enter Username" class="intext" name="uname"  value="<?php echo $data['uname']; ?>" /><br><br>
                     <span class="error"><?php echo $data['uname_err']; ?></span><br>
