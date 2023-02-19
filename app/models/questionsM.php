@@ -5,7 +5,7 @@
         public function __construct() {
             $this->db = new Database;
         }
-
+//****************************************************************Create Question************************************************************************************************************* */
         public function add($data) {
             $this->db->query('INSERT into question (title, content, date, visibility, rating, userID) VALUES (:title, :content, :date, :visibility, :rating, :userID)');
             // Bind values
@@ -54,6 +54,7 @@
             $row = $this->db->resultSet();
             return $row;
         }
+//****************************************************************Retrive Questions************************************************************************************************************* */
 
         //getQuestions
         public function getQuestions() {
@@ -72,7 +73,8 @@
             return $row;
         }
 
-        //update Question
+//****************************************************************Edit Question************************************************************************************************************* */
+
         public function edit($data) {
             $this->db->query('UPDATE question SET title = :title, content = :content, date = :date, visibility = :visibility WHERE QID = :QID');
             // Bind values
@@ -89,6 +91,7 @@
                 return false;
             }
         }
+
     //Get Question by ID
         public function getQuestionByID($QID) {
             $this->db->query('SELECT question.QID as QID, question.title as title, question.content as content, question.visibility as visibility,
@@ -123,6 +126,18 @@
             return false;
         }
     }
+
+//****************************************************************Delete Question************************************************************************************************************* */
+    
+            public function delete($QID) {
+                $this->db->query('DELETE FROM question WHERE QID = :QID');
+                $this->db->bind(':QID', $QID);
+                if($this->db->execute()) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
 }
 
 ?>

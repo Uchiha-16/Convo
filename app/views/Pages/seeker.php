@@ -1,5 +1,6 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 
+
     </head>
 <body>
 <?php require APPROOT . '/views/inc/components/Snavbar.php'; ?>
@@ -9,7 +10,6 @@
             <div class="content-body">
                 <div class="LHS">
                     <h3>Questions and Discussions</h3><br>
-                   <?php echo $_SESSION['userID']; ?>
                      Question 1
                      <div class="question-div">
                         <div class="info">
@@ -69,13 +69,16 @@
                             </div>
                         </div>
                     </div>
-
+                <div class="flash-msg">
+                    <?php flash('reg_flash'); ?>
+                </div> 
 
 
         </div>
 
 
                 <div class="RHS">
+                <form action="<?php echo URLROOT;?>/Questions/myquestions"><button type="submit" style="float:right" class="read-more attend">My Questions</button></form>
                     <div class="filter-div">
                         <div style="display:flex">
                             <img src="../img/filter.png">

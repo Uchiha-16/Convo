@@ -190,8 +190,26 @@
                     'content_err' => '',
                     'tag_err' => '',
                 ];
-                $this->view('questions/myQuestions', $data);
+                $this->view('questions/editQuestion', $data);
             }
         }
+
+        public function delete($QID) {
+                // Get existing post from model
+                $question = $this->questionModel->getQuestionByID($QID);
+                //check the owner of the question
+                if($question->userID != $_SESSION['userID']){
+                    redirect('questions/myQuestions');
+                }
+
+                if($this->questionModel->delete($QID)) {
+                    flash('reg_flash', 'Question Deleted Successfully!');
+                    redirect('questions/myQuestions');
+                } else {
+                    die('Something went wrong');
+                    redirect('questions/myQuestions');
+                }
+            }
+        
     }
 ?>

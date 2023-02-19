@@ -7,7 +7,7 @@
             <div class="dropdown-list">
                 <button class="dropbtn dropbtn-1" onclick="drop()"><img src="<?php echo URLROOT; ?>/img/plus.png" class="icon"> Add New</button>
                 <div class="dropdown-content" id="myDropdown">
-                    <a href="seeker/addQuestion.php">Question</a>
+                    <a href="<?php echo URLROOT;?>/Questions/add">Question</a>
                     <a href="seeker/addBlog.php" style="border-bottom:none;">Blog</a>
                 </div>
             </div>

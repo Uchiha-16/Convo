@@ -15,7 +15,7 @@
 
                     <div class="question-div add-event">
                         <form action="<?php echo URLROOT;?>/Questions/edit/<?php echo $data['QID']; ?>" method="POST">
-                        <?php echo $data['QID']; ?>
+                       
                             <table>
                                 <tr>
                                     <td colspan="3">
@@ -26,7 +26,7 @@
                                 <tr>
                                     <td colspan="3">
                                         <h4 style="margin-bottom:.5rem">Title <span class="star">*</span></h4>
-                                        <input class="inputform" type="text" name="title" placeholder="Enter title here..." value="<?php echo $data['title']; echo $data['QID']; ?>">
+                                        <input class="inputform" type="text" name="title" placeholder="Enter title here..." value="<?php echo $data['title'];?>">
                                         <span class="error"><?php echo $data['title_err']; ?></span>
                                     </td>
                                 </tr>

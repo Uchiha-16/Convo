@@ -4,6 +4,7 @@
 <body>
 <?php require APPROOT . '/views/inc/components/Snavbar.php'; ?>
 
+
    <!-- body content -->
    <div class="container-div">
             <div class="content-body">
@@ -32,12 +33,12 @@
                                 <?php endforeach; ?>
                                 <br><br>
                                 <?php if(empty($question->modID)) : ?>
-                                    <form action="<?php echo URLROOT;?>/Questions/edit/<?php echo $question->QID; ?>" method="post" style="width: 50%; float:left">
+                                    <form action="<?php echo URLROOT;?>/Questions/edit/<?php echo $question->QID;?>" style="width: 50%; float:left">
                                     <button class="read-more edit-btn" type="submit"> <img style="width: 17px;" src="../img/edit.png">Edit</button>
                                 </form>
                                 <form action="" style="width: 40%; float:left"></form>
-                                <form action="<?php echo URLROOT;?>/questions/delete" style="width: 50%; float:left">
-                                    <button class="read-more edit-btn"> <img style="width: 17px;" src="../img/delete.png">Delete</button>
+                                <form action="<?php echo URLROOT;?>/questions/delete/<?php echo $question->QID;?>" style="width: 50%; float:left">
+                                    <button class="read-more edit-btn" onclick="return confirm('Are you sure you want to delete this record?')"> <img style="width: 17px;" src="../img/delete.png">Delete</button>
                                 </form>
                                 <?php endif; ?>
                             </div>
@@ -58,6 +59,9 @@
                         </div>
                     </div>
                 <?php endforeach; ?>
+                <div class="flash-msg">
+                    <?php flash('reg_flash'); ?>
+                </div>      
 
         </div>
 

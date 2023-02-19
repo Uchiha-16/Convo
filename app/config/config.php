@@ -3,7 +3,7 @@
     define('APPROOT', dirname(dirname(__FILE__)));
 
     //URLROOT
-    define('URLROOT', 'http://localhost/ConvoMVC');
+    define('URLROOT', 'http://localhost/Convo');
     
     //WEBSITE NAME
     define('SITENAME', 'Convo | Online Forum Website');
