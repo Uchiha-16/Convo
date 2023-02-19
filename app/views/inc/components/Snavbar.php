@@ -23,7 +23,7 @@
                     <a href="#">Projects</a>
                     <a href="#">Skill Test</a>
                     <a href="seeker/subscriptionpage.php">Subscription</a>
-                    <a href="./logout.php" style="border-bottom:none">Log-out</a>
+                    <a href="<?php echo URLROOT?>/Users/logout" style="border-bottom:none">Log-out</a>
                 </div>
                 </div>
                 <?php else : ?>

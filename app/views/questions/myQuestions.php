@@ -14,6 +14,9 @@
 
 
                 <?php foreach ($data['questions'] as $question) : ?>
+                    <div class="alert success">
+                        <?php flash('reg_flash'); ?>
+                    </div>    
                      <div class="question-div">
                         <div class="info">
                             <div class="qdp">
@@ -47,7 +50,7 @@
                             <h3><?php echo $question->title;?></h3>
                             <p><?php echo $question->content;?></p>
                             <div class="date-count">
-                                <label><?php echo $question->date;?></label>
+                                <label><?php echo convertTime($question->date);?></label>
                                 <label style="font-weight:600; float:right"><?php echo $question->rating;?></label><br>
                                 <label style="font-weight:600; float:right">No Answers Yet</label><br>
                                 <?php if(empty($question->modID)) : ?>
@@ -59,9 +62,7 @@
                         </div>
                     </div>
                 <?php endforeach; ?>
-                <div class="flash-msg">
-                    <?php flash('reg_flash'); ?>
-                </div>      
+                  
 
         </div>
 
