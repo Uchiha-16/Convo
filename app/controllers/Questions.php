@@ -109,7 +109,7 @@
                 $checkbox_value = isset($_POST['visibility']) ? 'anonymus' : 'public';
                 $tag = isset($_POST['tag']) ? $_POST['tag'] : '0';
                 $resourceID = isset($_POST['resourceID']) ? $_POST['resourceID'] : '0';
-
+                
                 //Input Data
                 $data = [
                     'QID' => $QID,
@@ -123,6 +123,8 @@
                     'content_err' => '',
                     'tag_err' => '',
                 ];
+
+                
 
                 //validate each inputs
                 // Validate Title
@@ -149,17 +151,17 @@
 
                 // Make sure errors are empty
                 if(empty($data['title_err']) && empty($data['content_err']) && empty($data['tag_err'])) {
-                    // Adding Question
+                    // Updating the Question
+                    $this->questionModel->deleteQuestionTag($QID);
                     if($this->questionModel->edit($data)) {
-                        $LastID = $this->questionModel->getLastID();
                         foreach($data['tag'] as $tag){
-                           if(!($this->questionModel->questionTag($tag, $LastID->QID)))
+                           if(!($this->questionModel->questionTag($tag, $QID)))
                             {
                                 die('Something went wrong with inserting the tags');
                             }
                         }
                             flash('reg_flash','Question Updated Successfully');
-                            redirect('questions/editQuestion');
+                            redirect('questions/myQuestions');
                         
                     } else {
                         die('Something went wrong');
@@ -172,12 +174,14 @@
             else {
 
                 $question = $this->questionModel->getQuestionByID($QID);
-
+                
+                //check the owner of the question
                 if($question->userID != $_SESSION['userID']){
-                    redirect('questions/myquestions');
+                    redirect('questions/myQuestions');
                 }
 
                 $data = [
+                    'QID' => $QID,
                     'title' => $question->title,
                     'content' => $question->content,
                     'tag' =>  $question->tags,
@@ -186,7 +190,7 @@
                     'content_err' => '',
                     'tag_err' => '',
                 ];
-                $this->view('questions/editQuestion', $data);
+                $this->view('questions/myQuestions', $data);
             }
         }
     }

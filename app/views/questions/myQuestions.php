@@ -8,7 +8,8 @@
    <div class="container-div">
             <div class="content-body">
                 <div class="LHS">
-                    <h3>My Questions</h3><br>
+                    
+                    <h3><?php echo $_SESSION['firstName'].' '. $_SESSION['lastName'];?>'s Questions</h3><br>
 
 
                 <?php foreach ($data['questions'] as $question) : ?>
@@ -31,7 +32,7 @@
                                 <?php endforeach; ?>
                                 <br><br>
                                 <?php if(empty($question->modID)) : ?>
-                                    <form action="<?php echo URLROOT;?>/questions/edit/<?php echo $question->QID; ?>" style="width: 50%; float:left">
+                                    <form action="<?php echo URLROOT;?>/Questions/edit/<?php echo $question->QID; ?>" method="post" style="width: 50%; float:left">
                                     <button class="read-more edit-btn" type="submit"> <img style="width: 17px;" src="../img/edit.png">Edit</button>
                                 </form>
                                 <form action="" style="width: 40%; float:left"></form>

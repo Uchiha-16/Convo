@@ -33,9 +33,9 @@
 
         //Insert Tag
         public function questionTag($tag, $LastID) {
-                $this->db->query('INSERT INTO questiontag (QID, tag) VALUES(:user_id, :tag)');
+                $this->db->query('INSERT INTO questiontag (QID, tag) VALUES(:QID, :tag)');
                 // Bind values
-                $this->db->bind(':user_id', $LastID);
+                $this->db->bind(':QID', $LastID);
                 $this->db->bind(':tag', $tag);
 
             // Execute
@@ -72,7 +72,7 @@
             return $row;
         }
 
-    //update Question
+        //update Question
         public function edit($data) {
             $this->db->query('UPDATE question SET title = :title, content = :content, date = :date, visibility = :visibility WHERE QID = :QID');
             // Bind values
@@ -97,6 +97,32 @@
             $row = $this->db->single();
             return $row;
         }
+
+        //Delete QuestionTag
+        public function deleteQuestionTag($QID) {
+            $this->db->query('DELETE FROM questiontag WHERE QID = :QID');
+            $this->db->bind(':QID', $QID);
+            if($this->db->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        //Update Tags
+        public function UpdateQTag($tag, $LastID) {
+            $this->db->query('UPDATE questiontag SET  VALUES(:user_id, :tag)');
+            // Bind values
+            $this->db->bind(':user_id', $LastID);
+            $this->db->bind(':tag', $tag);
+
+        // Execute
+        if($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
 
 ?>
