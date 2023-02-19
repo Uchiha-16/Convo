@@ -159,7 +159,7 @@
                             }
                         }
                             flash('reg_flash','Question Updated Successfully');
-                            redirect('questions/myQuestions');
+                            redirect('questions/editQuestion');
                         
                     } else {
                         die('Something went wrong');
@@ -172,6 +172,11 @@
             else {
 
                 $question = $this->questionModel->getQuestionByID($QID);
+
+                if($question->userID != $_SESSION['userID']){
+                    redirect('questions/myquestions');
+                }
+
                 $data = [
                     'title' => $question->title,
                     'content' => $question->content,

@@ -92,7 +92,7 @@
     //Get Question by ID
         public function getQuestionByID($QID) {
             $this->db->query('SELECT question.QID as QID, question.title as title, question.content as content, question.visibility as visibility,
-            GROUP_CONCAT(questiontag.tag SEPARATOR ",") as tags FROM question JOIN questiontag ON question.QID = questiontag.QID WHERE question.QID = :QID');
+            GROUP_CONCAT(questiontag.tag SEPARATOR ",") as tags, question.userID as userID FROM question JOIN questiontag ON question.QID = questiontag.QID WHERE question.QID = :QID');
             $this->db->bind(':QID', $QID);
             $row = $this->db->single();
             return $row;
