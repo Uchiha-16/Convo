@@ -1,22 +1,17 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
-
+        
+        <style>
+            .nav{
+                grid-template-columns: 5% 6% 6% 6% 51% 10% 4% 4% 4%;
+            }
+        </style>
     </head>
 <body>
-<?php require APPROOT . '/views/inc/components/Snavbar.php'; ?>
+<?php require APPROOT . '/views/inc/components/Enavbar.php'; ?>
 
-
-   <!-- body content -->
-   <div class="container-div">
+<div class="container-div">
             <div class="content-body">
                 <div class="LHS">
-                    
-                    <h3><?php echo $_SESSION['firstName'].' '. $_SESSION['lastName'];?>'s Questions</h3><br>
-
-
-                <?php foreach ($data['questions'] as $question) : ?>
-                    <div class="alert success">
-                        <?php flash('reg_flash'); ?>
-                    </div>    
                      <div class="question-div">
                         <div class="info">
                             <div class="qdp">
@@ -24,47 +19,63 @@
                                     <img src="../img/user.jpg"/>
                                 </div>
                                 <div class="qdp-1">
-                                    <label><?php echo $_SESSION['uname'];?></label><br>
-                                    <label class="qdp-1-2"><?php echo $_SESSION['firstName']." ".$_SESSION['lastName'];?></label>
+                                    <label><?php echo $data['Quser']->uname; ?></label><br>
+                                    <label class="qdp-1-2"><?php echo $data['Quser']->fName." ".$data['Quser']->lName;?></label>
                                 </div>
                             </div>
                             <div class="tags">
                                 <label>Category</label><br>
-                                <?php $tagArray = explode(",", $question->tags); ?>
+                                <?php $tagArray = explode(",", $data['question']->tags); ?>
                                 <?php foreach ($tagArray as $tag) : ?>
                                     <div class="tag"><?php echo $tag ?></div>
                                 <?php endforeach; ?>
                                 <br><br>
-                                <?php if(empty($question->modID)) : ?>
-                                    <form action="<?php echo URLROOT;?>/Questions/edit/<?php echo $question->QID;?>" style="width: 50%; float:left">
-                                    <button class="read-more edit-btn" type="submit"> <img style="width: 17px;" src="../img/edit.png">Edit</button>
-                                </form>
-                                <form action="" style="width: 40%; float:left"></form>
-                                <form action="<?php echo URLROOT;?>/questions/delete/<?php echo $question->QID;?>" style="width: 50%; float:left">
-                                    <button class="read-more edit-btn" onclick="return confirm('Are you sure you want to delete this record?')"> <img style="width: 17px;" src="../img/delete.png">Delete</button>
-                                </form>
-                                <?php endif; ?>
                             </div>
                         </div>
                         <div class="content-display">
-                            <h3><?php echo $question->title;?></h3>
-                            <p><?php echo $question->content;?></p>
+                            <h3><?php echo $data['question']->title;?></h3>
+                            <p><?php echo $data['question']->content;?></p>
                             <div class="date-count">
-                                <label><?php echo convertTime($question->date);?></label>
-                                <label style="font-weight:600; float:right"><?php echo $question->rating;?></label><br>
-                                <label style="font-weight:600; float:right">No Answers Yet</label><br>
-                                <?php if(empty($question->modID)) : ?>
-                                    <button style="float:right" class="read-more">Waiting For Approval</button>
-                                <?php else : ?>
-                                    <form action="<?php echo URLROOT;?>/answers/viewA/<?php echo $question->QID;?>">
-                                    <button style="float:right" class="read-more">READ MORE</button>
-                                </form>
-                                <?php endif; ?>
+                                <label><?php echo convertTime($data['question']->date);?></label>
+                                <label style="font-weight:600; float:right"><?php echo $data['question']->rating;?></label><br>
+                                <a href="" class="reactbtn"><img src="<?php echo URLROOT;?>/img/recommend.png" style="width: 12%"> Recommend</a>
+                                <a href="" class="reactbtn"><img src="<?php echo URLROOT;?>/img/share.png" style="width: 12%; text-decoration:none;" > Share</a>
                             </div>
                         </div>
                     </div>
-                <?php endforeach; ?>
-                  
+                    
+                    <h2><?php echo $data['count']->count;?> Answers</h2>
+                    <?php foreach($data['answers'] as $answer) :?>
+                    <div class="question-div">
+                        <div class="info">
+                            <div class="qdp">
+                                <div>
+                                    <img src="../img/user.jpg"/>
+                                </div>
+                                <div class="qdp-1">
+                                    <label><?php echo $answer->uname;?></label><br>
+                                    <label class="qdp-1-2"><?php echo $answer->fName." ".$answer->lName;?></label>
+                                </div>
+                            </div>
+                            <div class="tags">
+                                <?php $tagArray = explode(",", $answer->qualifications); ?>
+                                <?php foreach ($tagArray as $tag) : ?>
+                                    <div class="tag"><?php echo $tag ?></div>
+                                <?php endforeach; ?>
+                                <br><br>
+                            </div>
+                        </div>
+                        <div class="content-display">
+                            <h3><?php echo $answer->content;?></h3>
+                            <iframe width="560" height="315" src="<?php echo $answer->link?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                            <div class="date-count">
+                                <label><?php echo convertTime($answer->date);?></label>
+                                <label style="font-weight:600; float:right"><?php echo $answer->rating;?></label><br>
+                            </div>
+                        </div>
+                    </div>
+                    <?php endforeach; ?>
+
 
         </div>
 
@@ -72,7 +83,7 @@
                 <div class="RHS">
                     <div class="filter-div">
                         <div style="display:flex">
-                            <img src="../img/filter.png">
+                            <img src="<?php echo URLROOT; ?>/img/filter.png">
                             <label>Filters</label><button class="read-more go">Go</button>
                         </div>
                         <div>
@@ -298,3 +309,6 @@
 </html>
 
 <?php require APPROOT . '/views/inc/footer.php'; ?>
+  
+        
+        

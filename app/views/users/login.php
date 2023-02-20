@@ -38,7 +38,7 @@
                     <input type="submit" value="Log In" name="submit"/><br>
                     <p style="color: #19758D; font-weight:600">Don’t have an account? <a href="<? echo URLROOT; ?>/users/register">Sign Up</a></p>
                 </form>
-                <div class="flash-msg">
+                <div class="alert success">
                     <?php flash('reg_flash'); ?>
                 </div>
             </div>

@@ -385,6 +385,20 @@ input[type=search]{
     height: 20px;
 }
 
+.reactbtn {
+    border: none;
+    font-weight: bold;
+    width: 23%;
+    padding-top: 1.3rem;
+    padding-left: 5rem;
+    padding-right: 5rem;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: .5s;
+    font-family: 'Inter';
+}
+
 /*========================= footer =======================*/
 footer{
     position: relative;
