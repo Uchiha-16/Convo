@@ -5,9 +5,8 @@ Group CS04
 
 <h1 align="center">
   <br>
-  <img src="./public/img/logoNamep.png" alt="Convo" width="200">
+  <img src="./public/img/logoNamep.png" alt="Convo" width="500">
   <br>
-  Convo
   <br>
 </h1>
 
