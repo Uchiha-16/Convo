@@ -21,5 +21,15 @@
     
         $this->view('answers/viewA', $data);
     }
+
+    public function add($QID){
+        $question = $this->answersM->getQuestion($QID);
+        $Quser = $this->answersM->Quser($QID);
+        $data = [
+            'question' => $question,
+            'Quser' => $Quser,
+        ];
+        $this->view('answers/addA', $data);
+    }
 }
 ?>

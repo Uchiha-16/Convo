@@ -11,70 +11,40 @@
                 <div class="LHS">
                     <h3>Questions and Discussions</h3><br>
 
+                    <?php foreach($data['questions'] as $q): ?>
+                        <?php foreach($q as $question): ?>
 
-                     Question 1
                      <div class="question-div">
                         <div class="info">
                             <div class="qdp">
                                 <div>
-                                    <img src="<?php echo URLROOT;?>/img/pfp/<?php echo $_SESSION['pfp']; ?>"/>
+                                    <img src="<?php echo URLROOT;?>/img/pfp/<?php echo $question->pfp ?>"/>
                                 </div>
                                 <div class="qdp-1">
-                                    <label>Induwara Pathirana</label><br>
-                                    <label class="qdp-1-2">University of Colombo</label>
+                                    <label><?php echo $question->fName." ".$question->lName; ?></label><br>
+                                    <label class="qdp-1-2"><?php echo $question->uname ?></label>
                                 </div>
                             </div>
                             <div class="tags">
                                 <label>Category</label><br>
-                                <div class="tag">Syntax</div>
-                                <div class="tag">MATLAB</div>
-                                <div class="tag">Mathematics</div>
+                                <!-- <?php //$tagArray = explode(",", $data['tags']->tags); ?>
+                                <?php //foreach ($tagArray as $tag) : ?>
+                                    <div class="tag"><?php //echo $tag ?></div>
+                                <?php //endforeach; ?> -->
                             </div>
                         </div>
                         <div class="content-display">
-                            <h3>Can anyone tell me the syntax in Mathematica or MATLAB for finding the Lyapunov exponents for five-dimensional and six-dimensional systems?</h3>
-                            <p>Discription if it has any...</p>
+                            <h3><?php echo $question->title ?></h3>
+                            <p><?php echo $question->content ?></p>
                             <div class="date-count">
-                                <label>October 31, 2022</label>
+                                <label><?php echo convertTime($question->date);?></label>
                                 <label style="font-weight:600; float:right">3 Answers</label><br>
                                 <button style="float:right" class="read-more">READ MORE</button>
                             </div>
                         </div>
                     </div>
-                    
-                    Question 2
-                    <div class="question-div">
-                        <div class="info">
-                            <div class="qdp">
-                                <div>
-                                    <img src="../img/user.jpg"/>
-                                </div>
-                                <div class="qdp-1">
-                                    <label>Induwara Pathirana</label><br>
-                                    <label class="qdp-1-2">University of Colombo</label>
-                                </div>
-                            </div>
-                            <div class="tags">
-                                <label>Category</label><br>
-                                <div class="tag">Syntax</div>
-                                <div class="tag">MATLAB</div>
-                                <div class="tag">Mathematics</div>
-                            </div>
-                        </div>
-                        <div class="content-display">
-                            <h3>Can anyone tell me the syntax in Mathematica or MATLAB for finding the Lyapunov exponents for five-dimensional and six-dimensional systems?</h3>
-                            <p>Discription if it has any...</p>
-                            <div class="date-count">
-                                <label>October 31, 2022</label>
-                                <label style="font-weight:600; float:right">3 Answers</label><br>
-                                <button style="float:right" class="read-more">READ MORE</button>
-                            </div>
-                        </div>
-                    </div>
-                <!-- <div class="flash-msg">
-                    <?php //flash('reg_flash'); ?>
-                </div>  -->
-
+                        <?php endforeach; ?>
+                    <?php endforeach; ?>
 
         </div>
 

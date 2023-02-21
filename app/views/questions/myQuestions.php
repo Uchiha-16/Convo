@@ -21,7 +21,7 @@
                         <div class="info">
                             <div class="qdp">
                                 <div>
-                                    <img src="../img/user.jpg"/>
+                                    <img src="<?php echo URLROOT;?>/img/pfp/<?php echo $_SESSION['pfp']?>"/>
                                 </div>
                                 <div class="qdp-1">
                                     <label><?php echo $_SESSION['uname'];?></label><br>

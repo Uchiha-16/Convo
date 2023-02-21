@@ -7,7 +7,20 @@
     
 
     public function seeker() {
-        $data = [];
+        $usertag = $this->pagesM->getUserTag();
+        $tags = [];
+        foreach($usertag as $tag) {
+            array_push($tags, $tag->tag);
+        }
+
+        for($i = 0; $i < count($tags); $i++) {
+            $questions = $this->pagesM->getQuestions($tags[$i]);
+            $question[$i] = $questions;
+        }
+
+        $data = [
+            'questions' => $question,
+        ];
         $this->view('pages/seeker', $data);
     }
 
@@ -15,6 +28,7 @@
         $data = [];
         $this->view('pages/expert', $data);
     }
+    
     public function about() {
         $questions = $this->pagesM->getQuestions();
 

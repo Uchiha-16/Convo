@@ -232,7 +232,6 @@
             $_SESSION['firstName'] = $user->firstName;
             $_SESSION['lastName'] = $user->lastName;
             $_SESSION['pfp'] = $user->pfp;
-            redirect('pages/seeker');
         }
 
         public function logout() {
