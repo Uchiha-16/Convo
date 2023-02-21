@@ -1,32 +1,52 @@
-<?php require APPROOT . '/views/inc/header.php'; ?>
+<link href="../stylesheets/event.css" rel="stylesheet" type="text/css"/>
+        <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+        <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
+        <link rel="stylesheet" href="../stylesheets/mobile.css" rel="stylesheet" type="text/css">
 
-            <style>
-                .nav{
-                    grid-template-columns: 5% 6% 6% 6% 51% 10% 4% 4% 4%;
-                }
-            </style>
+        <!-- scripts -->
+        <script src="https://kit.fontawesome.com/a061f2abcc.js" crossorigin="anonymous"></script>
+        
+        
+        <!-- styles -->
+        <style>
+            .nav{
+                grid-template-columns: 5% 6% 6% 6% 51% 10% 4% 4% 4%;
+            }
+            .add-event textarea{
+                height: 23rem;
+            }
+            .filter-div{
+/*                margin-top: 3.6rem;*/
+                display: none;
+            }
+        </style>
+        
     </head>
-<body>
-<?php require APPROOT . '/views/inc/components/Enavbar.php'; ?>
-
-  <!-- body content -->
-  <div class="container-div">
+    <body>
+        <!-- nav bar -->
+        <?php include 'Enavbar.php'; ?>
+        
+        <!-- body content -->
+        <div class="container-div">
             <div class="content-body">
                 <div class="LHS">
-                    <h3>Related questions and discussions to answer...</h3><br>
+                    <br><br><br>
                     
                     <!-- Question 1 -->
                     <div class="question-div">
-                        <div class="info">
+                        <div class="content-display">
+                            <h2>What are some alternatives to String Theory that have been researched/developed?</h2>
+                            <p>The only finite mathematical framework that incorporates both the standard model of particle physics and gravity under one umbrella that I am aware of is string theory. I would like to know whether there are any other mathematical possibilities exist which do not depend on supersymmetry and still consistent with the standard model and gravity and produce finite answers. In a nutshell my question is: can there be any alternative to string theory? (Remember, I am not talking about only gravity. I am talking about gravity as well as other phenomena).</p>
                             <div class="qdp">
                                 <div>
-                                    <img src="../images/user.jpg"/>
+                                    <img src="../images/p2.jpg"/>
                                 </div>
                                 <div class="qdp-1">
                                     <label>Dilky Liyanage</label><br>
                                     <label class="qdp-1-2">University of Colombo</label>
                                 </div>
                             </div>
+                            <div class="info">
                             <div class="tags">
                                 <label>Category</label><br>
                                 <div class="tag">Physics</div>
@@ -34,54 +54,113 @@
                                 <div class="tag">Mathematics</div>
                             </div>
                         </div>
-                        <div class="content-display">
-                            <h3>What are some alternatives to String Theory that have been researched/developed?</h3>
-                            <p>Discription if it has any...</p>
                             <div class="date-count">
                                 <label>October 2, 2022</label>
                                 <label style="font-weight:600; float:right">1 Answer</label><br>
-                                <div class="read-more-btn">
-                                    <button class="read-more one" onClick="window.location.href='<?php echo URLROOT;?>/Answers/add'">Answer this question</button>
-                                    <button class="read-more two">Save for later</button>
-                                </div>
+                                <button class="read-more" style="width:100%;">Save for later</button>
                             </div>
                         </div>
-                    </div>
+                    </div> 
                     
-                    <!-- Question 2 -->
-                    <div class="question-div">
-                        <div class="info">
-                            <div class="qdp">
-                                <div>
-                                    <img src="../images/user.jpg"/>
-                                </div>
-                                <div class="qdp-1">
-                                    <label>Induwara Pathirana</label><br>
-                                    <label class="qdp-1-2">University of Colombo</label>
-                                </div>
-                            </div>
-                            <div class="tags">
-                                <label>Category</label><br>
-                                <div class="tag">Syntax</div>
-                                <div class="tag">MATLAB</div>
-                                <div class="tag">Mathematics</div>
-                            </div>
-                        </div>
-                        <div class="content-display">
-                            <h3>Can anyone tell me the syntax in Mathematica or MATLAB for finding the Lyapunov exponents for five-dimensional and six-dimensional systems?</h3>
-                            <p>Discription if it has any...</p>
-                            <div class="date-count">
-                                <label>October 31, 2022</label>
-                                <label style="font-weight:600; float:right">3 Answers</label><br>
-                                <div class="read-more-btn">
-                                    <button class="read-more one" >Answer this question</button>
-                                    <button class="read-more two">Save for later</button>
-                                </div>
-                            </div>
-                        </div>
+                    <!-- Answer -->
+                    <div class="question-div add-event">
+                        <form action="" method="POST">
+                            <h3 style="color: #0D5F75;">Add Answer</h3>
+                            <table>
+                                <tr>
+                                    <td colspan="3">
+                                        <p class="desc">Make sure to check the other answers before adding the same answer again. Enter a clear and concise answer that others will easily understand.</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        <div class="qdp">
+                                            <div>
+                                                <img src="../images/p1.jpg"/>
+                                            </div>
+                                            <div class="qdp-1">
+                                                <label>Varsha Wijethunge</label><br>
+                                                <label class="qdp-1-2">University of Colombo</label>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        <h4 style="margin-bottom:.5rem">Answer</h4>
+
+
+                                        <section>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="first box">
+                                                        <input id="font-size" type="number" value="16" min="1" max="100" onchange="f1(this)">
+                                                    </div>
+                                                    <div class="second box">
+                                                        <button type="button" onclick="f2(this)">
+                                                            <i class="fa-solid fa-bold"></i>
+                                                        </button>
+                                                        <button type="button" onclick="f3(this)">
+                                                            <i class="fa-solid fa-italic"></i>
+                                                        </button>
+                                                        <button type="button" onclick="f4(this)">
+                                                            <i class="fa-solid fa-underline"></i>
+                                                        </button>
+                                                    </div>
+                                                    <div class="third box">
+                                                        <button type="button" onclick="f5(this)">
+                                                            <i class="fa-solid fa-align-left"></i>
+                                                        </button>
+                                                        <button type="button" onclick="f6(this)">
+                                                            <i class="fa-solid fa-align-center"></i>
+                                                        </button>
+                                                        <button type="button" onclick="f7(this)">
+                                                            <i class="fa-solid fa-align-right"></i>
+                                                        </button>
+                                                    </div>
+                                                    <div class="fourth box">
+                                                        <button type="button" onclick="f8(this)">aA</button>
+                                                        <button type="button" onclick="f9()">
+                                                            <i class="fa-solid fa-text-slash"></i>
+                                                        </button>
+                                                        <input type="color" onchange="f10(this)">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="row row1">
+                                                <div class="col col1">
+                                                    <textarea id="textarea1" class="inputform" type="text" name="desc" placeholder="Enter an explanation in text format..."></textarea>
+                                                </div>
+                                            </div>
+                                        </section>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" style="padding-top: 1rem;">
+                                        <label for="file" id="attatchment">
+                                            <img src="../images/thumbnail.png"> Add Thumbnail
+                                            <input style="border: none; display:none;" type="file" id="file" name="pfp" value="">
+                                        </label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        <br><br>
+                                        <div class="add">
+                                            <button style="float:right" class="read-more attend submit" type="submit" name="create">Publish</button>
+                                            <button style="float:right" class="read-more attend submit" type="reset">Cancel</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
                     </div>
                     
                 </div>
+                
+                
+                
                 <div class="RHS">
                     <div class="filter-div">
                         <div style="display:flex">
@@ -302,5 +381,5 @@
         </div>
         
         <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="arrow up"></i><br></button>
-
-<?php require APPROOT . '/views/inc/footer.php'; ?>
+            
+        <?php require APPROOT . '/views/inc/footer.php'; ?>

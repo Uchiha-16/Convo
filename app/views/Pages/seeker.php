@@ -302,10 +302,5 @@
 
         <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="arrow up"></i><br></button>
 
-    <div id="body"></div>
-    
-    </body>
-
-</html>
 
 <?php require APPROOT . '/views/inc/footer.php'; ?>

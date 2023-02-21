@@ -1,6 +1,6 @@
             <?php require APPROOT . '/views/inc/header.php'; ?>
-            <link href="../stylesheets/event.css" rel="stylesheet" type="text/css"/>
-            <link href="../stylesheets/webinar.css" rel="stylesheet" type="text/css"/>
+            <link href="<?php echo URLROOT; ?>/css/event.css" rel="stylesheet" type="text/css"/>
+            <link href="<?php echo URLROOT; ?>/css/webinar.css" rel="stylesheet" type="text/css"/>
 
             <style>
                 .nav{
@@ -17,12 +17,12 @@
                 <div class="LHS">
                     <div class="video" onclick="view()">
                         <div>
-                            <img src="../images/test1.png" class="thumbnail">
+                            <img src="<?php echo URLROOT;?>/img/test1.png" class="thumbnail">
                         </div>
                         <div>
                             <div class="qdp">
                                 <div>
-                                    <img src="../images/user.jpg"/>
+                                    <img src="<?php echo URLROOT;?>/img/user.jpg"/>
                                 </div>
                                 <div class="video-content">
                                     <p class="text">What about the standard model incompatible with general relativity, and how does string theory fix it?</p>
@@ -33,12 +33,12 @@
                     </div>
                     <div class="video">
                         <div>
-                            <img src="../images/test2.jpg" class="thumbnail">
+                            <img src="<?php echo URLROOT;?>/img/test2.jpg" class="thumbnail">
                         </div>
                         <div>
                             <div class="qdp">
                                 <div>
-                                    <img src="../images/user.jpg"/>
+                                    <img src="<?php echo URLROOT;?>/img/user.jpg"/>
                                 </div>
                                 <div class="video-content">
                                     <p class="text">How you should prepare for new Covid-19 Virus for upcoming months?</p>
@@ -49,12 +49,12 @@
                     </div>
                     <div class="video">
                         <div>
-                            <img src="../images/test3.png" class="thumbnail">
+                            <img src="<?php echo URLROOT;?>/img/test3.png" class="thumbnail">
                         </div>
                         <div>
                             <div class="qdp">
                                 <div>
-                                    <img src="../images/user.jpg"/>
+                                    <img src="<?php echo URLROOT;?>/img/user.jpg"/>
                                 </div>
                                 <div class="video-content">
                                     <p class="text">Differences between C and Python</p>
@@ -65,12 +65,12 @@
                     </div>
                     <div class="video">
                         <div>
-                            <img src="../images/test4.png" class="thumbnail">
+                            <img src="<?php echo URLROOT;?>/img/test4.png" class="thumbnail">
                         </div>
                         <div>
                             <div class="qdp">
                                 <div>
-                                    <img src="../images/user.jpg"/>
+                                    <img src="<?php echo URLROOT;?>/img/user.jpg"/>
                                 </div>
                                 <div class="video-content">
                                     <p class="text">What are Data Structures?</p>
@@ -81,12 +81,12 @@
                     </div>
                     <div class="video">
                         <div>
-                            <img src="../images/test5.jpg" class="thumbnail">
+                            <img src="<?php echo URLROOT;?>/img/test5.jpg" class="thumbnail">
                         </div>
                         <div>
                             <div class="qdp">
                                 <div>
-                                    <img src="../images/user.jpg"/>
+                                    <img src="<?php echo URLROOT;?>/img/user.jpg"/>
                                 </div>
                                 <div class="video-content">
                                     <p class="text">INSL Volunteer Training Program</p>
@@ -97,12 +97,12 @@
                     </div>
                     <div class="video">
                         <div>
-                            <img src="../images/test6.jpg" class="thumbnail">
+                            <img src="<?php echo URLROOT;?>/img/test6.jpg" class="thumbnail">
                         </div>
                         <div>
                             <div class="qdp">
                                 <div>
-                                    <img src="../images/user.jpg"/>
+                                    <img src="<?php echo URLROOT;?>/img/user.jpg"/>
                                 </div>
                                 <div class="video-content">
                                     <p class="text">What is the big problem or question that this new academic discipline that you keep talking about would address?</p>
@@ -113,12 +113,12 @@
                     </div>
                     <div class="video">
                         <div>
-                            <img src="../images/test7.png" class="thumbnail">
+                            <img src="<?php echo URLROOT;?>/img/test7.png" class="thumbnail">
                         </div>
                         <div>
                             <div class="qdp">
                                 <div>
-                                    <img src="../images/user.jpg"/>
+                                    <img src="<?php echo URLROOT;?>/img/user.jpg"/>
                                 </div>
                                 <div class="video-content">
                                     <p class="text">What will be your major focus as an independent researcher?</p>
@@ -129,12 +129,12 @@
                     </div>
                     <div class="video">
                         <div>
-                            <img src="../images/test8.jpg" class="thumbnail">
+                            <img src="<?php echo URLROOT;?>/img/test8.jpg" class="thumbnail">
                         </div>
                         <div>
                             <div class="qdp">
                                 <div>
-                                    <img src="../images/user.jpg"/>
+                                    <img src="<?php echo URLROOT;?>/img/user.jpg"/>
                                 </div>
                                 <div class="video-content">
                                     <p class="text">Is it a bad idea to take an elective class pass/fail to boost my GPA?</p>
@@ -145,12 +145,12 @@
                     </div>
                     <div class="video">
                         <div>
-                            <img src="../images/test9.jpg" class="thumbnail">
+                            <img src="<?php echo URLROOT;?>/img/test9.jpg" class="thumbnail">
                         </div>
                         <div>
                             <div class="qdp">
                                 <div>
-                                    <img src="../images/user.jpg"/>
+                                    <img src="<?php echo URLROOT;?>/img/user.jpg"/>
                                 </div>
                                 <div class="video-content">
                                     <p class="text">What kind of education should one follow to be like Tony Stark?</p>
@@ -166,7 +166,7 @@
                     <form action="webinarStat.php"><button type="submit" style="float:right" class="read-more attend">My Videos</button></form>
                     <div class="filter-div">
                         <div style="display:flex">
-                            <img src="../images/filter.png">
+                            <img src="<?php echo URLROOT;?>/img/filter.png">
                             <label>Filters</label><button class="read-more go">Go</button>
                         </div>
                         <div>
@@ -368,7 +368,7 @@
         
         <!-- View -->
         <div class="video-view" id="1">
-            <img src="../images/cancel.png" class="cancel" onclick="cancel()">
+            <img src="<?php echo URLROOT;?>/img/cancel.png" class="cancel" onclick="cancel()">
             <iframe width="550" height="325" src="https://www.youtube.com/embed/Nxtv1LfdSBk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             <h3>What is the big problem or question that this new academic discipline that you keep talking about would address?</h3>
             <div style="display:flex;">
