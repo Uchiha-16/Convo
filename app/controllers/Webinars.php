@@ -90,15 +90,14 @@
         //     }
         // }
 
-        public function webinarView(){
-            $questions = $this->webinarM->getQuestions();
+        public function home(){
+            
 
-            $data = [
-                'question' => $questions
-            ];
+            $data = [];
             $this->view('webinars/home', $data);
-        }
+              
 
+        }
         // public function edit($QID){
         //     if($_SERVER['REQUEST_METHOD'] == 'POST') {
         //         // Form is submitting
@@ -195,20 +194,20 @@
 
         // public function delete($QID) {
                 // Get existing post from model
-                $question = $this->questionModel->getQuestionByID($QID);
-                //check the owner of the question
-                if($question->userID != $_SESSION['userID']){
-                    redirect('questions/myQuestions');
-                }
+            //     $question = $this->questionModel->getQuestionByID($QID);
+            //     //check the owner of the question
+            //     if($question->userID != $_SESSION['userID']){
+            //         redirect('questions/myQuestions');
+            //     }
 
-                if($this->questionModel->delete($QID)) {
-                    flash('reg_flash', 'Question Deleted Successfully!');
-                    redirect('questions/myQuestions');
-                } else {
-                    die('Something went wrong');
-                    redirect('questions/myQuestions');
-                }
-            }
+            //     if($this->questionModel->delete($QID)) {
+            //         flash('reg_flash', 'Question Deleted Successfully!');
+            //         redirect('questions/myQuestions');
+            //     } else {
+            //         die('Something went wrong');
+            //         redirect('questions/myQuestions');
+            //     }
+            // }
         
     }
 ?>
