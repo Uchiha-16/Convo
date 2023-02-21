@@ -73,9 +73,7 @@
                             </div>
                         </div>
                     </div>
-                <div class="flash-msg">
-                    <?php flash('reg_flash'); ?>
-                </div> 
+              
 
 
         </div>
