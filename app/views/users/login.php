@@ -16,7 +16,7 @@
 
         <!-- Title -->
         <title>Convo | Online Forum</title>
-        <link rel="icon" type="image/icon" href="images/logoIcon.png">
+        <link rel="icon" type="images/icon" href="<?php echo URLROOT; ?>/img/logoIcon.png">
 
         <!-- stylesheets -->
         <link href="<?php echo URLROOT; ?>/css/style.css" rel="stylesheet" type="text/css"/>
@@ -48,7 +48,7 @@
                     <img src="<?php echo URLROOT; ?>/img/login.gif" alt="spaceman" id="gif"/>
                 </div>
                 <div class="c2-c2">
-                    <img src="<?php echo URLROOT; ?>/img/ogoName.png" alt="Convo" id="logo"/>
+                    <img src="<?php echo URLROOT; ?>/img/logoName.png" alt="Convo" id="logo"/>
                     <p>Hitch your wagon to a star...</p>
                 </div>
             </div>

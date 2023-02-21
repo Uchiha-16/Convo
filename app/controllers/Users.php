@@ -188,11 +188,19 @@
                 if(empty($data['email_err']) && empty($data['password_err'])) {
                     //log the user
                     $loggedUser = $this->userModel->login($data['uname'], $data['password']);
-
+                    $role = $this->userModel->userRole($data['uname']);
+                    
                     if($loggedUser) {
                        // Create Session
                         $this->createUserSession($loggedUser);
-                        redirect('pages/seeker');
+
+                        // Role
+                        if($role == 'expert'){
+                            redirect('pages/expert');
+                        } else{
+                            redirect('pages/seeker');
+                        }
+
                     } else {
                         $data['password_err'] = 'Password  incorrect. Try Again';
 

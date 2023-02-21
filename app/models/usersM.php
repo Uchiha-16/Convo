@@ -92,5 +92,14 @@
                 return false;
             }
         }
+
+        // Role
+        public function userRole($username) {
+            $this->db->query('SELECT * FROM userinfo WHERE username = :username');
+            $this->db->bind(':username', $username);
+
+            $row = $this->db->single();
+            return $row->role;
+        }
     }
 ?>

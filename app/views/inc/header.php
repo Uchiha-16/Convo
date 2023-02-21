@@ -9,9 +9,8 @@
         <meta charset="UTF-8">
         
         <title><?php echo SITENAME ?></title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0 shrink-to-fit=no">
-        <meta name="description" content="Online Forum">
-        <meta charset="UTF-8">
+        <link rel="icon" type="images/icon" href="<?php echo URLROOT; ?>/img/logoIcon.png">
+        
         <link href="<?php echo URLROOT; ?>/css/style.css" rel="stylesheet" type="text/css"/>
         <link href="<?php echo URLROOT; ?>/css/landing.css" rel="stylesheet" type="text/css"/>
         <link href="<?php echo URLROOT; ?>/css/page.css" rel="stylesheet" type="text/css"/>
