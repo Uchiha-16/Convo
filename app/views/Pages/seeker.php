@@ -10,12 +10,14 @@
             <div class="content-body">
                 <div class="LHS">
                     <h3>Questions and Discussions</h3><br>
+
+
                      Question 1
                      <div class="question-div">
                         <div class="info">
                             <div class="qdp">
                                 <div>
-                                    <img src="../img/user.jpg"/>
+                                    <img src="<?php echo URLROOT;?>/img/pfp/<?php echo $_SESSION['pfp']; ?>"/>
                                 </div>
                                 <div class="qdp-1">
                                     <label>Induwara Pathirana</label><br>
@@ -69,9 +71,9 @@
                             </div>
                         </div>
                     </div>
-                <div class="flash-msg">
-                    <?php flash('reg_flash'); ?>
-                </div> 
+                <!-- <div class="flash-msg">
+                    <?php //flash('reg_flash'); ?>
+                </div>  -->
 
 
         </div>

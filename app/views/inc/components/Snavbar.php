@@ -32,9 +32,9 @@
                             grid-template-columns: 5% 6% 6% 57% 6% 6% 8% 6%;
                         }
                     </style>
-                <div class="nav-hover"><a href="login.php">Login</a></div>
-                <div class="nav-hover"><a href="signup.php">Register</a></div>
-                <div class="nav-hover"><a href="aboutus.php">About us</a></div>
+                <div class="nav-hover"><a href="<?php echo URLROOT;?>/Users/login">Login</a></div>
+                <div class="nav-hover"><a href="<?php echo URLROOT;?>/Users/register">Register</a></div>
+                <div class="nav-hover"><a href="<?php echo URLROOT;?>/Pages/about">About us</a></div>
                 <?php endif; ?>
              
         </div>

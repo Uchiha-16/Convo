@@ -14,7 +14,8 @@
 
                 //Input Data
                 $data = [
-                    // 'pfp' => trim($_FILES['pfp']),
+                    'pfp' => ($_FILES['pfp']),
+                    'pfp_name' => time().'_'.($_FILES['pfp']['name']),
                     'fname' => trim($_POST['fname']),
                     'lname' => trim($_POST['lname']),
                     'email' => trim($_POST['email']),
@@ -31,6 +32,13 @@
                     'tag_err' => ''
                 ];
 
+
+                // Validate Image
+                if(uploadImage($data['pfp']['tmp_name'], $data['pfp_name'], '/img/pfp/')) {
+                    $data['pfp'] = $data['pfp_name'];
+                } else {
+                    $data['pfp'] = '../img/pfp/user.png';
+                }
                 //validate each inputs
                 // Validate fName
                 if(empty($data['fname'])) {
@@ -121,6 +129,8 @@
             } else {
                 // Initial data
                 $data = [
+                    'pfp' => '',
+                    'pfp_name' => '',
                     'fname' => '',
                     'lname' => '',
                     'email' => '',
@@ -213,7 +223,7 @@
             $_SESSION['uname'] = $user->uname;
             $_SESSION['firstName'] = $user->firstName;
             $_SESSION['lastName'] = $user->lastName;
-            // $_SESSION['pfp'] = $user->pfp;
+            $_SESSION['pfp'] = $user->pfp;
             redirect('pages/seeker');
         }
 
@@ -221,6 +231,9 @@
             unset($_SESSION['userID']);
             unset($_SESSION['email']);
             unset($_SESSION['uname']);
+            unset($_SESSION['firstName']);
+            unset($_SESSION['lastName']);
+            unset($_SESSION['pfp']);
             session_destroy();
             redirect('users/login');
         }
