@@ -14,6 +14,7 @@
         <link href="<?php echo URLROOT; ?>/css/style.css" rel="stylesheet" type="text/css"/>
         <link href="<?php echo URLROOT; ?>/css/landing.css" rel="stylesheet" type="text/css"/>
         <link href="<?php echo URLROOT; ?>/css/page.css" rel="stylesheet" type="text/css"/>
+        <link href="<?php echo URLROOT; ?>/css/textEditor.css" rel="stylesheet" type="text/css"/>
         <!-- <link href="<?php //echo URLROOT; ?>/css/consultpage.css" rel="stylesheet" type="text/css"/>
         <link href="<?php //echo URLROOT; ?>/css/calander.css" rel="stylesheet" type="text/css"/> -->
         <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>

@@ -1,3 +1,4 @@
+//=========================================== Picture Upload
 const imgDiv = document.querySelector('.user-img');
 const img = document.querySelector('#photo');
 const file = document.querySelector('#file');
@@ -16,106 +17,132 @@ file.addEventListener( 'change', function(){
 })
 
 
-            //Get the button:
-            mybutton = document.getElementById("myBtn");
+//=========================================== Move Top
 
-            // When the user scrolls down 20px from the top of the document, show the button
-            window.onscroll = function() {scrollFunction()};
+//Get the button:
+mybutton = document.getElementById("myBtn");
 
-            function scrollFunction() {
-              if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20){
-                mybutton.style.display = "block";
-              } else {
-                mybutton.style.display = "none";
-              }
-            }
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function () { scrollFunction() };
 
-            // When the user clicks on the button, scroll to the top of the document
-            function topFunction() {
-              document.body.scrollTop = 0; // For Safari
-              document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-            }
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+  document.body.scrollTop = 0; // For Safari
+  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
         
-            /* When the user clicks on the button, 
-            toggle between hiding and showing the dropdown content */
-            function drop() {
-              document.getElementById("myDropdown").classList.toggle("show");
-            }
+
+//=========================================== Navbar Drop Down
+
+/* When the user clicks on the button, 
+toggle between hiding and showing the dropdown content */
+function drop() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+function drop2() {
+  document.getElementById("myDropdown2").classList.toggle("show");
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function (e) {
+  if (!e.target.matches('.dropbtn')) {
+    var myDropdown = document.getElementById("myDropdown");
+    var myDropdown2 = document.getElementById("myDropdown2");
+    if (myDropdown.classList.contains('show')) {
+      myDropdown.classList.remove('show');
+    }
+    if (myDropdown2.classList.contains('show')) {
+      myDropdown2.classList.remove('show');
+    }
+  }
+}
             
-            function drop2() {
-              document.getElementById("myDropdown2").classList.toggle("show");
-            }
 
-            // Close the dropdown if the user clicks outside of it
-            window.onclick = function(e) {
-              if (!e.target.matches('.dropbtn')) {
-              var myDropdown = document.getElementById("myDropdown");
-              var myDropdown2 = document.getElementById("myDropdown2");
-                if (myDropdown.classList.contains('show')) {
-                  myDropdown.classList.remove('show');
-                }
-                if (myDropdown2.classList.contains('show')) {
-                  myDropdown2.classList.remove('show');
-                }
-              }
-            }
-            
-            function filter1(){
-                var x = document.getElementById('checkbox-1');
-                if(x.style.display === "none"){
-                    x.style.display = "block";
-                    document.getElementById('down').style.display = "none";
-                    document.getElementById('up').style.display = "inline-block";
-                }else{
-                    x.style.display = "none";
-                    document.getElementById('up').style.display = "none";
-                    document.getElementById('down').style.display = "inline-block";
-                }
-            }
-            function filter2(){
-                var x = document.getElementById('checkbox-2');
-                if(x.style.display === "none"){
-                    x.style.display = "block";
-                    document.getElementById('down2').style.display = "none";
-                    document.getElementById('up2').style.display = "inline-block";
-                }else{
-                    x.style.display = "none";
-                    document.getElementById('up2').style.display = "none";
-                    document.getElementById('down2').style.display = "inline-block";
-                }
-            }
-            function filter3(){
-                var x = document.getElementById('checkbox-3');
-                if(x.style.display === "none"){
-                    x.style.display = "block";
-                    document.getElementById('down3').style.display = "none";
-                    document.getElementById('up3').style.display = "inline-block";
-                }else{
-                    x.style.display = "none";
-                    document.getElementById('up3').style.display = "none";
-                    document.getElementById('down3').style.display = "inline-block";
-                }
-            }
-//.......................Add Question.......................................................//
-            function confirmation(){
-              if(confirm("Are you sure you want to discard this question?")){
-                  window.location.href = "../home.php";
-              }
-          }
+//=========================================== Filters
 
-          function addQuestion() {
-            alert("Question Added Successfully...  WAITING FOR APPROVAL");
-            window.location.href = "../home.php";
-        }
+function filter1() {
+  var x = document.getElementById('checkbox-1');
+  if (x.style.display === "none") {
+    x.style.display = "block";
+    document.getElementById('down').style.display = "none";
+    document.getElementById('up').style.display = "inline-block";
+  } else {
+    x.style.display = "none";
+    document.getElementById('up').style.display = "none";
+    document.getElementById('down').style.display = "inline-block";
+  }
+}
+function filter2() {
+  var x = document.getElementById('checkbox-2');
+  if (x.style.display === "none") {
+    x.style.display = "block";
+    document.getElementById('down2').style.display = "none";
+    document.getElementById('up2').style.display = "inline-block";
+  } else {
+    x.style.display = "none";
+    document.getElementById('up2').style.display = "none";
+    document.getElementById('down2').style.display = "inline-block";
+  }
+}
+function filter3() {
+  var x = document.getElementById('checkbox-3');
+  if (x.style.display === "none") {
+    x.style.display = "block";
+    document.getElementById('down3').style.display = "none";
+    document.getElementById('up3').style.display = "inline-block";
+  } else {
+    x.style.display = "none";
+    document.getElementById('up3').style.display = "none";
+    document.getElementById('down3').style.display = "inline-block";
+  }
+}
 
-  
-        var close = document.getElementsByClassName("closebtn");
-        var i;
 
-        for (i = 0; i < close.length; i++) {
-          close[i].onclick = function(){
-            var div = this.parentElement;
-            div.style.opacity = "0";
-            setTimeout(function(){ div.style.display = "none"; }, 600);
-          }
+//=========================================== Add Question
+
+function confirmation() {
+  if (confirm("Are you sure you want to discard this question?")) {
+    window.location.href = "../home.php";
+  }
+}
+
+function addQuestion() {
+  alert("Question Added Successfully...  WAITING FOR APPROVAL");
+  window.location.href = "../home.php";
+}
+
+
+var close = document.getElementsByClassName("closebtn");
+var i;
+
+for (i = 0; i < close.length; i++) {
+  close[i].onclick = function () {
+    var div = this.parentElement;
+    div.style.opacity = "0";
+    setTimeout(function () { div.style.display = "none"; }, 600);
+  }
+}
+
+//=========================================== Webinar - Video view
+
+function view() {
+  document.getElementById("1").style.display = "grid";
+}
+function cancel() {
+  document.getElementById("1").style.display = "none";
+}
+
+//=========================================== Add
+
+function show2() {
+  document.getElementById("dropdown2").style.display = "grid";
 }

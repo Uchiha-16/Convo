@@ -136,9 +136,7 @@ ul.dropdown li input[type="checkbox"]:checked + label {
 }
 
 ul.dropdown li input[type="checkbox"] {
-    display: absolute;
-}
-ul.dropdown li input[type="checkbox"] {
+    display: none;
     position: absolute;
     top: 36rem;
     opacity: 0;
