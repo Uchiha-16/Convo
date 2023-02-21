@@ -6,11 +6,15 @@
         }
     
 
-    public function index() {
+    public function seeker() {
         $data = [];
         $this->view('pages/seeker', $data);
     }
 
+    public function expert() {
+        $data = [];
+        $this->view('pages/expert', $data);
+    }
     public function about() {
         $questions = $this->pagesM->getQuestions();
 
