@@ -1,11 +1,11 @@
 //=========================================== nav bar active state
 
-var navItems = document.querySelectorAll(".nav-hover");
-for (var i = 0; i < navItems.length; i++) {
-  navItems[i].addEventListener("click", function () {
-    this.classList.add("active");
+$(document).ready(function () {
+
+  $(".nav-hover").click(function () {
+    $(this).addClass("active").siblings().removeClass("active");
   });
-}
+});
 
 //=========================================== Picture Upload
 const imgDiv = document.querySelector('.user-img');
