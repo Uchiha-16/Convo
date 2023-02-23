@@ -19,7 +19,7 @@
                 <div class="content-body">
                     <div class="LHS">
                         <div class="question-div add-event">
-                            <form action="" method="POST">
+                            <form action="<?php echo URLROOT;?>/Webinars/add" method="POST">
                                 <table>
                                     <tr>
                                         <td colspan="3">
@@ -102,7 +102,7 @@
                                                     </li>
                                                     <li>
                                                         <input type="checkbox" value="literature" name="tag[]" id="checkbox15" />
-                                                        <label for="checkbox15">literature</label>
+                                                        <label for="checkbox15">Literature</label>
                                                     </li>
                                                     <li>
                                                         <input type="checkbox" value="mathematics" name="tag[]" id="checkbox16" />
@@ -145,11 +145,6 @@
                                                         <label for="checkbox25">Space Science</label>
                                                     </li>
                                                 </ul>
-                                                <div class="select">
-                                                    <label>All tags selected?</label>
-                                                    <button style="float:right" class="read-more submit" type="submit" name="submit">Yes, I'm good.</button>
-                                                    <button style="float:right" class="read-more submit" type="submit" name="submit">No</button>
-                                                </div>
                                             </div>
                                         </td>
                                     </tr>
@@ -164,25 +159,18 @@
                                                 <ul class="dropdown" id="dropdown">
                                                     <!-- Add New -->
                                                     <li>
-                                                        <input type="checkbox" value="1" name="tag[]" id="checkbox29" id="newPlaylist" onchange="showDiv('hidden_div', this)" />
+                                                        <input type="checkbox" value="1" name="playlist[]" id="checkbox29" id="newPlaylist" onchange="showDiv('hidden_div', this)" />
                                                         <label for="checkbox29">Add new</label><br>
                                                         <div id="hidden_div">
                                                             <input class="inputform" type="text" name="newP" id="playlist" placeholder="Add a unique name to your new playlist">
                                                         </div>
                                                     </li>
-
-                                                    <li>
-                                                        <input type="checkbox" value="p1" name="tag[]" id="checkbox26" />
-                                                        <label for="checkbox26">Website With Login Page</label>
-                                                    </li>
-                                                    <li>
-                                                        <input type="checkbox" value="p2" name="tag[]" id="checkbox27" />
-                                                        <label for="checkbox27">CSS For Beginners</label>
-                                                    </li>
-                                                    <li>
-                                                        <input type="checkbox" value="p3" name="tag[]" id="checkbox28" />
-                                                        <label for="checkbox28">CSS Card Slider</label>
-                                                    </li>
+                                                    <?php foreach($data['webinars'] as $webinars) : ?>
+                                                        <li>
+                                                            <input type="checkbox" value="p1" name="playlist[]" id="checkbox26" />
+                                                            <label for="checkbox26"><?php echo $webinarsPlaylist->playlistName ?></label>
+                                                        </li>
+                                                    <?php endforeach; ?>
                                                 </ul>
                                             </div>
                                         </td>
@@ -205,7 +193,7 @@
                                             <label for="file" id="attatchment">
                                                 <label style="font-size: 14px; color:black">Upload a picture that shows what's in your video.
                                                     A good thumbnail stands out and draws viewers' attention.</label><br><br>
-                                                <input style="border: none; font-size: 14px;" type="file" id="file" name="pfp" value="">
+                                                <input style="border: none; font-size: 14px;" type="file" id="file" name="image" value="">
                                             </label>
                                         </td>
                                     </tr>
