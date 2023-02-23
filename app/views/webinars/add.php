@@ -1,6 +1,7 @@
         <?php require APPROOT . '/views/inc/header.php'; ?>
         <link href="<?php echo URLROOT; ?>/css/event.css" rel="stylesheet" type="text/css" />
 
+
         <style>
 .nav {
     grid-template-columns: 5% 6% 6% 6% 51% 10% 4% 4% 4%;
@@ -17,7 +18,6 @@
             <div class="container-div">
                 <div class="content-body">
                     <div class="LHS">
-                        <h3>Add Webinar</h3><br>
 
                         <!-- Adding a picture to event -->
 
@@ -31,19 +31,20 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td colspan="3">
+                                        <td colspan="3" style="border-bottom: 1px solid rgba(128,128,128, .2); padding-bottom: 1rem;">
                                             <h4 style="margin-bottom:.5rem">Title <span class="star">*</span></h4>
                                             <input class="inputform" type="text" name="title"
-                                                placeholder="Enter title here..." required>
+                                                placeholder="A catchy title can help you hook viewers." required>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td colspan="3">
-                                            <h4 style="margin-bottom:.5rem">Description</h4>
+                                            <h4 style="margin-bottom:1.5rem">Description <span class="star">*</span>
+                                            </h4>
 
                                             <!-- Text Editor -->
                                             <div class="textEditor">
-                                                <div class="container">
+                                                <div>
                                                     <div class="options">
                                                         <!-- Text Format -->
                                                         <button id="bold" class="option-button format">
@@ -98,24 +99,6 @@
                                                         <button id="justifyFull" class="option-button align">
                                                             <i class="fa-solid fa-align-justify"></i>
                                                         </button>
-                                                        <button id="indent" class="option-button spacing">
-                                                            <i class="fa-solid fa-indent"></i>
-                                                        </button>
-                                                        <button id="outdent" class="option-button spacing">
-                                                            <i class="fa-solid fa-outdent"></i>
-                                                        </button>
-                                                        <!-- Headings -->
-                                                        <select id="formatBlock" class="adv-option-button">
-                                                            <option value="H1">H1</option>
-                                                            <option value="H2">H2</option>
-                                                            <option value="H3">H3</option>
-                                                            <option value="H4">H4</option>
-                                                            <option value="H5">H5</option>
-                                                            <option value="H6">H6</option>
-                                                        </select>
-                                                        <!-- Font -->
-                                                        <select id="fontName" class="adv-option-button"></select>
-                                                        <select id="fontSize" class="adv-option-button"></select>
                                                         <!-- Color -->
                                                         <div class="input-wrapper">
                                                             <input type="color" id="foreColor"
@@ -128,13 +111,14 @@
                                                             <label for="backColor">Highlight Color</label>
                                                         </div>
                                                     </div>
-                                                    <iframe id="text-input" contenteditable="true"></iframe>
+
+                                                    <textarea id="text-input"></textarea>
                                                 </div>
                                             </div>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td colspan="3">
+                                        <td colspan="3" style="border-bottom: 1px solid rgba(128,128,128, .2); padding-bottom: 1rem;"><br>
                                             <h4 style="margin-bottom:.5rem">Tags <span class="star">*</span></h4>
                                             <div class="dropdown-div">
 
@@ -142,9 +126,11 @@
                                                     Event.</label>
                                                 <ul class="dropdown" id="dropdown">
 
-                                                    <li><input type="checkbox" value="agricultureScience" name="tag[]"
-                                                            id="checkbox1" /><label for="checkbox1">Agriculture
-                                                            Science</label></li>
+                                                    <li>
+                                                        <input type="checkbox" value="agricultureScience" name="tag[]"
+                                                            id="checkbox1" />
+                                                        <label for="checkbox1">Agriculture Science</label>
+                                                    </li>
 
                                                     <li><input type="checkbox" value="anthropology" name="tag[]"
                                                             id="checkbox2" /><label for="checkbox2">Anthropology</label>
@@ -250,61 +236,64 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <!--                                <td style="padding-right:1rem; width:50%;">-->
-                                        <td class="rp">
+                                        <td colspan="3" style="border-bottom: 1px solid rgba(128,128,128, .2); padding-bottom: 1rem;">
+                                            <h4 style="margin-bottom:.5rem">Playlists <span class="star">*</span></h4>
+                                            <div class="dropdown-div">
 
-                                            <!-- filter -->
-                                            <div class="checkbox-1">
-                                                <span class="checkbox-title" onclick="filter3()">
-                                                    <h4>Playlist <span class="star">*</span>
-                                                        <i class="arrow up" id="up3" style="margin-left: 4.3rem;"></i><i
-                                                            class="arrow down" id="down3"
-                                                            style="margin-left: 4.3rem;"></i>
-                                                    </h4>
-                                                </span>
-                                                <input class="inputform" type="text" name="resourceperson"
-                                                    placeholder="Enter new Playlist..." required>
-                                                <ul id="checkbox-3">
-                                                    <?php
-                                                    $sql = "SELECT playlist.playlistName FROM playlist WHERE expertID = $sessionID;";
-                                                    $playlists = mysqli_query($conn, $sql);
-                                                    while($playlistrow = mysqli_fetch_assoc($playlists)){
-                                                        $playlistName = $playlistrow['firstName'];
-                                                        echo '<li>';
-                                                        echo '<label for="checkbox1">';
-                                                        echo '<input type="checkbox" value="last 3 months" name="rp[]" id="checkbox1"/>';
-                                                        echo $playlistrow;
-                                                        echo '</label>';
-                                                        echo '</li>';
-                                                    }
-                                                ?>
+                                                <label>Add your video to one or more playlists.
+                                                    Playlists can help viewers discover your content faster..</label>
+
+                                                <ul class="dropdown" id="dropdown">
+                                                    <!-- Add New -->
+                                                    <li>
+                                                        <input type="checkbox" value="1" name="tag[]" id="checkbox29"
+                                                            id="newPlaylist" onchange="showDiv('hidden_div', this)" />
+                                                        <label for="checkbox29">Add new</label><br>
+                                                        <div id="hidden_div">
+                                                            <input class="inputform" type="text" name="newP" id="playlist" placeholder="Add a unique name to your new playlist">
+                                                        </div>
+                                                    </li>
+
+                                                    <li>
+                                                        <input type="checkbox" value="p1" name="tag[]"
+                                                            id="checkbox26" />
+                                                        <label for="checkbox26">Website With Login Page</label>
+                                                    </li>
+                                                    <li>
+                                                        <input type="checkbox" value="p2" name="tag[]"
+                                                            id="checkbox27" />
+                                                        <label for="checkbox27">CSS For Beginners</label>
+                                                    </li>
+                                                    <li>
+                                                        <input type="checkbox" value="p3" name="tag[]"
+                                                            id="checkbox28" />
+                                                        <label for="checkbox28">CSS Card Slider</label>
+                                                    </li>
                                                 </ul>
-
                                             </div>
-
-                                            <!-- </td>
-                                    <td class="time">
-                                        <h4>Time <span class="star">*</span></h4>
-                                        <input class="inputform" type="time" name="time" required>
-                                    </td>
-                                    <td class="date">
-                                        <h4>Date <span class="star">*</span></h4>
-                                        <input class="inputform" type="date" name="date" required>
-                                    </td> -->
+                                        </td>
                                     </tr>
                                     <tr>
-                                        <td colspan="3">
-                                            <h4 style="margin-bottom:.5rem">Video Link <span class="star">*</span></h4>
+                                        <td colspan="3" style="border-bottom: 1px solid rgba(128,128,128, .2); padding-bottom: 1rem;">
+                                            <h4 style="margin-bottom:.5rem">Video Link <span class="star">*</span></h4><br>
+                                            <label class="steps"><b>Step 1:</b> Upload your video to YouTube.</label><br><br>
+                                            <label class="steps"><b>Step 2:</b> Copy the Embedded YouTube link.</label><br><br>
+                                            <label class="steps"><b>Step 3:</b> Paste the link to the following field.</label><br><br>
+                                            <label class="steps">Make sure that it is the <b>‘Embedded video link’</b>.</label><br><br>
                                             <input class="inputform" type="text" name="link"
-                                                placeholder="Please include the video link here. Make sure that it is the ‘Embedded video link’."
+                                                placeholder="Please include the video link here."
                                                 required>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td colspan="3" style="padding-top: 1rem;">
+                                            <h4 style="margin-bottom:.5rem">Add Thumbnail <img src="<?php echo URLROOT;?>/img/thumbnail.png" style="width: 17px;"> <span class="star">*</span>
+                                            </h4>
                                             <label for="file" id="attatchment">
-                                                <img src="../images/thumbnail.png"> Add Thumbnail
-                                                <input style="border: none; display:none;" type="file" id="file"
+                                                <label style="font-size: 14px; color:black">Upload a picture that shows
+                                                    what's in your video.
+                                                    A good thumbnail stands out and draws viewers' attention.</label><br><br>
+                                                <input style="border: none; font-size: 14px;" type="file" id="file"
                                                     name="pfp" value="">
                                             </label>
                                         </td>
@@ -316,7 +305,8 @@
                                                 <button style="float:right" class="read-more attend submit"
                                                     type="reset">Cancel</button>
                                                 <button style="float:right" class="read-more attend submit"
-                                                    type="submit" name="submit">Publish</button>
+                                                    type="submit" name="submit"
+                                                    onclick="webinarPublish()">Publish</button>
                                             </div>
                                         </td>
                                     </tr>
@@ -330,7 +320,7 @@
                                 class="read-more attend">Create</button></form>
                         <form action="webinarStat.php"><button type="submit" style="float:right"
                                 class="read-more attend">My Videos</button></form>
-                        <form action="webinar.php"><button type="submit" style="float:right"
+                        <form action="<?php echo URLROOT;?>/Webinars/home""><button type="submit" style="float:right"
                                 class="read-more attend">Webinars</button></form>
                     </div>
                 </div>

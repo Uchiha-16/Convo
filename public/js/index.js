@@ -141,8 +141,30 @@ function cancel() {
   document.getElementById("1").style.display = "none";
 }
 
+//=========================================== Webinar - Video view
+
+function webinarPublish() {
+  if (confirm("By Publishing, you acknowledge that you agree to Convo's Terms of Service and Community Guidelines. Please be sure not to violate others' copyright or privacy rights.")) {
+    
+  }
+}
+
+//========================================== playlist
+
+function showDiv(divId, element) {
+
+  document.getElementById(divId).style.display = element.value == 1 ? 'block' : 'none';
+  if (element.value == 1) {
+    element.value = 0;
+  } else {
+    element.value = 1;
+  }
+}
+
 //=========================================== Add
 
 function show2() {
   document.getElementById("dropdown2").style.display = "grid";
 }
+
+

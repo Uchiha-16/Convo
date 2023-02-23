@@ -82,7 +82,7 @@
 }
 ul.dropdown{
     list-style: none;
-    height: 155px;
+    height: auto;
     padding: 15px;
     overflow: scroll;
     overflow-x: hidden;

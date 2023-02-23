@@ -81,7 +81,7 @@
 }
 ul.dropdown{
     list-style: none;
-    height: 155px;
+    height: auto;
     padding: 15px;
     overflow: scroll;
     overflow-x: hidden;
@@ -339,5 +339,18 @@ section .col1 textarea{
 
 #attatchment {
     color:#0D5F75;
-    font-size: 25px;
+    font-size: 16px;
+}
+
+#attatchment img{
+    width: 15px;
+}
+
+#playlist {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+.steps{
+    font-size: 14px;
+    padding: 1rem 0 1rem 0;
 }
