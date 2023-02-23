@@ -1,3 +1,46 @@
 .answerbox {
-    grid-template-rows: 10% 60% 30%;
+    grid-template-rows: 20% 80% ;
+    margin-right: 3rem;
+    margin-bottom: 2rem;
+    height: auto;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 21px rgba(0, 0, 0, 0.07);
+    border-radius: 20px;
+    display: grid;
+    padding: 2rem 2rem 0.5rem 2rem;
+}
+
+.question-div{
+    padding: 2rem 2rem 0.5rem 2rem;
+}
+
+.info-1 {
+    display: grid;
+    grid-template-columns: 20% auto;
+}
+
+.answercontent {
+    display: grid;
+    grid-template-columns: 20% auto;
+}
+
+.answerrating {
+    display: grid;
+    grid-template-rows: 30% 40% 30%;
+	width: 100%;
+	text-align: center;
+}
+
+.ratingbtn {
+    background: none;
+    border: none;
+    font-size: 60px;
+	color: #95a5a6;
+	outline: none;
+    cursor: pointer;
+}
+
+.ratinglabel {
+    font-size: 20px;
+    color: #7E7E7E;
 }

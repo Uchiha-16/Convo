@@ -73,10 +73,9 @@
                 }
     
                 $str2 = substr($str2, 0, -4);
-                print($str2);
+                
                 $tags = $this->pagesM->getQuestionTags($str2);
-    
-                print_r($tags);
+
     
                 $data = [
                     'questions' => $questions,

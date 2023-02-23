@@ -15,77 +15,64 @@
                 <div class="LHS">
                     <h3>Related questions and discussions to answer...</h3><br>
                     
-                    <!-- Question 1 -->
+                    <?php foreach($data['questions'] as $question) : ?>
+
                     <div class="question-div">
-                        <div class="info">
-                            <div class="qdp">
-                                <div>
-                                    <img src="../images/user.jpg"/>
-                                </div>
-                                <div class="qdp-1">
-                                    <label>Dilky Liyanage</label><br>
-                                    <label class="qdp-1-2">University of Colombo</label>
-                                </div>
+                    <div class="info">
+                        <div class="qdp">
+                            <div><?php if($question->visibility == "anonymus") : ?>
+                                
+                                <img src="<?php echo URLROOT;?>/img/pfp/anonymus.png"/>
                             </div>
-                            <div class="tags">
-                                <label>Category</label><br>
-                                <div class="tag">Physics</div>
-                                <div class="tag">Science</div>
-                                <div class="tag">Mathematics</div>
+                            <div class="qdp-1">
+                                
+                                    <label class="expert">Anonymus User</label> <br>
+                                <?php else : ?>
+                                    <img src="<?php echo URLROOT;?>/img/pfp/<?php echo $question->pfp ?>"/>
+                            </div>
+                            <div class="qdp-1">
+                                <label><?php echo $question->fName." ".$question->lName; ?></label><br>
+                                <label class="qdp-1-2"><?php echo $question->uname ?></label>
+                                <?php endif; ?>
                             </div>
                         </div>
-                        <div class="content-display">
-                            <h3>What are some alternatives to String Theory that have been researched/developed?</h3>
-                            <p>Discription if it has any...</p>
-                            <div class="date-count">
-                                <label>October 2, 2022</label>
-                                <label style="font-weight:600; float:right">1 Answer</label><br>
-                                <div class="read-more-btn">
-                                    <button class="read-more one" onClick="window.location.href='<?php echo URLROOT;?>/Answers/add'">Answer this question</button>
-                                    <button class="read-more two">Save for later</button>
-                                </div>
+                        <div class="tags">
+                            <label>Category</label><br>   
+                            <?php  for($i=0; $i<count($data['tags']); $i++) : ?>
+                                <?php if($data['tags'][$i]->QID == $question->QID) : ?>
+                                    <?php $tagArray = explode(",", $data['tags'][$i]->tags); ?>
+                                    <?php foreach ($tagArray as $tag) : ?>
+                                        <div class="tag"><?php echo $tag ?></div>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+                            <?php endfor; ?>
+                        </div>
+                    </div>
+                    <div class="content-display">
+                        <h3><?php echo $question->title ?></h3>
+                        <p><?php echo $question->content ?></p>
+                        <div class="date-count">
+                            <label><?php echo convertTime($question->date);?></label>
+                            <label style="font-weight:600; float:right">3 Answers</label><br>
+                            <!-- <form action="<?php echo URLROOT;?>/answers/viewA/<?php echo $question->QID;?>">
+                                <button style="float:right" class="read-more">READ MORE</button>
+                            </form> -->
+                            <div class="read-more-btn">
+                                <form action="<?php echo URLROOT;?>/answers/add/<?php echo $question->QID;?>">
+                                <button class="read-more one" type="submit">Answer this question</button></form>
+                                <form action="<?php echo URLROOT;?>/answers/save/<?php echo $question->QID;?>">
+                                <button class="read-more two">Save for later</button></form>
                             </div>
                         </div>
                     </div>
-                    
-                    <!-- Question 2 -->
-                    <div class="question-div">
-                        <div class="info">
-                            <div class="qdp">
-                                <div>
-                                    <img src="../images/user.jpg"/>
-                                </div>
-                                <div class="qdp-1">
-                                    <label>Induwara Pathirana</label><br>
-                                    <label class="qdp-1-2">University of Colombo</label>
-                                </div>
-                            </div>
-                            <div class="tags">
-                                <label>Category</label><br>
-                                <div class="tag">Syntax</div>
-                                <div class="tag">MATLAB</div>
-                                <div class="tag">Mathematics</div>
-                            </div>
-                        </div>
-                        <div class="content-display">
-                            <h3>Can anyone tell me the syntax in Mathematica or MATLAB for finding the Lyapunov exponents for five-dimensional and six-dimensional systems?</h3>
-                            <p>Discription if it has any...</p>
-                            <div class="date-count">
-                                <label>October 31, 2022</label>
-                                <label style="font-weight:600; float:right">3 Answers</label><br>
-                                <div class="read-more-btn">
-                                    <button class="read-more one" >Answer this question</button>
-                                    <button class="read-more two">Save for later</button>
-                                </div>
-                            </div>
-                        </div>
                     </div>
+   <?php endforeach; ?>
                     
                 </div>
                 <div class="RHS">
                     <div class="filter-div">
                         <div style="display:flex">
-                            <img src="../images/filter.png">
+                            <img src="<?php echo URLROOT;?>/img/filter.png">
                             <label>Filters</label><button class="read-more go">Go</button>
                         </div>
                         <div>

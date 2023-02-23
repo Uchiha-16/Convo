@@ -29,7 +29,7 @@
             'question' => $question,
             'Quser' => $Quser,
         ];
-        $this->view('answers/addA', $data);
+        $this->view('answers/add', $data);
     }
 }
 ?>

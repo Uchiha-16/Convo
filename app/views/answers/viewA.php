@@ -1,5 +1,5 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
-        
+<link href="<?php echo URLROOT; ?>/css/answer.css" rel="stylesheet" type="text/css"/>
         <style>
             .nav{
                 grid-template-columns: 5% 6% 6% 6% 51% 10% 4% 4% 4%;
@@ -37,18 +37,19 @@
                             <p><?php echo $data['question']->content;?></p>
                             <div class="date-count">
                                 <label><?php echo convertTime($data['question']->date);?></label>
-                                <label style="font-weight:600; float:right"><?php echo $data['question']->rating;?></label><br>
+                                <label style="font-weight:600; float:right"><?php echo $data['question']->rating;?></label><br><br><br>
+                                <hr>
+                                <a href="" class="reactbtn"><img src="<?php echo URLROOT;?>/img/share.png" style="width: 12%;"> Share</a>
                                 <a href="" class="reactbtn"><img src="<?php echo URLROOT;?>/img/recommend.png" style="width: 12%"> Recommend</a>
-                                <a href="" class="reactbtn"><img src="<?php echo URLROOT;?>/img/share.png" style="width: 12%; text-decoration:none;" > Share</a>
                             </div>
                         </div>
                     </div>
                     
-                    <h2><?php echo $data['count']->count;?> Answers</h2>
+                    <?php if($data['count']->count > 0) :?>
                     <?php foreach($data['answers'] as $answer) :?>
                         <?php //print_r ($answer);?>
-                    <div class="question-div">
-                        <div class="info">
+                    <div class="answerbox">
+                        <div class="info-1">
                             <div class="qdp">
                                 <div>
                                     <img src="<?php echo URLROOT;?>/img/pfp/<?php echo $answer->pfp; ?>"/>
@@ -66,20 +67,37 @@
                                 <br><br>
                             </div>
                         </div>
-                        <div class="content-display">
-                            <iframe width="560" height="315" src="<?php echo $answer->link?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                            <h3><?php echo $answer->content;?></h3>
-                            <div class="date-count">
-                                <label><?php echo convertTime($answer->date);?></label>
-                                <label style="font-weight:600; float:right"><?php echo $answer->rating;?></label><br>
+                        <div class="answercontent">
+                            <div class="answerrating">
+                                <div></div>
+                                <div>
+                            <button class="ratingbtn" onclick="upvote()"><i class="fas fa-long-arrow-alt-up" id="upvote"></i></button>
+		                    <br>
+                            <label class="ratinglabel"><?php echo $answer->rating; ?></label><br>
+		                    <button class="ratingbtn" onclick="downvote()"><i class="fas fa-long-arrow-alt-down" id="downvote"></i></button>
+                                </div>
+                            
+                            <div>
+                                <div class="date-count">
+                                    <label><?php echo convertTime($answer->date);?></label>
+                                </div>
                             </div>
+                            </div>
+                            <div class = "answercontent-1">
+                            <iframe width="750" height="315" src="<?php echo $answer->link?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                            <p><?php echo $answer->content;?></p>
+                            
+                            <hr>
+                            <a href="" class="reactbtn"><img src="<?php echo URLROOT;?>/img/share.png" style="width: 12%;" > Share</a>
+                            <a href="" class="reactbtn"><img src="<?php echo URLROOT;?>/img/recommend.png" style="width: 12%"> Recommend</a>
                         </div>
                     </div>
-                    <?php endforeach; ?>
-
-
-        </div>
-
+                </div>
+        <?php endforeach; ?>
+        <?php else : ?>
+            <h2>No Answers for this Question Yet</h2>
+        <?php endif; ?>
+                </div>
 
                 <div class="RHS">
                     <div class="filter-div">
