@@ -130,6 +130,9 @@ input[type=search]{
 .show {
     display: block;
 }
+.active { /*for nav bar active state*/
+    border-bottom: 2px solid black;
+}
 /*======================== content ===========================*/
 .container-div{
     z-index: 10;
