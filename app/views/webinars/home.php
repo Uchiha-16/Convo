@@ -15,150 +15,44 @@
         <div class="container-div">
             <div class="content-body">
                 <div class="LHS">
-                    <div class="video" onclick="view()">
-                        <div>
-                            <img src="<?php echo URLROOT;?>/img/test1.png" class="thumbnail">
-                        </div>
-                        <div>
-                            <div class="qdp">
-                                <div>
-                                    <img src="<?php echo URLROOT;?>/img/user.jpg"/>
-                                </div>
-                                <div class="video-content">
-                                    <p class="text">What about the standard model incompatible with general relativity, and how does string theory fix it?</p>
-                                    <label class="qdp-1-2">21 July 2022</label>
+
+                    <?php foreach($data['webinars'] as $webinar) : ?>
+                        
+                        <div class="video" onclick="view()">
+                            <div>
+                                <img src="<?php echo URLROOT;?>/img/thumbnails/<?php echo $webinar->thumbnail ?>" class="thumbnail">
+                            </div>
+                            <div>
+                                <div class="qdp">
+                                    <div>
+                                        <?php if($webinar->pfp != NULL) : ?>
+                                            <img src="<?php echo URLROOT;?>/img/pfp/<?php echo $webinar->pfp ?>"/>
+                                        <?php else : ?>
+                                            <img src="<?php echo URLROOT;?>/img/pfp/user.jpg"/>
+                                        <?php endif; ?>
+                                    </div>
+                                    <div class="video-content">
+                                        <p class="text"><?php echo $webinar->title ?></p>
+                                        <label class="qdp-1-2"><?php echo $webinar->date ?></label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="video">
-                        <div>
-                            <img src="<?php echo URLROOT;?>/img/test2.jpg" class="thumbnail">
-                        </div>
-                        <div>
-                            <div class="qdp">
-                                <div>
-                                    <img src="<?php echo URLROOT;?>/img/user.jpg"/>
-                                </div>
-                                <div class="video-content">
-                                    <p class="text">How you should prepare for new Covid-19 Virus for upcoming months?</p>
-                                    <label class="qdp-1-2">21 July 2022</label>
-                                </div>
+
+                        <!-- View -->
+                        <!-- <form action="<?php echo URLROOT ?>/Webinar/view/"><button type="submit"> </button></form>-->
+                        <div class="video-view" id="1">
+                            <img src="<?php echo URLROOT;?>/img/cancel.png" class="cancel" onclick="cancel()">
+                            <iframe width="550" height="325" src="https://www.youtube.com/embed/<?php echo $webinar->videolink ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <h3><?php echo $webinar->videolink</h3>
+                            <div style="display:flex;">
+                                <label class="qdp-1-2">21 July 2022</label>
+                                <span class="qdp-1-2 qdp-1-3">By Varsha Wijethunge</span>
                             </div>
                         </div>
-                    </div>
-                    <div class="video">
-                        <div>
-                            <img src="<?php echo URLROOT;?>/img/test3.png" class="thumbnail">
-                        </div>
-                        <div>
-                            <div class="qdp">
-                                <div>
-                                    <img src="<?php echo URLROOT;?>/img/user.jpg"/>
-                                </div>
-                                <div class="video-content">
-                                    <p class="text">Differences between C and Python</p>
-                                    <label class="qdp-1-2">21 July 2022</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="video">
-                        <div>
-                            <img src="<?php echo URLROOT;?>/img/test4.png" class="thumbnail">
-                        </div>
-                        <div>
-                            <div class="qdp">
-                                <div>
-                                    <img src="<?php echo URLROOT;?>/img/user.jpg"/>
-                                </div>
-                                <div class="video-content">
-                                    <p class="text">What are Data Structures?</p>
-                                    <label class="qdp-1-2">21 July 2022</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="video">
-                        <div>
-                            <img src="<?php echo URLROOT;?>/img/test5.jpg" class="thumbnail">
-                        </div>
-                        <div>
-                            <div class="qdp">
-                                <div>
-                                    <img src="<?php echo URLROOT;?>/img/user.jpg"/>
-                                </div>
-                                <div class="video-content">
-                                    <p class="text">INSL Volunteer Training Program</p>
-                                    <label class="qdp-1-2">21 July 2022</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="video">
-                        <div>
-                            <img src="<?php echo URLROOT;?>/img/test6.jpg" class="thumbnail">
-                        </div>
-                        <div>
-                            <div class="qdp">
-                                <div>
-                                    <img src="<?php echo URLROOT;?>/img/user.jpg"/>
-                                </div>
-                                <div class="video-content">
-                                    <p class="text">What is the big problem or question that this new academic discipline that you keep talking about would address?</p>
-                                    <label class="qdp-1-2">21 July 2022</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="video">
-                        <div>
-                            <img src="<?php echo URLROOT;?>/img/test7.png" class="thumbnail">
-                        </div>
-                        <div>
-                            <div class="qdp">
-                                <div>
-                                    <img src="<?php echo URLROOT;?>/img/user.jpg"/>
-                                </div>
-                                <div class="video-content">
-                                    <p class="text">What will be your major focus as an independent researcher?</p>
-                                    <label class="qdp-1-2">21 July 2022</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="video">
-                        <div>
-                            <img src="<?php echo URLROOT;?>/img/test8.jpg" class="thumbnail">
-                        </div>
-                        <div>
-                            <div class="qdp">
-                                <div>
-                                    <img src="<?php echo URLROOT;?>/img/user.jpg"/>
-                                </div>
-                                <div class="video-content">
-                                    <p class="text">Is it a bad idea to take an elective class pass/fail to boost my GPA?</p>
-                                    <label class="qdp-1-2">21 July 2022</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="video">
-                        <div>
-                            <img src="<?php echo URLROOT;?>/img/test9.jpg" class="thumbnail">
-                        </div>
-                        <div>
-                            <div class="qdp">
-                                <div>
-                                    <img src="<?php echo URLROOT;?>/img/user.jpg"/>
-                                </div>
-                                <div class="video-content">
-                                    <p class="text">What kind of education should one follow to be like Tony Stark?</p>
-                                    <label class="qdp-1-2">21 July 2022</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
+                    <?php endforeach; ?>
+                    
                 </div>
                 
                 <div class="RHS">
@@ -366,16 +260,7 @@
             </div>
         </div>
         
-        <!-- View -->
-        <div class="video-view" id="1">
-            <img src="<?php echo URLROOT;?>/img/cancel.png" class="cancel" onclick="cancel()">
-            <iframe width="550" height="325" src="https://www.youtube.com/embed/Nxtv1LfdSBk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            <h3>What is the big problem or question that this new academic discipline that you keep talking about would address?</h3>
-            <div style="display:flex;">
-                <label class="qdp-1-2">21 July 2022</label>
-                <span class="qdp-1-2 qdp-1-3">By Varsha Wijethunge</span>
-            </div>
-        </div>
+        
         
         <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="arrow up"></i><br></button>
             

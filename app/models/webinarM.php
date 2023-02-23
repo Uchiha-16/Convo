@@ -57,10 +57,11 @@
 //****************************************************************Retrive Questions************************************************************************************************************* */
 
         //getQuestions
-        public function getQuestions() {
-            $this->db->query('SELECT question.QID as QID, question.title as title, question.content as content, question.date as date, question.rating as rating, 
-            GROUP_CONCAT(questiontag.tag SEPARATOR ",") as tags, question.moderatorID as modID FROM question JOIN questiontag ON question.QID = questiontag.QID WHERE userID = :userID GROUP BY question.QID');
-            $this->db->bind(':userID', $_SESSION['userID']);
+        public function getwebinars() {
+            $this->db->query('SELECT webinar.webinarID as webinarID, webinar.webinarTitle as title, webinar.date as date, 
+            webinar.videolink as videolink, webinar.thumbnail as thumbnail, webinar.expertID as expertID, user.pfp as pfp 
+            FROM webinar, expert, user WHERE webinar.expertID = expert.expertID AND webinar.expertID = user.userID;');
+
             $row = $this->db->resultSet();
             return $row;
         }
