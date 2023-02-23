@@ -12,17 +12,6 @@
         $Quser = $this->answersM->Quser($QID);
         $count = $this->answersM->answerCount($QID);
 
-        $uid = array();
-        for($i = 0; $i < count($answers); $i++) {
-            $uid[$i] = $answers[$i]->userID;
-        }
-    
-        $str2 = '';
-    
-        foreach($uid as $id) {
-            $str2 = $str2 . 'expertID = "' . $id . '" OR ';
-        }
-        
         $data = [
             'question' => $question,
             'answers' => $answers,
