@@ -11,8 +11,7 @@
                 <div class="LHS">
                     <h3>Questions and Discussions</h3><br>
 
-                    <?php foreach($data['questions'] as $q): ?>
-                        <?php foreach($q as $question): ?>
+                    <?php foreach($data['questions'] as $question): ?>
 
                      <div class="question-div">
                         <div class="info">
@@ -27,10 +26,11 @@
                             </div>
                             <div class="tags">
                                 <label>Category</label><br>
-                                <!-- <?php //$tagArray = explode(",", $data['tags']->tags); ?>
-                                <?php //foreach ($tagArray as $tag) : ?>
-                                    <div class="tag"><?php //echo $tag ?></div>
-                                <?php //endforeach; ?> -->
+
+                                <?php $tagArray = explode(",", $data['tags']->); ?>
+                                <?php foreach ($tagArray as $tag) : ?>
+                                    <div class="tag"><?php echo $tag ?></div>
+                                <?php endforeach; ?>
                             </div>
                         </div>
                         <div class="content-display">
@@ -39,12 +39,13 @@
                             <div class="date-count">
                                 <label><?php echo convertTime($question->date);?></label>
                                 <label style="font-weight:600; float:right">3 Answers</label><br>
-                                <button style="float:right" class="read-more">READ MORE</button>
+                                <form action="<?php echo URLROOT;?>/answers/viewA/<?php echo $question->QID;?>">
+                                    <button style="float:right" class="read-more">READ MORE</button>
+                                </form>
                             </div>
                         </div>
                     </div>
                         <?php endforeach; ?>
-                    <?php endforeach; ?>
 
         </div>
 

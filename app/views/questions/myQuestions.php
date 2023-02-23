@@ -56,7 +56,7 @@
                                 <?php if(empty($question->modID)) : ?>
                                     <button style="float:right" class="read-more">Waiting For Approval</button>
                                 <?php else : ?>
-                                    <form action="<?php echo URLROOT;?>/answers/viewA/<?php echo $question->QID;?>">
+                                <form action="<?php echo URLROOT;?>/answers/viewA/<?php echo $question->QID;?>">
                                     <button style="float:right" class="read-more">READ MORE</button>
                                 </form>
                                 <?php endif; ?>
