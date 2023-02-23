@@ -11,26 +11,37 @@
                 <div class="LHS">
                     <h3>Questions and Discussions</h3><br>
 
-                    <?php foreach($data['questions'] as $question): ?>
+                    <?php foreach($data['questions'] as $question) : ?>
 
                      <div class="question-div">
                         <div class="info">
                             <div class="qdp">
-                                <div>
-                                    <img src="<?php echo URLROOT;?>/img/pfp/<?php echo $question->pfp ?>"/>
+                                <div><?php if($question->visibility == "anonymus") : ?>
+                                    
+                                    <img src="<?php echo URLROOT;?>/img/pfp/anonymus.png"/>
+                                </div>
+                                <div class="qdp-1">
+                                    
+                                        <label class="expert">Anonymus User</label> <br>
+                                    <?php else : ?>
+                                        <img src="<?php echo URLROOT;?>/img/pfp/<?php echo $question->pfp ?>"/>
                                 </div>
                                 <div class="qdp-1">
                                     <label><?php echo $question->fName." ".$question->lName; ?></label><br>
                                     <label class="qdp-1-2"><?php echo $question->uname ?></label>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                             <div class="tags">
-                                <label>Category</label><br>
-
-                                <?php $tagArray = explode(",", $data['tags']->); ?>
-                                <?php foreach ($tagArray as $tag) : ?>
-                                    <div class="tag"><?php echo $tag ?></div>
-                                <?php endforeach; ?>
+                                <label>Category</label><br>   
+                                <?php  for($i=0; $i<count($data['tags']); $i++) : ?>
+                                    <?php if($data['tags'][$i]->QID == $question->QID) : ?>
+                                        <?php $tagArray = explode(",", $data['tags'][$i]->tags); ?>
+                                        <?php foreach ($tagArray as $tag) : ?>
+                                            <div class="tag"><?php echo $tag ?></div>
+                                        <?php endforeach; ?>
+                                    <?php endif; ?>
+                                <?php endfor; ?>
                             </div>
                         </div>
                         <div class="content-display">

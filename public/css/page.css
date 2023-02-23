@@ -255,6 +255,7 @@ input[type=search]{
     cursor: pointer;
     transition: .3s;
     margin-top: 1rem;
+    font-family: 'inter';
 }
 
 .one{
@@ -374,7 +375,7 @@ input[type=search]{
     width: 80%;
     margin: 0;
     padding: 3px 10px 3px 10px;
-
+    margin-top: 23px;
 }
 
 .delete-button{

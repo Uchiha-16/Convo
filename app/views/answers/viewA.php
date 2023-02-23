@@ -16,7 +16,7 @@
                         <div class="info">
                             <div class="qdp">
                                 <div>
-                                    <img src="../img/user.jpg"/>
+                                    <img src="<?php echo URLROOT;?>/img/pfp/<?php echo $data['Quser']->pfp; ?> "/>
                                 </div>
                                 <div class="qdp-1">
                                     <label><?php echo $data['Quser']->uname; ?></label><br>
@@ -46,11 +46,12 @@
                     
                     <h2><?php echo $data['count']->count;?> Answers</h2>
                     <?php foreach($data['answers'] as $answer) :?>
+                        <?php //print_r ($answer);?>
                     <div class="question-div">
                         <div class="info">
                             <div class="qdp">
                                 <div>
-                                    <img src="../img/user.jpg"/>
+                                    <img src="<?php echo URLROOT;?>/img/pfp/<?php echo $answer->pfp; ?>"/>
                                 </div>
                                 <div class="qdp-1">
                                     <label><?php echo $answer->uname;?></label><br>
@@ -66,8 +67,8 @@
                             </div>
                         </div>
                         <div class="content-display">
-                            <h3><?php echo $answer->content;?></h3>
                             <iframe width="560" height="315" src="<?php echo $answer->link?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                            <h3><?php echo $answer->content;?></h3>
                             <div class="date-count">
                                 <label><?php echo convertTime($answer->date);?></label>
                                 <label style="font-weight:600; float:right"><?php echo $answer->rating;?></label><br>

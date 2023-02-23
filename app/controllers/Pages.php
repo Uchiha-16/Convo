@@ -13,44 +13,76 @@
         
             $usertag = $this->pagesM->getUserTag();
 
-        //    $tags = array();
+            $str = '';
 
-        //       foreach($usertag as $tag) {
-        //         array_push($tags, $tag->tag);
-        //       }
+            foreach($usertag as $tag) {
+                $str = $str . 'questiontag.tag = "' . $tag->tag . '" OR ';
 
-        //     $tag = implode(",", $tags);
-        //     print_r($tag);
-
-        $str = '';
-
-        foreach($usertag as $tag) {
-            $str = $str . 'questiontag.tag = "' . $tag->tag . '" OR ';
-
-        }
-
-        $str = substr($str, 0, -4);
-
-        //print($str);
-            $questions = $this->pagesM->getQuestions($str);
-
-            $questiontag = array();
-            
-
-            foreach($questions as $question) {
-                $questiontag[$question->QID] = $this->pagesM->getQuestionTags($question->QID);
             }
-            print_r($questiontag);
-            $data = [
-                'questions' => $questions,
-                'tags' => $questiontag,
-            ];
-            print_r($data);
+
+            $str = substr($str, 0, -4);
+
+
+                $questions = $this->pagesM->getQuestions($str);
+                $qid = array();
+                for($i = 0; $i < count($questions); $i++) {
+                    $qid[$i] = $questions[$i]->QID;
+                }
+
+                $str2 = '';
+
+                foreach($qid as $id) {
+                    $str2 = $str2 . 'QID = "' . $id . '" OR ';
+                }
+
+                $str2 = substr($str2, 0, -4);
+
+                $tags = $this->pagesM->getQuestionTags($str2);
+
+                $data = [
+                    'questions' => $questions,
+                    'tags' => $tags,
+                ];
+
             $this->view('pages/seeker', $data);
         }
 
         public function expert() {
-            $data = [];
+            $usertag = $this->pagesM->getUserTag();
+
+            $str = '';
+    
+            foreach($usertag as $tag) {
+                $str = $str . 'questiontag.tag = "' . $tag->tag . '" OR ';
+    
+            }
+    
+            $str = substr($str, 0, -4);
+    
+    
+                $questions = $this->pagesM->getQuestions($str);
+                $qid = array();
+                for($i = 0; $i < count($questions); $i++) {
+                    $qid[$i] = $questions[$i]->QID;
+                }
+    
+                $str2 = '';
+    
+                foreach($qid as $id) {
+                    $str2 = $str2 . 'QID = "' . $id . '" OR ';
+                }
+    
+                $str2 = substr($str2, 0, -4);
+                print($str2);
+                $tags = $this->pagesM->getQuestionTags($str2);
+    
+                print_r($tags);
+    
+                $data = [
+                    'questions' => $questions,
+                    'tags' => $tags,
+                ];
+
             $this->view('pages/expert', $data);
         }
         

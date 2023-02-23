@@ -23,6 +23,7 @@
                     'password' => trim($_POST['password']),
                     'confirm_password' => trim($_POST['confirm_password']),
                     'tag' => $tag,
+                    'role' => 'seeker',
                     'fname_err' => '',
                     'lname_err' => '',
                     'email_err' => '',
@@ -37,7 +38,7 @@
                 if(uploadImage($data['pfp']['tmp_name'], $data['pfp_name'], '/img/pfp/')) {
                     $data['pfp'] = $data['pfp_name'];
                 } else {
-                    $data['pfp'] = '../img/pfp/user.png';
+                    $data['pfp'] = 'user.jpg';
                 }
                 //validate each inputs
                 // Validate fName
@@ -138,6 +139,7 @@
                     'password' => '',
                     'confirm_password' => '',
                     'tag' => '',
+                    'role' => '',
                     'fname_err' => '',
                     'lname_err' => '',
                     'email_err' => '',
@@ -188,14 +190,13 @@
                 if(empty($data['email_err']) && empty($data['password_err'])) {
                     //log the user
                     $loggedUser = $this->userModel->login($data['uname'], $data['password']);
-                    $role = $this->userModel->userRole($data['uname']);
                     
                     if($loggedUser) {
                        // Create Session
                         $this->createUserSession($loggedUser);
 
                         // Role
-                        if($role == 'expert'){
+                        if($loggedUser->role == 'expert'){
                             redirect('pages/expert');
                         } else{
                             redirect('pages/seeker');
