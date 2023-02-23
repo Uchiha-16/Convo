@@ -4,7 +4,9 @@
             $this->webinarModel = $this -> model('webinarM');
         }
 
-        // public function add(){
+        public function add(){
+            $data = [];
+            $this->view('webinars/add', $data);
         //     if($_SERVER['REQUEST_METHOD'] == 'POST') {
         //         // Form is submitting
         //         // Validate the data
@@ -88,7 +90,7 @@
         //         ];
         //         $this->view('questions/add', $data);
         //     }
-        // }
+        }
 
         public function home(){
             
