@@ -40,11 +40,10 @@
                         </div>
 
                         <!-- View -->
-                        <!-- <form action="<?php echo URLROOT ?>/Webinar/view/"><button type="submit"> </button></form>-->
                         <div class="video-view" id="1">
                             <img src="<?php echo URLROOT;?>/img/cancel.png" class="cancel" onclick="cancel()">
-                            <iframe width="550" height="325" src="https://www.youtube.com/embed/<?php echo $webinar->videolink ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                            <h3><?php echo $webinar->videolink</h3>
+                            <iframe width="550" height="325" src="https://www.youtube.com/embed/Nxtv1LfdSBk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <h3>What is the big problem or question that this new academic discipline that you keep talking about would address?</h3>
                             <div style="display:flex;">
                                 <label class="qdp-1-2">21 July 2022</label>
                                 <span class="qdp-1-2 qdp-1-3">By Varsha Wijethunge</span>
@@ -259,8 +258,6 @@
                 <footer><a href="index.php">About Us</a> <p> | </p> &copy; Convo 2022 All rights reserved.</footer>
             </div>
         </div>
-        
-        
         
         <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="arrow up"></i><br></button>
             
