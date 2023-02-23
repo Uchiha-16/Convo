@@ -1,30 +1,18 @@
-<link href="../stylesheets/event.css" rel="stylesheet" type="text/css"/>
-        <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
-        <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
-        <link rel="stylesheet" href="../stylesheets/mobile.css" rel="stylesheet" type="text/css">
+<?php require APPROOT . '/views/inc/header.php'; ?>
+        <link href="<?php echo URLROOT; ?>/css/event.css" rel="stylesheet" type="text/css" />
 
-        <!-- scripts -->
-        <script src="https://kit.fontawesome.com/a061f2abcc.js" crossorigin="anonymous"></script>
-        
-        
-        <!-- styles -->
+
         <style>
-            .nav{
-                grid-template-columns: 5% 6% 6% 6% 51% 10% 4% 4% 4%;
-            }
-            .add-event textarea{
-                height: 23rem;
-            }
-            .filter-div{
-/*                margin-top: 3.6rem;*/
-                display: none;
-            }
+.nav {
+    grid-template-columns: 5% 6% 6% 6% 51% 10% 4% 4% 4%;
+}
         </style>
-        
-    </head>
-    <body>
-        <!-- nav bar -->
-        <?php include 'Enavbar.php'; ?>
+        </head>
+
+        <body>
+
+            <?php require APPROOT . '/views/inc/components/Enavbar.php'; ?>
+
         
         <!-- body content -->
         <div class="container-div">
@@ -35,27 +23,29 @@
                     <!-- Question 1 -->
                     <div class="question-div">
                         <div class="content-display">
-                            <h2>What are some alternatives to String Theory that have been researched/developed?</h2>
-                            <p>The only finite mathematical framework that incorporates both the standard model of particle physics and gravity under one umbrella that I am aware of is string theory. I would like to know whether there are any other mathematical possibilities exist which do not depend on supersymmetry and still consistent with the standard model and gravity and produce finite answers. In a nutshell my question is: can there be any alternative to string theory? (Remember, I am not talking about only gravity. I am talking about gravity as well as other phenomena).</p>
+                            <h2><?php echo $data['question']->title; ?></h2>
+                            <p><?php echo $data['question']->content; ?>.</p>
                             <div class="qdp">
                                 <div>
-                                    <img src="../images/p2.jpg"/>
+                                    <img src="<?php echo URLROOT; ?>/img/pfp/<?php echo $data['Quser']->pfp; ?>"/>
                                 </div>
                                 <div class="qdp-1">
-                                    <label>Dilky Liyanage</label><br>
-                                    <label class="qdp-1-2">University of Colombo</label>
+                                    <label><?php echo $data['Quser']->fName ." ". $data['Quser']->lName; ?></label><br>
+                                    <label class="qdp-1-2"><?php echo $data['Quser']->uname; ?></label>
                                 </div>
                             </div>
                             <div class="info">
                             <div class="tags">
                                 <label>Category</label><br>
-                                <div class="tag">Physics</div>
-                                <div class="tag">Science</div>
-                                <div class="tag">Mathematics</div>
+                                <?php $tagArray = explode(",", $data['question']->tags); ?>
+                                <?php foreach ($tagArray as $tag) : ?>
+                                    <div class="tag"><?php echo $tag ?></div>
+                                <?php endforeach; ?>
+                                <br><br>
                             </div>
                         </div>
                             <div class="date-count">
-                                <label>October 2, 2022</label>
+                                <label><?php echo convertTime($data['question']->date); ?></label>
                                 <label style="font-weight:600; float:right">1 Answer</label><br>
                                 <button class="read-more" style="width:100%;">Save for later</button>
                             </div>
@@ -64,101 +54,128 @@
                     
                     <!-- Answer -->
                     <div class="question-div add-event">
-                        <form action="" method="POST">
-                            <h3 style="color: #0D5F75;">Add Answer</h3>
-                            <table>
-                                <tr>
-                                    <td colspan="3">
-                                        <p class="desc">Make sure to check the other answers before adding the same answer again. Enter a clear and concise answer that others will easily understand.</p>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3">
-                                        <div class="qdp">
-                                            <div>
-                                                <img src="../images/p1.jpg"/>
-                                            </div>
-                                            <div class="qdp-1">
-                                                <label>Varsha Wijethunge</label><br>
-                                                <label class="qdp-1-2">University of Colombo</label>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3">
-                                        <h4 style="margin-bottom:.5rem">Answer</h4>
+                            <form action="" method="POST">
+                                <table>
+                                    <tr>
+                                        <td colspan="3">
+                                            <p class="p1">Add an Answer</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" style="border-bottom: 1px solid rgba(128,128,128, .2); padding-bottom: 1rem;">
+                                            <h4 style="margin-bottom:1.5rem">Description<span class="star">*</span></h4>
 
-
-                                        <section>
-                                            <div class="row">
-                                                <div class="col">
-                                                    <div class="first box">
-                                                        <input id="font-size" type="number" value="16" min="1" max="100" onchange="f1(this)">
-                                                    </div>
-                                                    <div class="second box">
-                                                        <button type="button" onclick="f2(this)">
+                                            <!-- Text Editor -->
+                                            <div class="textEditor">
+                                                <div>
+                                                    <div class="options">
+                                                        <!-- Text Format -->
+                                                        <button id="bold" class="option-button format">
                                                             <i class="fa-solid fa-bold"></i>
                                                         </button>
-                                                        <button type="button" onclick="f3(this)">
+                                                        <button id="italic" class="option-button format">
                                                             <i class="fa-solid fa-italic"></i>
                                                         </button>
-                                                        <button type="button" onclick="f4(this)">
+                                                        <button id="underline" class="option-button format">
                                                             <i class="fa-solid fa-underline"></i>
                                                         </button>
-                                                    </div>
-                                                    <div class="third box">
-                                                        <button type="button" onclick="f5(this)">
+                                                        <button id="strikethrough" class="option-button format">
+                                                            <i class="fa-solid fa-strikethrough"></i>
+                                                        </button>
+                                                        <button id="superscript" class="option-button script">
+                                                            <i class="fa-solid fa-superscript"></i>
+                                                        </button>
+                                                        <button id="subscript" class="option-button script">
+                                                            <i class="fa-solid fa-subscript"></i>
+                                                        </button>
+                                                        <!-- List -->
+                                                        <button id="insertOrderedList" class="option-button">
+                                                            <div class="fa-solid fa-list-ol"></div>
+                                                        </button>
+                                                        <button id="insertUnorderedList" class="option-button">
+                                                            <i class="fa-solid fa-list"></i>
+                                                        </button>
+                                                        <!-- Undo/Redo -->
+                                                        <button id="undo" class="option-button">
+                                                            <i class="fa-solid fa-rotate-left"></i>
+                                                        </button>
+                                                        <button id="redo" class="option-button">
+                                                            <i class="fa-solid fa-rotate-right"></i>
+                                                        </button>
+                                                        <!-- Link -->
+                                                        <button id="createLink" class="adv-option-button">
+                                                            <i class="fa fa-link"></i>
+                                                        </button>
+                                                        <button id="unlink" class="option-button">
+                                                            <i class="fa fa-unlink"></i>
+                                                        </button>
+                                                        <!-- Alignment -->
+                                                        <button id="justifyLeft" class="option-button align">
                                                             <i class="fa-solid fa-align-left"></i>
                                                         </button>
-                                                        <button type="button" onclick="f6(this)">
+                                                        <button id="justifyCenter" class="option-button align">
                                                             <i class="fa-solid fa-align-center"></i>
                                                         </button>
-                                                        <button type="button" onclick="f7(this)">
+                                                        <button id="justifyRight" class="option-button align">
                                                             <i class="fa-solid fa-align-right"></i>
                                                         </button>
-                                                    </div>
-                                                    <div class="fourth box">
-                                                        <button type="button" onclick="f8(this)">aA</button>
-                                                        <button type="button" onclick="f9()">
-                                                            <i class="fa-solid fa-text-slash"></i>
+                                                        <button id="justifyFull" class="option-button align">
+                                                            <i class="fa-solid fa-align-justify"></i>
                                                         </button>
-                                                        <input type="color" onchange="f10(this)">
+                                                        <!-- Color -->
+                                                        <div class="input-wrapper">
+                                                            <input type="color" id="foreColor" class="adv-option-button" />
+                                                            <label for="foreColor">Font Color</label>
+                                                        </div>
+                                                        <div class="input-wrapper">
+                                                            <input type="color" id="backColor" class="adv-option-button" />
+                                                            <label for="backColor">Highlight Color</label>
+                                                        </div>
                                                     </div>
+
+                                                    <textarea id="text-input" name="content"></textarea>
+                                                    <span class="error"><?php echo $data['content_err']; ?></span>
                                                 </div>
                                             </div>
-                                            <br>
-                                            <div class="row row1">
-                                                <div class="col col1">
-                                                    <textarea id="textarea1" class="inputform" type="text" name="desc" placeholder="Enter an explanation in text format..."></textarea>
-                                                </div>
+                                        </td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td colspan="3" style="border-bottom: 1px solid rgba(128,128,128, .2); padding-bottom: 1rem;">
+                                            <h4 style="margin-bottom:.5rem">Video Link</h4><br>
+                                            <label class="steps"><b>Step 1:</b> Upload your video to YouTube/ Or go to your uploaded YouTube video.</label><br><br>
+                                            <label class="steps"><b>Step 2:</b> Copy the YouTube "Sharing Link" relevant to your video. You can copy either the embedded link as well.<br>
+                                                <label style="color: #117ea6; font-size:13px; margin-left:3.2rem"><b>Sharing Link Example:</b> https://youtu.be/2ybLD6_2gKM</label><br>
+                                                <label style="color: #117ea6; font-size:13px; margin-left:3.2rem"><b>Embeded Link Example:</b> https://www.youtube.com/embed/2ybLD6_2gKM</label></label><br><br>
+                                            <label class="steps"><b>Step 3:</b> Paste the link to the following field.</label><br><br>
+                                            <label class="steps">Make sure that it is the <b>‘Shared/ Embeded video link’</b>.</label><br><br>
+                                            <input class="inputform" type="text" name="link" placeholder="Please include the video link here." required>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" style="padding-top: 1rem;">
+                                            <h4 style="margin-bottom:.5rem">Add Thumbnail <img src="<?php echo URLROOT;?>/img/thumbnail.png" style="width: 17px;"></h4>
+                                            <label for="file" id="attatchment">
+                                                <label style="font-size: 14px; color:black">Upload a picture that shows what's in your video.
+                                                    A good thumbnail stands out and draws viewers' attention.</label><br><br>
+                                                <input style="border: none; font-size: 14px;" type="file" id="file" name="image" value="">
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3">
+                                            <br><br>
+                                            <div class="add">
+                                                <button style="float:right" class="read-more attend submit" type="reset">Cancel</button>
+                                                <button style="float:right" class="read-more attend submit" type="submit" name="submit" onclick="webinarPublish()">Publish</button>
                                             </div>
-                                        </section>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3" style="padding-top: 1rem;">
-                                        <label for="file" id="attatchment">
-                                            <img src="../images/thumbnail.png"> Add Thumbnail
-                                            <input style="border: none; display:none;" type="file" id="file" name="pfp" value="">
-                                        </label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3">
-                                        <br><br>
-                                        <div class="add">
-                                            <button style="float:right" class="read-more attend submit" type="submit" name="create">Publish</button>
-                                            <button style="float:right" class="read-more attend submit" type="reset">Cancel</button>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-                        </form>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </form>
+                        </div>
+
                     </div>
-                    
-                </div>
-                
                 
                 
                 <div class="RHS">
