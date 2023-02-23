@@ -15,14 +15,22 @@
                      <div class="question-div">
                         <div class="info">
                             <div class="qdp">
-                                <div>
-                                    <img src="<?php echo URLROOT;?>/img/pfp/<?php echo $data['Quser']->pfp; ?> "/>
-                                </div>
-                                <div class="qdp-1">
-                                    <label><?php echo $data['Quser']->uname; ?></label><br>
-                                    <label class="qdp-1-2"><?php echo $data['Quser']->fName." ".$data['Quser']->lName;?></label>
-                                </div>
+                            <div><?php if($data['question']->visibility == "anonymus") : ?>
+                                
+                                <img src="<?php echo URLROOT;?>/img/pfp/anonymus.png"/>
                             </div>
+                            <div class="qdp-1">
+                                
+                                    <label class="expert">Anonymus User</label> <br>
+                                <?php else : ?>
+                                    <img src="<?php echo URLROOT;?>/img/pfp/<?php echo $data['Quser']->pfp; ?> "/>
+                            </div>
+                            <div class="qdp-1">
+                                <label><?php echo $data['Quser']->fName." ".$data['Quser']->lName;?></label><br>
+                                <label class="qdp-1-2"><?php echo $data['Quser']->uname; ?></label>
+                                <?php endif; ?>
+                            </div>
+                        </div>
                             <div class="tags">
                                 <label>Category</label><br>
                                 <?php $tagArray = explode(",", $data['question']->tags); ?>
@@ -84,7 +92,7 @@
                             </div>
                             </div>
                             <div class = "answercontent-1">
-                            <iframe width="750" height="315" src="<?php echo $answer->link?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                            <iframe width="750" height="315" src="https://www.youtube.com/embed/<?php echo $answer->link?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                             <p><?php echo $answer->content;?></p>
                             
                             <hr>
