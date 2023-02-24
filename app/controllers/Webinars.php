@@ -6,15 +6,11 @@
 
         public function add(){
 
-            $webinars = $this->webinarModel->getPlaylist();
-            
-            $data = [
-                'webinars' => $webinars,
-            ];
-            
-
+            // my playlists
+            $webinarsPlaylist = $this->webinarModel->getPlaylist();
+            //$this->view('webinars/add', $data);
+            // Form is submitting
             if($_SERVER['REQUEST_METHOD'] == 'POST') {
-                // Form is submitting
                 // Validate the data
                 $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
                 date_default_timezone_set('Asia/Colombo');
@@ -34,8 +30,10 @@
                     'tag' => $tag,
                     'playlist' => $playlist,
                     'videolink' => $stringFromEnd,
-                    'thumbnail' => trim($_POST['image']),
-                    'date' => date('Y-m-d H:i:s'),  
+                    'thumbnail' => trim($_POST['thumbnail']),
+                    'thumbnail_name' => time().'_'.($_FILES['thumbnail']['name']),
+                    'date' => date('Y-m-d H:i:s'), 
+                    'webinarsPlaylist' => $webinarsPlaylist, 
                     'title_err' => '',
                     'link_err' => '',
                     'thumbnail_err' => '',
@@ -50,7 +48,10 @@
                 }
 
                 // Validate thumbnail
-                if(empty($data['thumbnail'])) {
+                // Validate Image
+                if(uploadImage($data['thumbnail']['tmp_name'], $data['thumbnail_name'], '/img/thumbnails/')) {
+                    $data['thumbnail'] = $data['thumbnail_name'];
+                } else {
                     $data['thumbnail_err'] = 'Please add a Thumbnail';
                 }
 
@@ -94,7 +95,7 @@
                     }
                 } else {
                     // Load view with errors
-                    $this->view('webinars/home', $data);
+                    $this->view('webinars/add', $data);
                 }
             }
             else {
@@ -110,9 +111,23 @@
                     'thumbnail_err' => '',
                     'tag_err' => '',
                     'playlist_err' => '',
+                    'webinarsPlaylist' => $webinarsPlaylist,
                 ];
                 $this->view('webinars/add', $data);
             }
+
+            
+        }
+
+
+        public function myWebinars(){
+            $webinars = $this->webinarModel->getmywebinars();
+            
+            $data = [
+                'webinars' => $webinars,
+            ];
+            
+            $this->view('webinars/myWebinars', $data);
         }
 
         public function home(){

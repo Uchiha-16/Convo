@@ -1,57 +1,74 @@
-            <?php require APPROOT . '/views/inc/header.php'; ?>
-            <link href="<?php echo URLROOT; ?>/css/event.css" rel="stylesheet" type="text/css"/>
-            <link href="<?php echo URLROOT; ?>/css/webinar.css" rel="stylesheet" type="text/css"/>
+<?php require APPROOT . '/views/inc/header.php'; ?>
 
-            <style>
-                .nav{
-                    grid-template-columns: 5% 6% 6% 6% 51% 10% 4% 4% 4%;
-                }
-            </style>
+        <link href="<?php echo URLROOT; ?>/css/event.css" rel="stylesheet" type="text/css"/>
+        <link href="<?php echo URLROOT; ?>/css/webinar.css" rel="stylesheet" type="text/css"/>
+        
+        <style>
+            .nav{
+                grid-template-columns: 5% 6% 6% 6% 51% 10% 4% 4% 4%;
+            }
+        </style>
     </head>
-<body>
-<?php require APPROOT . '/views/inc/components/Enavbar.php'; ?>
+    <body>
+        <!-- nav bar -->
+        <?php require APPROOT . '/views/inc/components/Enavbar.php'; ?>
+        
+        
         
         <!-- body content -->
         <div class="container-div">
             <div class="content-body">
-                <div class="LHS">
-
-                    <?php foreach($data['webinars'] as $webinar) : ?>
-                        
-                        <div class="video" onclick="view()">
-                            <div>
-                                <img src="<?php echo URLROOT;?>/img/thumbnails/<?php echo $webinar->thumbnail ?>" class="thumbnail">
-                            </div>
-                            <div>
-                                <div class="qdp">
-                                    <div>
-                                        <?php if($webinar->pfp != NULL) : ?>
-                                            <img src="<?php echo URLROOT;?>/img/pfp/<?php echo $webinar->pfp ?>"/>
-                                        <?php else : ?>
-                                            <img src="<?php echo URLROOT;?>/img/pfp/user.jpg"/>
-                                        <?php endif; ?>
-                                    </div>
-                                    <div class="video-content">
-                                        <p class="text"><?php echo $webinar->title ?></p>
-                                        <label class="qdp-1-2"><?php echo $webinar->date ?></label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- View -->
-                        <div class="video-view" id="1">
-                            <img src="<?php echo URLROOT;?>/img/cancel.png" class="cancel" onclick="cancel()">
-                            <iframe width="550" height="325" src="https://www.youtube.com/embed/Nxtv1LfdSBk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                            <h3>What is the big problem or question that this new academic discipline that you keep talking about would address?</h3>
-                            <div style="display:flex;">
-                                <label class="qdp-1-2">21 July 2022</label>
-                                <span class="qdp-1-2 qdp-1-3">By Varsha Wijethunge</span>
-                            </div>
-                        </div>
-
-                    <?php endforeach; ?>
-                    
+                <div class="LHS webinar-stat">
+                    <h3>Webinar Content</h3>
+                    <div class="table">
+                        <table class="webinar-table">
+                            <!-- TH -->
+                            <tr>
+                                <th colspan="2">Video</th>
+                                <th colspan="3" style="padding-left:2rem;">Date</th>
+                            </tr>
+                            <!-- section -->
+                            <tr>
+                                <td class="table-thumbnail"><img src="<?php echo URLROOT;?>/img/1.png"></td>
+                                <td>Fortnite 2022 01 15 00 01 48 06 DVR<br><span>hgjhhj</span></td>
+                                <td class="table-date">Feb 6, 2021<br><span>Published</span></td>
+                                <td class="edit" style="font-size: 16px;font-weight: 500;width: 6%;">Edit</td>
+                                <td class="edit remove" style="font-size: 16px;font-weight: 500;width: 13%;">Remove</td>
+                            </tr>
+                            <!-- section -->
+                            <tr>
+                                <td class="table-thumbnail"><img src="<?php echo URLROOT;?>/img/6.png"></td>
+                                <td>Shingeki no Kyojin | Attack on Titan - MUST WATCH<br><span>At the beginning, there was Hope... Light... and Joy... But now, there's no hope in their eyes... Its just Dark...</span></td>
+                                <td class="table-date">Feb 6, 2021<br><span>Published</span></td>
+                                <td class="edit" style="font-size: 16px;font-weight: 500;">Edit</td>
+                                <td class="edit remove" style="font-size: 16px;font-weight: 500;">Remove</td>
+                            </tr>
+                            <!-- section -->
+                            <tr>
+                                <td class="table-thumbnail"><img src="<?php echo URLROOT;?>/img/3.png"></td>
+                                <td>Mikasa Ackerman FAN ART<br><span>Hey again everyone! This video is also inspired by Attack On Titan anime. If you haven't checked out ...</span></td>
+                                <td class="table-date">Feb 4, 2021<br><span>Published</span></td>
+                                <td class="edit" style="font-size: 16px;font-weight: 500;">Edit</td>
+                                <td class="edit remove" style="font-size: 16px;font-weight: 500;">Remove</td>
+                            </tr>
+                            <!-- section -->
+                            <tr>
+                                <td class="table-thumbnail"><img src="<?php echo URLROOT;?>/img/4.png"></td>
+                                <td>EREN YEAGER fan art in 4 min!<br><span>Hey again everyone! I'm uploading my second video which is inspired by Attack On Titan anime. The artwork ...</span></td>
+                                <td class="table-date">Dec 27, 2020<br><span>Published</span></td>
+                                <td class="edit" style="font-size: 16px;font-weight: 500;">Edit</td>
+                                <td class="edit remove" style="font-size: 16px;font-weight: 500;">Remove</td>
+                            </tr>
+                            <!-- section -->
+                            <tr>
+                                <td class="table-thumbnail"><img src="<?php echo URLROOT;?>/img/5.png"></td>
+                                <td>Amazing Genshin Impact Fanart!<br><span>Hey everyone! I'm uploading my first video which is inspired by the most popular game among otakus, Genshin ...</span></td>
+                                <td class="table-date">Nov 17, 2020<br><span>Published</span></td>
+                                <td class="edit" style="font-size: 16px;font-weight: 500;">Edit</td>
+                                <td class="edit remove" style="font-size: 16px;font-weight: 500;">Remove</td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
                 
                 <div class="RHS">
@@ -221,7 +238,7 @@
                                 
                                 <!-- Filter 3 -->
                                 <div class="checkbox-1">
-                                    <span class="checkbox-title" onclick="filter3()">Expert <i class="arrow up" id="up3" style="margin-left: 6.66rem;"></i><i class="arrow down" id="down3" style="margin-left: 6.66rem;"></i></span>
+                                    <span class="checkbox-title" onclick="filter3()">Expert <i class="arrow up" id="up3" style="margin-left: 4.3rem;"></i><i class="arrow down" id="down3" style="margin-left: 6.66rem;"></i></span>
                                     <ul id="checkbox-3">
                                         <li>
                                             <label for="checkbox1">
@@ -261,4 +278,4 @@
         
         <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="arrow up"></i><br></button>
             
-<?php require APPROOT . '/views/inc/footer.php'; ?> 
+<?php require APPROOT . '/views/inc/footer.php'; ?>

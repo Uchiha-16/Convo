@@ -4,6 +4,7 @@
 .LHS{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto 1fr;
     padding-top: 1rem;
     padding-right: 2rem;
 }

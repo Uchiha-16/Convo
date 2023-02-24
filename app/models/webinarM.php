@@ -13,7 +13,7 @@
             $this->db->bind(':title', $data['title']);
             $this->db->bind(':date', $data['date']);
             $this->db->bind(':videolink', $data['videolink']);
-            $this->db->bind(':thumbnail', $data['image']);
+            $this->db->bind(':thumbnail', $data['thumbnail']);
             $this->db->bind(':expertID', $_SESSION['userID']);
 
             // Execute
@@ -80,11 +80,23 @@
         // }
 //****************************************************************Retrive Questions************************************************************************************************************* */
 
-        //getQuestions
+        //getWebinars
         public function getwebinars() {
             $this->db->query('SELECT webinar.webinarID as webinarID, webinar.webinarTitle as title, webinar.date as date, 
             webinar.videolink as videolink, webinar.thumbnail as thumbnail, webinar.expertID as expertID, user.pfp as pfp 
             FROM webinar, expert, user WHERE webinar.expertID = expert.expertID AND webinar.expertID = user.userID;');
+
+            $row = $this->db->resultSet();
+            return $row;
+        }
+
+        //get myWebinars
+        public function getmywebinars() {
+            $this->db->query('SELECT webinar.webinarID as webinarID, webinar.webinarTitle as title, webinar.date as date, 
+            webinar.videolink as videolink, webinar.thumbnail as thumbnail, webinar.expertID as expertID
+            FROM webinar WHERE webinar.expertID = :expertID');
+
+            $this->db->bind(':expertID', $_SESSION['userID']);
 
             $row = $this->db->resultSet();
             return $row;
