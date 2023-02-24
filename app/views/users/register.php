@@ -21,6 +21,7 @@
         <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
         <script src="https://kit.fontawesome.com/a061f2abcc.js" crossorigin="anonymous"></script>
         
+        
     </head>
     <body>
         <div class="grid">
@@ -45,6 +46,26 @@
                                 <input type="file" id="file" name="pfp" value="">
                             </label>
                         </div><br>
+                        <script>
+                        const imgDiv = document.querySelector('.user-img');
+                        const img = document.querySelector('#photo');
+                        const file = document.querySelector('#file');
+                        const uploadebtn = document.querySelector('#uploadbtn');
+
+                        file.addEventListener( 'change', function(){
+                            const choosedfile = this.files[0];
+                            if(choosedfile){
+                                const reader = new FileReader();
+                                
+                                reader.addEventListener( 'load', function(){
+                                    img.setAttribute('src', reader.result);
+                                })
+                            reader.readAsDataURL(choosedfile);
+                            }
+                        });
+
+                        </script>
+
                         <table>
                             <tr>
                                 <td class="right"><input type="text" placeholder="First Name" name="fname" value="<?php echo $data['fname']; ?>" /><br><br>
@@ -150,5 +171,6 @@
         <script src="<?php echo URLROOT; ?>/js/index.js"></script>
         <script src="<?php echo URLROOT; ?>/js/validate.js"></script>
     </body>
+    
 </html>
 
