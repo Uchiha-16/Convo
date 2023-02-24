@@ -51,6 +51,7 @@
                 'QID' => $QID,
                 'expertID' => $_SESSION['userID'],    
                 'content_err' => '',
+                'link_err' => '',
                 'question' => $question,
                 'Quser' => $Quser,
             ];
@@ -59,6 +60,8 @@
             if(empty($data['content'])) {
                 $data1['content_err'] = 'Please enter Content';
             }
+
+
 
 
             // Make sure errors are empty

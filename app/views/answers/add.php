@@ -150,8 +150,8 @@
                                             <label class="steps"><b>Step 3:</b> Paste the link to the following field.</label><br><br>
                                             <label class="steps">Make sure that it is the <b>‘Shared/ Embeded video link’</b>.</label><br><br>
                                             <input class="inputform" type="text" name="link" placeholder="Please include the video link here." required>
+                                            <span class="error"><?php echo $data['link_err']; ?></span>
                                         </td>
-                                    </tr>
                                     <tr>
                                         <td colspan="3" style="padding-top: 1rem;">
                                             <h4 style="margin-bottom:.5rem">Add Thumbnail <img src="<?php echo URLROOT;?>/img/thumbnail.png" style="width: 17px;"></h4>

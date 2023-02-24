@@ -30,8 +30,8 @@
                     'tag' => $tag,
                     'playlist' => $playlist,
                     'videolink' => $stringFromEnd,
-                    'thumbnail' => trim($_POST['thumbnail']),
-                    'thumbnail_name' => time().'_'.($_FILES['thumbnail']['name']),
+                    'thumbnail' => ($_POST['thumbnail']),
+                    // 'thumbnail_name' => time().'_'.($_FILES['thumbnail']['name']),
                     'date' => date('Y-m-d H:i:s'), 
                     'webinarsPlaylist' => $webinarsPlaylist, 
                     'title_err' => '',
@@ -49,11 +49,11 @@
 
                 // Validate thumbnail
                 // Validate Image
-                if(uploadImage($data['thumbnail']['tmp_name'], $data['thumbnail_name'], '/img/thumbnails/')) {
-                    $data['thumbnail'] = $data['thumbnail_name'];
-                } else {
-                    $data['thumbnail_err'] = 'Please add a Thumbnail';
-                }
+                // if(uploadImage($data['thumbnail']['tmp_name'], $data['thumbnail_name'], '/img/thumbnails/')) {
+                //     $data['thumbnail'] = $data['thumbnail_name'];
+                // } else {
+                //     $data['thumbnail_err'] = 'Please add a Thumbnail';
+                // }
 
                 // Validate Content
                 if(empty($data['videolink'])) {
