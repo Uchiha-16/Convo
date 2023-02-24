@@ -19,7 +19,7 @@
                 <div class="content-body">
                     <div class="LHS">
                         <div class="question-div add-event">
-                            <form action="" method="POST">
+                            <form action="<?php echo URLROOT;?>/Webinars/add" method="POST">
                                 <table>
                                     <tr>
                                         <td colspan="3">
@@ -30,6 +30,7 @@
                                         <td colspan="3" style="border-bottom: 1px solid rgba(128,128,128, .2); padding-bottom: 1rem;">
                                             <h4 style="margin-bottom:.5rem">Title <span class="star">*</span></h4>
                                             <input class="inputform" type="text" name="title" placeholder="A catchy title can help you hook viewers." required>
+                                            <span class="error"><?php echo $data['title_err']; ?></span>
                                         </td>
                                     </tr>
                                     <tr>
@@ -102,7 +103,7 @@
                                                     </li>
                                                     <li>
                                                         <input type="checkbox" value="literature" name="tag[]" id="checkbox15" />
-                                                        <label for="checkbox15">literature</label>
+                                                        <label for="checkbox15">Literature</label>
                                                     </li>
                                                     <li>
                                                         <input type="checkbox" value="mathematics" name="tag[]" id="checkbox16" />
@@ -145,12 +146,8 @@
                                                         <label for="checkbox25">Space Science</label>
                                                     </li>
                                                 </ul>
-                                                <div class="select">
-                                                    <label>All tags selected?</label>
-                                                    <button style="float:right" class="read-more submit" type="submit" name="submit">Yes, I'm good.</button>
-                                                    <button style="float:right" class="read-more submit" type="submit" name="submit">No</button>
-                                                </div>
                                             </div>
+                                            <span class="error"><?php echo $data['tag_err']; ?></span>
                                         </td>
                                     </tr>
                                     <tr>
@@ -159,32 +156,26 @@
                                             <div class="dropdown-div">
 
                                                 <label>Add your video to one or more playlists.
-                                                    Playlists can help viewers discover your content faster..</label>
+                                                    Playlists can help viewers discover your content faster.</label>
 
                                                 <ul class="dropdown" id="dropdown">
                                                     <!-- Add New -->
                                                     <li>
-                                                        <input type="checkbox" value="1" name="tag[]" id="checkbox29" id="newPlaylist" onchange="showDiv('hidden_div', this)" />
+                                                        <input type="checkbox" value="1" name="playlist[]" id="checkbox29" id="newPlaylist" onchange="showDiv('hidden_div', this)" />
                                                         <label for="checkbox29">Add new</label><br>
                                                         <div id="hidden_div">
                                                             <input class="inputform" type="text" name="newP" id="playlist" placeholder="Add a unique name to your new playlist">
                                                         </div>
                                                     </li>
-
-                                                    <li>
-                                                        <input type="checkbox" value="p1" name="tag[]" id="checkbox26" />
-                                                        <label for="checkbox26">Website With Login Page</label>
-                                                    </li>
-                                                    <li>
-                                                        <input type="checkbox" value="p2" name="tag[]" id="checkbox27" />
-                                                        <label for="checkbox27">CSS For Beginners</label>
-                                                    </li>
-                                                    <li>
-                                                        <input type="checkbox" value="p3" name="tag[]" id="checkbox28" />
-                                                        <label for="checkbox28">CSS Card Slider</label>
-                                                    </li>
+                                                    <?php foreach($data['webinarsPlaylist'] as $webinarsPlaylist) : ?>
+                                                        <li>
+                                                            <input type="checkbox" value="p1" name="playlist[]" id="checkbox26" />
+                                                            <label for="checkbox26"><?php echo $webinarsPlaylist->playlistName ?></label>
+                                                        </li>
+                                                    <?php endforeach; ?>
                                                 </ul>
                                             </div>
+                                            <span class="error"><?php echo $data['playlist_err']; ?></span>
                                         </td>
                                     </tr>
                                     <tr>
@@ -197,6 +188,7 @@
                                             <label class="steps"><b>Step 3:</b> Paste the link to the following field.</label><br><br>
                                             <label class="steps">Make sure that it is the <b>‘Shared/ Embeded video link’</b>.</label><br><br>
                                             <input class="inputform" type="text" name="link" placeholder="Please include the video link here." required>
+                                            <span class="error"><?php echo $data['link_err']; ?></span>
                                         </td>
                                     </tr>
                                     <tr>
@@ -205,8 +197,9 @@
                                             <label for="file" id="attatchment">
                                                 <label style="font-size: 14px; color:black">Upload a picture that shows what's in your video.
                                                     A good thumbnail stands out and draws viewers' attention.</label><br><br>
-                                                <input style="border: none; font-size: 14px;" type="file" id="file" name="pfp" value="">
+                                                <input style="border: none; font-size: 14px;" type="file" id="file" name="thumbnail" value="">
                                             </label>
+                                            <span class="error"><?php echo $data['thumbnail_err']; ?></span>
                                         </td>
                                     </tr>
                                     <tr>
@@ -224,8 +217,8 @@
 
                     </div>
                     <div class="RHS">
-                        <form action="addWebinar.php"><button type="submit" style="float:right" class="read-more attend">Create</button></form>
-                        <form action="webinarStat.php"><button type="submit" style="float:right"  class="read-more attend">My Videos</button></form>
+                        <form action="<?php echo URLROOT;?>/Webinars/add"><button type="submit" style="float:right" class="read-more attend">Create</button></form>
+                        <form action="<?php echo URLROOT;?>/Webinars/myWebinars"><button type="submit" style="float:right"  class="read-more attend">My Videos</button></form>
                         <form action="<?php echo URLROOT;?>/Webinars/home""><button type="submit" style="float:right" class="read-more attend">Webinars</button></form>
                     </div>
                 </div>

@@ -41,6 +41,11 @@ function scrollFunction() {
     mybutton.style.display = "none";
   }
 }
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+  document.body.scrollTop = 0; // For Safari
+  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
 
 //...........................................Vote............................................//
 var upvote_state = false;
@@ -69,11 +74,7 @@ function downvote(){
         downvote_state = false;
     }
 }
-// When the user clicks on the button, scroll to the top of the document
-function topFunction() {
-  document.body.scrollTop = 0; // For Safari
-  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-}
+
         
 
 //=========================================== Navbar Drop Down
@@ -179,11 +180,11 @@ function cancel() {
 
 //=========================================== Webinar - Video view
 
-function webinarPublish() {
-  if (confirm("By Publishing, you acknowledge that you agree to Convo's Terms of Service and Community Guidelines. Please be sure not to violate others' copyright or privacy rights.")) {
+// function webinarPublish() {
+//   if (confirm("By Publishing, you acknowledge that you agree to Convo's Terms of Service and Community Guidelines. Please be sure not to violate others' copyright or privacy rights.")) {
     
-  }
-}
+//   }
+// }
 
 //========================================== playlist
 
