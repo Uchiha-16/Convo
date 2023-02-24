@@ -38,8 +38,8 @@
                                             <h4 style="margin-bottom:.5rem">Tags <span class="star">*</span></h4>
                                             <div class="dropdown-div">
 
-                                                <label>Please Select <b>all the Tags</b> which are Related to the
-                                                    Event.</label>
+                                                <label>Please Select <b>all the Tags</b> which are Related to your
+                                                    Webinar.</label>
                                                 <ul class="dropdown" id="dropdown">
 
                                                     <li>
@@ -197,7 +197,7 @@
                                             <label for="file" id="attatchment">
                                                 <label style="font-size: 14px; color:black">Upload a picture that shows what's in your video.
                                                     A good thumbnail stands out and draws viewers' attention.</label><br><br>
-                                                <input style="border: none; font-size: 14px;" type="file" id="file" name="thumbnail" value="">
+                                                <input style="border: none; font-size: 14px; text-align:left" type="file" id="file" name="thumbnail" value="">
                                             </label>
                                             <span class="error"><?php echo $data['thumbnail_err']; ?></span>
                                         </td>
