@@ -9,15 +9,15 @@
 <body>
 <?php require APPROOT . '/views/inc/components/Enavbar.php'; ?>
 
-<div class="container-div">
-            <div class="content-body">
-                <div class="LHS">
+    <div class="container-div">
+        <div class="content-body">
+            <div class="LHS">
                 <div class="screen">
                     <h3 class="screen-title">Add Project</h3>
                     <div><hr></div>
                     <form action="" method="POST">
                         <div class="form-group">
-                            <label for="title">Title</label><br>
+                            <label for="title">Title<span class="star">*</span></label><br>
                             <div class="form-field-div">
                                 <input type="text" name="title" id="title" class="form-control" placeholder="Enter title" required><br><br>
                             </div>
@@ -310,7 +310,7 @@
             </div>
         </div>
         
-        <!-- View -->
+        <!-- View
         <div class="video-view" id="1">
             <img src="../images/cancel.png" class="cancel" onclick="cancel()">
             <iframe width="550" height="325" src="https://www.youtube.com/embed/Nxtv1LfdSBk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -319,7 +319,7 @@
                 <label class="qdp-1-2">21 July 2022</label>
                 <span class="qdp-1-2 qdp-1-3">By Varsha Wijethunge</span>
             </div>
-        </div>
+        </div> -->
         
         <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="arrow up"></i><br></button>
             
@@ -419,7 +419,13 @@
             }
         </script>
         
-    </body>
+
+
+
+
+
+
+</body>
 
 
 
