@@ -3,9 +3,9 @@
 
 
         <style>
-.nav {
-    grid-template-columns: 5% 6% 6% 6% 51% 10% 4% 4% 4%;
-}
+            .nav {
+                grid-template-columns: 5% 6% 6% 6% 51% 10% 4% 4% 4%;
+            }
         </style>
         </head>
 
@@ -19,7 +19,7 @@
                 <div class="content-body">
                     <div class="LHS">
                         <div class="question-div add-event">
-                            <form action="<?php echo URLROOT;?>/Webinars/add" method="POST">
+                            <form name="" action="<?php echo URLROOT;?>/Webinars/add" method="POST" enctype="multipart/form-data">
                                 <table>
                                     <tr>
                                         <td colspan="3">
@@ -197,7 +197,30 @@
                                             <label for="file" id="attatchment">
                                                 <label style="font-size: 14px; color:black">Upload a picture that shows what's in your video.
                                                     A good thumbnail stands out and draws viewers' attention.</label><br><br>
-                                                <input style="border: none; font-size: 14px;" type="file" id="file" name="thumbnail" value="">
+                                                <div class="user-img">
+                                                    <label for="file" id="uploadbtn">
+                                                        <img src="<?php echo URLROOT; ?>/img/user.jpg" id="photo">
+                                                        <input type="file" id="file" name="thumbnail" value="">
+                                                    </label>
+                                                </div>
+                                                <script>
+                                                    const imgDiv = document.querySelector('.user-img');
+                                                    const img = document.querySelector('#photo');
+                                                    const file = document.querySelector('#file');
+                                                    const uploadebtn = document.querySelector('#uploadbtn');
+
+                                                    file.addEventListener('change', function() {
+                                                        const choosedfile = this.files[0];
+                                                        if (choosedfile) {
+                                                            const reader = new FileReader();
+
+                                                            reader.addEventListener('load', function() {
+                                                                img.setAttribute('src', reader.result);
+                                                            })
+                                                            reader.readAsDataURL(choosedfile);
+                                                        }
+                                                    })
+                                                </script>
                                             </label>
                                             <span class="error"><?php echo $data['thumbnail_err']; ?></span>
                                         </td>

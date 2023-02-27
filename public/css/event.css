@@ -1,42 +1,52 @@
-.question-div{
+.question-div {
     grid-template-columns: 100%;
     grid-template-rows: auto auto;
 }
-.info{
+
+.info {
     grid-template-rows: auto auto;
     row-gap: 1rem;
 }
-.info p{
+
+.info p {
     margin: 0;
 }
-.info h3{
+
+.info h3 {
     margin-top: .3rem;
 }
-.info span{
+
+.info span {
     font-size: 15px;
 }
-.tags{
+
+.tags {
     margin-top: 0;
     padding-top: 0;
     padding-bottom: 1rem;
-    border-bottom: 1px solid rgba(128,128,128, .2);
+    border-bottom: 1px solid rgba(128, 128, 128, .2);
 }
-.tags label{
+
+.tags label {
     font-size: 13px;
 }
-.tag{
+
+.tag {
     padding: 3px 20px 3px 20px;
     font-size: 11px;
 }
-.content-display{
+
+.content-display {
     border: none;
     padding: 0;
 }
-.flex{
+
+.flex {
     display: flex;
     flex-wrap: wrap;
 }
-.webinar{
+
+.webinar {
     background: rgba(0, 167, 174, 0.5);
     border-radius: 4px;
     width: auto;
@@ -48,7 +58,8 @@
     padding: 4px 25px 4px 25px;
     font-size: 13px;
 }
-.time{
+
+.time {
     color: #5A5A5A;
     border: 1px solid #5A5A5A;
     border-radius: 5px;
@@ -56,40 +67,47 @@
     box-shadow: none;
     margin-left: .5rem;
 }
-.qdp{
+
+.qdp {
     grid-template-columns: 50px auto;
     margin-right: 3rem;
     margin-bottom: 1rem;
 }
-.qdp img{
+
+.qdp img {
     width: 50px;
 }
-.attend{
+
+.attend {
     font-size: 18px;
     background: #19758D;
     color: #FFFFFF;
 }
-.filter-div{
+
+.filter-div {
     height: auto;
     margin-top: 7.5rem;
 }
 
 /* ================= drop down ========================*/
-.dropdown-div{
+.dropdown-div {
     user-select: none;
     font-size: 14px;
 }
-ul.dropdown{
+
+ul.dropdown {
     list-style: none;
     height: auto;
     padding: 15px;
     overflow: scroll;
     overflow-x: hidden;
 }
-ul.dropdown li{
+
+ul.dropdown li {
     display: inline;
 }
-ul.dropdown li label{
+
+ul.dropdown li label {
     display: inline-block;
     background-color: rgba(255, 255, 255, .9);
     border: 2px solid rgba(139, 139, 139, .3);
@@ -105,11 +123,13 @@ ul.dropdown li label{
     -webkit-tap-highlight-color: transparent;
     transition: all .2s;
 }
+
 ul.dropdown li label {
     padding: 8px 12px;
     cursor: pointer;
     font-size: 12px;
 }
+
 ul.dropdown li label::before {
     display: inline-block;
     font-style: normal;
@@ -123,13 +143,13 @@ ul.dropdown li label::before {
     transition: transform .3s ease-in-out;
 }
 
-ul.dropdown li input[type="checkbox"]:checked + label::before {
+ul.dropdown li input[type="checkbox"]:checked+label::before {
     content: "\f00c";
     transform: rotate(-360deg);
     transition: transform .3s ease-in-out;
 }
 
-ul.dropdown li input[type="checkbox"]:checked + label {
+ul.dropdown li input[type="checkbox"]:checked+label {
     background-color: #19758d;
     color: #fff;
     transition: all .2s;
@@ -141,25 +161,29 @@ ul.dropdown li input[type="checkbox"] {
     top: 36rem;
     opacity: 0;
 }
-ul.dropdown li input[type="checkbox"]:focus + label {
+
+ul.dropdown li input[type="checkbox"]:focus+label {
     border: 2px solid #9fa4a8;
 }
 
 /* ===================== adding event ========================*/
 
-.star{
+.star {
     color: darkred;
 }
-.add-event{
+
+.add-event {
     grid-template-rows: 100%;
 }
-.add-event table .desc{
+
+.add-event table .desc {
     color: #848484;
     font-size: 14px;
-    border-bottom: 1px solid rgba(128,128,128, .2);
+    border-bottom: 1px solid rgba(128, 128, 128, .2);
     padding-bottom: 1rem;
 }
-.inputform{
+
+.inputform {
     width: 95%;
     height: 40px;
     background-color: #EFEFEF;
@@ -173,38 +197,46 @@ ul.dropdown li input[type="checkbox"]:focus + label {
     padding-left: 1rem;
     padding-right: 1rem;
 }
-.time, .date{
+
+.time, .date {
     width: 30%;
     font-size: 14px;
     float: right;
     padding-top: 2rem;
 }
-.time, .date, .rp{
+
+.time, .date, .rp {
     padding-right: 4rem;
 }
-.time{
+
+.time {
     border: none;
     color: black;
 }
-.inputform::placeholder{
+
+.inputform::placeholder {
     font-size: 14px;
     text-align: left;
     color: #A6A6A6;
 }
-.add-event textarea{
+
+.add-event textarea {
     font-family: "Inter";
     padding: 1rem;
     height: 10rem;
     width: 98%;
 }
-.checkbox-title h4{
+
+.checkbox-title h4 {
     font-size: 16px;
 }
+
 /*=========== textarea ==============*/
 section {
     height: auto;
     width: 97%;
 }
+
 section .col {
     background-color: #fff;
     width: 100%;
@@ -292,57 +324,64 @@ section textarea {
     resize: vertical;
     margin-bottom: 0;
 }
-section .col1{
+
+section .col1 {
     display: inline-block;
     padding: 0;
     background: transparent;
     box-shadow: none;
 }
-section .row1{
+
+section .row1 {
     background: transparent;
 }
-section .col1 textarea{
+
+section .col1 textarea {
     margin-bottom: 0;
 }
 
 .anonymusp1 {
-    margin:0px;
+    margin: 0px;
 }
+
 /*=======================*/
-.add{
+.add {
     display: flex;
     justify-content: center;
-    border-top: 1px solid rgba(128,128,128, .2);
+    border-top: 1px solid rgba(128, 128, 128, .2);
 }
-.submit{
+
+.submit {
     font-size: 16px;
     width: 41%;
     margin: 2rem;
-        
+
 }
-::-webkit-calendar-picker-indicator{
-  opacity: 0;
+
+::-webkit-calendar-picker-indicator {
+    opacity: 0;
 }
+
 .select:disabled {
-  background: #ccc;
+    background: #ccc;
 }
 
 /*=========== Add Webinar ==============*/
 
-.p1{
+.p1 {
     color: #0D5F75;
     font-size: 20px;
-    border-bottom: 1px solid rgba(128,128,128, .2);
+    border-bottom: 1px solid rgba(128, 128, 128, .2);
     padding-bottom: 1rem;
     font-weight: bold;
 }
 
 #attatchment {
-    color:#0D5F75;
+    color: #0D5F75;
     font-size: 16px;
 }
 
-#attatchment img{
+#attatchment img {
     width: 15px;
 }
 
@@ -350,7 +389,31 @@ section .col1 textarea{
     margin-top: 1rem;
     margin-bottom: 1rem;
 }
-.steps{
+
+.steps {
     font-size: 14px;
     padding: 1rem 0 1rem 0;
+}
+
+/*========================= thumbnail =====================*/
+.user-img {
+    width: 120px;
+    height: 120px;
+}
+
+#photo {
+    width: 119px;
+    width: 119px;
+}
+
+#file {
+    display: none;
+}
+
+#uploadbtn {
+    cursor: pointer;
+}
+
+#attatchment img {
+    width: 131px;
 }
