@@ -34,18 +34,15 @@
             date_default_timezone_set('Asia/Colombo');
 
             $link = $_POST['link'];
-            $path = parse_url($link, PHP_URL_PATH);
-            $lastComponent = basename($path);
-            $stringFromEnd = strstr($lastComponent, '/', true);
-            
-            echo $stringFromEnd;
-        
+            $path = parse_url($link, PHP_URL_PATH); // extract the path component of the URL
+            $segments = explode('/', $path); // split the path into an array of segments
 
+            $last_segment = end($segments); // extract the last segment of the array
             //Input Data
             $data = [
                 'content' => trim($_POST['content']),
                 'date' => date('Y-m-d H:i:s'),
-                'embedlink' => $stringFromEnd,
+                'embedlink' => $last_segment,
                 'attachment' => trim($_POST['image']),
                 'rating' => 0,
                 'QID' => $QID,
@@ -58,7 +55,7 @@
 
             // Validate Content
             if(empty($data['content'])) {
-                $data1['content_err'] = 'Please enter Content';
+                $data['content_err'] = 'Please enter Content';
             }
 
 

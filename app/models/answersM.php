@@ -42,7 +42,7 @@
             $this->db->query('INSERT INTO answer (content, date, embedlink, attachment, rating, QID, expertID) VALUES (:content, :date, :embedlink, :attachment, :rating, :QID, :expertID)');
             $this->db->bind(':content', $data1['content']);
             $this->db->bind(':date', $data1['date']);
-            $this->db->bind(':embedlink', $data1['link']);
+            $this->db->bind(':embedlink', $data1['embedlink']);
             $this->db->bind(':attachment', $data1['image']);
             $this->db->bind(':rating', $data1['rating']);
             $this->db->bind(':QID', $data1['QID']);

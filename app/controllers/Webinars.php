@@ -18,20 +18,22 @@
                 $playlist = isset($_POST['playlist']) ? $_POST['playlist'] : '0';
 
                 $link = $_POST['link'];
-                $path = parse_url($link, PHP_URL_PATH);
-                $lastComponent = basename($path);
-                $stringFromEnd = strstr($lastComponent, '/', true);
-            
-                echo $stringFromEnd;
+                
+                $link = $_POST['link'];
+                $path = parse_url($link, PHP_URL_PATH); // extract the path component of the URL
+                $segments = explode('/', $path); // split the path into an array of segments
+
+                $last_segment = end($segments); // extract the last segment of the array
 
                 //Input Data
                 $data = [
                     'title' => trim($_POST['title']),
                     'tag' => $tag,
                     'playlist' => $playlist,
-                    'videolink' => $stringFromEnd,
-                    'thumbnail' => ($_POST['thumbnail']),
-                    // 'thumbnail_name' => time().'_'.($_FILES['thumbnail']['name']),
+                    'videolink' => $last_segment,
+                    'link' => $link,
+                    //'thumbnail' => ($_FILES['thumbnail']),
+                    //'thumbnail_name' => time().'_'.($_FILES['thumbnail']['name']),
                     'date' => date('Y-m-d H:i:s'), 
                     'webinarsPlaylist' => $webinarsPlaylist, 
                     'title_err' => '',
@@ -44,11 +46,10 @@
                 //validate each inputs
                 // Validate Title
                 if(empty($data['title'])) {
-                    $data['title_err'] = 'Please enter Title';
+                    $data['title_err'] = 'Please Enter Title';
                 }
 
-                // Validate thumbnail
-                // Validate Image
+                //Validate thumbnail
                 // if(uploadImage($data['thumbnail']['tmp_name'], $data['thumbnail_name'], '/img/thumbnails/')) {
                 //     $data['thumbnail'] = $data['thumbnail_name'];
                 // } else {
@@ -57,7 +58,15 @@
 
                 // Validate Content
                 if(empty($data['videolink'])) {
-                    $data['link_err'] = 'Please enter Video Link';
+                    $data['link_err'] = 'Please Enter Video Link';
+                }else 
+                {
+                    $link = trim($link);
+          
+                    // Check if the input matches the expected format of a YouTube video URL
+                    if(!(preg_match('/^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/(watch\?v=)?([a-zA-Z0-9_-]{11})|(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/embed\/([a-zA-Z0-9_-]{11})/', $link))) {
+                        $data['link_err'] = 'Please Enter Valid Video Link';
+                    }
                 }
 
                 // Validate Tag
@@ -119,6 +128,7 @@
             
         }
 
+        
 
         public function myWebinars(){
             $webinars = $this->webinarModel->getmywebinars();
