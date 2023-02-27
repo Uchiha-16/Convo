@@ -54,7 +54,7 @@
                     
                     <!-- Answer -->
                     <div class="question-div add-event">
-                            <form action="" method="POST">
+                            <form action="<?php echo URLROOT;?>/answers/add/<?php echo $data['question']->QID; ?>" method="POST">
                                 <table>
                                     <tr>
                                         <td colspan="3">
@@ -133,7 +133,7 @@
                                                         </div>
                                                     </div>
 
-                                                    <textarea id="text-input" name="content"></textarea>
+                                                    <textarea id="text-input" name="content"><?php echo $data['content'];?></textarea>
                                                     <span class="error"><?php echo $data['content_err']; ?></span>
                                                 </div>
                                             </div>
@@ -149,9 +149,9 @@
                                                 <label style="color: #117ea6; font-size:13px; margin-left:3.2rem"><b>Embeded Link Example:</b> https://www.youtube.com/embed/2ybLD6_2gKM</label></label><br><br>
                                             <label class="steps"><b>Step 3:</b> Paste the link to the following field.</label><br><br>
                                             <label class="steps">Make sure that it is the <b>‘Shared/ Embeded video link’</b>.</label><br><br>
-                                            <input class="inputform" type="text" name="link" placeholder="Please include the video link here." required>
+                                            <input class="inputform" type="text" name="link" placeholder="Please include the video link here.">
+
                                         </td>
-                                    </tr>
                                     <tr>
                                         <td colspan="3" style="padding-top: 1rem;">
                                             <h4 style="margin-bottom:.5rem">Add Thumbnail <img src="<?php echo URLROOT;?>/img/thumbnail.png" style="width: 17px;"></h4>

@@ -55,6 +55,7 @@
                     
                     <?php if($data['count']->count > 0) :?>
                     <?php foreach($data['answers'] as $answer) :?>
+                        <?php echo $answer->link?>
                         <?php //print_r ($answer);?>
                     <div class="answerbox">
                         <div class="info-1">
@@ -92,8 +93,10 @@
                             </div>
                             </div>
                             <div class = "answercontent-1">
-                            <iframe width="750" height="315" src="https://www.youtube.com/embed/<?php echo $answer->link?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                            <p><?php echo $answer->content;?></p>
+                                <?php if($answer->link != "") : ?>
+                                    <iframe width="750" height="315" src="https://www.youtube.com/embed/<?php echo $answer->link?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                                <?php endif; ?>
+                                <p><?php echo $answer->content;?></p>
                             
                             <hr>
                             <a href="" class="reactbtn"><img src="<?php echo URLROOT;?>/img/share.png" style="width: 12%;" > Share</a>
