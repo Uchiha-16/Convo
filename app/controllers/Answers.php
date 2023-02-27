@@ -96,5 +96,6 @@
             $this->view('answers/add', $data);
         }
     }
+
 }
 ?>
