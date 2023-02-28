@@ -70,7 +70,7 @@
                             }
                         }
                             flash('reg_flash','Question Added Successfully');
-                            redirect('Pages/seeker');
+                            redirect('questions/myquestions');
                         
                     } else {
                         die('Something went wrong');

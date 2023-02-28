@@ -13,9 +13,9 @@
 
         <body>
 
-            <?php require APPROOT . '/views/inc/components/Enavbar.php'; ?>
+           
+                <?php require APPROOT . '/views/inc/components/Enavbar.php'; ?>
 
-        
         <!-- body content -->
         <div class="container-div">
             <div class="content-body">

@@ -558,6 +558,7 @@
             $_SESSION['firstName'] = $user->firstName;
             $_SESSION['lastName'] = $user->lastName;
             $_SESSION['pfp'] = $user->pfp;
+            $_SESSION['role'] = $user->role;
         }
 
         public function logout() {

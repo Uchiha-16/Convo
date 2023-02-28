@@ -3,13 +3,21 @@
             <link href="<?php echo URLROOT; ?>/css/webinar.css" rel="stylesheet" type="text/css"/>
 
             <style>
-                .nav{
-                    grid-template-columns: 5% 6% 6% 6% 51% 10% 4% 4% 4%;
-                }
-            </style>
+            <?php if(($_SESSION['role']) == 'seeker') : ?>
+             
+            <?php elseif(($_SESSION['role']) == 'expert') : ?>
+            .nav{
+                grid-template-columns: 5% 6% 6% 6% 51% 10% 4% 4% 4%;
+            }
+            <?php endif; ?>
+        </style>
     </head>
 <body>
-<?php require APPROOT . '/views/inc/components/Enavbar.php'; ?>
+    <?php if(($_SESSION['role']) == 'seeker') : ?>
+        <?php require APPROOT . '/views/inc/components/Snavbar.php'; ?>
+    <?php elseif(($_SESSION['role']) == 'expert') : ?>
+        <?php require APPROOT . '/views/inc/components/Enavbar.php'; ?>
+    <?php endif; ?>
         
         <!-- body content -->
         <div class="container-div">
