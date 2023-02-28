@@ -381,6 +381,10 @@ section .col1 textarea {
     font-size: 16px;
 }
 
+#attatchment img {
+    width: 15px;
+}
+
 #playlist {
     margin-top: 1rem;
     margin-bottom: 1rem;
@@ -391,20 +395,27 @@ section .col1 textarea {
     padding: 1rem 0 1rem 0;
 }
 
-/*======================= thumnail ========================*/
+/*========================= thumbnail =====================*/
 .user-img {
+    width: 120px;
     height: 120px;
 }
 
 #photo {
-    width: 205px;
-    height: 115.31px;
+    width: 119px;
+    width: 119px;
 }
 
-#file {
+#image {
     display: none;
+    border: none; 
+    font-size: 14px;
 }
 
 #uploadbtn {
     cursor: pointer;
+}
+
+#attatchment img {
+    width: 131px;
 }

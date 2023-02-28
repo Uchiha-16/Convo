@@ -50,6 +50,7 @@
                             <div class="date-count">
                                 <label><?php echo convertTime($question->date);?></label>
                                 <label style="font-weight:600; float:right">3 Answers</label><br>
+                                <label style="font-weight:600; float:right"><?php echo $question->rating;?> Recommends</label><br>
                                 <form action="<?php echo URLROOT;?>/answers/viewA/<?php echo $question->QID;?>">
                                     <button style="float:right" class="read-more">READ MORE</button>
                                 </form>

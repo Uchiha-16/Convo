@@ -1,4 +1,5 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
+    <!-- <link rel="stylesheet" href="<?php //echo URLROOT;?>/css/event.css"> -->
 
             <style>
                 .nav{
@@ -70,6 +71,9 @@
                     
                 </div>
                 <div class="RHS">
+                    <form action="<?php echo URLROOT;?>/Questions/myQuestions"><button type="submit" style="float:right" class="read-more one">MyQuestions</button></form>
+                    <form action="<?php echo URLROOT;?>/Answers/myAnswers"><button type="submit" style="float:right" class="read-more one">Answered Questions</button></form>
+                                        <br><br>
                     <div class="filter-div">
                         <div style="display:flex">
                             <img src="<?php echo URLROOT;?>/img/filter.png">

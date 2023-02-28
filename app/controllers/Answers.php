@@ -34,35 +34,46 @@
             date_default_timezone_set('Asia/Colombo');
 
             $link = $_POST['link'];
-            $path = parse_url($link, PHP_URL_PATH);
-            $lastComponent = basename($path);
-            $stringFromEnd = strstr($lastComponent, '/', true);
+            $path = parse_url($link, PHP_URL_PATH); // extract the path component of the URL
+            $segments = explode('/', $path); // split the path into an array of segments
+            $last_segment = end($segments); // extract the last segment of the array
             
-            echo $stringFromEnd;
-        
-
             //Input Data
             $data = [
                 'content' => trim($_POST['content']),
                 'date' => date('Y-m-d H:i:s'),
-                'embedlink' => $stringFromEnd,
-                'attachment' => trim($_POST['image']),
+                'embedlink' => $last_segment,
+                'image' => ($_FILES['image']),
+                'image_name' => time().'_'.($_FILES['image']['name']),
                 'rating' => 0,
                 'QID' => $QID,
                 'expertID' => $_SESSION['userID'],    
                 'content_err' => '',
+                'image_err' => '',
                 'question' => $question,
                 'Quser' => $Quser,
             ];
 
             // Validate Content
             if(empty($data['content'])) {
-                $data1['content_err'] = 'Please enter Content';
+                $data['content_err'] = 'Please enter Content';
+            }
+
+            if($data['image']['size'] > 0){
+                if(uploadImage($data['image']['tmp_name'], $data['image_name'], '/img/answerImg/')) {
+                    //done
+                }else{
+                    $data['image_err'] = 'Something Went Wrong when uploading the image';
+                }
+            }else{
+                $data['image_name'] = null;
             }
 
 
+
+
             // Make sure errors are empty
-            if(empty($data['content_err'])) {
+            if(empty($data['content_err']) && empty($data['image_err'])) {
                 // Adding Question
                 if($this->answersM->add($data)) {
                     
@@ -83,15 +94,18 @@
                 'date' => '',
                 'embedlink' => '',
                 'attachment' => '',
+                'attachmentName' => '',
                 'rating' => '', 
                 'QID' => '',
                 'expertID' => '',    
                 'content_err' => '', 
+                'image_err' => '',
                 'question' => $question,
                 'Quser' => $Quser,
             ];
             $this->view('answers/add', $data);
         }
     }
+
 }
 ?>

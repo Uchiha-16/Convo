@@ -1,5 +1,7 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
         <link href="<?php echo URLROOT; ?>/css/event.css" rel="stylesheet" type="text/css" />
+        
+        
 
 
         <style>
@@ -54,7 +56,7 @@
                     
                     <!-- Answer -->
                     <div class="question-div add-event">
-                            <form action="" method="POST">
+                            <form action="<?php echo URLROOT;?>/answers/add/<?php echo $data['question']->QID; ?>" method="POST" enctype="multipart/form-data">
                                 <table>
                                     <tr>
                                         <td colspan="3">
@@ -133,8 +135,8 @@
                                                         </div>
                                                     </div>
 
-                                                    <textarea id="text-input" name="content"></textarea>
-                                                    <span class="error"><?php echo $data['content_err']; ?></span>
+                                                    <textarea id="text-input" name="content"><?php echo $data['content'];?></textarea>
+                                                    <span class="error"><?php echo $data['content_err']; ?></span> 
                                                 </div>
                                             </div>
                                         </td>
@@ -149,17 +151,22 @@
                                                 <label style="color: #117ea6; font-size:13px; margin-left:3.2rem"><b>Embeded Link Example:</b> https://www.youtube.com/embed/2ybLD6_2gKM</label></label><br><br>
                                             <label class="steps"><b>Step 3:</b> Paste the link to the following field.</label><br><br>
                                             <label class="steps">Make sure that it is the <b>‘Shared/ Embeded video link’</b>.</label><br><br>
-                                            <input class="inputform" type="text" name="link" placeholder="Please include the video link here." required>
+                                            <input class="inputform" type="text" name="link" placeholder="Please include the video link here.">
+
                                         </td>
-                                    </tr>
                                     <tr>
                                         <td colspan="3" style="padding-top: 1rem;">
                                             <h4 style="margin-bottom:.5rem">Add Thumbnail <img src="<?php echo URLROOT;?>/img/thumbnail.png" style="width: 17px;"></h4>
-                                            <label for="file" id="attatchment">
+                                          
                                                 <label style="font-size: 14px; color:black">Upload a picture that shows what's in your video.
                                                     A good thumbnail stands out and draws viewers' attention.</label><br><br>
-                                                <input style="border: none; font-size: 14px;" type="file" id="file" name="image" value="">
-                                            </label>
+                                                <img id="imagePlaceholder" src="<?php echo URLROOT;?>/img/user.jpg" style="width:30%" alt="" >
+                                                <img src="<?php echo URLROOT;?>/img/browse.png" style="width: 40px;" alt="" id="addImageBtn" onclick="toggleBrowse()">
+                                                <img src="<?php echo URLROOT;?>/img/rmvbrowse.png" style="width: 57px; position: relative;top: 10px; display:none" alt="" id="removeImageBtn" onclick="toggleRemove()">
+                                                <input type="file" id="image" name="image">
+                                                <span class="error"><?php echo $data['image_err']; ?></span> 
+
+                                            
                                         </td>
                                     </tr>
                                     <tr>
@@ -179,217 +186,8 @@
                 
                 
                 <div class="RHS">
-                    <div class="filter-div">
-                        <div style="display:flex">
-                            <img src="../images/filter.png">
-                            <label>Filters</label><button class="read-more go">Go</button>
-                        </div>
-                        <div>
-                            <form action="" method="POST">
-                                
-                                <!-- Filter 1 -->
-                                <div class="checkbox-1">
-                                    <span class="checkbox-title" onclick="filter1()">Category <i class="arrow up" id="up"></i><i class="arrow down" id="down"></i></span>
-                                    <ul id="checkbox-1">
-                                        <li>
-                                            <label for="checkbox1">
-                                                <input type="checkbox" value="agricultureScience" name="tag[]" id="checkbox1"/>Agriculture Science
-                                            </label>
-                                        </li>     
-                                        <li>
-                                            <label for="checkbox2">
-                                                <input type="checkbox" value="anthropology" name="tag[]" id="checkbox2"/>Anthropology
-                                            </label>
-                                        </li>        
-                                        <li>
-                                            <label for="checkbox3">
-                                                <input type="checkbox" value="biology" name="tag[]" id="checkbox3"/>Biology
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label for="checkbox4">
-                                                <input type="checkbox" value="Chemistry" name="tag[]" id="checkbox4"/>Chemistry
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label for="checkbox5">
-                                                <input type="checkbox" value="CS" name="tag[]" id="checkbox5"/>Computer Science
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label for="checkbox6">
-                                                <input type="checkbox" value="design" name="tag[]" id="checkbox6"/>Design
-                                            </label>
-                                        </li>       
-                                        <li>
-                                            <label for="checkbox7">
-                                                <input type="checkbox" value="economics" name="tag[]" id="checkbox7"/>Economics
-                                            </label>
-                                        </li>        
-                                        <li>
-                                            <label for="checkbox8">
-                                                <input type="checkbox" value="education" name="tag[]" id="checkbox8"/>Education
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label for="checkbox9">
-                                                <input type="checkbox" value="engineering" name="tag[]" id="checkbox9"/>Engineering
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label for="checkbox10">
-                                                <input type="checkbox" value="EA" name="tag[]" id="checkbox10"/>Entertaintment &amp; Arts
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label for="checkbox11">
-                                                <input type="checkbox" value="geoscience" name="tag[]" id="checkbox11"/>Geoscience
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label for="checkbox12">
-                                                <input type="checkbox" value="history" name="tag[]" id="checkbox12"/>History
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label for="checkbox13">
-                                                <input type="checkbox" value="law" name="tag[]" id="checkbox13"/>Law
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label for="checkbox14">
-                                                <input type="checkbox" value="linguistics" name="tag[]" id="checkbox14"/>Linguistics
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label for="checkbox15">
-                                                <input type="checkbox" value="literature" name="tag[]" id="checkbox15"/>literature
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label for="checkbox16">
-                                                <input type="checkbox" value="mathematics" name="tag[]" id="checkbox16"/>Mathematics
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label for="checkbox17">
-                                                <input type="checkbox" value="Medicine" name="tag[]" id="checkbox17"/>Medicine
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label for="checkbox18">
-                                                <input type="checkbox" value="linguistics" name="tag[]" id="checkbox18"/>Linguistics
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label for="checkbox19">
-                                                <input type="checkbox" value="philosophy" name="tag[]" id="checkbox19"/>Philosophy
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label for="checkbox20" for="checkbox1">
-                                                <input type="checkbox" value="physics" name="tag[]" id="checkbox20"/>Physics
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label for="checkbox21">
-                                                <input type="checkbox" value="PS" name="tag[]" id="checkbox21"/>Political Science
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label for="checkbox22">
-                                                <input type="checkbox" value="psychology" name="tag[]" id="checkbox22"/>Psychology
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label for="checkbox23">
-                                                <input type="checkbox" value="RS" name="tag[]" id="checkbox23"/>Religious Studies
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label for="checkbox24">
-                                                <input type="checkbox" value="socialScience" name="tag[]" id="checkbox24"/>Social Science
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label for="checkbox25">
-                                                <input type="checkbox" value="spaceScience" name="tag[]" id="checkbox25"/>Space Science
-                                            </label>
-                                        </li>
-                                    </ul>
-                                </div>
-                                
-                                <!-- Filter 2 -->
-                                <div class="checkbox-1">
-                                    <span class="checkbox-title" onclick="filter2()">Publish date <i class="arrow up" id="up2" style="margin-left: 4.3rem;"></i><i class="arrow down" id="down2" style="margin-left: 4.3rem;"></i></span>
-                                    <ul id="checkbox-2">
-                                        <li>
-                                            <label for="checkbox1">
-                                                <input type="checkbox" value="last 3 months" name="publishDate[]" id="checkbox1"/>Last 3 months
-                                            </label>
-                                        </li>     
-                                        <li>
-                                            <label for="checkbox2">
-                                                <input type="checkbox" value="last 6 months" name="publishDate[]" id="checkbox2"/>Last 6 months
-                                            </label>
-                                        </li>        
-                                        <li>
-                                            <label for="checkbox3">
-                                                <input type="checkbox" value="last year" name="publishDate[]" id="checkbox3"/>Last year
-                                            </label>
-                                        </li>
-                                    </ul>
-                                </div>
-                                
-                                <!-- Filter 3 -->
-                                <div class="checkbox-1">
-                                    <span class="checkbox-title" onclick="filter3()">Questions &amp; answers <i class="arrow up" id="up3" style="margin-left: 0.7rem;"></i><i class="arrow down" id="down3" style="margin-left: 0.7rem;"></i></span>
-                                    <ul id="checkbox-3">
-                                        <li>
-                                            <label for="checkbox1">
-                                                <input type="checkbox" value="last 3 months" name="QA[]" id="checkbox1"/>My questions
-                                            </label>
-                                        </li>     
-                                        <li>
-                                            <label for="checkbox2">
-                                                <input type="checkbox" value="last 6 months" name="QA[]" id="checkbox2"/>Answered
-                                            </label>
-                                        </li>        
-                                        <li>
-                                            <label for="checkbox3">
-                                                <input type="checkbox" value="last year" name="QA[]" id="checkbox3"/>Not answered
-                                            </label>
-                                        </li>
-                                    </ul>
-                                </div>
-                                
-                                <!-- Filter 4 -->
-                                <div class="checkbox-1">
-                                    <span class="checkbox-title" onclick="filter#()">Rating <i class="arrow up" id="up4" style="margin-left: 6.7rem;"></i><i class="arrow down" id="down4" style="margin-left: 6.7rem;"></i></span>
-<!--
-                                    <ul id="checkbox-3">
-                                        <li>
-                                            <label for="checkbox1">
-                                                <input type="checkbox" value="last 3 months" name="QA[]" id="checkbox1"/>My questions
-                                            </label>
-                                        </li>     
-                                        <li>
-                                            <label for="checkbox2">
-                                                <input type="checkbox" value="last 6 months" name="QA[]" id="checkbox2"/>Answered
-                                            </label>
-                                        </li>        
-                                        <li>
-                                            <label for="checkbox3">
-                                                <input type="checkbox" value="last year" name="QA[]" id="checkbox3"/>Not answered
-                                            </label>
-                                        </li>
-                                    </ul>
--->
-                                </div>
-                                
-                            </form>
-                        </div>
-                    </div>
+                    <form action="<?php echo URLROOT;?>/Pages/expert"><button type="submit" style="float:right" class="read-more attend">Home</button></form>
+                    <form action="<?php echo URLROOT;?>/Answers/myAnswers"><button type="submit" style="float:right" class="read-more attend">Answered Questions</button></form>
                 </div>
             </div>
             <div>

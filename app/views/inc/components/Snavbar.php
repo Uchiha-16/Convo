@@ -1,7 +1,7 @@
 <div class="nav">
             <div><a href="#"><img src="<?php echo URLROOT; ?>/img/logo%20with%20name%20WHITE%201.png" id="logo"></a></div>
-            <div class="nav-hover"><a href="<?php echo URLROOT; ?>/pages/seeker">Home</a></div>
-            <div class="nav-hover"><a href="webinars/home">Webinar</a></div>
+            <div class="nav-hover"><a href="<?php echo URLROOT; ?>/Pages/seeker">Home</a></div>
+            <div class="nav-hover"><a href="<?php echo URLROOT; ?>/Webinars/home">Webinar</a></div>
             <div><input type="search" name="search" placeholder="Search for questions..."/></div>
             <?php if(isset($_SESSION['userID'])) : ?>
             <div class="dropdown-list">
