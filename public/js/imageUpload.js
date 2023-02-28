@@ -1,4 +1,4 @@
-
+//*******************************************Image Upload*************************************************************/
 function toggleBrowse() {
     document.getElementById("image").click();
     document.getElementById("addImageBtn").style.display = "none";
@@ -22,3 +22,32 @@ function readURL(input) {
 document.getElementById("image").onchange = function () {
     readURL(this);
 };
+
+/******************************************Submit Tag Form*************************************************************/
+
+// document.getElementById('innerform').addEventListener('submit', function(event) {
+//     // prevent the form from being submitted
+//     event.preventDefault();
+
+//     // select all the checked checkboxes and create an array of their values
+//     var selectedItems = [];
+//     var checkboxes = document.querySelectorAll('input[name="rp[]"]:checked');
+//     for (var i = 0; i < checkboxes.length; i++) {
+//         selectedItems.push(checkboxes[i].value);
+//     }
+
+//     // do something with selectedItems, such as sending it to the server using AJAX
+//     $.ajax({
+//         type: "POST",
+//         url: "http://localhost/Convo/Questions/search.php",
+//         data: { selectedItems: selectedItems },
+//         success: function(result) {
+//             // do something with the result, such as displaying it on the web page
+//         },
+//         error: function(jqXHR, textStatus, errorThrown) {
+//             // handle the error
+//         }
+//     })
+// });
+
+    

@@ -5,6 +5,7 @@
         }
 
         public function add(){
+
             if($_SERVER['REQUEST_METHOD'] == 'POST') {
                 // Form is submitting
                 // Validate the data
@@ -12,7 +13,13 @@
                 date_default_timezone_set('Asia/Colombo');
                 $checkbox_value = isset($_POST['visibility']) ? 'anonymus' : 'public';
                 $tag = isset($_POST['tag']) ? $_POST['tag'] : '0';
-                $resourceID = isset($_POST['resourceID']) ? $_POST['resourceID'] : '0';
+                $resourceID = isset($_POST['rp']) ? $_POST['rp'] : '0';
+
+                if($resourceID != '0'){
+                    $resourceID = implode(',', $resourceID);
+                }
+
+                
 
                 //Input Data
                 $data = [
@@ -89,6 +96,39 @@
                 $this->view('questions/add', $data);
             }
         }
+
+        // public function search() {
+        //     if($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+        //         $selectedItems = isset($_POST['selectedItems']) ? $_POST['selectedItems'] : array();
+
+        //         $str = '';
+
+        //         foreach($selectedItems as $tag) {
+        //             $str = $str . 'usertag.tag = "' . $tag . '" OR ';
+
+        //         }
+
+        //         $str = substr($str, 0, -4);
+
+        //         print($str);
+
+        //         $experts = $this->questionModel->getExperts($str);
+
+        //         $data1 = [
+        //             'expert' => $experts
+        //         ];
+
+        //         $this->view('questions/add', $data1);
+        //     }else{
+
+        //         $data1 = [
+        //             'expert' => ''
+        //         ];
+
+        //         $this->view('questions/add', $data1);
+        //     }
+        // }
 
         public function myquestions(){
             $questions = $this->questionModel->getQuestions();
