@@ -26,7 +26,7 @@
 
         // Get Last QID
         public function getLastID() {
-            $this->db->query('SELECT QID from question ORDER BY userID DESC LIMIT 1');
+            $this->db->query('SELECT QID from question ORDER BY QID DESC LIMIT 1');
             $row = $this->db->single();
             return $row;
         }

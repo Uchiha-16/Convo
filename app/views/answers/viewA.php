@@ -45,7 +45,7 @@
                             <p><?php echo $data['question']->content;?></p>
                             <div class="date-count">
                                 <label><?php echo convertTime($data['question']->date);?></label>
-                                <label style="font-weight:600; float:right"><?php echo $data['question']->rating;?></label><br><br><br>
+                                <label style="font-weight:600; float:right"><?php echo $data['question']->rating;?> Recommends</label><br><br><br>
                                 <hr>
                                 <a href="" class="reactbtn"><img src="<?php echo URLROOT;?>/img/share.png" style="width: 12%;"> Share</a>
                                 <a href="" class="reactbtn"><img src="<?php echo URLROOT;?>/img/recommend.png" style="width: 12%"> Recommend</a>
