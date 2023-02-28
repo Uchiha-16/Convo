@@ -24,4 +24,5 @@
         <script src="<?php echo URLROOT; ?>/js/script.js" defer></script>
         <script src="<?php echo URLROOT; ?>/js/index.js"></script>
         <script src="<?php echo URLROOT; ?>/js/textEditor.js"></script>
+        <script src="<?php echo URLROOT; ?>/js/imageUpload.js"></script>
         

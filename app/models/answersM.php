@@ -38,15 +38,15 @@
             return $row;
         }
 
-        public function add($data1) {
+        public function add($data) {
             $this->db->query('INSERT INTO answer (content, date, embedlink, attachment, rating, QID, expertID) VALUES (:content, :date, :embedlink, :attachment, :rating, :QID, :expertID)');
-            $this->db->bind(':content', $data1['content']);
-            $this->db->bind(':date', $data1['date']);
-            $this->db->bind(':embedlink', $data1['embedlink']);
-            $this->db->bind(':attachment', $data1['image']);
-            $this->db->bind(':rating', $data1['rating']);
-            $this->db->bind(':QID', $data1['QID']);
-            $this->db->bind(':expertID', $data1['expertID']);
+            $this->db->bind(':content', $data['content']);
+            $this->db->bind(':date', $data['date']);
+            $this->db->bind(':embedlink', $data['embedlink']);
+            $this->db->bind(':attachment', $data['image_name']);
+            $this->db->bind(':rating', $data['rating']);
+            $this->db->bind(':QID', $data['QID']);
+            $this->db->bind(':expertID', $data['expertID']);
             if($this->db->execute()) {
                 return true;
             } else {

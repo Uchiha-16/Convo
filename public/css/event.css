@@ -406,8 +406,10 @@ section .col1 textarea {
     width: 119px;
 }
 
-#file {
+#image {
     display: none;
+    border: none; 
+    font-size: 14px;
 }
 
 #uploadbtn {

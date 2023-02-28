@@ -1,5 +1,7 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
         <link href="<?php echo URLROOT; ?>/css/event.css" rel="stylesheet" type="text/css" />
+        
+        
 
 
         <style>
@@ -54,7 +56,7 @@
                     
                     <!-- Answer -->
                     <div class="question-div add-event">
-                            <form action="<?php echo URLROOT;?>/answers/add/<?php echo $data['question']->QID; ?>" method="POST">
+                            <form action="<?php echo URLROOT;?>/answers/add/<?php echo $data['question']->QID; ?>" method="POST" enctype="multipart/form-data">
                                 <table>
                                     <tr>
                                         <td colspan="3">
@@ -134,7 +136,7 @@
                                                     </div>
 
                                                     <textarea id="text-input" name="content"><?php echo $data['content'];?></textarea>
-                                                    <span class="error"><?php echo $data['content_err']; ?></span>
+                                                    <span class="error"><?php echo $data['content_err']; ?></span> 
                                                 </div>
                                             </div>
                                         </td>
@@ -155,11 +157,16 @@
                                     <tr>
                                         <td colspan="3" style="padding-top: 1rem;">
                                             <h4 style="margin-bottom:.5rem">Add Thumbnail <img src="<?php echo URLROOT;?>/img/thumbnail.png" style="width: 17px;"></h4>
-                                            <label for="file" id="attatchment">
+                                          
                                                 <label style="font-size: 14px; color:black">Upload a picture that shows what's in your video.
                                                     A good thumbnail stands out and draws viewers' attention.</label><br><br>
-                                                <input style="border: none; font-size: 14px;" type="file" id="file" name="image" value="">
-                                            </label>
+                                                <img id="imagePlaceholder" src="<?php echo URLROOT;?>/img/user.jpg" style="width:30%" alt="" >
+                                                <img src="<?php echo URLROOT;?>/img/browse.png" style="width: 40px;" alt="" id="addImageBtn" onclick="toggleBrowse()">
+                                                <img src="<?php echo URLROOT;?>/img/rmvbrowse.png" style="width: 57px; position: relative;top: 10px; display:none" alt="" id="removeImageBtn" onclick="toggleRemove()">
+                                                <input type="file" id="image" name="image">
+                                                <span class="error"><?php echo $data['image_err']; ?></span> 
+
+                                            
                                         </td>
                                     </tr>
                                     <tr>
