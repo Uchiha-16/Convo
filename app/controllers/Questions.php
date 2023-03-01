@@ -97,39 +97,6 @@
             }
         }
 
-        // public function search() {
-        //     if($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-        //         $selectedItems = isset($_POST['selectedItems']) ? $_POST['selectedItems'] : array();
-
-        //         $str = '';
-
-        //         foreach($selectedItems as $tag) {
-        //             $str = $str . 'usertag.tag = "' . $tag . '" OR ';
-
-        //         }
-
-        //         $str = substr($str, 0, -4);
-
-        //         print($str);
-
-        //         $experts = $this->questionModel->getExperts($str);
-
-        //         $data1 = [
-        //             'expert' => $experts
-        //         ];
-
-        //         $this->view('questions/add', $data1);
-        //     }else{
-
-        //         $data1 = [
-        //             'expert' => ''
-        //         ];
-
-        //         $this->view('questions/add', $data1);
-        //     }
-        // }
-
         public function myquestions(){
             $questions = $this->questionModel->getQuestions();
             

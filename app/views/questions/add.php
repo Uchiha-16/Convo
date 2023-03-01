@@ -2,6 +2,7 @@
 <link href="<?php echo URLROOT;?>/css/event.css" rel="stylesheet" type="text/css"/>
 <link href="<?php echo URLROOT;?>/css/addconsult.css" rel="stylesheet" type="text/css"/>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <style>
             <?php if(($_SESSION['role']) == 'seeker') : ?>
              
@@ -11,6 +12,40 @@
             }
             <?php endif; ?>
         </style>
+
+        <script type="text/javascript">
+            // $(document).ready(function() {
+            //     $(".mybutton").click(function() {
+
+            //         $.ajax({
+            //             type: "post",
+            //             url: "add.php",
+            //             data: $("form").serialize(),
+            //             success: function(result) {
+            //                 $(".myresult").html(result);
+            //             }
+            //         });
+
+            //     });
+            // });
+
+            const myForm = document.getElementById('innerform');
+
+            myForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const formData = new FormData(myForm);
+            
+            fetch('<?php echo URLROOT;?>/Questions/search', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error(error));
+});
+        </script>
+
     </head>
 <body>
     <?php if(($_SESSION['role']) == 'seeker') : ?>
@@ -101,7 +136,7 @@
                                     <td colspan="3">
                                         <h4 style="margin-bottom:.5rem">Tags <span class="star">*</span></h4>
                                         <div class="dropdown-div">
-                                            <form action="<?php echo URLROOT;?>/questions/search" method="POST" id="innerform">
+                                            <form method="POST" id="innerform">
                                                 <label>Please Select <b>all the Tags</b> which are Related to the Event.</label>
                                                 <ul class="dropdown" id="dropdown">
                                             
@@ -158,8 +193,8 @@
 
                                                 <div class="select">
                                                     <label>All tags selected?</label>
-                                                    <button style="float:right" class="read-more submit" type="submit" name="tagcomplete" value="search">Yes, I'm good.</button>
-                                                    <button style="float:right" class="read-more submit" type="" name="reset">No</button>
+                                                    <button style="float:right" class="read-more submit mybutton" type="submit" name="tagcomplete" value="search">Yes, I'm good.</button>
+                                                    <button style="float:right" class="read-more submit" type="reset" name="reset">No</button>
                                                 </div>
                                                 </form>
                                         <?php
@@ -176,12 +211,8 @@
                                         <i class="arrow up" id="up3" style="margin-left: 4.3rem;"></i><i class="arrow down" id="down3" style="margin-left: 4.3rem;"></i></h4></span>
                                         <ul id="checkbox-3">
                                             <li>
-                                                <!-- <label for="checkbox1" id="experts-container">
-                                                <?php //foreach ($data1['expert'] as $expert) : ?>
-                                                    <input type="checkbox" value="<?php //echo $expert->ID ?>" name="rp[]" id="checkbox<?php //$i = 1; echo $i; $i = $i + 1; ?>"/>
-                                                    <?php // echo $expert->firstName.' '.$expert->lastName; ?><br>
-                                                    <?php //endforeach; ?>
-                                                </label> -->
+                                                <div class="myresult">
+                                                </div>
                                             </li>
                                         </ul>
                                     </div>
