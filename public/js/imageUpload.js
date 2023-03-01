@@ -50,4 +50,20 @@ document.getElementById("image").onchange = function () {
 //     })
 // });
 
+
+const myForm = document.getElementById('innerform');
+
+            myForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const formData = new FormData(myForm);
+            
+            fetch('<?php echo URLROOT;?>/FormTag/submitForm', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error(error));
+});
     

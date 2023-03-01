@@ -29,21 +29,7 @@
             //     });
             // });
 
-            const myForm = document.getElementById('innerform');
-
-            myForm.addEventListener('submit', function(event) {
-            event.preventDefault();
             
-            const formData = new FormData(myForm);
-            
-            fetch('<?php echo URLROOT;?>/Questions/search', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => console.log(data))
-            .catch(error => console.error(error));
-});
         </script>
 
     </head>
@@ -211,8 +197,11 @@
                                         <i class="arrow up" id="up3" style="margin-left: 4.3rem;"></i><i class="arrow down" id="down3" style="margin-left: 4.3rem;"></i></h4></span>
                                         <ul id="checkbox-3">
                                             <li>
-                                                <div class="myresult">
-                                                </div>
+                                                <?php foreach ($data['response'] as $expert) : ?>
+                                                    <input type="checkbox" value="<?php echo $expert->expertID; ?>" name="expert[]" id="checkbox<?php echo $expert->expertID; ?>"/>
+                                                    <label for="checkbox<?php echo $expert->expertID; ?>"><?php echo $expert->fName; ?></label>
+                                                <?php endforeach; ?>
+                                                
                                             </li>
                                         </ul>
                                     </div>
