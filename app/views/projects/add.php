@@ -15,7 +15,7 @@
                 <div class="screen">
                     <h3 class="screen-title">Add Project</h3>
                     <div><hr></div>
-                    <form action="" method="POST">
+                    <form action="<?php echo URLROOT;?>/projects/add" method="POST">
                         <div class="form-group">
                             <label for="title">Title<span class="star">*</span></label><br>
                             <div class="form-field-div">
@@ -26,10 +26,14 @@
                                 <div class="form-field-div">
                                     <label for="tag">Field</label><br>
                                     <select name="tag" id="tag" class="form-control" required>
-                                        <option value="Computer Science">Computer Science</option>
+                                        <!-- <option value="Computer Science">Computer Science</option>
                                         <option value="Information Technology">Information Technology</option>
                                         <option value="Software Engineering">Software Engineering</option>
-                                        <option value="Data Science">Data Science</option>
+                                        <option value="Data Science">Data Science</option> -->
+                                        <?php $tagArray = explode(",", $data['tags']->tags); ?>
+                                        <?php foreach ($tagArray as $tag) : ?>
+                                            <option value="<?php echo $tag; ?>"><?php echo $tag; ?></option>
+                                        <?php endforeach; ?>
                                         <?php 
                                             // $result1=mysqli_query ($conn,"SELECT tag FROM usertag WHERE $_SESSION[userID]=usertag.userID");
                                             // while($row1=mysqli_fetch_array($result1)){

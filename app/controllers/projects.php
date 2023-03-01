@@ -5,27 +5,38 @@
         }
 
         public function add(){
+
+            $userID = $_SESSION['userID'];
+
+            $tags = $this->projectModel->getUserTags($userID);
+
             if($_SERVER['REQUEST_METHOD'] == 'POST') {
                 // Form is submitting
                 // Validate the data
                 $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
                 date_default_timezone_set('Asia/Colombo');
-                $checkbox_value = isset($_POST['visibility']) ? 'anonymus' : 'public';
                 $tag = isset($_POST['tag']) ? $_POST['tag'] : '0';
-                $resourceID = isset($_POST['resourceID']) ? $_POST['resourceID'] : '0';
+                //$resourceID = isset($_POST['resourceID']) ? $_POST['resourceID'] : '0';
 
                 //Input Data
                 $data = [
                     'title' => trim($_POST['title']),
-                    'content' => trim($_POST['content']),
+                    'description' => trim($_POST['description']),
+                    'slot' => trim($_POST['slot']),
                     'tag' => $tag,
-                    'date' => date('Y-m-d H:i:s'),
-                    'visibility' => $checkbox_value,
-                    'rating' => 0,
-                    'resourceID' => $resourceID,    
+                    'deadline' => date('Y-m-d H:i:s'),
+                    'type' => $_POST['type'],
+                    'availability' => $_POST['availability'],
+                    'duration' => $_POST['duration'],
+                    'payment' => $_POST['payment'],
+                  //  'resourceID' => $resourceID,
                     'title_err' => '',
-                    'content_err' => '',
+                    'description_err' => '',
                     'tag_err' => '',
+                    'slot_err' => '',
+                    'duration_err' => '',
+                    'tags' => $tags
+
                 ];
 
                 //validate each inputs
@@ -34,59 +45,72 @@
                     $data['title_err'] = 'Please enter Title';
                 }
 
-                // Validate Content
-                if(empty($data['content'])) {
-                    $data['content_err'] = 'Please enter Content';
+                // Validate Description
+                if(empty($data['description'])) {
+                    $data['description_err'] = 'Please enter Description';
                 }
 
                 // Validate Tag
                 if($data['tag'] == '0') {
-                    $data['tag_err'] = 'Please Select One or More Tags';
+                    $data['tag_err'] = 'Please Select One Specific Tag';
                 }
 
-                // if(empty($data['tag_err'])){
-                //     foreach($data['tag'] as $tag){
-                //        $experts =  $this->questionModel->getExpertID($tag);
+                // Validate Slot
+                if(empty($data['slot'])) {
+                    $data['slot_err'] = 'Please enter Slot';
+                }
 
-                //     }
-                // }
+                // Validate Duration
+                if(empty($data['duration'])) {
+                    $data['duration_err'] = 'Please enter Duration';
+                }
 
-                // Make sure errors are empty
+                if(empty($data['tag_err'])){
+                    foreach($data['tag'] as $tag){
+                       $experts =  $this->projectModel->getExpertID($tag);
+
+                    }
+                }
+
+                //Make sure errors are empty
                 if(empty($data['title_err']) && empty($data['content_err']) && empty($data['tag_err'])) {
                     // Adding Question
-                    if($this->questionModel->add($data)) {
-                        $LastID = $this->questionModel->getLastID();
+                    if($this->projectModel->add($data)) {
+                        $LastID = $this->projectModel->getLastID();
                         foreach($data['tag'] as $tag){
-                           if(!($this->questionModel->questionTag($tag, $LastID->QID)))
+                           if(!($this->projectModel->projectTag($tag, $LastID->QID)))
                             {
                                 die('Something went wrong with inserting the tags');
                             }
                         }
-                            flash('reg_flash','Question Added Successfully');
-                            redirect('Pages/seeker');
+                            flash('reg_flash','Project Added Successfully');
+                            redirect('projects/view');
                         
                     } else {
                         die('Something went wrong');
                     }
                 } else {
                     // Load view with errors
-                    $this->view('questions/add', $data);
+                    $this->view('projects/add', $data);
                 }
             }
             else {
                 $data = [
                     'title' => '',
-                    'content' => '',
-                    'tag' => '',
-                    'date' => '',
-                    'visibility' => '',
-                    'rating' => '',
+                    'description' => '',
+                    'slot' => '',
+                    'type' => '',
+                    'availability' => '',
+                    'duration' => '',
+                    'payment' => '',
+                    'deadline' => '',
                     'resourceID' => '',
                     'title_err' => '',
                     'content_err' => '',
                     'tag_err' => '',
+                    'tags' => $tags,
                 ];
-                $this->view('questions/add', $data);
+                $this->view('projects/add', $data);
             }
         }
 
