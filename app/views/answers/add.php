@@ -156,17 +156,16 @@
                                         </td>
                                     <tr>
                                         <td colspan="3" style="padding-top: 1rem;">
-                                            <h4 style="margin-bottom:.5rem">Add Image <img src="<?php echo URLROOT;?>/img/thumbnail.png" style="width: 17px;"></h4>
-                                          
-                                                <label style="font-size: 14px; color:black">Upload a picture that shows what's in your video.
-                                                    A good Image stands out and draws viewers' attention.</label><br><br>
-                                                <img id="imagePlaceholder" src="<?php echo URLROOT;?>/img/user.jpg" style="width:30%" alt="" >
-                                                <img src="<?php echo URLROOT;?>/img/browse.png" style="width: 40px;" alt="" id="addImageBtn" onclick="toggleBrowse()">
-                                                <img src="<?php echo URLROOT;?>/img/rmvbrowse.png" style="width: 57px; position: relative;top: 10px; display:none" alt="" id="removeImageBtn" onclick="toggleRemove()">
-                                                <input type="file" id="image" name="image">
-                                                <span class="error"><?php echo $data['image_err']; ?></span> 
-
+                                            <h4 style="margin-bottom:.5rem">Add Thumbnail <img src="<?php echo URLROOT;?>/img/thumbnail.png" style="width: 17px;"> <span class="star">*</span></h4>
                                             
+                                            <label style="font-size: 14px; color:black">Upload a picture that shows what's in your video.
+                                                    A good thumbnail stands out and draws viewers' attention.<br><b>Make sure it is in 16:9 ratio</b>.</label><br><br>
+                                            <img id="imagePlaceholder" src="<?php echo URLROOT;?>/img/thumbnailpic.png" style="width:30%" alt="" id="addImageBtn" onclick="toggleBrowse()">
+                                            <!-- <img src="/img/browse.png" style="width: 40px;" alt="" > -->
+                                            <img src="<?php echo URLROOT;?>/img/cancel.png" style="width: 21px; position: relative;top: -142px;" alt="" id="removeImageBtn" onclick="toggleRemove()">
+                                            <input type="file" id="image" name="image"><br>
+                                            
+                                            <span class="error"><?php echo $data['image_err']; ?></span>
                                         </td>
                                     </tr>
                                     <tr>
