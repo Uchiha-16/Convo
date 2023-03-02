@@ -3,6 +3,8 @@
 
 <?php if(!isset($_SESSION['userID'])): ?>
     <link href="<?php echo URLROOT; ?>/css/free.css" rel="stylesheet" type="text/css"/>
+
+<?php endif; ?>
         <style>
             <?php if(($_SESSION['role']) == 'seeker') : ?>
              
