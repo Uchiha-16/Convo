@@ -1,7 +1,7 @@
 <?php
-    class Blogs extends Controller {
+    class Events extends Controller {
         public function __construct() {
-            $this->blogsModel = $this -> model('blogsM');
+            $this->eventsModel = $this -> model('eventsM');
         }
 
         public function index(){
@@ -9,12 +9,12 @@
             $data = [
                 // 'blogs' => $blogs
             ];
-            $this->view('blogs/index', $data);
+            $this->view('events/index', $data);
         }
 
         public function add(){
             $data = [];
-            $this->view('blogs/add', $data);
+            $this->view('events/add', $data);
         }
 
     }

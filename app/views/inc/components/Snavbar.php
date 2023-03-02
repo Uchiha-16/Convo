@@ -13,17 +13,17 @@
                 </div>
             </div>
             <div class="nav-hover"><img src="<?php echo URLROOT; ?>/img/notification.png" class="nav-icon"></div>
-            <div class="nav-hover"><img src="<?php echo URLROOT; ?>/img/chat.png" class="nav-icon"></div>
+            <div class="nav-hover"><img src="<?php echo URLROOT; ?>/img/chat.png" class="nav-icon" onclick="location.href='<?php echo URLROOT; ?>/Chats/index'"></div>
             <div class="nav-hover dropbtn" onclick="drop2()">
                 <img class="dropbtn" src="<?php echo URLROOT; ?>/img/profile.png" class="nav-icon" style="width: 25px;">
                 <div class="dropdown-content dropdown-content2" id="myDropdown2">
                     <a href="<?php echo URLROOT;?>/Profile/View">Profile</a>
                     <a href="<?php echo URLROOT;?>/Moderator/approve">Approvals</a>
-                    <a href="<?php echo URLROOT;?>/Blogs/view">Blogs</a>
-                    <a href="#">Events</a>
-                    <a href="#">Projects</a>
-                    <a href="#">Skill Test</a>
-                    <a href="seeker/subscriptionpage.php">Subscription</a>
+                    <a href="<?php echo URLROOT;?>/Blogs/index">Blogs</a>
+                    <a href="<?php echo URLROOT;?>/Events/index">Events</a>
+                    <a href="<?php echo URLROOT;?>/Projects/index">Projects</a>
+                    <a href="<?php echo URLROOT;?>/SkillTest/index">Skill Test</a>
+                    <a href="<?php echo URLROOT;?>/Subscriptions/index">Subscription</a>
                     <a href="<?php echo URLROOT?>/Users/logout" style="border-bottom:none">Log-out</a>
                 </div>
                 </div>

@@ -12,20 +12,11 @@
 </style>
 
 <script type="text/javascript">
-    // $(document).ready(function() {
-    //     $(".mybutton").click(function() {
-
-    //         $.ajax({
-    //             type: "post",
-    //             url: "add.php",
-    //             data: $("form").serialize(),
-    //             success: function(result) {
-    //                 $(".myresult").html(result);
-    //             }
-    //         });
-
-    //     });
-    // });
+    function confirmation(){
+                    if(confirm("Are you sure you want to discard this blog?")){
+                        window.location.href = "<?php echo URLROOT; ?>/Blogs/index";
+                    }
+                }
 </script>
 
 </head>
@@ -122,11 +113,7 @@
 
                                                 <li><input type="checkbox" value="spaceScience" name="tag[]" id="checkbox25"/><label for="checkbox25">Space Science</label></li>
                                             </ul>
-                                            <div class="select">
-                                                <label>All tags selected?</label>
-                                                <button style="float:right" class="read-more submit" type="submit" name="submit">Yes, I'm good.</button>
-                                                <button style="float:right" class="read-more submit" type="submit" name="submit">No</button>
-                                            </div>
+                                        
                                         </div>
                                     </tda>
                                 </tr>
@@ -185,8 +172,8 @@
                                     <td colspan="3">
                                         <br><br>
                                         <div class="add">
-                                            <button style="float:right" class="read-more attend submit" type="submit" name="submit">Reset</button>
-                                            <button style="float:right" class="read-more attend submit" type="reset">Add Post</button>
+                                            <button style="float:right" class="read-more attend submit" type="reset" onclick="confirmation()">Reset</button>
+                                            <button style="float:right" class="read-more attend submit" type="submit" name="submit">Add Post</button>
                                         </div>
                                     </td>
                                 </tr>
@@ -196,7 +183,7 @@
                     
                 </div>
                 <div class="RHS">
-                <form action="blog.php"><button type="submit" style="float:right" class="read-more attend">Blogs</button></form>
+                <form action="<?php echo URLROOT; ?>/Blogs/index"><button type="submit" style="float:right" class="read-more attend">Blogs</button></form>
                 </div>
             </div>
             <div>

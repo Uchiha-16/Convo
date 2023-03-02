@@ -419,3 +419,56 @@ footer a:after{
     color: black;
 }
 
+
+
+/*======================================== Project Home ===========================================*/
+.icon-1{
+    width: 50px;
+    height: 50px;
+    align-items: center;
+    border: 1px solid #bdbdbd;
+    border-radius: 50%;
+    border-color: #000000 1px solid;
+    margin-right: 10px;
+}
+.name-field{
+    margin: 0;
+    padding: 0;
+}
+.name-tag{
+    margin-left: 1rem;
+}
+.tag-top{
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(128,128,128, .4);
+}
+.question {
+    font-size: 18px;
+}
+.description {
+font-size: 13px;
+color: #4f4f4f;
+}
+.tag-button{
+    line-height: 22px;
+padding: 0 22px 0 22px;
+    width: auto;
+    margin-right: 1rem;
+}
+.tag-field {
+font-size: 10px;
+margin-top: 20px;
+margin-bottom: 20px;
+color: #6B6B6B;
+}
+.tag-field button{
+    color: #6B6B6B;
+}
+.tag-detail{
+    font-size: 13px;
+    display: flex;
+    justify-content:flex-start;
+    margin-right: 3%;
+    display: inline;
+}
+

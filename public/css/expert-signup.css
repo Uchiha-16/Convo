@@ -1,0 +1,132 @@
+body{
+    background-color: #0D5F75;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #333;
+    line-height: 1.5;
+    margin: 0;
+    padding: 0;
+}
+.grid-container{
+    background-color: #0D5F75;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0px;
+}
+.c1{
+    background-color: #0D5F75;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 5px 5px 5px;
+}
+.logo{
+    width: 30%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#icon{
+    width: 70%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.c2{
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 5% 5% 5px 5px;
+    padding: 0% 5% 10% 10%;
+    border-radius: 20px;
+}
+.title{
+    font-weight: 700;
+    font-size: 25px;
+    color: #0D5F75;
+    text-align: center;
+}
+
+.user-img{
+    width: 30%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: left;
+    border-radius: 25px;
+}
+
+#photo{
+    width: 30%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100px;
+}
+#uploadbtn{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+}
+
+.form-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+}
+.form-field{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 5px 5px 5px 5px;
+    padding: 5px 5px 5px 5px;
+    outline: 0;
+    border-width: 0 0 1px;
+    border-color: #0D5F75;
+    border-radius: 5px;
+}
+
+.submit-btn{
+    background-color: #0D5F75;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 700;
+    margin: 10px 0px 0px 0px;
+    width: 100%;
+    cursor: pointer;
+}
+
+.tag-dropdown{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    justify-content: center;
+    border:2px solid #ccc; 
+    width:auto; 
+    height: 100px; 
+    overflow-y: scroll;
+
+}
+
+.tag-checkbox{
+    background-color: #0D5F75;
+    color: white;
+    margin: 3px;
+    padding: 2px 2px 3px 3px;
+    border-radius: 5px;
+}
