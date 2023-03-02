@@ -6,7 +6,7 @@
             $this->db = new Database;
         }
 //****************************************************************Create Question************************************************************************************************************* */
-        public function add($data) {
+        public function add() {
             
             $this->db->query('INSERT into webinar (webinarTitle, date, videolink, thumbnail, expertID) VALUES (:title, :date, :videolink, :thumbnail, :expertID)');
             // Bind values

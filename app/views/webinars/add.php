@@ -38,8 +38,8 @@
                                             <h4 style="margin-bottom:.5rem">Tags <span class="star">*</span></h4>
                                             <div class="dropdown-div">
 
-                                                <label>Please Select <b>all the Tags</b> which are Related to the
-                                                    Event.</label>
+                                                <label>Please Select <b>all the Tags</b> which are Related to your
+                                                    Webinar.</label>
                                                 <ul class="dropdown" id="dropdown">
 
                                                 <li><input type="checkbox" value="agricultureScience" name="tag[]"
@@ -190,34 +190,14 @@
                                     <tr>
                                         <td colspan="3" style="padding-top: 1rem;">
                                             <h4 style="margin-bottom:.5rem">Add Thumbnail <img src="<?php echo URLROOT;?>/img/thumbnail.png" style="width: 17px;"> <span class="star">*</span></h4>
-                                            <label for="file" id="attatchment">
-                                                <label style="font-size: 14px; color:black">Upload a picture that shows what's in your video.
-                                                    A good thumbnail stands out and draws viewers' attention.</label><br><br>
-                                                <div class="user-img">
-                                                    <label for="file" id="uploadbtn">
-                                                        <img src="<?php echo URLROOT; ?>/img/user.jpg" id="photo">
-                                                        <input type="file" id="file" name="thumbnail" value="">
-                                                    </label>
-                                                </div>
-                                                <script>
-                                                    const imgDiv = document.querySelector('.user-img');
-                                                    const img = document.querySelector('#photo');
-                                                    const file = document.querySelector('#file');
-                                                    const uploadebtn = document.querySelector('#uploadbtn');
-
-                                                    file.addEventListener('change', function() {
-                                                        const choosedfile = this.files[0];
-                                                        if (choosedfile) {
-                                                            const reader = new FileReader();
-
-                                                            reader.addEventListener('load', function() {
-                                                                img.setAttribute('src', reader.result);
-                                                            })
-                                                            reader.readAsDataURL(choosedfile);
-                                                        }
-                                                    })
-                                                </script>
-                                            </label>
+                                            
+                                            <label style="font-size: 14px; color:black">Upload a picture that shows what's in your video.
+                                                    A good thumbnail stands out and draws viewers' attention.<br><b>Make sure it is in 16:9 ratio</b>.</label><br><br>
+                                            <img id="imagePlaceholder" src="<?php echo URLROOT;?>/img/thumbnailpic.png" style="width:30%" alt="" id="addImageBtn" onclick="toggleBrowse()">
+                                            <!-- <img src="/img/browse.png" style="width: 40px;" alt="" > -->
+                                            <img src="<?php echo URLROOT;?>/img/cancel.png" style="width: 21px; position: relative;top: -142px;" alt="" id="removeImageBtn" onclick="toggleRemove()">
+                                            <input type="file" id="image" name="image"><br>
+                                            
                                             <span class="error"><?php echo $data['thumbnail_err']; ?></span>
                                         </td>
                                     </tr>

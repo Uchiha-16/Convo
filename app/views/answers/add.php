@@ -26,8 +26,8 @@
                     <div class="question-div">
                         <div class="content-display">
                             <h2><?php echo $data['question']->title; ?></h2>
-                            <p><?php echo $data['question']->content; ?>.</p>
-                            <div class="qdp">
+                            <p style="font-size: 15px;"><?php echo $data['question']->content; ?>.</p>
+                            <div class="qdp" style="padding-top: 1rem; border-top: 1px solid rgba(128,128,128, .2);">
                                 <div>
                                     <img src="<?php echo URLROOT; ?>/img/pfp/<?php echo $data['Quser']->pfp; ?>"/>
                                 </div>
