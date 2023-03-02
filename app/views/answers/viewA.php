@@ -12,6 +12,7 @@
 
     <?php endif; ?>
 </style>
+
 </head>
 
 <body>
@@ -42,7 +43,12 @@
                             </div>
                             <div class="qdp-1">
                                 <label><?php echo $data['Quser']->fName . " " . $data['Quser']->lName; ?></label><br>
-                                <label class="qdp-1-2"><?php echo $data['Quser']->uname; ?></label>
+                                <?php if (isset($_SESSION['role'])) : ?>
+                                    <?php if (($_SESSION['role']) == 'expert') : ?>
+                                        <!-- should be experts qualification in short -->
+                                        <label class="qdp-1-2"><?php echo $data['Quser']->uname; ?></label>
+                                    <?php endif; ?>
+                                <?php endif; ?>
                             <?php endif; ?>
                             </div>
                         </div>
@@ -60,18 +66,29 @@
                         <p><?php echo $data['question']->content; ?></p>
                         <div class="date-count">
                             <label><?php echo convertTime($data['question']->date); ?></label>
-                            <label style="font-weight:600; float:right"><?php echo $data['question']->rating; ?> Recommends</label><br><br><br>
+                            <label style="font-weight:600; float:right">Overall Rating: <?php echo $data['question']->rating; ?></label><br><br>
                             <hr>
-                            <a href="" class="reactbtn"><img src="<?php echo URLROOT; ?>/img/share.png" style="width: 12%;"> Share</a>
-                            <a href="" class="reactbtn"><img src="<?php echo URLROOT; ?>/img/recommend.png" style="width: 12%"> Recommend</a>
+                            <?php if (isset($_SESSION['role'])) : ?>
+                                <div class="rating-box">
+                                    <header>Rate this question</header>
+                                    <div class="stars">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
+                            <!-- <a href="" class="reactbtn"><img src="/img/share.png" style="width: 12%;"> Share</a> -->
+                            <!-- <a href="" class="reactbtn"><img src="/img/recommend.png" style="width: 12%"> Recommend</a> -->
                         </div>
                     </div>
                 </div>
 
                 <?php if ($data['count']->count > 0) : ?>
-                    <?php foreach ($data['answers'] as $answer) : ?>
-                        <?php echo $answer->link ?>
-                        <?php echo $answer->threadID ?>
+                    <?php foreach ($data['answers'] as $answer) : ?><br>
+                        <h3>Expertise Answers</h3>
                         <div class="answerbox">
                             <div class="info-1">
                                 <div class="qdp">
