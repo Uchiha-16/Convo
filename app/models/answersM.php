@@ -7,7 +7,7 @@
         }
 
         public function getAnswers($QID) {
-            $this->db->query('SELECT answer.content as content, answer.embedlink as link, answer.attachment as attachment, answer.date as date, 
+            $this->db->query('SELECT answer.threadID as threadID, answer.content as content, answer.embedlink as link, answer.attachment as attachment, answer.date as date, 
             answer.rating as rating, user.userID as userID, user.uname as uname, user.firstName as fName, user.lastName as lName, user.pfp as pfp, 
             GROUP_CONCAT(expertqualification.qualification SEPARATOR ",") as qualifications FROM answer JOIN user ON answer.expertID = user.userID 
             JOIN expertqualification ON expertqualification.expertID = answer.expertID WHERE answer.QID = :QID GROUP BY answer.threadID ORDER BY answer.rating DESC;');
@@ -54,6 +54,97 @@
             }
         }
 
-    }
+        public function upvote($threadID){
+            $this->db->query('UPDATE answer SET rating = rating + 1 WHERE threadID = :threadID');
+            $this->db->bind(':threadID', $threadID);
+            if($this->db->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        public function downvote($threadID){
+            $this->db->query('UPDATE answer SET rating = rating - 1 WHERE threadID = :threadID');
+            $this->db->bind(':threadID', $threadID);
+            if($this->db->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        public function removeupvote($threadID){
+            $this->db->query('UPDATE answer SET rating = rating - 1 WHERE threadID = :threadID');
+            $this->db->bind(':threadID', $threadID);
+            if($this->db->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        public function removedownvote($threadID){
+            $this->db->query('UPDATE answer SET rating = rating + 1 WHERE threadID = :threadID');
+            $this->db->bind(':threadID', $threadID);
+            if($this->db->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        public function addInteraction($userID, $threadID, $interaction){
+            $this->db->query('INSERT INTO interactions(userID, threadID, interaction) VALUES (:userID, :threadID, :interaction)');
+            $this->db->bind(':userID', $userID);
+            $this->db->bind(':threadID', $threadID);
+            $this->db->bind(':interatcion', $interaction);
+            if($this->db->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        public function setInteraction($userID, $threadID, $interaction){
+            $this->db->query('UPDATE interactions SET interaction = :interaction WHERE userID = :userID AND threadID = :threadID');
+            $this->db->bind(':userID', $userID);
+            $this->db->bind(':threadID', $threadID);
+            $this->db->bind(':interatcion', $interaction);
+            if($this->db->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        public function getInteraction($userID, $threadID){
+            $this->db->query('SELECT interaction FROM interactions WHERE userID = :userID AND threadID = :threadID');
+            $this->db->bind(':userID', $userID);
+            $this->db->bind(':threadID', $threadID);
+            $row = $this->db->single();
+            return $row;
+        }
+
+        public function interactionExist($userID, $threadID){
+            $this->db->query('SELECT interaction FROM interactions WHERE userID = :userID AND threadID = :threadID');
+            $this->db->bind(':userID', $userID);
+            $this->db->bind(':threadID', $threadID);
+
+            if($this->db->rowCount() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        public function getRating($threadID){
+            $this->db->query('SELECT rating FROM answer WHERE threadID = :threadID');
+            $this->db->bind(':threadID', $threadID);
+            $row = $this->db->single();
+            return $row;
+        }
+
+    }   
 
 ?>

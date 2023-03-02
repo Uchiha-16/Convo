@@ -64,7 +64,7 @@
                     <?php if($data['count']->count > 0) :?>
                     <?php foreach($data['answers'] as $answer) :?>
                         <?php echo $answer->link?>
-                        <?php //print_r ($answer);?>
+                        <?php echo $answer->threadID ?>
                     <div class="answerbox">
                         <div class="info-1">
                             <div class="qdp">
@@ -88,10 +88,10 @@
                             <div class="answerrating">
                                 <div></div>
                                 <div>
-                            <button class="ratingbtn" onclick="upvote()"><i class="fas fa-long-arrow-alt-up" id="upvote"></i></button>
+                            <button class="upvote" onclick="upvote(<?php echo $answer->threadID ?>)"><i class="fa-sharp fa-solid fa-arrow-up" id="upvote-<?php echo $answer->threadID ?>"></i></button>
 		                    <br>
                             <label class="ratinglabel"><?php echo $answer->rating; ?></label><br>
-		                    <button class="ratingbtn" onclick="downvote()"><i class="fas fa-long-arrow-alt-down" id="downvote"></i></button>
+		                    <button class="downvote" onclick="downvote(<?php echo $answer->threadID ?>)"><i class="fa-sharp fa-solid fa-arrow-down" id="downvote-<?php echo $answer->threadID ?>"></i></button>
                                 </div>
                             
                             <div>

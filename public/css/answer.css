@@ -31,13 +31,28 @@
 	text-align: center;
 }
 
-.ratingbtn {
+.upvote {
     background: none;
     border: none;
     font-size: 60px;
 	color: #95a5a6;
 	outline: none;
     cursor: pointer;
+    transition: 0.2s all;
+}
+
+.downvote {
+    background: none;
+    border: none;
+    font-size: 60px;
+	color: #95a5a6;
+	outline: none;
+    cursor: pointer;
+    transition: 0.2s all;
+}
+
+.vote {
+    color: #0D5F75;
 }
 
 .ratinglabel {

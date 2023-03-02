@@ -66,4 +66,44 @@ const myForm = document.getElementById('innerform');
             .then(data => console.log(data))
             .catch(error => console.error(error));
 });
-    
+
+//post Interactions
+
+//*******************************************Rating Answers*************************************************************/
+
+function upvote(answerID){
+    // alert("upvote");
+    if($("#upvote-"+answerID).hasClass("vote")){
+        $("#upvote-"+answerID).removeClass("vote");   
+
+
+    }else {
+        if($("#downvote-"+answerID).hasClass("vote")){
+            $("#downvote-"+answerID).removeClass("vote");
+
+           
+        }
+
+        $("#upvote-"+answerID).addClass("vote");
+    }
+}
+
+function downvote(answerID){
+    // alert("downvote");
+    if($("#downvote-"+answerID).hasClass("vote")){
+        $("#downvote-"+answerID).removeClass("vote");
+
+        
+    }else {
+        if($("#upvote-"+answerID).hasClass("vote")){
+            $("#upvote-"+answerID).removeClass("vote");
+
+          
+        }
+
+        $("#downvote-"+answerID).addClass("vote");
+    }
+}
+
+
+       
