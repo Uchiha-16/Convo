@@ -27,7 +27,7 @@
             <img src="<?php echo URLROOT;?>/img/back.png" class="back"/>
             <div class="navbar-div">
                 <div class="nav-bar">
-                    <img src="<?php echo URLROOT;?>/img/logoWhite.png" id="logo" onclick="document.location='<?php echo URLROOT;?>/pages/freehome'" style="cursor: pointer"/>
+                    <img src="<?php echo URLROOT;?>/img/logoWhite.png" id="logo" onclick="document.location='<?php echo URLROOT;?>/pages/index'" style="cursor: pointer"/>
                     <p class="quote">Hitch your wagon to a star...</p>
                 </div>
                 <div class="buttons">

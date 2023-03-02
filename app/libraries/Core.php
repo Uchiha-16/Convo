@@ -7,8 +7,11 @@
 
         public function __construct() {
             // print_r($this->getURL());
-
-            $url = $this->getURL();
+            if($this->getURL() == null) {
+                $url = 'pages/index';
+            } else {
+                $url = $this->getURL();
+            }
 
             if(file_exists('../app/controllers/' . ucwords($url[0]) . '.php')) {
                 // If exists, set as controller
@@ -36,6 +39,15 @@
                 $this->params = $url ? array_values($url) : [];
 
                 //call method and pass parameter list
+                call_user_func_array([$this->currentController, $this->currentMethod], $this->params);
+            }else {
+                // If controller doesn't exist, load the default controller
+                require_once '../app/controllers/' . $this->currentController . '.php';
+
+                //Instantiate the controller class
+                $this->currentController = new $this->currentController;
+
+                //Call the method
                 call_user_func_array([$this->currentController, $this->currentMethod], $this->params);
             }
         }

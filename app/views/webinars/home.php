@@ -1,8 +1,10 @@
             <?php require APPROOT . '/views/inc/header.php'; ?>
             <link href="<?php echo URLROOT; ?>/css/event.css" rel="stylesheet" type="text/css"/>
             <link href="<?php echo URLROOT; ?>/css/webinar.css" rel="stylesheet" type="text/css"/>
-
-            <style>
+            <?php if(!isset($_SESSION['userID'])): ?>
+                <link href="<?php echo URLROOT; ?>/css/free.css" rel="stylesheet" type="text/css"/>
+            <?php endif; ?>
+        <style>
             <?php if(($_SESSION['role']) == 'seeker') : ?>
              
             <?php elseif(($_SESSION['role']) == 'expert') : ?>
@@ -13,11 +15,15 @@
         </style>
     </head>
 <body>
-    <?php if(($_SESSION['role']) == 'seeker') : ?>
+    <?php if(!isset($_SESSION['role'])) : ?>
+        <?php require APPROOT . '/views/inc/components/Snavbar.php'; ?>
+    <?php elseif(($_SESSION['role']) == 'seeker') : ?>
         <?php require APPROOT . '/views/inc/components/Snavbar.php'; ?>
     <?php elseif(($_SESSION['role']) == 'expert') : ?>
         <?php require APPROOT . '/views/inc/components/Enavbar.php'; ?>
+    
     <?php endif; ?>
+
         
         <!-- body content -->
         <div class="container-div">

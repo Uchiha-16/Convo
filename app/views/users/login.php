@@ -37,6 +37,7 @@
                     <span class="error"><?php echo $data['password_err']; ?></span><br><br>
                     <input type="submit" value="Log In" name="submit"/><br>
                     <p style="color: #19758D; font-weight:600">Don’t have an account? <a href="<?php echo URLROOT; ?>/users/signup">Sign Up</a></p>
+                    <p style="color: #19758D; font-weight:600"><a href="<?php echo URLROOT; ?>/Pages/index">Continue without logging In</a></p>
                 </form>
                 <div class="alert success">
                     <?php flash('reg_flash'); ?>

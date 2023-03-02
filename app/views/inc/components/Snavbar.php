@@ -1,9 +1,10 @@
 <div class="nav">
             <div><a href="#"><img src="<?php echo URLROOT; ?>/img/logo%20with%20name%20WHITE%201.png" id="logo"></a></div>
+            <?php if(isset($_SESSION['userID'])) : ?>
             <div class="nav-hover"><a href="<?php echo URLROOT; ?>/Pages/seeker">Home</a></div>
             <div class="nav-hover"><a href="<?php echo URLROOT; ?>/Webinars/home">Webinar</a></div>
             <div><input type="search" name="search" placeholder="Search for questions..."/></div>
-            <?php if(isset($_SESSION['userID'])) : ?>
+           
             <div class="dropdown-list">
                 <button class="dropbtn dropbtn-1" onclick="drop()"><img src="<?php echo URLROOT; ?>/img/plus.png" class="icon"> Add New</button>
                 <div class="dropdown-content" id="myDropdown">
@@ -27,13 +28,17 @@
                 </div>
                 </div>
                 <?php else : ?>
+
+                <div class="nav-hover"><a href="<?php echo URLROOT; ?>/Pages/index">Home</a></div>
+                <div class="nav-hover"><a href="<?php echo URLROOT; ?>/Webinars/home">Webinar</a></div>
+                <div><input type="search" name="search" placeholder="Search for questions..."/></div>
                     <style>
                         .nav {
                             grid-template-columns: 5% 6% 6% 57% 6% 6% 8% 6%;
                         }
                     </style>
                 <div class="nav-hover"><a href="<?php echo URLROOT;?>/Users/login">Login</a></div>
-                <div class="nav-hover"><a href="<?php echo URLROOT;?>/Users/register">Register</a></div>
+                <div class="nav-hover"><a href="<?php echo URLROOT;?>/Users/signup">Register</a></div>
                 <div class="nav-hover"><a href="<?php echo URLROOT;?>/Pages/about">About us</a></div>
                 <?php endif; ?>
              

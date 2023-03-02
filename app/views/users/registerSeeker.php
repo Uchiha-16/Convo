@@ -222,7 +222,7 @@
                                 <span class="error"><?php echo $data['tag_err']; ?></span><br><br>
                                 <input type="submit" value="Sign Up" name="submit" /><br>
                                 <p style="color: #19758D; font-weight:600; font-size:14px; margin:5px 0 0 0;">Already
-                                    have an account? <a href="../login.php">Log In</a></p>
+                                    have an account? <a href="<?php echo URLROOT; ?>/Users/login">Log In</a></p>
                             </td>
                         </tr>
                     </table>
