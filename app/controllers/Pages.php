@@ -6,6 +6,18 @@
         public function __construct() {
            $this->pagesM = $this -> model('pagesM');
 
+        }   
+
+        public function index(){
+            $questions = $this->pagesM->Questions();
+
+            $tags = $this->pagesM->getQuestionTags();
+
+                $data = [
+                    'questions' => $questions,
+                    'tags' => $tags,
+                ];
+            $this->view('pages/index', $data);
         }
     
 
