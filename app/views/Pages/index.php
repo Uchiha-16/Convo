@@ -51,7 +51,7 @@
                             <div class="date-count">
                                 <label><?php echo convertTime($question->date); ?></label>
                                 <label style="font-weight:600; float:right">3 Answers</label><br>
-                                <label style="font-weight:600; float:right"><?php echo $question->rating; ?> Recommends</label><br>
+                                <label style="font-weight:600; float:right">Overall Rating: <?php echo $question->rating; ?></label><br>
                                 <form action="<?php echo URLROOT; ?>/answers/viewA/<?php echo $question->QID; ?>">
                                     <button style="float:right" class="read-more">READ MORE</button>
                                 </form>
@@ -64,7 +64,9 @@
 
 
             <div class="RHS">
-                <form action="<?php echo URLROOT; ?>/Questions/myquestions"><button type="submit" style="float:right" class="read-more attend">My Questions</button></form>
+                <?php if(isset($_SESSION['userID'])) : ?>
+                    <form action="<?php echo URLROOT; ?>/Questions/myquestions"><button type="submit" style="float:right" class="read-more attend">My Questions</button></form>
+                <?php endif; ?>
                 <div class="filter-div">
                     <div style="display:flex">
                         <img src="<?php echo URLROOT; ?>/img/filter.png">

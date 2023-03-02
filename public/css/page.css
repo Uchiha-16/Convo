@@ -404,6 +404,34 @@ input[type=search]{
     /* border-top: 1px solid rgba(128,128,128, .2); */
 }
 
+/*======================== Rating =======================*/
+.rating-box {
+    position: relative;
+    background: #fff;
+    padding: 12px 0px 12px;
+    border-radius: 25px;
+}
+.rating-box header {
+    margin-bottom: 13px;
+    text-align: right;
+}
+.rating-box .stars {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    gap: 10px;
+}
+.stars i {
+    color: #e6e6e6;
+    font-size: 26px;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+.stars i.active {
+    color: #ff9c1a;
+    border: none;
+}
+
 /*========================= footer =======================*/
 footer{
     position: relative;
@@ -418,4 +446,5 @@ footer a:after{
     border-bottom: solid 1px black;
     color: black;
 }
+
 

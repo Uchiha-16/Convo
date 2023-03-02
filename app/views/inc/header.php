@@ -23,6 +23,6 @@
         <script src="https://kit.fontawesome.com/a061f2abcc.js" crossorigin="anonymous"></script>
         <script src="<?php echo URLROOT; ?>/js/script.js" defer></script>
         <script src="<?php echo URLROOT; ?>/js/index.js"></script>
-        <script src="<?php echo URLROOT; ?>/js/textEditor.js"></script>
-        <script src="<?php echo URLROOT; ?>/js/imageUpload.js"></script>
+        <script src="<?php echo URLROOT; ?>/js/textEditor.js" type="text/javascript"></script>
+        <script src="<?php echo URLROOT; ?>/js/imageUpload.js" type="text/javascript"></script>
         

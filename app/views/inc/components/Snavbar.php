@@ -1,6 +1,7 @@
 <div class="nav">
-            <div><a href="#"><img src="<?php echo URLROOT; ?>/img/logo%20with%20name%20WHITE%201.png" id="logo"></a></div>
+            
             <?php if(isset($_SESSION['userID'])) : ?>
+            <div><a href="<?php echo URLROOT; ?>/Pages/seeker"><img src="<?php echo URLROOT; ?>/img/logo%20with%20name%20WHITE%201.png" id="logo"></a></div>
             <div class="nav-hover"><a href="<?php echo URLROOT; ?>/Pages/seeker">Home</a></div>
             <div class="nav-hover"><a href="<?php echo URLROOT; ?>/Webinars/home">Webinar</a></div>
             <div><input type="search" name="search" placeholder="Search for questions..."/></div>
@@ -28,7 +29,7 @@
                 </div>
                 </div>
                 <?php else : ?>
-
+                <div><a href="<?php echo URLROOT; ?>/Pages/index"><img src="<?php echo URLROOT; ?>/img/logo%20with%20name%20WHITE%201.png" id="logo"></a></div>
                 <div class="nav-hover"><a href="<?php echo URLROOT; ?>/Pages/index">Home</a></div>
                 <div class="nav-hover"><a href="<?php echo URLROOT; ?>/Webinars/home">Webinar</a></div>
                 <div><input type="search" name="search" placeholder="Search for questions..."/></div>
@@ -39,7 +40,7 @@
                     </style>
                 <div class="nav-hover"><a href="<?php echo URLROOT;?>/Users/login">Login</a></div>
                 <div class="nav-hover"><a href="<?php echo URLROOT;?>/Users/signup">Register</a></div>
-                <div class="nav-hover"><a href="<?php echo URLROOT;?>/Pages/about">About us</a></div>
+                <div class="nav-hover"><a href="<?php echo URLROOT; ?>/Pages/about">About us</a></div>
                 <?php endif; ?>
              
         </div>
