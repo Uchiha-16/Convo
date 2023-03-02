@@ -160,7 +160,7 @@
 
         }
 
-        public function downvote($threadID){
+        public function Removedownvote($threadID){
             $rdislikes = $this->answersM->removedownvote($threadID);
 
             $userID = $_SESSION['userID'];

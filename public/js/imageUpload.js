@@ -6,7 +6,7 @@ function toggleBrowse() {
 }
 function toggleRemove() {
     document.getElementById("image").value = "";
-    document.getElementById("imagePlaceholder").src = "http://localhost/Convo/img/user.jpg";
+    document.getElementById("imagePlaceholder").src = "http://localhost/Convo/img/thumbnailpic.jpg";
     document.getElementById("addImageBtn").style.display = "block";
     document.getElementById("removeImageBtn").style.display = "none";
 }
