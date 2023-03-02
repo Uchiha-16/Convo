@@ -23,7 +23,6 @@
                 return false;
             }
         }
-
         // Get Last QID
         public function getLastID() {
             $this->db->query('SELECT QID from question ORDER BY QID DESC LIMIT 1');
@@ -47,10 +46,9 @@
         }
 
         //getExpertDetails
-        public function getExpertID($tag) {
-            $this->db->query('SELECT expert.expertID as ID, user.firstName, user.lastName FROM user JOIN expert ON user.userID = expert.expertID 
-                            JOIN usertag ON user.userID = usertag.userID WHERE usertag.tag = :tag');
-            $this->db->bind(':tag', $tag);
+        public function getExperts($tag) {
+            $this->db->query('SELECT DISTINCT expert.expertID as ID, user.firstName, user.lastName 
+                              FROM user JOIN expert ON user.userID = expert.expertID JOIN usertag ON user.userID = usertag.userID WHERE ' . $tag .'');
             $row = $this->db->resultSet();
             return $row;
         }

@@ -13,9 +13,9 @@
 
         <body>
 
-            <?php require APPROOT . '/views/inc/components/Enavbar.php'; ?>
+           
+                <?php require APPROOT . '/views/inc/components/Enavbar.php'; ?>
 
-        
         <!-- body content -->
         <div class="container-div">
             <div class="content-body">
@@ -156,10 +156,10 @@
                                         </td>
                                     <tr>
                                         <td colspan="3" style="padding-top: 1rem;">
-                                            <h4 style="margin-bottom:.5rem">Add Thumbnail <img src="<?php echo URLROOT;?>/img/thumbnail.png" style="width: 17px;"></h4>
+                                            <h4 style="margin-bottom:.5rem">Add Image <img src="<?php echo URLROOT;?>/img/thumbnail.png" style="width: 17px;"></h4>
                                           
                                                 <label style="font-size: 14px; color:black">Upload a picture that shows what's in your video.
-                                                    A good thumbnail stands out and draws viewers' attention.</label><br><br>
+                                                    A good Image stands out and draws viewers' attention.</label><br><br>
                                                 <img id="imagePlaceholder" src="<?php echo URLROOT;?>/img/user.jpg" style="width:30%" alt="" >
                                                 <img src="<?php echo URLROOT;?>/img/browse.png" style="width: 40px;" alt="" id="addImageBtn" onclick="toggleBrowse()">
                                                 <img src="<?php echo URLROOT;?>/img/rmvbrowse.png" style="width: 57px; position: relative;top: 10px; display:none" alt="" id="removeImageBtn" onclick="toggleRemove()">

@@ -42,3 +42,88 @@ function readURL(input) {
 document.getElementById("image").onchange = function () {
     readURL(this);
 };
+
+/******************************************Submit Tag Form*************************************************************/
+
+// document.getElementById('innerform').addEventListener('submit', function(event) {
+//     // prevent the form from being submitted
+//     event.preventDefault();
+
+//     // select all the checked checkboxes and create an array of their values
+//     var selectedItems = [];
+//     var checkboxes = document.querySelectorAll('input[name="rp[]"]:checked');
+//     for (var i = 0; i < checkboxes.length; i++) {
+//         selectedItems.push(checkboxes[i].value);
+//     }
+
+//     // do something with selectedItems, such as sending it to the server using AJAX
+//     $.ajax({
+//         type: "POST",
+//         url: "http://localhost/Convo/Questions/search.php",
+//         data: { selectedItems: selectedItems },
+//         success: function(result) {
+//             // do something with the result, such as displaying it on the web page
+//         },
+//         error: function(jqXHR, textStatus, errorThrown) {
+//             // handle the error
+//         }
+//     })
+// });
+
+
+const myForm = document.getElementById('innerform');
+
+            myForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const formData = new FormData(myForm);
+            
+            fetch('<?php echo URLROOT;?>/FormTag/submitForm', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error(error));
+});
+
+//post Interactions
+
+//*******************************************Rating Answers*************************************************************/
+
+function upvote(answerID){
+    // alert("upvote");
+    if($("#upvote-"+answerID).hasClass("vote")){
+        $("#upvote-"+answerID).removeClass("vote");   
+
+
+    }else {
+        if($("#downvote-"+answerID).hasClass("vote")){
+            $("#downvote-"+answerID).removeClass("vote");
+
+           
+        }
+
+        $("#upvote-"+answerID).addClass("vote");
+    }
+}
+
+function downvote(answerID){
+    // alert("downvote");
+    if($("#downvote-"+answerID).hasClass("vote")){
+        $("#downvote-"+answerID).removeClass("vote");
+
+        
+    }else {
+        if($("#upvote-"+answerID).hasClass("vote")){
+            $("#upvote-"+answerID).removeClass("vote");
+
+          
+        }
+
+        $("#downvote-"+answerID).addClass("vote");
+    }
+}
+
+
+       

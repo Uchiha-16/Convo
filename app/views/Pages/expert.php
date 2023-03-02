@@ -63,6 +63,8 @@
                                 <button class="read-more one" type="submit">Answer this question</button></form>
                                 <form action="<?php echo URLROOT;?>/answers/save/<?php echo $question->QID;?>">
                                 <button class="read-more two">Save for later</button></form>
+                                <form action="<?php echo URLROOT;?>/answers/viewA/<?php echo $question->QID;?>">
+                                <button class="read-more two">Read More</button></form>
                             </div>
                         </div>
                     </div>

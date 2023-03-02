@@ -1,10 +1,44 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 <link href="<?php echo URLROOT;?>/css/event.css" rel="stylesheet" type="text/css"/>
 <link href="<?php echo URLROOT;?>/css/addconsult.css" rel="stylesheet" type="text/css"/>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<style>
+            <?php if(($_SESSION['role']) == 'seeker') : ?>
+             
+            <?php elseif(($_SESSION['role']) == 'expert') : ?>
+            .nav{
+                grid-template-columns: 5% 6% 6% 6% 51% 10% 4% 4% 4%;
+            }
+            <?php endif; ?>
+        </style>
+
+        <script type="text/javascript">
+            // $(document).ready(function() {
+            //     $(".mybutton").click(function() {
+
+            //         $.ajax({
+            //             type: "post",
+            //             url: "add.php",
+            //             data: $("form").serialize(),
+            //             success: function(result) {
+            //                 $(".myresult").html(result);
+            //             }
+            //         });
+
+            //     });
+            // });
+
+            
+        </script>
+
     </head>
 <body>
-
-<?php require APPROOT . '/views/inc/components/Snavbar.php'; ?>
+    <?php if(($_SESSION['role']) == 'seeker') : ?>
+        <?php require APPROOT . '/views/inc/components/Snavbar.php'; ?>
+    <?php elseif(($_SESSION['role']) == 'expert') : ?>
+        <?php require APPROOT . '/views/inc/components/Enavbar.php'; ?>
+    <?php endif; ?>
 
 
                 <!-- body content -->
@@ -34,7 +68,7 @@
                                 </tr>
                                 <tr>
                                     <td colspan="3">
-                                        <h4 style="margin-bottom:.5rem">Content</h4>
+                                        <h4 style="margin-bottom:.5rem">Content <span class="star">*</span></h4>
 
 
                                         <section>
@@ -88,6 +122,7 @@
                                     <td colspan="3">
                                         <h4 style="margin-bottom:.5rem">Tags <span class="star">*</span></h4>
                                         <div class="dropdown-div">
+                                            <form method="POST" id="innerform">
                                                 <label>Please Select <b>all the Tags</b> which are Related to the Event.</label>
                                                 <ul class="dropdown" id="dropdown">
                                             
@@ -141,14 +176,14 @@
                                                     
                                                     <li><input type="checkbox" value="spaceScience" name="tag[]" id="checkbox25" value="<?php echo $data['tag']; ?>"/><label for="checkbox25">Space Science</label></li>
                                                 </ul>
-<!--
+
                                                 <div class="select">
                                                     <label>All tags selected?</label>
-                                                    <button style="float:right" class="read-more submit" type="submit" name="tagcomplete">Yes, I'm good.</button>
-                                                    <button style="float:right" class="read-more submit" type="" name="reset">No</button>
+                                                    <button style="float:right" class="read-more submit mybutton" type="submit" name="tagcomplete" value="search">Yes, I'm good.</button>
+                                                    <button style="float:right" class="read-more submit" type="reset" name="reset">No</button>
                                                 </div>
--->
-                                            <?php
+                                                </form>
+                                        <?php
                                                     // display experts of the relavant tags
                                             ?>
                                         </div>
@@ -156,41 +191,27 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                <td>	</td>
+                            	<td class="rp">
+                                    <div class="checkbox-1">
+                                        <span class="checkbox-title" onclick="filter3()"><h4>Select Specific Experts(Optional)
+                                        <i class="arrow up" id="up3" style="margin-left: 4.3rem;"></i><i class="arrow down" id="down3" style="margin-left: 4.3rem;"></i></h4></span>
+                                        <ul id="checkbox-3">
+                                            <li>
+                                                <?php foreach ($data['response'] as $expert) : ?>
+                                                    <input type="checkbox" value="<?php echo $expert->expertID; ?>" name="expert[]" id="checkbox<?php echo $expert->expertID; ?>"/>
+                                                    <label for="checkbox<?php echo $expert->expertID; ?>"><?php echo $expert->fName; ?></label>
+                                                <?php endforeach; ?>
+                                                
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    </td>
                                 <td> <input type="checkbox" id="anonymus" name="visibility" value="<?php echo $data['visibility']?>"></td>
                                 <td><label for="anonymus">Make Anonymus</label><p class="anonymusp1">Your name will not be displayed in the Question</p></td>
                             </tr>
                                 <tr>
     <!--                                <td style="padding-right:1rem; width:50%;">-->
-                                    <td class="rp">
-
-                                        <!-- filter -->
-                                        <div class="checkbox-1">
-                                            <span class="checkbox-title" onclick="filter3()"><h4>Resource People <span class="star">*</span>
-                                            <i class="arrow up" id="up3" style="margin-left: 4.3rem;"></i><i class="arrow down" id="down3" style="margin-left: 4.3rem;"></i></h4></span>
-                                            <ul id="checkbox-3">
-                                                <?php
-                                                    
-                                                    
-                                                    // $sql = "SELECT expert.expertID as ID, user.firstName, user.lastName FROM user, expert WHERE user.userID = expert.expertID;";
-                                                    // $experts = mysqli_query($conn, $sql);
-                                                    // while($expertrow = mysqli_fetch_assoc($experts)){
-
-                                                    //     $fname = $expertrow['firstName'];
-                                                    //     $lname = $expertrow['lastName'];
-                                                    //     echo '<li>';
-                                                    //     echo '<label for="checkbox1">';
-                                                    //     echo '<input type="checkbox" value="resource person" name="rp[]" id="checkbox1"/>';
-                                                    //     echo $fname.' '.$lname;
-                                                    //     echo '</label>';
-                                                    //     echo '</li>';
-                                                        
-                                                    // }
-                                                
-                                                ?>
-                                            </ul>
-                                    </div>
-                                    </td>
+                                    
                                 </tr>
                                 <tr>
                                     <td colspan="3">
@@ -207,8 +228,8 @@
                     
                 </div>
                 <div class="RHS">
-                    <form action="pending.php"><button type="submit" style="float:right" class="read-more attend">My Questions</button></form>
-                    <form action="myevent.php"><button type="submit" style="float:right" class="read-more attend">Home</button></form>
+                    <form action="<?php echo URLROOT;?>/questions/myquestions"><button type="submit" style="float:right" class="read-more attend">My Questions</button></form>
+                    <form action="<?php echo URLROOT;?>/pages/seeker"><button type="submit" style="float:right" class="read-more attend">Home</button></form>
                 </div>
             </div>
             <div>
@@ -219,5 +240,3 @@
         <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="arrow up"></i><br></button>
             
         <?php require APPROOT . '/views/inc/footer.php'; ?>
-
-?>

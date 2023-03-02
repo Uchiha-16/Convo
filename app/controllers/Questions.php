@@ -5,6 +5,7 @@
         }
 
         public function add(){
+
             if($_SERVER['REQUEST_METHOD'] == 'POST') {
                 // Form is submitting
                 // Validate the data
@@ -12,7 +13,13 @@
                 date_default_timezone_set('Asia/Colombo');
                 $checkbox_value = isset($_POST['visibility']) ? 'anonymus' : 'public';
                 $tag = isset($_POST['tag']) ? $_POST['tag'] : '0';
-                $resourceID = isset($_POST['resourceID']) ? $_POST['resourceID'] : '0';
+                $resourceID = isset($_POST['rp']) ? $_POST['rp'] : '0';
+
+                if($resourceID != '0'){
+                    $resourceID = implode(',', $resourceID);
+                }
+
+                
 
                 //Input Data
                 $data = [
@@ -63,7 +70,7 @@
                             }
                         }
                             flash('reg_flash','Question Added Successfully');
-                            redirect('Pages/seeker');
+                            redirect('questions/myquestions');
                         
                     } else {
                         die('Something went wrong');
