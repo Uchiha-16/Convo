@@ -125,3 +125,7 @@ header .current-date{
     margin-top: 2.9rem;
     height: auto;
 }
+
+.active {
+    border-bottom: none;
+}

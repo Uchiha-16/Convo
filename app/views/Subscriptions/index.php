@@ -26,10 +26,18 @@
 </head>
 
 <body>
-    <?php if (($_SESSION['role']) == 'seeker') : ?>
+<?php if (($_SESSION['role']) == 'seeker') : ?>
         <?php require APPROOT . '/views/inc/components/Snavbar.php'; ?>
     <?php elseif (($_SESSION['role']) == 'expert') : ?>
         <?php require APPROOT . '/views/inc/components/Enavbar.php'; ?>
+    <?php elseif (($_SESSION['role']) == 'seeker/mod') : ?>
+        <?php require APPROOT . '/views/inc/components/SMnavbar.php'; ?> 
+    <?php elseif (($_SESSION['role']) == 'expert/mod') : ?>
+        <?php require APPROOT . '/views/inc/components/EMnavbar.php'; ?>
+    <?php elseif (($_SESSION['role']) == 'premium') : ?>
+        <?php require APPROOT . '/views/inc/components/Pnavbar.php'; ?>
+    <?php elseif (($_SESSION['role']) == 'admin') : ?>
+        <?php require APPROOT . '/views/inc/components/Anavbar.php'; ?>
     <?php endif; ?>
 
         
@@ -50,7 +58,7 @@
                                     <p style="font-size: 25px;font-weight: bold;">Premium Plan Subscription</p>
                                 </td>
                                 <td>
-                                    <form action="subscription.php"><button class="subscribe" style="float: right;" type="submit">Subscribe</button></form>
+                                    <form action="<?php echo URLROOT; ?>/Subscriptions/subscribe"><button class="subscribe" style="float: right;" type="submit">Subscribe</button></form>
                                 </td>
                             </tr>
                             <tr>

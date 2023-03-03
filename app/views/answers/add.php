@@ -14,7 +14,11 @@
 <body>
 
 
-    <?php require APPROOT . '/views/inc/components/Enavbar.php'; ?>
+    <?php if (($_SESSION['role']) == 'expert') : ?>
+        <?php require APPROOT . '/views/inc/components/Enavbar.php'; ?>
+    <?php elseif (($_SESSION['role']) == 'expert/mod') : ?>
+        <?php require APPROOT . '/views/inc/components/EMnavbar.php'; ?>
+    <?php endif; ?>
 
     <!-- body content -->
     <div class="container-div">

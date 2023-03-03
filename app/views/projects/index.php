@@ -19,7 +19,7 @@
         <link href="<?php //echo URLROOT; ?>/css/calander.css" rel="stylesheet" type="text/css"/> -->
         <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
         <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
-        <link rel="stylesheet" href="../stylesheets/mobile.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/mobile.css" rel="stylesheet" type="text/css">
         <script src="https://kit.fontawesome.com/a061f2abcc.js" crossorigin="anonymous"></script>
         <script src="<?php echo URLROOT; ?>/js/script.js" defer></script>
         <script src="<?php echo URLROOT; ?>/js/index.js"></script>
@@ -45,6 +45,16 @@
         <?php require APPROOT . '/views/inc/components/Snavbar.php'; ?>
     <?php elseif (($_SESSION['role']) == 'expert') : ?>
         <?php require APPROOT . '/views/inc/components/Enavbar.php'; ?>
+    <?php elseif (($_SESSION['role']) == 'seeker/mod') : ?>
+        <?php require APPROOT . '/views/inc/components/SMnavbar.php'; ?> 
+    <?php elseif (($_SESSION['role']) == 'expert/mod') : ?>
+        <?php require APPROOT . '/views/inc/components/EMnavbar.php'; ?>
+    <?php elseif (($_SESSION['role']) == 'premium') : ?>
+        <?php require APPROOT . '/views/inc/components/Pnavbar.php'; ?>
+    <?php elseif (($_SESSION['role']) == 'company') : ?>
+        <?php require APPROOT . '/views/inc/components/Cnavbar.php'; ?>
+    <?php elseif (($_SESSION['role']) == 'admin') : ?>
+        <?php require APPROOT . '/views/inc/components/Anavbar.php'; ?>
     <?php endif; ?>
 
         <div class="container-div">

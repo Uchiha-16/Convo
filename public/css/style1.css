@@ -24,7 +24,7 @@ body{
     font-style: normal;
     font-weight: normal;
     font-size: 16px;
-    line-height: 150%;
+    /*line-height: 150%;*/
     color: #ffffff;
 
     width: 100vw;
@@ -135,12 +135,12 @@ hr.line{
   outline: 0;
 }
 
-.icon{
-    height: 25px;
+/* .icon{
+     height: 25px;
     width: auto;
     padding: 10px;
-    vertical-align: middle;
-}
+    vertical-align: middle; 
+} */
 
 
 /*================================================================*/
@@ -323,10 +323,6 @@ hr.line{
     padding-right: 7px;
     padding-top: 2px;
     padding-bottom: 2px;
-    background: #484848;
-    box-shadow: #0f1111 0 2px 5px 0;
-    color: var(--white-color);
-    border-radius: 4px;
     text-align: center;
 }
 

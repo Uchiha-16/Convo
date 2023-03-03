@@ -12,9 +12,9 @@
             $this->view('Subscriptions/index', $data);
         }
 
-        public function add(){
+        public function subscribe(){
             $data = [];
-            $this->view('Subscriptions/add', $data);
+            $this->view('Subscriptions/subscribe', $data);
         }
 
     }
