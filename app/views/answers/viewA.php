@@ -86,62 +86,74 @@
                     </div>
                 </div>
 
-                <?php if ($data['count']->count > 0) : ?>
-                    <?php foreach ($data['answers'] as $answer) : ?><br>
-                        <h3>Expertise Answers</h3>
-                        <div class="answerbox">
-                            <div class="info-1">
-                                <div class="qdp">
-                                    <div>
-                                        <img src="<?php echo URLROOT; ?>/img/pfp/<?php echo $answer->pfp; ?>" />
-                                    </div>
-                                    <div class="qdp-1">
-                                        <label><?php echo $answer->uname; ?></label><br>
-                                        <label class="qdp-1-2"><?php echo $answer->fName . " " . $answer->lName; ?></label>
-                                    </div>
-                                </div>
-                                <div class="tags">
-                                    <?php $tagArray = explode(",", $answer->qualifications); ?>
-                                    <?php foreach ($tagArray as $tag) : ?>
-                                        <div class="tag"><?php echo $tag ?></div>
-                                    <?php endforeach; ?>
-                                    <br><br>
-                                </div>
-                            </div>
-                            <div class="answercontent">
-                                <div class="answerrating">
-                                    <div></div>
-                                    <div>
-                                        <button class="upvote" onclick="upvote(<?php echo $answer->threadID ?>)"><i class="fa-sharp fa-solid fa-arrow-up" id="upvote-<?php echo $answer->threadID ?>"></i></button>
-                                        <br>
-                                        <label class="ratinglabel"><?php echo $answer->rating; ?></label><br>
-                                        <button class="downvote" onclick="downvote(<?php echo $answer->threadID ?>)"><i class="fa-sharp fa-solid fa-arrow-down" id="downvote-<?php echo $answer->threadID ?>"></i></button>
-                                    </div>
+                <?php if ($data['count']->count > 0) : ?><br>
 
-                                    <div>
-                                        <div class="date-count">
-                                            <label><?php echo convertTime($answer->date); ?></label>
+                    <?php if ($data['count']->count > 1) : ?>
+                        <h3><?php echo $data['count']->count ?> Expertiese Answers</h3>
+                    <?php else : ?>
+                        <h3><?php echo $data['count']->count ?> Expertiese Answer</h3>
+                    <?php endif; ?>
+
+                    <?php foreach ($data['answers'] as $answer) : ?><br>
+                        <div class="answerbox">
+                            
+                            <div class="answercontent">
+                                <?php if (isset($_SESSION['role'])) : ?>
+                                    <div class="answerrating">
+                                        <label>Rate</label><br>
+                                        <div>
+                                            <button class="upvote" onclick="upvote(<?php echo $answer->threadID ?>)"><i class="fa-sharp fa-solid fa-arrow-up" id="upvote-<?php echo $answer->threadID ?>"></i></button>
+                                            <br>
+                                            <label class="ratinglabel"><?php echo $answer->rating; ?></label><br>
+                                            <button class="downvote" onclick="downvote(<?php echo $answer->threadID ?>)"><i class="fa-sharp fa-solid fa-arrow-down" id="downvote-<?php echo $answer->threadID ?>"></i></button>
                                         </div>
                                     </div>
-                                </div>
+                                <?php endif; ?>
                                 <div class="answercontent-1">
                                     <?php if ($answer->link != "") : ?>
-                                        <iframe width="750" height="315" src="https://www.youtube.com/embed/<?php echo $answer->link ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                                        <iframe width="100%" height="315" src="https://www.youtube.com/embed/<?php echo $answer->link ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                                     <?php endif; ?>
                                     <?php if ($answer->attachment != "") : ?>
-                                        <img style="width:50%" src="<?php echo URLROOT; ?>/img/answerImg/<?php echo $answer->attachment; ?>">
+                                        <img style="width:20%" src="<?php echo URLROOT; ?>/img/answerImg/<?php echo $answer->attachment; ?>">
                                     <?php endif; ?>
                                     <p><?php echo $answer->content; ?></p>
 
                                     <hr>
-                                    <a href="" class="reactbtn"><img src="<?php echo URLROOT; ?>/img/share.png" style="width: 12%;"> Share</a>
-                                    <a href="" class="reactbtn"><img src="<?php echo URLROOT; ?>/img/recommend.png" style="width: 12%"> Recommend</a>
+                                </div>
+                            </div>
+                            <div class="info-1">
+                                <?php if (isset($_SESSION['role'])) : ?>
+                                    <div class="qdp">
+                                        <div style="display: grid; margin-bottom: auto; margin-top: auto;">
+                                            <img src="<?php echo URLROOT; ?>/img/pfp/<?php echo $answer->pfp; ?>" />
+                                        </div>
+                                        <div class="qdp-1">
+                                            <label><?php echo $answer->uname; ?></label>
+                                            <label class="qdp-1-2"><?php echo $answer->fName . " " . $answer->lName; ?></label>
+                                        </div>
+                                    </div>
+                                <?php else : ?>
+                                    <div class="qdp" style="padding-left: 0;">
+                                        <div style="display: grid; margin-bottom: auto; margin-top: auto;">
+                                            <img src="<?php echo URLROOT; ?>/img/pfp/<?php echo $answer->pfp; ?>" />
+                                        </div>
+                                        <div class="qdp-1">
+                                            <label><?php echo $answer->uname; ?></label>
+                                            <label class="qdp-1-2"><?php echo $answer->fName . " " . $answer->lName; ?></label>
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
+                                <div>
+                                    <div class="date-count">
+                                        <label><?php echo convertTime($answer->date); ?></label>
+                                        <a href="" class="reactbtn"><img src="<?php echo URLROOT; ?>/img/share.png" style="width: 12%;"> Share</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     <?php endforeach; ?>
                 <?php else : ?>
-                    <h2>No Answers for this Question Yet</h2>
+                    <h3>No Answers for this Question Yet</h3>
                 <?php endif; ?>
             </div>
 

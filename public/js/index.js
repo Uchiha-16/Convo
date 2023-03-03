@@ -142,6 +142,18 @@ function filter3() {
     document.getElementById('down3').style.display = "inline-block";
   }
 }
+function filter4() {
+  var x = document.getElementById('checkbox-4');
+  if (x.style.display === "none") {
+    x.style.display = "block";
+    document.getElementById('down4').style.display = "none";
+    document.getElementById('up4').style.display = "inline-block";
+  } else {
+    x.style.display = "none";
+    document.getElementById('up4').style.display = "none";
+    document.getElementById('down4').style.display = "inline-block";
+  }
+}
 
 
 //=========================================== Add Question

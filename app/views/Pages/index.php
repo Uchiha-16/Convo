@@ -47,7 +47,20 @@
                         </div>
                         <div class="content-display">
                             <h3><?php echo $question->title ?></h3>
-                            <p><?php echo $question->content ?></p>
+                            <p class="line-clamp"><?php echo $question->content ?></p>
+                            <!-- <script>
+                                //=========================================== line-clamp
+
+                                var content = document.querySelector('.line-clamp');
+                                var text = content.textContent;
+                                var textLength = text.length;
+                                var maxTextLength = 30;
+                                if (textLength > maxTextLength) {
+                                var newText = text.substring(0, maxTextLength);
+                                content.textContent = newText + '...';
+                                }
+                                content = "";
+                                </script> -->
                             <div class="date-count">
                                 <label><?php echo convertTime($question->date); ?></label>
                                 <label style="font-weight:600; float:right">3 Answers</label><br>
@@ -254,26 +267,36 @@
 
                             <!-- Filter 4 -->
                             <div class="checkbox-1">
-                                <span class="checkbox-title" onclick="filter#()">Rating <i class="arrow up" id="up4" style="margin-left: 6.7rem;"></i><i class="arrow down" id="down4" style="margin-left: 6.7rem;"></i></span>
-                                <!--
-                                    <ul id="checkbox-3">
+                                <span class="checkbox-title" onclick="filter4()">Rating <i class="arrow up" id="up4" style="margin-left: 6.7rem;"></i><i class="arrow down" id="down4" style="margin-left: 6.7rem;"></i></span>
+                                
+                                    <ul id="checkbox-4">
                                         <li>
                                             <label for="checkbox1">
-                                                <input type="checkbox" value="last 3 months" name="QA[]" id="checkbox1"/>My questions
+                                                <input type="checkbox" value="1" name="ratings[]" id="checkbox1"/>1 Star
                                             </label>
                                         </li>
                                         <li>
                                             <label for="checkbox2">
-                                                <input type="checkbox" value="last 6 months" name="QA[]" id="checkbox2"/>Answered
+                                                <input type="checkbox" value="2" name="ratings[]" id="checkbox2"/>2 Stars
                                             </label>
                                         </li>
                                         <li>
                                             <label for="checkbox3">
-                                                <input type="checkbox" value="last year" name="QA[]" id="checkbox3"/>Not answered
+                                                <input type="checkbox" value="3" name="ratings[]" id="checkbox3"/>3 Stars
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label for="checkbox3">
+                                                <input type="checkbox" value="3" name="ratings[]" id="checkbox3"/>4 Stars
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label for="checkbox3">
+                                                <input type="checkbox" value="3" name="ratings[]" id="checkbox3"/>5 Stars
                                             </label>
                                         </li>
                                     </ul>
--->
+
                             </div>
 
                         </form>

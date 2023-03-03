@@ -68,9 +68,13 @@
                         </div>
 
                         <div class="RHS">
-                            <form action="<?php echo URLROOT; ?>/Webinars/add"><button type="submit" style="float:right" class="read-more attend">Create</button></form>
-                            <form action="<?php echo URLROOT; ?>/Webinars/myWebinars"><button type="submit" style="float:right" class="read-more attend">My Videos</button></form>
-                            <div class="filter-div">
+                            <?php if(isset($_SESSION['userID'])) : ?>
+                                <form action="<?php echo URLROOT; ?>/Webinars/add"><button type="submit" style="float:right" class="read-more attend">Create</button></form>
+                                <form action="<?php echo URLROOT; ?>/Webinars/myWebinars"><button type="submit" style="float:right" class="read-more attend">My Videos</button></form>
+                                <div class="filter-div">
+                            <?php else : ?>
+                                <div class="filter-div" style="margin-top: 0.9rem;">
+                            <?php endif; ?>
                                 <div style="display:flex">
                                     <img src="<?php echo URLROOT; ?>/img/filter.png">
                                     <label>Filters</label><button class="read-more go">Go</button>
