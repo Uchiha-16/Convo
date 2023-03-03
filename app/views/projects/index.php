@@ -95,7 +95,13 @@
                             <button class="tag-button">IT</button>
                         </div>
                         <div class="tag-bottom">
-                            <label class="qdp-1-2">Published: October 25, 2022<br>Project duration: More than 6 months</label><a href="login-form.php"><button class="answer-btn" formaction="#">Apply Now!</button></a>  
+                            <div>
+                                <a href="login-form.php"><button class="answer-btn" formaction="#">Apply Now!</button></a>  
+                            </div>
+                            <div></div>
+                            <div>
+                                <label class="qdp-1-2">Published: October 25, 2022<br>Project duration: More than 6 months</label>
+                            </div>
                         </div>
 
                     </div>

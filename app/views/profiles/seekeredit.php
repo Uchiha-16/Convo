@@ -45,12 +45,12 @@
     <!--end main menu-->
     <div class="container-div">
             <div class="content-body">
-                <div class="LHS">
+                <div class="LHS" style="border:none">
                     <!--Container-->
                     <div class="container-edit-profile">
                         <div class="left-profile-edit">
                             <div class="profile-picture-sec">
-                                <img src="<?php echo URLROOT; ?>/img/pfp.jpg" alt="profile" class="profile-picture">
+                                <img src="<?php echo URLROOT; ?>/img/pfp/<?php echo $data['profile']->pfp ?>" alt="profile" class="profile-picture">
                             </div>
                             <button class="read-more" style="width:50%">Edit Profile Picture</button>
                         </div>
@@ -60,35 +60,45 @@
                                 <div class="form-div">
                                     <label for="fname">First Name</label>
                                     <img class="normal-icon" src="<?php echo URLROOT; ?>/img/edit.png" alt="edit">
-                                    <input type="text" id="fname" name="fname" class="form-control" placeholder="Dilky" readonly>
+                                    <input type="text" id="fname" name="fname" class="form-control" placeholder="<?php echo $data['profile']->firstName ?>">
                                 </div>
                                 <div class="form-div">
                                     <label for="fname">Last Name</label>
                                     <img class="normal-icon" src="<?php echo URLROOT; ?>/img/edit.png" alt="edit">
-                                    <input type="text" id="lname" name="lname" class="form-control" placeholder="Liyanage" readonly>
+                                    <input type="text" id="lname" name="lname" class="form-control" placeholder="<?php echo $data['profile']->lastName ?>">
                                 </div>
 
                                 <div class="form-div">
                                 <label for="lname">Email</label>
                                 <img class="normal-icon" src="<?php echo URLROOT; ?>/img/edit.png" alt="edit">
-                                <input type="text" id="email" name="email" class="form-control" placeholder="dilkyliyanage22@gmail.com" readonly>
+                                <input type="text" id="email" name="email" class="form-control" placeholder="<?php echo $data['profile']->email ?>">
                                 </div>
 
                                 <div class="form-div">
                                 <label for="lname">Username</label>
                                 <img class="normal-icon" src="<?php echo URLROOT; ?>/img/edit.png" alt="edit">
-                                <input type="text" id="username" name="username" class="form-control" placeholder="Mika99" readonly>
+                                <input type="text" id="username" name="username" class="form-control" placeholder="<?php echo $data['profile']->uname ?>">
                                 </div>
 
                                 <div class="form-div">
-                                    <label for="lname">Password</label>
+                                    <label for="lname">Old Password</label>
                                     <img class="normal-icon" src="<?php echo URLROOT; ?>/img/edit.png" alt="edit">
-                                    <input type="password" id="password" name="password" class="form-control" placeholder="************" readonly>
+                                    <input type="password" id="password" name="password" class="form-control" placeholder="***********">
+                                </div>
+                                <div class="form-div">
+                                    <label for="lname">New Password</label>
+                                    <img class="normal-icon" src="<?php echo URLROOT; ?>/img/edit.png" alt="edit">
+                                    <input type="password" id="password" name="password" class="form-control" placeholder="**************">
+                                </div>
+                                <div class="form-div">
+                                    <label for="lname">Rewrite New Password</label>
+                                    <img class="normal-icon" src="<?php echo URLROOT; ?>/img/edit.png" alt="edit">
+                                    <input type="password" id="password" name="password" class="form-control" placeholder="**************">
                                 </div>
                                 <div class="form-div">
                                     <label for="lname">Designation</label>
                                     <img class="normal-icon" src="<?php echo URLROOT; ?>/img/edit.png" alt="edit">
-                                    <input type="text" id="designation" name="desigantion" class="form-control" placeholder="BSc. Computer Science" readonly>
+                                    <input type="text" id="designation" name="desigantion" class="form-control" placeholder="BSc. Computer Science">
                                 </div>
                                 <p>Tags
 
@@ -104,11 +114,11 @@
                     </div>
                 </div>
                 
-                <div class="RHS">
+                <div>
                 </div>
             </div>
             <div>
-                <footer><a href="index.php">About Us</a> <p> | </p> &copy; Convo 2022 All rights reserved.</footer>
+                <footer><a href="<?php echo URLROOT; ?>/Pages/about">About Us</a> <p> | </p> &copy; Convo 2022 All rights reserved.</footer>
             </div>
         </div>
         

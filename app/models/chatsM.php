@@ -1,5 +1,5 @@
 <?php
-    class skilltestM {
+    class chatsM {
         private $db;
 
         public function __construct() {
