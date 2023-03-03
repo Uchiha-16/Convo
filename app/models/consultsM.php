@@ -1,5 +1,5 @@
 <?php
-    class chatsM {
+    class consultsM {
         private $db;
 
         public function __construct() {

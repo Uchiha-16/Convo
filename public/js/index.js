@@ -1,11 +1,21 @@
 //=========================================== nav bar active state
 
-$(document).ready(function () {
 
-  $(".nav-hover").click(function () {
-    $(this).addClass("active").siblings().removeClass("active");
+const navLinks = document.querySelectorAll('.nav-hover');
+
+navLinks.forEach(link => {
+  link.addEventListener('click', () => {
+    navLinks.forEach(link => link.classList.remove('active'));
+    link.classList.add('active');
   });
 });
+// $(document).ready(function () {
+
+//   $(".nav-hover").on('click', function () {
+//     $(this).addClass("active").removeClass("active").parent().siblings().children()
+//     .off('click');
+//   });
+// });
 
 //=========================================== Picture Upload
 const imgDiv = document.querySelector('.user-img');

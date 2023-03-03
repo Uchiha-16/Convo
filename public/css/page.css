@@ -85,6 +85,12 @@ input[type=search]{
 .nav-hover:after{
     border-bottom: solid 2px black;
 }
+
+.nav-hover.active{
+    border-bottom: 2px solid black;
+}
+
+
 .dropdown-content {
     display: none;
     position: absolute;
@@ -130,9 +136,7 @@ input[type=search]{
 .show {
     display: block;
 }
-.active { /*for nav bar active state*/
-    border-bottom: 2px solid black;
-}
+
 /*======================== content ===========================*/
 .container-div{
     z-index: 10;
@@ -381,9 +385,6 @@ input[type=search]{
     margin-top: 23px;
 }
 
-.delete-button{
-
-}
 .editicon{
     width: 20px;
     height: 20px;

@@ -192,7 +192,7 @@
 
 
 <div class="right">
-        <button class="new_blog"><a href="<?php echo URLROOT; ?>/Blogs/add.php" style="color:white">Add Blog</a></button>
+        <button class="new_blog"><a href="<?php echo URLROOT; ?>/Blogs/add" style="color:white">Add Blog</a></button>
        
         <div class="filter_box">
             <div class="filter_head">
