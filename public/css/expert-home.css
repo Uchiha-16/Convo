@@ -128,7 +128,6 @@ body{
     justify-content: center;
     align-items: left;
     margin-bottom: 2%;
-    margin-left: 5%;
     margin-right: 5%;
     padding: 2%;
     width: 80%;
@@ -238,12 +237,13 @@ body{
 
 .tag-bottom{
     display: grid;
-    grid-template-columns: 30% 30% 40%;
-    justify-content: left;
+    grid-template-columns: 30% 40% 30%;
     align-items: center;
     margin-bottom: 0px;
 }
-
+.tag-bottom a{
+    width: 100%;
+}
 .a{
  margin-right: 10px;
 }
@@ -282,3 +282,4 @@ body{
     margin-right: 15px;
     margin-bottom: 0%;
 }
+

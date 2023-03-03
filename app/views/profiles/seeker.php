@@ -40,8 +40,9 @@
                 <div class="LHS">
                     <div class="col1">
                         <div>
-                            <img src="<?php echo URLROOT; ?>/img/pfp.jpg">
-                            <h4>Dilky Liyanage</h4>
+                            
+                            <img src="<?php echo URLROOT; ?>/img/pfp/<?php echo $data['profile']->pfp ?>" />
+                            <h4><?php echo $data['profile']->userName ?></h4>
                             <label class="qdp-1-2">BSc. Computer Science</label>
                             <form action="<?php echo URLROOT; ?>/profiles/seekeredit"><button class="read-more">Edit</button></form>
                             <table>
@@ -187,7 +188,7 @@
                 </div>
             </div>
             <div>
-                <footer><a href="index.php">About Us</a> <p> | </p> &copy; Convo 2022 All rights reserved.</footer>
+                <footer><a href="<?php echo URLROOT; ?>/Pages/about">About Us</a> <p> | </p> &copy; Convo 2022 All rights reserved.</footer>
             </div>
         </div>
 

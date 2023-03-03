@@ -5,10 +5,12 @@
         }
 
         public function seeker(){
-            // $blogs = $this->blogsModel->getBlogs();
+            $profile = $this->profilesModel->getprofile();
+
             $data = [
-                // 'blogs' => $blogs
+                'profile' => $profile
             ];
+            
             $this->view('profiles/seeker', $data);
         }
 
@@ -28,7 +30,11 @@
         }
 
         public function seekeredit(){
-            $data = [];
+            $profile = $this->profilesModel->getprofile();
+
+            $data = [
+                'profile' => $profile
+            ];
             $this->view('profiles/seekeredit', $data);
         }
 
