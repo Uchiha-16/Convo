@@ -2,7 +2,7 @@
     class answersM {
         private $db;
 
-        public function __construct() {d
+        public function __construct() {
             $this->db = new Database;
         }
 

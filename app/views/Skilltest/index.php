@@ -1,45 +1,44 @@
-<?php
-session_start();
-?>
 
-<html lang="en">
-<head>
- <!-- meta tags -->
- <meta name="viewport" content="width=device-width, initial-scale=1.0 shrink-to-fit=no">
-        <meta name="description" content="Online Forum">
-        <meta charset="UTF-8">
+<?php require APPROOT . '/views/inc/header.php'; ?>
 
-        <!--<meta name="keywords" content="Forum, Question, Answer">-->
+<link href="<?php echo URLROOT; ?>/css/sboard.css" rel="stylesheet" type="text/css"/>
 
-        <!-- Title -->
-        <title>Score Board</title>
-        <link rel="icon" type="images/icon" href="<?php echo URLROOT; ?>/img/logoIcon.png">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-        <!-- stylesheets -->
-        <link href="../stylesheets/style.css" rel="stylesheet" type="text/css"/>
-        <link href="../stylesheets/landing.css" rel="stylesheet" type="text/css"/>
-        <link href="../stylesheets/page.css" rel="stylesheet" type="text/css"/>
-        <link href="../stylesheets/sboard.css" rel="stylesheet" type="text/css"/>
-        <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
-        <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
-        <link rel="stylesheet" href="../stylesheets/mobile.css" rel="stylesheet" type="text/css">
+<style>
+    <?php if (($_SESSION['role']) == 'seeker') : ?>
+    <?php elseif (($_SESSION['role']) == 'expert') : ?>
+      .nav {
+        grid-template-columns: 5% 6% 6% 6% 51% 10% 4% 4% 4%;
+    }
 
-        <!-- scripts -->
-        <script src="https://kit.fontawesome.com/a061f2abcc.js" crossorigin="anonymous"></script>
-        <script>
-            function confirmation(){
-                    if(confirm("Are you sure you want to discard this report?")){
-                        window.location.href = "home.php";
-                    }
-                }
+    <?php endif; ?>
+</style>
 
-        </script>
-    </head>
+<script type="text/javascript">
+    function confirmation(){
+      if(confirm("Are you sure you want to discard this blog?")){
+        window.location.href = "<?php echo URLROOT; ?>/Blogs/index";
+      }
+    }
+</script>
+
+</head>
+
 <body>
-
-
- <!-- nav bar -->
- <?php include 'Snavbar.php'; ?>
+<?php if (($_SESSION['role']) == 'seeker') : ?>
+        <?php require APPROOT . '/views/inc/components/Snavbar.php'; ?>
+    <?php elseif (($_SESSION['role']) == 'expert') : ?>
+        <?php require APPROOT . '/views/inc/components/Enavbar.php'; ?>
+    <?php elseif (($_SESSION['role']) == 'seeker/mod') : ?>
+        <?php require APPROOT . '/views/inc/components/SMnavbar.php'; ?> 
+    <?php elseif (($_SESSION['role']) == 'expert/mod') : ?>
+        <?php require APPROOT . '/views/inc/components/EMnavbar.php'; ?>
+    <?php elseif (($_SESSION['role']) == 'premium') : ?>
+        <?php require APPROOT . '/views/inc/components/Pnavbar.php'; ?>
+    <?php elseif (($_SESSION['role']) == 'admin') : ?>
+        <?php require APPROOT . '/views/inc/components/Anavbar.php'; ?>
+    <?php endif; ?>
 
 
         <script>
@@ -143,7 +142,7 @@ session_start();
               
             </div>
  
-            <button class="start" > <a href="./testview.php?n=1"> START</a></button>
+            <button class="start" > <a href="<?php echo URLROOT; ?>/Skilltest/test"> START</a></button>
             
             <div class="total_skill"> Total Skill Tests:</div>
 

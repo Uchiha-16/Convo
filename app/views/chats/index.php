@@ -21,6 +21,14 @@
         <?php require APPROOT . '/views/inc/components/Snavbar.php'; ?>
     <?php elseif (($_SESSION['role']) == 'expert') : ?>
         <?php require APPROOT . '/views/inc/components/Enavbar.php'; ?>
+    <?php elseif (($_SESSION['role']) == 'seeker/mod') : ?>
+        <?php require APPROOT . '/views/inc/components/SMnavbar.php'; ?> 
+    <?php elseif (($_SESSION['role']) == 'expert/mod') : ?>
+        <?php require APPROOT . '/views/inc/components/EMnavbar.php'; ?>
+    <?php elseif (($_SESSION['role']) == 'premium') : ?>
+        <?php require APPROOT . '/views/inc/components/Pnavbar.php'; ?>
+    <?php elseif (($_SESSION['role']) == 'admin') : ?>
+        <?php require APPROOT . '/views/inc/components/Anavbar.php'; ?>
     <?php endif; ?>
 
         

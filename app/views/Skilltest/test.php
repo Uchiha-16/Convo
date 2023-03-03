@@ -1,56 +1,55 @@
-<?php
-session_start();
-?>
+<?php require APPROOT . '/views/inc/header.php'; ?>
 
-<html lang="en">
-<head>
- <!-- meta tags -->
- <meta name="viewport" content="width=device-width, initial-scale=1.0 shrink-to-fit=no">
-        <meta name="description" content="Online Forum">
-        <meta charset="UTF-8">
+<link href="<?php echo URLROOT; ?>/css/skill.css" rel="stylesheet" type="text/css"/>
 
-        <!--<meta name="keywords" content="Forum, Question, Answer">-->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-        <!-- Title -->
-        <title>Skill Test</title>
-        <link rel="icon" type="images/icon" href="<?php echo URLROOT; ?>/img/logoIcon.png">
+<style>
+    <?php if (($_SESSION['role']) == 'seeker') : ?>
+    <?php elseif (($_SESSION['role']) == 'expert') : ?>
+      .nav {
+        grid-template-columns: 5% 6% 6% 6% 51% 10% 4% 4% 4%;
+    }
 
-        <!-- stylesheets -->
-        <link href="../stylesheets/style.css" rel="stylesheet" type="text/css"/>
-        <link href="../stylesheets/landing.css" rel="stylesheet" type="text/css"/>
-        <link href="../stylesheets/page.css" rel="stylesheet" type="text/css"/>
-        <link href="../stylesheets/skill.css" rel="stylesheet" type="text/css"/>
-        <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
-        <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
-        <link rel="stylesheet" href="../stylesheets/mobile.css" rel="stylesheet" type="text/css">
-        <script src="../scripts/index.js" crossorigin="anonymous"></script>
+    <?php endif; ?>
+</style>
 
-        <!-- scripts -->
-        <script src="https://kit.fontawesome.com/a061f2abcc.js" crossorigin="anonymous"></script>
-        <!-- <script type="text/javascript" src="quiz.js"></script> -->
-        <script>
-            function confirmation(){
-                    if(confirm("Are you sure you want to discard this report?")){
-                        window.location.href = "home.php";
-                    }
-                }
+<script type="text/javascript">
+    function confirmation(){
+      if(confirm("Are you sure you want to discard this blog?")){
+        window.location.href = "<?php echo URLROOT; ?>/Blogs/index";
+      }
+    }
+</script>
 
-        </script>
-    </head>
+</head>
+
 <body>
-
+<?php if (($_SESSION['role']) == 'seeker') : ?>
+        <?php require APPROOT . '/views/inc/components/Snavbar.php'; ?>
+    <?php elseif (($_SESSION['role']) == 'expert') : ?>
+        <?php require APPROOT . '/views/inc/components/Enavbar.php'; ?>
+    <?php elseif (($_SESSION['role']) == 'seeker/mod') : ?>
+        <?php require APPROOT . '/views/inc/components/SMnavbar.php'; ?> 
+    <?php elseif (($_SESSION['role']) == 'expert/mod') : ?>
+        <?php require APPROOT . '/views/inc/components/EMnavbar.php'; ?>
+    <?php elseif (($_SESSION['role']) == 'premium') : ?>
+        <?php require APPROOT . '/views/inc/components/Pnavbar.php'; ?>
+    <?php elseif (($_SESSION['role']) == 'admin') : ?>
+        <?php require APPROOT . '/views/inc/components/Anavbar.php'; ?>
+    <?php endif; ?>
 
 <!-- nav bar -->
-        <div class="nav">
+        <!-- <div class="nav">
             <div><a href="#"><img src="<?php echo URLROOT; ?>/img/logo%20with%20name%20WHITE%201.png" id="logo"></a></div>
             <div class="nav-hover"><a href="./home.php">Home</a></div>
             <div class="nav-hover"><a href="">Events</a></div>
             <div><input type="search" name="search" placeholder="Search for questions..."/></div>
             <div class="dropdown-list">
                 <button class="dropbtn dropbtn-1" onclick="drop()"><img src="<?php echo URLROOT; ?>/img/plus.png" class="icon"> Add New</button>
-                <div class="dropdown-content" id="myDropdown">
+                <div class="dropdown-content" id="myDropdown"> -->
                     <!-- <a href="./addQuestion.php">Question</a> -->
-                    <a href="./addBlog.php">Blog</a>
+                    <!-- <a href="./addBlog.php">Blog</a>
                     <a href="#">Project</a>
                     <a href="../report/addReport.php" style="border-bottom:none">Report or Complaint</a>
                 </div>
@@ -60,7 +59,7 @@ session_start();
             <div class="nav-hover dropbtn" onclick="drop2()">
                 <img class="dropbtn" src="<?php echo URLROOT; ?>/img/profile.png" class="nav-icon" style="width: 25px;">
                 <div class="dropdown-content dropdown-content2" id="myDropdown2">
-                    <a href="#">Profile</a>
+                    <a href="#">Profile</a> -->
                     <!-- <a href="#">Approvals</a> -->
                     <!-- <a href="#">Blogs</a> -->
                     <!-- <a href="#">Projects</a> -->
@@ -68,12 +67,12 @@ session_start();
                     <!-- <a href="#">Subscription</a> -->
                     <!-- <a href="#">Report or Complaint</a> -->
                     <!-- <a href="#">Subscription</a> -->
-                    <a href="subscription.php">Subscription</a>
+                    <!-- <a href="subscription.php">Subscription</a>
                     <a href="logout.php" style="border-bottom:none">Log-out</a>
                     
                 </div>
             </div> 
-        </div>
+        </div> -->
 
 
         <script>
@@ -253,7 +252,7 @@ session_start();
                     quiz.innerHTML = `
                     <h2 style="color:#15637C">You answered ${score}/${quizData.length} questions correctly</h2>
                     <button onclick="location.reload()">Reload</button>
-                    <button> <a href="sboard.php">View Scoreboard</a></button>
+                    <button> <a href="<?php echo URLROOT;?>/Skilltest/index">View Scoreboard</a></button>
                     
                     `
                 }

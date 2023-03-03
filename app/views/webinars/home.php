@@ -15,11 +15,19 @@
 
             <body>
                 <?php if (!isset($_SESSION['role'])) : ?>
-                    <?php require APPROOT . '/views/inc/components/Snavbar.php'; ?>
-                <?php elseif (($_SESSION['role']) == 'seeker') : ?>
-                    <?php require APPROOT . '/views/inc/components/Snavbar.php'; ?>
-                <?php elseif (($_SESSION['role']) == 'expert') : ?>
-                    <?php require APPROOT . '/views/inc/components/Enavbar.php'; ?>
+                    <?php if (($_SESSION['role']) == 'seeker') : ?>
+                        <?php require APPROOT . '/views/inc/components/Snavbar.php'; ?>
+                    <?php elseif (($_SESSION['role']) == 'expert') : ?>
+                        <?php require APPROOT . '/views/inc/components/Enavbar.php'; ?>
+                    <?php elseif (($_SESSION['role']) == 'seeker/mod') : ?>
+                        <?php require APPROOT . '/views/inc/components/SMnavbar.php'; ?> 
+                    <?php elseif (($_SESSION['role']) == 'expert/mod') : ?>
+                        <?php require APPROOT . '/views/inc/components/EMnavbar.php'; ?>
+                    <?php elseif (($_SESSION['role']) == 'premium') : ?>
+                        <?php require APPROOT . '/views/inc/components/Pnavbar.php'; ?>
+                    <?php elseif (($_SESSION['role']) == 'admin') : ?>
+                        <?php require APPROOT . '/views/inc/components/Anavbar.php'; ?>
+                    <?php endif; ?>
 
                 <?php endif; ?>
 
@@ -68,8 +76,11 @@
                         </div>
 
                         <div class="RHS">
+                            <?php if($_SESSION['role'] == 'expert') : ?>
                             <form action="<?php echo URLROOT; ?>/Webinars/add"><button type="submit" style="float:right" class="read-more attend">Create</button></form>
                             <form action="<?php echo URLROOT; ?>/Webinars/myWebinars"><button type="submit" style="float:right" class="read-more attend">My Videos</button></form>
+                            <br><br><br>
+                            <?php endif; ?>
                             <div class="filter-div">
                                 <div style="display:flex">
                                     <img src="<?php echo URLROOT; ?>/img/filter.png">

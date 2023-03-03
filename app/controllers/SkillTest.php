@@ -1,5 +1,5 @@
 <?php
-    class SkillTest extends Controller {
+    class Skilltest extends Controller {
         public function __construct() {
             $this->skilltestModel = $this -> model('skilltestM');
         }
@@ -9,12 +9,12 @@
             $data = [
                 // 'blogs' => $blogs
             ];
-            $this->view('SkillTest/index', $data);
+            $this->view('Skilltest/index', $data);
         }
 
-        public function add(){
+        public function test(){
             $data = [];
-            $this->view('SkillTest/add', $data);
+            $this->view('Skilltest/test', $data);
         }
 
     }

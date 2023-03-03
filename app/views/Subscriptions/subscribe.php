@@ -1,9 +1,9 @@
 
 <?php require APPROOT . '/views/inc/header.php'; ?>
 
-<link href="../stylesheets/addQuestion.css" rel="stylesheet" type="text/css"/>
-<link href="../stylesheets/addconsult.css" rel="stylesheet" type="text/css"/>
-<link href="../stylesheets/subs.css" rel="stylesheet" type="text/css"/>
+<link href="<?php echo URLROOT; ?>/css/addQuestion.css" rel="stylesheet" type="text/css"/>
+<link href="<?php echo URLROOT; ?>/css/addconsult.css" rel="stylesheet" type="text/css"/>
+<link href="<?php echo URLROOT; ?>/css/subs.css" rel="stylesheet" type="text/css"/>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -32,6 +32,14 @@
         <?php require APPROOT . '/views/inc/components/Snavbar.php'; ?>
     <?php elseif (($_SESSION['role']) == 'expert') : ?>
         <?php require APPROOT . '/views/inc/components/Enavbar.php'; ?>
+    <?php elseif (($_SESSION['role']) == 'seeker/mod') : ?>
+        <?php require APPROOT . '/views/inc/components/SMnavbar.php'; ?> 
+    <?php elseif (($_SESSION['role']) == 'expert/mod') : ?>
+        <?php require APPROOT . '/views/inc/components/EMnavbar.php'; ?>
+    <?php elseif (($_SESSION['role']) == 'premium') : ?>
+        <?php require APPROOT . '/views/inc/components/Pnavbar.php'; ?>
+    <?php elseif (($_SESSION['role']) == 'admin') : ?>
+        <?php require APPROOT . '/views/inc/components/Anavbar.php'; ?>
     <?php endif; ?>
 
 
@@ -92,7 +100,7 @@
                 
                 <tr>
                   <td style="border-bottom: 2px solid rgba(0, 0, 0, 0.08);">Valid Until</td>
-                  <td style="border-bottom: 2px solid rgba(0, 0, 0, 0.08);"><p class="p1">April 25, 2022 09:32</p></td>
+                  <td style="border-bottom: 2px solid rgba(0, 0, 0, 0.08);"><p class="p1">April 25, 2023 09:32</p></td>
                 </tr>
 
                 <tr>
@@ -101,15 +109,15 @@
                 </tr>
 
                 <tr>
-                  <td style="border-bottom: 2px solid rgba(0, 0, 0, 0.08);">Monthly Payment</td>
-                  <td style="border-bottom: 2px solid rgba(0, 0, 0, 0.08);"><p class="p1">April 25, 2022 09:32</p></td>
+                  <td style="border-bottom: 2px solid rgba(0, 0, 0, 0.08);">Subscrption Type</td>
+                  <td style="border-bottom: 2px solid rgba(0, 0, 0, 0.08);"><p class="p1">Monthly Payment</p></td>
                 </tr>
                 </table>
 
               </div>
               
               <div class="btns">
-                <form action="subscriptionpage.php"><button class="details" onclick="" type="submit"> View Subscription Details</button></form>
+                <form action="<?php echo URLROOT; ?>/Subscriptions/index"><button class="details" onclick="" type="submit"> View Subscription Details</button></form>
                 <button class="cancel" onclick="document.getElementById('id01').style.display='block'"> Cancel Subscription</button>
                 
                 <div id="id01"class="pop_up" data-effect="mfp-zoom-in">
@@ -139,7 +147,7 @@
                             <td colspan="2"><button type="submit" class="btn1">Skill Test</button></td>
                         </tr>
                         <tr>
-                            <td colspan="2" style="padding-top: 15px;" ><p style="margin-left: 12px;">Tags <img src="<?php echo URLROOT; ?>/img/question.png" alt="question"  width="17px" height="17px"></p></td>
+                            <td colspan="2"><p style="margin-left: 12px;">Tags <img src="<?php echo URLROOT; ?>/img/question.png" alt="question"  width="17px" height="17px"></p></td>
                         </tr>
                     </table>
                 <div class="tags1">
