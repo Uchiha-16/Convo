@@ -45,7 +45,7 @@
         <div class="container-div">
             <div class="content-body">
                 <div class="LHS">
-                    <div class="question-div add-event">
+                    <div class="question-div">
                         <table>
                             <tr>
                             <td colspan="3">
@@ -62,7 +62,7 @@
                                 </td>
                             </tr>
                             <tr>
-                            <table class="table1">
+                             <table class="table1">
                                 <tr>
                                     <td colspan="2">
                                         <p style="color:#00a7ae">Features</p>

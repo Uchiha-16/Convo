@@ -80,7 +80,7 @@
     <div class="container-div">
             <div class="content-body">
                 <div class="LHS">
-                <div class="question-div add-event">
+                <div class="question-div">
   
               <h2>My Subscription</h2>
               <div class="due"><p>Next Payment Due: December 25, 2022 09:32 (E-mail Service)</p></div>
@@ -90,28 +90,28 @@
                 <h4>Pricing Plan</h4>
 
                 <table>
-                <tr>
-                  <th style="font-size: 18px;font-weight: bold;">Premium Subscription Amount</th>
-                <tr>  
-                    <th style="color: #00A7AE">Status</th>  
-                    <th style="color: #00A7AE">Active</th>  
-                      
-                </tr>
-                
-                <tr>
-                  <td style="border-bottom: 2px solid rgba(0, 0, 0, 0.08);">Valid Until</td>
-                  <td style="border-bottom: 2px solid rgba(0, 0, 0, 0.08);"><p class="p1">April 25, 2023 09:32</p></td>
-                </tr>
+                  <tr>
+                    <th style="font-size: 18px;font-weight: bold;">Premium Subscription Amount</th>
+                  <tr>  
+                      <th style="color: #00A7AE">Status</th>  
+                      <th style="color: #00A7AE">Active</th>  
+                        
+                  </tr>
+                  
+                  <tr>
+                    <td style="border-bottom: 2px solid rgba(0, 0, 0, 0.08);">Valid Until</td>
+                    <td style="border-bottom: 2px solid rgba(0, 0, 0, 0.08);"><p class="p1">April 25, 2023 09:32</p></td>
+                  </tr>
 
-                <tr>
-                  <td style="border-bottom: 2px solid rgba(0, 0, 0, 0.08);">Activated On</td>
-                  <td style="border-bottom: 2px solid rgba(0, 0, 0, 0.08);"><p class="p1">April 25, 2022 09:32</p></td>
-                </tr>
+                  <tr>
+                    <td style="border-bottom: 2px solid rgba(0, 0, 0, 0.08);">Activated On</td>
+                    <td style="border-bottom: 2px solid rgba(0, 0, 0, 0.08);"><p class="p1">April 25, 2022 09:32</p></td>
+                  </tr>
 
-                <tr>
-                  <td style="border-bottom: 2px solid rgba(0, 0, 0, 0.08);">Subscrption Type</td>
-                  <td style="border-bottom: 2px solid rgba(0, 0, 0, 0.08);"><p class="p1">Monthly Payment</p></td>
-                </tr>
+                  <tr>
+                    <td style="border-bottom: 2px solid rgba(0, 0, 0, 0.08);">Subscrption Type</td>
+                    <td style="border-bottom: 2px solid rgba(0, 0, 0, 0.08);"><p class="p1">Monthly Payment</p></td>
+                  </tr>
                 </table>
 
               </div>
