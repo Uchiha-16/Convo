@@ -88,6 +88,8 @@
 
                                     
                             <?php endif; ?>
+                                <div class="filter-div" style="margin-top: 0.9rem;">
+
 
                                 <div style="display:flex">
                                     <img src="<?php echo URLROOT; ?>/img/filter.png">
