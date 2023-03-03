@@ -83,9 +83,6 @@
                                     <form action="<?php echo URLROOT; ?>/Webinars/myWebinars"><button type="submit" style="float:right" class="read-more attend">My Videos</button></form>
                                     <br><br><br><br><br>
                                 <?php endif; ?>
-                                    <!-- <div class="filter-div "> -->
-                                    <div class="filter-div" style="margin-top: 0.9rem;">
-
                                     
                             <?php endif; ?>
                                 <div class="filter-div" style="margin-top: 0.9rem;">
