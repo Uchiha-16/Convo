@@ -14,8 +14,9 @@
             </head>
 
             <body>
-                <?php if (!isset($_SESSION['role'])) : ?>
-                    <?php if (($_SESSION['role']) == 'seeker') : ?>
+                    <?php if (!isset($_SESSION['role'])) : ?>
+                        <?php require APPROOT . '/views/inc/components/Snavbar.php'; ?>
+                    <?php elseif (($_SESSION['role']) == 'seeker') : ?>
                         <?php require APPROOT . '/views/inc/components/Snavbar.php'; ?>
                     <?php elseif (($_SESSION['role']) == 'expert') : ?>
                         <?php require APPROOT . '/views/inc/components/Enavbar.php'; ?>
@@ -29,7 +30,7 @@
                         <?php require APPROOT . '/views/inc/components/Anavbar.php'; ?>
                     <?php endif; ?>
 
-                <?php endif; ?>
+            
 
 
                 <!-- body content -->
@@ -77,12 +78,17 @@
 
                         <div class="RHS">
                             <?php if(isset($_SESSION['userID'])) : ?>
-                                <form action="<?php echo URLROOT; ?>/Webinars/add"><button type="submit" style="float:right" class="read-more attend">Create</button></form>
-                                <form action="<?php echo URLROOT; ?>/Webinars/myWebinars"><button type="submit" style="float:right" class="read-more attend">My Videos</button></form>
-                                <div class="filter-div">
-                            <?php else : ?>
-                                <div class="filter-div" style="margin-top: 0.9rem;">
+                                <?php if($_SESSION['role'] == 'expert') : ?>
+                                    <form action="<?php echo URLROOT; ?>/Webinars/add"><button type="submit" style="float:right" class="read-more attend">Create</button></form>
+                                    <form action="<?php echo URLROOT; ?>/Webinars/myWebinars"><button type="submit" style="float:right" class="read-more attend">My Videos</button></form>
+                                    <br><br><br><br><br>
+                                <?php endif; ?>
+                                    <!-- <div class="filter-div "> -->
+                                    <div class="filter-div" style="margin-top: 0.9rem;">
+
+                                    
                             <?php endif; ?>
+
                                 <div style="display:flex">
                                     <img src="<?php echo URLROOT; ?>/img/filter.png">
                                     <label>Filters</label><button class="read-more go">Go</button>
