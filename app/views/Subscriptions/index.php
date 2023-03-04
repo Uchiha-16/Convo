@@ -226,25 +226,10 @@
                     </div>
                 </div>
                 <div class="RHS">
-                <div class="tagbox">
-                    <table>
-                        <tr>
-                            <td colspan="2"><button type="submit" class="btn1">Skill Test</button></td>
-                        </tr>
-                        <tr>
-                            <td colspan="2"><p style="margin-left: 12px;">Tags <img src="<?php echo URLROOT; ?>/img/question.png" alt="question"  width="17px" height="17px"></p></td>
-                        </tr>
-                    </table>
-                <div class="tags1">
-                    <a href="#"><button class="btn2" href="#">Mathematics</button></a>
-                    <a href="#"><button class="btn2" href="#">Syntax</button></a>
-                    <a href="#"><button class="btn2" href="#">MATLAB</button></a>
-                    <a href="#"><button class="btn2" href="#">PHP</button></a>
+                
                 </div>
-                </div>
-            </div>
             <div>
-                <footer><a href="index.php">About Us</a> <p> | </p> &copy; Convo 2022 All rights reserved.</footer>
+                <footer><a href="<?php echo URLROOT; ?>/Pages/about">About Us</a> <p> | </p> &copy; Convo 2022 All rights reserved.</footer>
             </div>
         </div>
         </div>

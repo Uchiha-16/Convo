@@ -53,7 +53,7 @@
                         </div>
                         <div class="content-display">
                             <h3><?php echo $question->title ?></h3>
-                            <p><?php echo $question->content ?></p>
+                            <p class="line-clamp"><?php echo $question->content ?></p>
                             <div class="date-count">
                                 <label><?php echo convertTime($question->date); ?></label>
                                 <label style="font-weight:600; float:right">3 Answers</label><br>

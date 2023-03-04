@@ -16,18 +16,22 @@
 </head>
 
 <body>
-    <?php if (($_SESSION['role']) == 'seeker') : ?>
+    <?php if (isset($_SESSION['role'])) : ?>
+        <?php if (($_SESSION['role']) == 'seeker') : ?>
+            <?php require APPROOT . '/views/inc/components/Snavbar.php'; ?>
+        <?php elseif (($_SESSION['role']) == 'expert') : ?>
+            <?php require APPROOT . '/views/inc/components/Enavbar.php'; ?>
+        <?php elseif (($_SESSION['role']) == 'seeker/mod') : ?>
+            <?php require APPROOT . '/views/inc/components/SMnavbar.php'; ?> 
+        <?php elseif (($_SESSION['role']) == 'expert/mod') : ?>
+            <?php require APPROOT . '/views/inc/components/EMnavbar.php'; ?>
+        <?php elseif (($_SESSION['role']) == 'premium') : ?>
+            <?php require APPROOT . '/views/inc/components/Pnavbar.php'; ?>
+        <?php elseif (($_SESSION['role']) == 'admin') : ?>
+            <?php require APPROOT . '/views/inc/components/Anavbar.php'; ?>
+        <?php endif; ?>
+    <?php else: ?>
         <?php require APPROOT . '/views/inc/components/Snavbar.php'; ?>
-    <?php elseif (($_SESSION['role']) == 'expert') : ?>
-        <?php require APPROOT . '/views/inc/components/Enavbar.php'; ?>
-    <?php elseif (($_SESSION['role']) == 'seeker/mod') : ?>
-        <?php require APPROOT . '/views/inc/components/SMnavbar.php'; ?> 
-    <?php elseif (($_SESSION['role']) == 'expert/mod') : ?>
-        <?php require APPROOT . '/views/inc/components/EMnavbar.php'; ?>
-    <?php elseif (($_SESSION['role']) == 'premium') : ?>
-        <?php require APPROOT . '/views/inc/components/Pnavbar.php'; ?>
-    <?php elseif (($_SESSION['role']) == 'admin') : ?>
-        <?php require APPROOT . '/views/inc/components/Anavbar.php'; ?>
     <?php endif; ?>
 
     <div class="container-div">
@@ -102,30 +106,33 @@
                     <?php foreach ($data['answers'] as $answer) : ?><br>
                         <div class="answerbox">
                             
-                            <div class="answercontent">
-                                <?php if (isset($_SESSION['role'])) : ?>
-                                    <div class="answerrating">
-                                        <label>Rate</label><br>
-                                        <div>
-                                            <button class="upvote" onclick="upvote(<?php echo $answer->threadID ?>)"><i class="fa-sharp fa-solid fa-arrow-up" id="upvote-<?php echo $answer->threadID ?>"></i></button>
-                                            <br>
-                                            <label class="ratinglabel"><?php echo $answer->rating; ?></label><br>
-                                            <button class="downvote" onclick="downvote(<?php echo $answer->threadID ?>)"><i class="fa-sharp fa-solid fa-arrow-down" id="downvote-<?php echo $answer->threadID ?>"></i></button>
+                                
+                            <?php if (isset($_SESSION['role'])) : ?>
+                                <div class="answercontent">
+                                        <div class="answerrating">
+                                            <label>Rate</label><br>
+                                            <div>
+                                                <button class="upvote" onclick="upvote(<?php echo $answer->threadID ?>)"><i class="fa-sharp fa-solid fa-arrow-up" id="upvote-<?php echo $answer->threadID ?>"></i></button>
+                                                <br>
+                                                <label class="ratinglabel"><?php echo $answer->rating; ?></label><br>
+                                                <button class="downvote" onclick="downvote(<?php echo $answer->threadID ?>)"><i class="fa-sharp fa-solid fa-arrow-down" id="downvote-<?php echo $answer->threadID ?>"></i></button>
+                                            </div>
                                         </div>
-                                    </div>
-                                <?php endif; ?>
-                                <div class="answercontent-1">
-                                    <?php if ($answer->link != "") : ?>
-                                        <iframe width="100%" height="315" src="https://www.youtube.com/embed/<?php echo $answer->link ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                                    <?php endif; ?>
-                                    <?php if ($answer->attachment != "") : ?>
-                                        <img style="width:20%" src="<?php echo URLROOT; ?>/img/answerImg/<?php echo $answer->attachment; ?>">
-                                    <?php endif; ?>
-                                    <p><?php echo $answer->content; ?></p>
+                            <?php else: ?>
+                                <div class="answercontent" style="grid-template-columns: auto;">
+                            <?php endif; ?>
+                                    <div class="answercontent-1">
+                                        <?php if ($answer->link != "") : ?>
+                                            <iframe width="100%" height="315" src="https://www.youtube.com/embed/<?php echo $answer->link ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                                        <?php endif; ?>
+                                        <?php if ($answer->attachment != "") : ?>
+                                            <img style="width:20%" src="<?php echo URLROOT; ?>/img/answerImg/<?php echo $answer->attachment; ?>">
+                                        <?php endif; ?>
+                                        <p><?php echo $answer->content; ?></p>
 
-                                    <hr>
+                                        <hr>
+                                    </div>
                                 </div>
-                            </div>
                             <div class="info-1">
                                 <?php if (isset($_SESSION['role'])) : ?>
                                     <div class="qdp">
@@ -155,6 +162,33 @@
                                     </div>
                                 </div>
                             </div>
+                            <?php if(isset($_SESSION['role'])): ?>
+                                <div class="comment-section">
+                            <?php else: ?>
+                                <div class="comment-section" style="padding-left: 0;">
+                            <?php endif; ?>
+                                    <div class="comment">
+                                        <div class="user-comment">
+                                            <span>Ck editor was more feature compared to tinymce editor go for ck editor</span>
+                                            <span class="name"> – Vinoth Narayan</span>
+                                            <span class="comment-time"> Aug 26, 2018 at 17:32</span>
+                                        </div>
+                                        <div class="user-comment">
+                                            <span>You say "like w3schools", and ask if it can be done?</span>
+                                            <span class="name"> – ASDFGerte</span>
+                                            <span class="comment-time"> Aug 26, 2018 at 17:35</span>
+                                        </div>
+                                        <div class="user-comment">
+                                            <span>You can look on Codepen.</span>
+                                            <span class="name"> – Kamil Naja</span>
+                                            <span class="comment-time"> Aug 26, 2018 at 17:50</span>
+                                        </div>
+                                    </div>
+                                    <div class="add-comment">
+                                        <input type="search" name="comment" style="font-size: 13px; width: 95%; border-radius: 10px 0 0 10px;" placeholder="Add a comment...">
+                                        <img src="<?php echo URLROOT; ?>/img/submit.png" class="submit">
+                                    </div>
+                                </div>
                         </div>
                     <?php endforeach; ?>
                 <?php else : ?>
