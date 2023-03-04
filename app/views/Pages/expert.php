@@ -16,7 +16,7 @@
     <div class="container-div">
         <div class="content-body">
             <div class="LHS">
-                <h3>Related questions and discussions to answer...</h3><br>
+                <h3>Questions and Discussions</h3><br>
 
                 <?php foreach ($data['questions'] as $question) : ?>
 
@@ -57,15 +57,13 @@
                             <div class="date-count">
                                 <label><?php echo convertTime($question->date); ?></label>
                                 <label style="font-weight:600; float:right">3 Answers</label><br>
+                                <label style="font-weight:600; float:right">Overall Rating: <?php echo $question->rating; ?></label><br>
                                 <!-- <form action="<?php echo URLROOT; ?>/answers/viewA/<?php echo $question->QID; ?>">
                                 <button style="float:right" class="read-more">READ MORE</button>
                             </form> -->
                                 <div class="read-more-btn">
                                     <form action="<?php echo URLROOT; ?>/answers/add/<?php echo $question->QID; ?>">
                                         <button class="read-more one" type="submit">Answer this question</button>
-                                    </form>
-                                    <form action="<?php echo URLROOT; ?>/answers/save/<?php echo $question->QID; ?>">
-                                        <button class="read-more two">Save for later</button>
                                     </form>
                                     <form action="<?php echo URLROOT; ?>/answers/viewA/<?php echo $question->QID; ?>">
                                         <button class="read-more two">Read More</button>
@@ -79,8 +77,6 @@
             </div>
             <div class="RHS">
                 <form action="<?php echo URLROOT; ?>/Questions/myQuestions"><button type="submit" style="float:right" class="read-more one">MyQuestions</button></form>
-                <form action="<?php echo URLROOT; ?>/Answers/myAnswers"><button type="submit" style="float:right" class="read-more one">Answered Questions</button></form>
-                <br><br>
                 <div class="filter-div">
                     <div style="display:flex">
                         <img src="<?php echo URLROOT; ?>/img/filter.png">
@@ -267,26 +263,36 @@
 
                             <!-- Filter 4 -->
                             <div class="checkbox-1">
-                                <span class="checkbox-title" onclick="filter#()">Rating <i class="arrow up" id="up4" style="margin-left: 6.7rem;"></i><i class="arrow down" id="down4" style="margin-left: 6.7rem;"></i></span>
-                                <!--
-                                    <ul id="checkbox-3">
+                                <span class="checkbox-title" onclick="filter4()">Rating <i class="arrow up" id="up4" style="margin-left: 6.7rem;"></i><i class="arrow down" id="down4" style="margin-left: 6.7rem;"></i></span>
+                                
+                                    <ul id="checkbox-4">
                                         <li>
                                             <label for="checkbox1">
-                                                <input type="checkbox" value="last 3 months" name="QA[]" id="checkbox1"/>My questions
+                                                <input type="checkbox" value="1" name="ratings[]" id="checkbox1"/>1 Star
                                             </label>
-                                        </li>     
+                                        </li>
                                         <li>
                                             <label for="checkbox2">
-                                                <input type="checkbox" value="last 6 months" name="QA[]" id="checkbox2"/>Answered
+                                                <input type="checkbox" value="2" name="ratings[]" id="checkbox2"/>2 Stars
                                             </label>
-                                        </li>        
+                                        </li>
                                         <li>
                                             <label for="checkbox3">
-                                                <input type="checkbox" value="last year" name="QA[]" id="checkbox3"/>Not answered
+                                                <input type="checkbox" value="3" name="ratings[]" id="checkbox3"/>3 Stars
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label for="checkbox3">
+                                                <input type="checkbox" value="3" name="ratings[]" id="checkbox3"/>4 Stars
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label for="checkbox3">
+                                                <input type="checkbox" value="3" name="ratings[]" id="checkbox3"/>5 Stars
                                             </label>
                                         </li>
                                     </ul>
--->
+
                             </div>
 
                         </form>

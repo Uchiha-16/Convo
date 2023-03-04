@@ -79,6 +79,7 @@
             <div class="RHS">
                 <form action="<?php echo URLROOT; ?>/Webinars/add"><button type="submit" style="float:right" class="read-more attend">Create</button></form>
                 <form action="<?php echo URLROOT; ?>/Webinars/myWebinars"><button type="submit" style="float:right" class="read-more attend">My Videos</button></form>
+                <br><br>
                 <div class="filter-div">
                     <div style="display:flex">
                         <img src="<?php echo URLROOT; ?>/img/filter.png">
@@ -243,7 +244,7 @@
 
                             <!-- Filter 3 -->
                             <div class="checkbox-1">
-                                <span class="checkbox-title" onclick="filter3()">Expert <i class="arrow up" id="up3" style="margin-left: 4.3rem;"></i><i class="arrow down" id="down3" style="margin-left: 6.66rem;"></i></span>
+                                <span class="checkbox-title" onclick="filter3()">Expert <i class="arrow up" id="up3" style="margin-left: 6.7rem;"></i><i class="arrow down" id="down3" style="margin-left: 6.7rem;"></i></span>
                                 <ul id="checkbox-3">
                                     <li>
                                         <label for="checkbox1">
@@ -265,7 +266,7 @@
 
                             <!-- Filter 4 -->
                             <div class="checkbox-1">
-                                <span class="checkbox-title" onclick="filter4()">Playlist <i class="arrow up" id="up4" style="margin-left: 4.3rem;"></i><i class="arrow down" id="down4" style="margin-left: 6.5rem;"></i></span>
+                                <span class="checkbox-title" onclick="filter4()">Playlist <i class="arrow up" id="up4" style="margin-left: 6.5rem;"></i><i class="arrow down" id="down4" style="margin-left: 6.5rem;"></i></span>
                                 <ul id="checkbox-4">
 
                                 </ul>

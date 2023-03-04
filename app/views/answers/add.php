@@ -53,7 +53,6 @@
                         <div class="date-count">
                             <label><?php echo convertTime($data['question']->date); ?></label>
                             <label style="font-weight:600; float:right">1 Answer</label><br>
-                            <button class="read-more" style="width:100%;">Save for later</button>
                         </div>
                     </div>
                 </div>
@@ -190,7 +189,6 @@
 
             <div class="RHS">
                 <form action="<?php echo URLROOT; ?>/Pages/expert"><button type="submit" style="float:right" class="read-more attend">Home</button></form>
-                <form action="<?php echo URLROOT; ?>/Answers/myAnswers"><button type="submit" style="float:right" class="read-more attend">Answered Questions</button></form>
             </div>
         </div>
         <div>

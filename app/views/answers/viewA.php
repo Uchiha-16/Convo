@@ -76,6 +76,13 @@
                         <div class="date-count">
                             <label><?php echo convertTime($data['question']->date); ?></label>
                             <label style="font-weight:600; float:right">Overall Rating: <?php echo $data['question']->rating; ?></label><br><br>
+                            <?php if (isset($_SESSION['role'])) : ?>
+                                <?php if (($_SESSION['role']) == 'expert') : ?>
+                                    <form action="" >
+                                        <button class="read-more one" type="submit">Answer this question</button>
+                                    </form>
+                                <?php endif; ?>
+                            <?php endif; ?>
                             <hr>
                             <?php if (isset($_SESSION['role'])) : ?>
                                 <div class="rating-box">
@@ -89,6 +96,7 @@
                                     </div>
                                 </div>
                             <?php endif; ?>
+                            
                             <!-- <a href="" class="reactbtn"><img src="/img/share.png" style="width: 12%;"> Share</a> -->
                             <!-- <a href="" class="reactbtn"><img src="/img/recommend.png" style="width: 12%"> Recommend</a> -->
                         </div>
