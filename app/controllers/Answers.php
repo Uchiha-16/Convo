@@ -16,7 +16,8 @@
                 'question' => $question,
                 'answers' => $answers,
                 'Quser' => $Quser,
-                'count' => $count
+                'count' => $count,
+                'QID' => $QID
             ];
         
             $this->view('answers/viewA', $data);

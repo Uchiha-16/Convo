@@ -78,7 +78,7 @@
                             <label style="font-weight:600; float:right">Overall Rating: <?php echo $data['question']->rating; ?></label><br><br>
                             <?php if (isset($_SESSION['role'])) : ?>
                                 <?php if (($_SESSION['role']) == 'expert') : ?>
-                                    <form action="" >
+                                    <form action="<?php echo URLROOT; ?>/Answers/add/<?php echo $data['QID'] ?>">
                                         <button class="read-more one" type="submit">Answer this question</button>
                                     </form>
                                 <?php endif; ?>

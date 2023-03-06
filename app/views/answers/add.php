@@ -33,11 +33,23 @@
                         <p style="font-size: 15px;"><?php echo $data['question']->content; ?>.</p>
                         <div class="qdp" style="padding-top: 1rem; border-top: 1px solid rgba(128,128,128, .2);">
                             <div>
-                                <img src="<?php echo URLROOT; ?>/img/pfp/<?php echo $data['Quser']->pfp; ?>" />
+                            <?php if ($data['question']->visibility == "anonymus") : ?>
+                                <img src="<?php echo URLROOT; ?>/img/pfp/anonymus.png" />
+                            </div>
+                            <div class="qdp-1">
+                                <label class="expert">Anonymus User</label> <br>
+                            <?php else : ?>
+                                <img src="<?php echo URLROOT; ?>/img/pfp/<?php echo $data['Quser']->pfp; ?> " />
                             </div>
                             <div class="qdp-1">
                                 <label><?php echo $data['Quser']->fName . " " . $data['Quser']->lName; ?></label><br>
-                                <label class="qdp-1-2"><?php echo $data['Quser']->uname; ?></label>
+                                <?php if (isset($_SESSION['role'])) : ?>
+                                <?php if (($_SESSION['role']) == 'expert') : ?>
+                                    <!-- should be experts qualification in short -->
+                                    <label class="qdp-1-2"><?php echo $data['Quser']->uname; ?></label>
+                                <?php endif; ?>
+                                <?php endif; ?>
+                                <?php endif; ?>
                             </div>
                         </div>
                         <div class="info">
@@ -52,7 +64,7 @@
                         </div>
                         <div class="date-count">
                             <label><?php echo convertTime($data['question']->date); ?></label>
-                            <label style="font-weight:600; float:right">1 Answer</label><br>
+                            <label style="font-weight:600; float:right">Overall Rating: <?php echo $data['question']->rating;?></label><br>
                         </div>
                     </div>
                 </div>
@@ -159,17 +171,25 @@
                                 </td>
                             <tr>
                                 <td colspan="3" style="padding-top: 1rem;">
-                                    <h4 style="margin-bottom:.5rem">Add Thumbnail <img src="<?php echo URLROOT; ?>/img/thumbnail.png" style="width: 17px;"> <span class="star">*</span></h4>
+                                            <h4 style="margin-bottom:.5rem">Add Thumbnail <img src="<?php echo URLROOT; ?>/img/thumbnail.png" style="width: 17px;"> <span class="star">*</span></h4>
 
-                                    <label style="font-size: 14px; color:black">Upload a picture that shows what's in your video.
-                                        A good thumbnail stands out and draws viewers' attention.<br><b>Make sure it is in 16:9 ratio</b>.</label><br><br>
-                                    <img id="imagePlaceholder" src="<?php echo URLROOT; ?>/img/thumbnailpic.png" style="width:30%" alt="" id="addImageBtn" onclick="toggleBrowse()">
-                                    <!-- <img src="/img/browse.png" style="width: 40px;" alt="" > -->
-                                    <img src="<?php echo URLROOT; ?>/img/cancel.png" style="width: 21px; position: relative;top: -142px;" alt="" id="removeImageBtn" onclick="toggleRemove()">
-                                    <input type="file" id="image" name="image"><br>
-
-                                    <span class="error"><?php echo $data['image_err']; ?></span>
-                                </td>
+                                            <label style="font-size: 14px; color:black">Upload a picture that shows what's in your video.
+                                                A good thumbnail stands out and draws viewers' attention.<br><b>Make sure it is in 16:9 ratio</b>.</label><br><br>
+                                            <br>  
+                                            <!-- Add image section -->                                   
+                                            <div class="avatar-upload">
+                                                <div class="avatar-edit">
+                                                    <input type='file' name="image" id="imageUpload" accept=".png, .jpg, .jpeg" />
+                                                    <label for="imageUpload"></label>
+                                                </div>
+                                                <div class="avatar-preview">
+                                                    <div id="imagePreview" style="background-image: url(<?php echo URLROOT; ?>/img/thumbnailpic.png);">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- -->
+                                            <span class="error"><?php echo $data['image_err']; ?></span>
+                                        </td>
                             </tr>
                             <tr>
                                 <td colspan="3">
