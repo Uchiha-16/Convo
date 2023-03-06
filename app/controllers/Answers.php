@@ -16,7 +16,8 @@
                 'question' => $question,
                 'answers' => $answers,
                 'Quser' => $Quser,
-                'count' => $count
+                'count' => $count,
+                'QID' => $QID
             ];
         
             $this->view('answers/viewA', $data);
@@ -160,7 +161,7 @@
 
         }
 
-        public function downvote($threadID){
+        public function Removedownvote($threadID){
             $rdislikes = $this->answersM->removedownvote($threadID);
 
             $userID = $_SESSION['userID'];

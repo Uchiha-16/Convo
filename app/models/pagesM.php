@@ -24,9 +24,18 @@
             return $row;
         }
 
+        //getQuestions for Index
+        public function Questions(){
+            $this->db->query('SELECT DISTINCT question.QID as QID, question.title as title, question.content as content, 
+            question.date as date, question.rating as rating, question.visibility as visibility, user.uname as uname, user.firstName as fName, user.lastName as lName, user.pfp as pfp
+            FROM question JOIN user on question.userID = user.userID JOIN questiontag ON question.QID = questiontag.QID');
+            $row = $this->db->resultSet();
+            return $row;
+        }
+
         //getQuestionTags
-        public function getQuestionTags($QID) {
-            $this->db->query('SELECT QID, GROUP_CONCAT(questiontag.tag SEPARATOR ",") as tags FROM questiontag WHERE ' . $QID . ' GROUP BY QID' );
+        public function getQuestionTags() {
+            $this->db->query('SELECT QID, GROUP_CONCAT(questiontag.tag SEPARATOR ",") as tags FROM questiontag GROUP BY QID' );
             $row = $this->db->resultSet();
             return $row;
         }

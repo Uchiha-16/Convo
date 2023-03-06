@@ -1,29 +1,31 @@
 //=========================================== nav bar active state
-
-$(document).ready(function () {
-
-  $(".nav-hover").click(function () {
-    $(this).addClass("active").siblings().removeClass("active");
+jQuery(function ($) {
+  var path = window.location.href;
+  // because the 'href' property of the DOM element is the absolute path
+  $('.nav-hover a').each(function () {
+    if (this.href === path) {
+      $(this).addClass('active');
+    }
   });
 });
 
 //=========================================== Picture Upload
-const imgDiv = document.querySelector('.user-img');
-const img = document.querySelector('#photo');
-const file = document.querySelector('#file');
-const uploadebtn = document.querySelector('#uploadbtn');
+// const imgDiv = document.querySelector('.user-img');
+// const img = document.querySelector('#photo');
+// const file = document.querySelector('#file');
+// const uploadebtn = document.querySelector('#uploadbtn');
 
-file.addEventListener( 'change', function(){
-    const choosedfile = this.files[0];
-    if(choosedfile){
-        const reader = new FileReader();
+// file.addEventListener( 'change', function(){
+//     const choosedfile = this.files[0];
+//     if(choosedfile){
+//         const reader = new FileReader();
         
-        reader.addEventListener( 'load', function(){
-            img.setAttribute('src', reader.result);
-        })
-    reader.readAsDataURL(choosedfile);
-    }
-})
+//         reader.addEventListener( 'load', function(){
+//             img.setAttribute('src', reader.result);
+//         })
+//     reader.readAsDataURL(choosedfile);
+//     }
+// })
 
 
 //=========================================== Move Top
@@ -48,32 +50,32 @@ function topFunction() {
 }
 
 //...........................................Vote............................................//
-var upvote_state = false;
-var downvote_state = false;
+// var upvote_state = false;
+// var downvote_state = false;
 
-function upvote(){
-    if(upvote_state === false){
-        document.getElementById("upvote").style.color = "#0D5F75";
-        document.getElementById("downvote").style.color = "#95a5a6";
-        upvote_state = true;
-        downvote_state = false;
-    }else{
-        document.getElementById("upvote").style.color = "#95a5a6";
-        upvote_state = false;
-    }
-}
+// function upvote(){
+//     if(upvote_state === false){
+//         document.getElementById("upvote").style.color = "#0D5F75";
+//         document.getElementById("downvote").style.color = "#95a5a6";
+//         upvote_state = true;
+//         downvote_state = false;
+//     }else{
+//         document.getElementById("upvote").style.color = "#95a5a6";
+//         upvote_state = false;
+//     }
+// }
 
-function downvote(){
-    if(downvote_state === false){
-        document.getElementById("downvote").style.color = "#0D5F75";
-        document.getElementById("upvote").style.color = "#95a5a6";
-        upvote_state = false;
-        downvote_state = true;
-    }else{
-        document.getElementById("downvote").style.color = "#95a5a6";
-        downvote_state = false;
-    }
-}
+// function downvote(){
+//     if(downvote_state === false){
+//         document.getElementById("downvote").style.color = "#0D5F75";
+//         document.getElementById("upvote").style.color = "#95a5a6";
+//         upvote_state = false;
+//         downvote_state = true;
+//     }else{
+//         document.getElementById("downvote").style.color = "#95a5a6";
+//         downvote_state = false;
+//     }
+// }
 
         
 
@@ -140,6 +142,18 @@ function filter3() {
     x.style.display = "none";
     document.getElementById('up3').style.display = "none";
     document.getElementById('down3').style.display = "inline-block";
+  }
+}
+function filter4() {
+  var x = document.getElementById('checkbox-4');
+  if (x.style.display === "none") {
+    x.style.display = "block";
+    document.getElementById('down4').style.display = "none";
+    document.getElementById('up4').style.display = "inline-block";
+  } else {
+    x.style.display = "none";
+    document.getElementById('up4').style.display = "none";
+    document.getElementById('down4').style.display = "inline-block";
   }
 }
 

@@ -6,6 +6,18 @@
         public function __construct() {
            $this->pagesM = $this -> model('pagesM');
 
+        }   
+
+        public function index(){
+            $questions = $this->pagesM->Questions();
+
+            $tags = $this->pagesM->getQuestionTags();
+
+                $data = [
+                    'questions' => $questions,
+                    'tags' => $tags,
+                ];
+            $this->view('pages/index', $data);
         }
     
 
@@ -86,10 +98,10 @@
         }
         
         public function about() {
-            $questions = $this->pagesM->getQuestions();
+            //$questions = $this->pagesM->getQuestions();
 
             $data = [
-                'question' => $questions
+                // 'question' => $questions
             ];
             $this->view('pages/about', $data);
         }

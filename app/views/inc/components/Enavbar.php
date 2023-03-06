@@ -1,8 +1,8 @@
 <!-- nav bar -->
 <div class="nav">
             <div><a href="<?php echo URLROOT;?>/Pages/expert"><img src="<?php echo URLROOT;?>/img/logo%20with%20name%20WHITE%201.png" id="logo"></a></div>
-            <div class="active nav-hover"><a href="<?php echo URLROOT;?>/Pages/expert">Home</a></div>
-            <div class="nav-hover"><a href="consulthome.php">Consult</a></div>
+            <div class="nav-hover"><a href="<?php echo URLROOT;?>/Pages/expert">Home</a></div>
+            <div class="nav-hover"><a href="<?php echo URLROOT;?>/Consults/index">Consult</a></div>
             <div class="nav-hover"><a href="<?php echo URLROOT;?>/Webinars/home">Webinar</a></div>
             <div><input type="search" name="search" placeholder="Search for questions..."/></div>
             <?php if(isset($_SESSION['userID'])) : ?>
@@ -15,18 +15,18 @@
                 </div>
             </div>
             <div class="nav-hover"><img src="<?php echo URLROOT;?>/img/notification.png" class="nav-icon"></div>
-            <div class="nav-hover"><img src="<?php echo URLROOT;?>/img/chat.png" class="nav-icon" onclick="location.href = 'chat.php'"></div>
-            <div class="nav-hover dropbtn" onclick="drop2()">
+            <div class="nav-hover"><a href="<?php echo URLROOT; ?>/Chats/index"><img src="<?php echo URLROOT;?>/img/chat.png" class="nav-icon"></a></div>
+            <div class="dropbtn" onclick="drop2()">
                 <img class="dropbtn" src="<?php echo URLROOT;?>/img/profile.png" class="nav-icon" style="width: 25px;">
                 <div class="dropdown-content dropdown-content2" id="myDropdown2">
-                    <a href="profile.php">Profile</a>
-                    <a href="approve.php">Approvals</a>
-                    <a href="<?php echo URLROOT;?>/Blogs/add">Blogs</a>
-                    <a href="<?php echo URLROOT;?>/Webinars/home">Webinars</a>
-                    <a href="<?php echo URLROOT;?>/Projects/add">Projects</a>
-                    <a href="sboard.php">Skill Test</a>
-                    <a href="subscription.php">Subscription</a>
-                    <a href="<?php echo URLROOT;?>/Users/logout" style="border-bottom:none">Log-out</a>
+                    <a href="<?php echo URLROOT;?>/Profile/View">Profile</a>
+                    <a href="<?php echo URLROOT;?>/Moderator/approve">Approvals</a>
+                    <a href="<?php echo URLROOT;?>/Blogs/index">Blogs</a>
+                    <a href="<?php echo URLROOT;?>/Events/index">Events</a>
+                    <a href="<?php echo URLROOT;?>/Projects/index">Projects</a>
+                    <a href="<?php echo URLROOT;?>/SkillTest/index">Skill Test</a>
+                    <a href="<?php echo URLROOT;?>/Subscription/index">Subscription</a>
+                    <a href="<?php echo URLROOT?>/Users/logout" style="border-bottom:none">Log-out</a>
                 </div>
             </div> 
 
@@ -42,3 +42,5 @@
             <?php endif; ?>
 
         </div>
+        
+   
