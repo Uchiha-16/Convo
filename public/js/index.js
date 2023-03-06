@@ -58,32 +58,32 @@ function topFunction() {
 }
 
 //...........................................Vote............................................//
-var upvote_state = false;
-var downvote_state = false;
+// var upvote_state = false;
+// var downvote_state = false;
 
-function upvote(){
-    if(upvote_state === false){
-        document.getElementById("upvote").style.color = "#0D5F75";
-        document.getElementById("downvote").style.color = "#95a5a6";
-        upvote_state = true;
-        downvote_state = false;
-    }else{
-        document.getElementById("upvote").style.color = "#95a5a6";
-        upvote_state = false;
-    }
-}
+// function upvote(){
+//     if(upvote_state === false){
+//         document.getElementById("upvote").style.color = "#0D5F75";
+//         document.getElementById("downvote").style.color = "#95a5a6";
+//         upvote_state = true;
+//         downvote_state = false;
+//     }else{
+//         document.getElementById("upvote").style.color = "#95a5a6";
+//         upvote_state = false;
+//     }
+// }
 
-function downvote(){
-    if(downvote_state === false){
-        document.getElementById("downvote").style.color = "#0D5F75";
-        document.getElementById("upvote").style.color = "#95a5a6";
-        upvote_state = false;
-        downvote_state = true;
-    }else{
-        document.getElementById("downvote").style.color = "#95a5a6";
-        downvote_state = false;
-    }
-}
+// function downvote(){
+//     if(downvote_state === false){
+//         document.getElementById("downvote").style.color = "#0D5F75";
+//         document.getElementById("upvote").style.color = "#95a5a6";
+//         upvote_state = false;
+//         downvote_state = true;
+//     }else{
+//         document.getElementById("downvote").style.color = "#95a5a6";
+//         downvote_state = false;
+//     }
+// }
 
         
 
