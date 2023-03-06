@@ -39,6 +39,13 @@
             $row = $this->db->resultSet();
             return $row;
         }
+
+        public function answerCount($QID) {
+            $this->db->query('SELECT QID, COUNT(answer.threadID) as count FROM answer WHERE QID = :QID;');
+            $this->db->bind(':QID', $QID);
+            $rows = $this->db->single();
+            return $rows;
+        }
     }
 
 ?>

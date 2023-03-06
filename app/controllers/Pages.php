@@ -13,9 +13,17 @@
 
             $tags = $this->pagesM->getQuestionTags();
 
+            $count = array();
+            $i = 0;
+            foreach($questions as $question) {
+                $count[$i] = $this->pagesM->answerCount($question->QID);
+                $i++;
+            }
+
                 $data = [
                     'questions' => $questions,
                     'tags' => $tags,
+                    'count' => $count
                 ];
             $this->view('pages/index', $data);
         }

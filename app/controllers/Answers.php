@@ -12,6 +12,18 @@
             $Quser = $this->answersM->Quser($QID);
             $count = $this->answersM->answerCount($QID);
 
+            if(!isset($_SESSION['userID'])){
+                $data = [
+                    'question' => $question,
+                    'answers' => $answers,
+                    'Quser' => $Quser,
+                    'count' => $count,
+                    'QID' => $QID,
+                ];
+            
+                $this->view('answers/viewA', $data);
+
+            }else {
             $userID = $_SESSION['userID'];
             
             $interaction = array();
@@ -34,6 +46,7 @@
         
             $this->view('answers/viewA', $data);
         }
+    }
 
         public function add($QID){
             $question = $this->answersM->getQuestion($QID);
