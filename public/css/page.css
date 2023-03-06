@@ -36,6 +36,25 @@
 .nav a{
     color: #FFFFFF;
 }
+.nav-hover a{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: border_anim .3s linear forwards;
+}
+@keyframes border_anim {
+	0%{
+		width: 0%;
+	}
+	100%{
+		width: 100%;
+	}
+}
+.dropbtn{
+    cursor: pointer;
+}
 .dropdown-list{
     height: 100%;
     width: 100%;
@@ -79,17 +98,13 @@ input[type=search]{
     border-bottom: 2px solid transparent;
     cursor: pointer;
 }
-.nav-hover:hover{
-    border-bottom: 2px solid black;
+.nav-hover a:hover{
+    color: #48e7ed;
+    font-weight: 500;
 }
-.nav-hover:after{
-    border-bottom: solid 2px black;
+.nav-hover a.active{
+    box-shadow: inset 0 -2px 0 #48e7ed;
 }
-
-.nav-hover.active{
-    border-bottom: 2px solid black;
-}
-
 
 .dropdown-content {
     display: none;

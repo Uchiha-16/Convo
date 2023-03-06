@@ -14,8 +14,8 @@
                 </div>
             </div>
             <div class="nav-hover"><img src="<?php echo URLROOT; ?>/img/notification.png" class="nav-icon"></div>
-            <div class="nav-hover"><img src="<?php echo URLROOT; ?>/img/chat.png" class="nav-icon" onclick="location.href='<?php echo URLROOT; ?>/Chats/index'"></div>
-            <div class="nav-hover dropbtn" onclick="drop2()">
+            <div class="nav-hover"><a href="<?php echo URLROOT; ?>/Chats/index"><img src="<?php echo URLROOT; ?>/img/chat.png" class="nav-icon"></a></div>
+            <div class="dropbtn" onclick="drop2()">
                 <img class="dropbtn" src="<?php echo URLROOT; ?>/img/profile.png" class="nav-icon" style="width: 25px;">
                 <div class="dropdown-content dropdown-content2" id="myDropdown2">
                     <a href="<?php echo URLROOT;?>/Profiles/seeker">Profile</a>
