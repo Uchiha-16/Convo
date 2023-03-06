@@ -5,8 +5,8 @@
         public function __construct() {
             $this->db = new Database;
         }
-//****************************************************************Create Question************************************************************************************************************* */
-        public function add() {
+//****************************************************************Create Webinar************************************************************************************************************* */
+        public function add($data) {
             
             $this->db->query('INSERT into webinar (webinarTitle, date, videolink, thumbnail, expertID) VALUES (:title, :date, :videolink, :thumbnail, :expertID)');
             // Bind values

@@ -192,12 +192,20 @@
                                             <h4 style="margin-bottom:.5rem">Add Thumbnail <img src="<?php echo URLROOT;?>/img/thumbnail.png" style="width: 17px;"> <span class="star">*</span></h4>
                                             
                                             <label style="font-size: 14px; color:black">Upload a picture that shows what's in your video.
-                                                    A good thumbnail stands out and draws viewers' attention.<br><b>Make sure it is in 16:9 ratio</b>.</label><br><br>
-                                            <img id="imagePlaceholder" src="<?php echo URLROOT;?>/img/thumbnailpic.png" style="width:30%" alt="" id="addImageBtn" onclick="toggleBrowse()">
-                                            <!-- <img src="/img/browse.png" style="width: 40px;" alt="" > -->
-                                            <img src="<?php echo URLROOT;?>/img/cancel.png" style="width: 21px; position: relative;top: -142px;" alt="" id="removeImageBtn" onclick="toggleRemove()">
-                                            <input type="file" id="image" name="image"><br>
-                                            
+                                                A good thumbnail stands out and draws viewers' attention.<br><b>Make sure it is in 16:9 ratio</b>.</label><br><br>
+                                            <br>  
+                                            <!-- Add image section -->                                   
+                                            <div class="avatar-upload">
+                                                <div class="avatar-edit">
+                                                    <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" name="image"/>
+                                                    <label for="imageUpload"></label>
+                                                </div>
+                                                <div class="avatar-preview">
+                                                    <div id="imagePreview" style="background-image: url(<?php echo URLROOT; ?>/img/thumbnailpic.png);">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- -->
                                             <span class="error"><?php echo $data['thumbnail_err']; ?></span>
                                         </td>
                                     </tr>
