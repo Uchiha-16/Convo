@@ -14,28 +14,28 @@
                 // Validate the data
                 $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
                 date_default_timezone_set('Asia/Colombo');
+
+                //TAG
                 $tag = isset($_POST['tag']) ? $_POST['tag'] : '0';
+
+                //PLAYLIST
                 $playlist = isset($_POST['playlist']) ? $_POST['playlist'] : '0';
 
-                $link = $_POST['link'];
-                
+                //VIDEO LINK
                 $link = $_POST['link'];
                 $path = parse_url($link, PHP_URL_PATH); // extract the path component of the URL
                 $segments = explode('/', $path); // split the path into an array of segments
-
                 $last_segment = end($segments); // extract the last segment of the array
-
+                echo $playlist;
                 //Input Data
                 $data = [
                     'title' => trim($_POST['title']),
                     'tag' => $tag,
                     'playlist' => $playlist,
                     'videolink' => $last_segment,
-                    'link' => $link,
-                    //'thumbnail' => ($_FILES['thumbnail']),
-                    //'thumbnail_name' => time().'_'.($_FILES['thumbnail']['name']),
-                    'date' => date('Y-m-d H:i:s'), 
-                    'webinarsPlaylist' => $webinarsPlaylist, 
+                    'thumbnail' => ($_FILES['thumbnail']),
+                    'thumbnail_name' => time().'_'.($_FILES['thumbnail']['name']),
+                    'date' => date('Y-m-d H:i:s'),
                     'title_err' => '',
                     'link_err' => '',
                     'thumbnail_err' => '',
@@ -50,17 +50,20 @@
                 }
 
                 //Validate thumbnail
-                // if(uploadImage($data['thumbnail']['tmp_name'], $data['thumbnail_name'], '/img/thumbnails/')) {
-                //     $data['thumbnail'] = $data['thumbnail_name'];
-                // } else {
-                //     $data['thumbnail_err'] = 'Please add a Thumbnail';
-                // }
+                if($data['thumbnail']['size'] > 0){
+                    if(uploadImage($data['thumbnail']['tmp_name'], $data['thumbnail_name'], '/img/thumbnails/')) {
+                        //done
+                    }else{
+                        $data['thumbnail_err'] = 'Something Went Wrong when uploading the image';
+                    }
+                }else{
+                    $data['thumbnail_name'] = null;
+                }
 
-                // Validate Content
+                // Validate videolink
                 if(empty($data['videolink'])) {
                     $data['link_err'] = 'Please Enter Video Link';
-                }else 
-                {
+                }else{
                     $link = trim($link);
           
                     // Check if the input matches the expected format of a YouTube video URL
@@ -80,7 +83,7 @@
                 }
 
                 // Make sure errors are empty
-                if(empty($data['title_err']) && empty($data['link_err']) && empty($data['thumbnail_err']) && empty($data['thumbnail_err']) && empty($data['playlist_err'])) {
+                if(empty($data['title_err']) && empty($data['link_err']) && empty($data['tag_err']) && empty($data['thumbnail_err']) && empty($data['playlist_err'])) {
                     // Adding Webinar
                     if($this->webinarModel->add($data)) {
                         $LastID = $this->webinarModel->getLastID();

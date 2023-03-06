@@ -6,14 +6,14 @@
             $this->db = new Database;
         }
 //****************************************************************Create Webinar************************************************************************************************************* */
-        public function add() {
+        public function add($data) {
             
             $this->db->query('INSERT into webinar (webinarTitle, date, videolink, thumbnail, expertID) VALUES (:title, :date, :videolink, :thumbnail, :expertID)');
             // Bind values
             $this->db->bind(':title', $data['title']);
             $this->db->bind(':date', $data['date']);
             $this->db->bind(':videolink', $data['videolink']);
-            $this->db->bind(':thumbnail', $data['thumbnail']);
+            $this->db->bind(':thumbnail', $data['thumbnail_name']);
             $this->db->bind(':expertID', $_SESSION['userID']);
 
             // Execute
