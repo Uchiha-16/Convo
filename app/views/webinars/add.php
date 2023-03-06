@@ -116,8 +116,8 @@
                                                 <ul class="dropdown" id="dropdown">
                                                     <!-- Add New -->
                                                     <li>
-                                                        <input type="checkbox" value="1" name="playlist[]" id="checkbox29" id="newPlaylist" onchange="showDiv('hidden_div', this)" />
-                                                        <label for="checkbox29">Add new</label><br>
+                                                        <input type="checkbox" value="1" id="checkbox0" id="newPlaylist" onchange="showDiv('hidden_div', this)" />
+                                                        <label for="checkbox0">Add new</label><br>
                                                         <div id="hidden_div">
                                                             <input class="inputform" type="text" name="newP" id="playlist" placeholder="Add a unique name to your new playlist">
                                                         </div>
@@ -168,6 +168,12 @@
                                             </div>
                                             <!-- -->
                                             <span class="error"><?php echo $data['thumbnail_err']; ?></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" class="terms">
+                                            <input type="checkbox" name="terms" class="terms-checkbox" required />
+                                            <label class="terms-label">By Publishing, you acknowledge that you agree to Convo's Terms of Service and Community Guidelines. Please be sure not to violate others' copyright or privacy rights.</label>
                                         </td>
                                     </tr>
                                     <tr>

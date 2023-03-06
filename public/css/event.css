@@ -458,4 +458,26 @@ section .col1 textarea {
 	background-repeat: no-repeat;
 	background-position: center;
 }
+
+/*========================= terms =====================*/
+
+.terms{
+    display: flex;
+    grid-gap: 1rem;
+    margin-top: 4rem;
+    border-top: 1px solid rgba(128, 128, 128, .2);
+    padding: 3rem 2rem 0 2rem;
+}
+.terms-checkbox{
+    width: 14px;
+    font-size: 14px;
+    height: auto;
+    margin: 0;
+    padding: 0;
+}
+.terms-label{
+    font-size: 14px;
+    font-weight:bold;
+    color: indianred;
+}
  

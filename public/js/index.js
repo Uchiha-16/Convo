@@ -195,7 +195,7 @@ function cancel() {
 //=========================================== Webinar - Video view
 
 // function webinarPublish() {
-//   if (confirm("By Publishing, you acknowledge that you agree to Convo's Terms of Service and Community Guidelines. Please be sure not to violate others' copyright or privacy rights.")) {
+//   if (confirm("")) {
     
 //   }
 // }
