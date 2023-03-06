@@ -10,22 +10,22 @@ jQuery(function ($) {
 });
 
 //=========================================== Picture Upload
-const imgDiv = document.querySelector('.user-img');
-const img = document.querySelector('#photo');
-const file = document.querySelector('#file');
-const uploadebtn = document.querySelector('#uploadbtn');
+// const imgDiv = document.querySelector('.user-img');
+// const img = document.querySelector('#photo');
+// const file = document.querySelector('#file');
+// const uploadebtn = document.querySelector('#uploadbtn');
 
-file.addEventListener( 'change', function(){
-    const choosedfile = this.files[0];
-    if(choosedfile){
-        const reader = new FileReader();
+// file.addEventListener( 'change', function(){
+//     const choosedfile = this.files[0];
+//     if(choosedfile){
+//         const reader = new FileReader();
         
-        reader.addEventListener( 'load', function(){
-            img.setAttribute('src', reader.result);
-        })
-    reader.readAsDataURL(choosedfile);
-    }
-})
+//         reader.addEventListener( 'load', function(){
+//             img.setAttribute('src', reader.result);
+//         })
+//     reader.readAsDataURL(choosedfile);
+//     }
+// })
 
 
 //=========================================== Move Top
