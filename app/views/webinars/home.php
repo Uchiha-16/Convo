@@ -34,10 +34,13 @@
 
 
                 <!-- body content -->
+                <div class="alert success">
+                    <?php flash('reg_flash'); ?>
+                </div>
                 <div class="container-div">
                     <div class="content-body">
                         <div class="LHS">
-
+                        
                             <?php foreach ($data['webinars'] as $webinar) : ?>
 
                                 <div class="video" onclick="view()">

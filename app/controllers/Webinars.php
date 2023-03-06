@@ -94,7 +94,7 @@
                             }
                         }
                         
-                        if($data['playlist'] != '0'){
+                        if(count($data['playlist']) != 0){
                             foreach($data['playlist'] as $playlist){
                                 if(!($this->webinarModel->webinarPlaylist($playlist, $LastID->webinarID))){
                                         die('Something went wrong when Selecting the Playlist');
@@ -102,7 +102,7 @@
                             }
                         }
                         
-                            flash('reg_flash','Webinar Added Successfully');
+                            flash('reg_flash','Webinar Added Successfully!');
                             redirect('webinars/home');
 
                         if(isset($data['newP'])){
