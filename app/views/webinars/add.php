@@ -122,11 +122,13 @@
                                                             <input class="inputform" type="text" name="newP" id="playlist" placeholder="Add a unique name to your new playlist">
                                                         </div>
                                                     </li>
+                                                    <?php $count = 26; ?>
                                                     <?php foreach ($data['webinarsPlaylist'] as $webinarsPlaylist) : ?>
                                                         <li>
-                                                            <input type="checkbox" value="<?php echo $data['playlist']; ?>" name="playlist[]" id="checkbox26" />
-                                                            <label for="checkbox26"><?php echo $webinarsPlaylist->playlistName ?></label>
+                                                            <input type="checkbox" value="<?php echo $webinarsPlaylist->playlistName ?>" name="playlist[]" id="checkbox<?php echo $count ?>" />
+                                                            <label for="checkbox<?php echo $count ?>"><?php echo $webinarsPlaylist->playlistName ?></label>
                                                         </li>
+                                                        <?php $count = $count + 1; ?>
                                                     <?php endforeach; ?>
                                                 </ul>
                                             </div>
@@ -156,7 +158,7 @@
                                             <!-- Add image section -->                                   
                                             <div class="avatar-upload">
                                                 <div class="avatar-edit">
-                                                    <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" name="image"/>
+                                                    <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" name="thumbnail"/>
                                                     <label for="imageUpload"></label>
                                                 </div>
                                                 <div class="avatar-preview">

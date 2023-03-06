@@ -26,15 +26,15 @@
                 $path = parse_url($link, PHP_URL_PATH); // extract the path component of the URL
                 $segments = explode('/', $path); // split the path into an array of segments
                 $last_segment = end($segments); // extract the last segment of the array
-
+                echo $playlist;
                 //Input Data
                 $data = [
                     'title' => trim($_POST['title']),
                     'tag' => $tag,
                     'playlist' => $playlist,
                     'videolink' => $last_segment,
-                    'thumbnail' => ($_FILES['image']),
-                    'thumbnail_name' => time().'_'.($_FILES['image']['name']),
+                    'thumbnail' => ($_FILES['thumbnail']),
+                    'thumbnail_name' => time().'_'.($_FILES['thumbnail']['name']),
                     'date' => date('Y-m-d H:i:s'),
                     'title_err' => '',
                     'link_err' => '',
@@ -51,13 +51,13 @@
 
                 //Validate thumbnail
                 if($data['thumbnail']['size'] > 0){
-                    if(uploadImage($data['image']['tmp_name'], $data['image_name'], '/img/answerImg/')) {
+                    if(uploadImage($data['thumbnail']['tmp_name'], $data['thumbnail_name'], '/img/thumbnails/')) {
                         //done
                     }else{
-                        $data['image_err'] = 'Something Went Wrong when uploading the image';
+                        $data['thumbnail_err'] = 'Something Went Wrong when uploading the image';
                     }
                 }else{
-                    $data['image_name'] = null;
+                    $data['thumbnail_name'] = null;
                 }
 
                 // Validate videolink

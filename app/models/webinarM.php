@@ -13,7 +13,7 @@
             $this->db->bind(':title', $data['title']);
             $this->db->bind(':date', $data['date']);
             $this->db->bind(':videolink', $data['videolink']);
-            $this->db->bind(':thumbnail', $data['thumbnail']);
+            $this->db->bind(':thumbnail', $data['thumbnail_name']);
             $this->db->bind(':expertID', $_SESSION['userID']);
 
             // Execute
