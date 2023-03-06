@@ -12,12 +12,24 @@
             $Quser = $this->answersM->Quser($QID);
             $count = $this->answersM->answerCount($QID);
 
+            $userID = $_SESSION['userID'];
+            
+            $interaction = array();
+            $i = 0;
+            foreach($answers as $answer){
+                $interaction[$i] = $this->answersM->getInteraction($answer->threadID, $userID);
+                $i++;
+            }
+
+            // print($interaction[0]->interaction);
+
             $data = [
                 'question' => $question,
                 'answers' => $answers,
                 'Quser' => $Quser,
                 'count' => $count,
-                'QID' => $QID
+                'QID' => $QID,
+                'interaction' => $interaction
             ];
         
             $this->view('answers/viewA', $data);
@@ -38,7 +50,7 @@
                 $path = parse_url($link, PHP_URL_PATH); // extract the path component of the URL
                 $segments = explode('/', $path); // split the path into an array of segments
                 $last_segment = end($segments); // extract the last segment of the array
-                
+                $interaction = 'new';
                 //Input Data
                 $data = [
                     'content' => trim($_POST['content']),
@@ -77,6 +89,11 @@
                 if(empty($data['content_err']) && empty($data['image_err'])) {
                     // Adding Question
                     if($this->answersM->add($data)) {
+                        $LastID = $this->answersM->getLastID();
+                        $users = $this->answersM->getUsers();
+                        foreach($users as $user) {
+                            $this->answersM->addInteraction($LastID->threadID, $user->userID, $interaction);
+                        }
                         
                         flash('reg_flash','Answer Added Successfully');
                         redirect('answers/viewA/'.$QID.'');
@@ -112,8 +129,9 @@
             $likes = $this->answersM->upvote($threadID);
 
             $userID = $_SESSION['userID'];
+            $c = $this->answersM->interactionExist($threadID, $userID);
 
-            if($this->answersM->interactionExist($threadID, $userID)){
+            if($c){
                 $res = $this->answersM->setInteraction($threadID, $userID, 'liked');
             }else{
                 $res = $this->answersM->addInteraction($threadID, $userID, 'liked');
@@ -131,7 +149,9 @@
 
             $userID = $_SESSION['userID'];
 
-            if($this->answersM->interactionExist($threadID, $userID)){
+            $c = $this->answersM->interactionExist($threadID, $userID);
+
+            if($c){
                 $res = $this->answersM->setInteraction($threadID, $userID, 'disliked');
             }else{
                 $res = $this->answersM->addInteraction($threadID, $userID, 'disliked');
@@ -148,7 +168,9 @@
 
             $userID = $_SESSION['userID'];
 
-            if($this->answersM->interactionExist($threadID, $userID)){
+            $c = $this->answersM->interactionExist($threadID, $userID);
+
+            if($c){
                 $res = $this->answersM->setInteraction($threadID, $userID, 'LikedRemoved');
             }else{
                 $res = $this->answersM->addInteraction($threadID, $userID, 'LikedRemoved');
@@ -166,7 +188,9 @@
 
             $userID = $_SESSION['userID'];
 
-            if($this->answersM->interactionExist($threadID, $userID)){
+            $c = $this->answersM->interactionExist($threadID, $userID);
+
+            if($c){
                 $res = $this->answersM->setInteraction($threadID, $userID, 'dislikedRemoved');
             }else{
                 $res = $this->answersM->addInteraction($threadID, $userID, 'dislikedremoved');

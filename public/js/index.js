@@ -49,36 +49,95 @@ function topFunction() {
   document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 }
 
-//...........................................Vote............................................//
-// var upvote_state = false;
-// var downvote_state = false;
+//*******************************************Rating Answers*************************************************************/
 
-// function upvote(){
-//     if(upvote_state === false){
-//         document.getElementById("upvote").style.color = "#0D5F75";
-//         document.getElementById("downvote").style.color = "#95a5a6";
-//         upvote_state = true;
-//         downvote_state = false;
-//     }else{
-//         document.getElementById("upvote").style.color = "#95a5a6";
-//         upvote_state = false;
-//     }
-// }
+function upvote(answerID){
+  // alert("upvote");
+  if($("#upvote-"+answerID).hasClass("vote")){
+      $("#upvote-"+answerID).removeClass("vote");   
 
-// function downvote(){
-//     if(downvote_state === false){
-//         document.getElementById("downvote").style.color = "#0D5F75";
-//         document.getElementById("upvote").style.color = "#95a5a6";
-//         upvote_state = false;
-//         downvote_state = true;
-//     }else{
-//         document.getElementById("downvote").style.color = "#95a5a6";
-//         downvote_state = false;
-//     }
-// }
+      removeupRating(answerID);
 
+  }else {
+      if($("#downvote-"+answerID).hasClass("vote")){
+          $("#downvote-"+answerID).removeClass("vote");
+
+          removedownRating(answerID);
+         
+      }
+
+      $("#upvote-"+answerID).addClass("vote");
+      incRating(answerID);
+  }
+}
+
+function downvote(answerID){
+  // alert("downvote");
+  if($("#downvote-"+answerID).hasClass("vote")){
+      $("#downvote-"+answerID).removeClass("vote");
+
+      removedownRating(answerID);
+      
+  }else {
+      if($("#upvote-"+answerID).hasClass("vote")){
+          $("#upvote-"+answerID).removeClass("vote");
+
+          removeupRating(answerID);
         
+      }
 
+      $("#downvote-"+answerID).addClass("vote");
+      decRating(answerID);
+  }
+}
+
+function incRating(answerID){
+  $.ajax({
+    url: URLROOT + '/Answers/upvote/'+answerID,
+    method: 'post',
+    data: $("form").serialize(),
+    dataType: 'text',
+    success: function (likes) {
+      $("#rating-"+answerID).text(likes);
+    }
+  })
+}
+
+function decRating(answerID){
+  $.ajax({
+    url: URLROOT + '/Answers/downvote/'+answerID,
+    method: 'post',
+    data: $("form").serialize(),
+    dataType: 'text',
+    success: function (likes) {
+      $("#rating-"+answerID).text(likes);
+    }
+  })
+}
+
+function removeupRating(answerID){
+  $.ajax({
+    url: URLROOT + '/Answers/Removeupvote/'+answerID,
+    method: 'post',
+    data: $("form").serialize(),
+    dataType: 'text',
+    success: function (likes) {
+      $("#rating-"+answerID).text(likes);
+    }
+  })
+}
+
+function removedownRating(answerID){
+  $.ajax({
+    url: URLROOT + '/Answers/Removedownvote/'+answerID,
+    method: 'post',
+    data: $("form").serialize(),
+    dataType: 'text',
+    success: function (likes) {
+      $("#rating-"+answerID).text(likes);
+    }
+  })
+}
 //=========================================== Navbar Drop Down
 
 /* When the user clicks on the button, 

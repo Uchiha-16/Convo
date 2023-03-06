@@ -17,6 +17,10 @@
             $this->view('consults/add', $data);
         }
 
+        public function requests(){
+            $data = [];
+            $this->view('consults/requests', $data);
+        }
     }
 
 ?>

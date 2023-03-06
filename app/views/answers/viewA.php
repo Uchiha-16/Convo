@@ -110,7 +110,7 @@
                     <?php else : ?>
                         <h3><?php echo $data['count']->count ?> Expertiese Answer</h3>
                     <?php endif; ?>
-
+                        <?php $i = 0; ?>
                     <?php foreach ($data['answers'] as $answer) : ?><br>
                         <div class="answerbox">
                             
@@ -120,10 +120,18 @@
                                         <div class="answerrating">
                                             <label>Rate</label><br>
                                             <div>
-                                                <button class="upvote" onclick="upvote(<?php echo $answer->threadID ?>)"><i class="fa-sharp fa-solid fa-arrow-up" id="upvote-<?php echo $answer->threadID ?>"></i></button>
-                                                <br>
-                                                <label class="ratinglabel"><?php echo $answer->rating; ?></label><br>
-                                                <button class="downvote" onclick="downvote(<?php echo $answer->threadID ?>)"><i class="fa-sharp fa-solid fa-arrow-down" id="downvote-<?php echo $answer->threadID ?>"></i></button>
+                                                <?php if($data['interaction'][$i]->interaction == 'liked' ) : ?>
+                                                    <button class="upvote vote" onclick="upvote(<?php echo $answer->threadID ?>)" id="upvote-<?php echo $answer->threadID ?>"><i class="fa-sharp fa-solid fa-arrow-up"></i></button>
+                                                <?php else : ?>
+                                                    <button class="upvote" onclick="upvote(<?php echo $answer->threadID ?>)" id="upvote-<?php echo $answer->threadID ?>"><i class="fa-sharp fa-solid fa-arrow-up"></i></button>
+                                                <?php endif; ?>
+                                                    <br>
+                                                <label class="ratinglabel" id="rating-<?php echo $answer->threadID ?>" ><?php echo $answer->rating; ?></label><br>
+                                                <?php if($data['interaction'][$i]->interaction == 'disliked' ) : ?>
+                                                    <button class="downvote vote" onclick="downvote(<?php echo $answer->threadID ?>)" id="downvote-<?php echo $answer->threadID ?>"><i class="fa-sharp fa-solid fa-arrow-down" ></i></button>
+                                                <?php else : ?>
+                                                    <button class="downvote" onclick="downvote(<?php echo $answer->threadID ?>)" id="downvote-<?php echo $answer->threadID ?>"><i class="fa-sharp fa-solid fa-arrow-down"></i></button>
+                                                <?php endif; ?>
                                             </div>
                                         </div>
                             <?php else: ?>
@@ -198,6 +206,7 @@
                                     </div>
                                 </div>
                         </div>
+                        <?php $i++; ?>
                     <?php endforeach; ?>
                 <?php else : ?>
                     <h3>No Answers for this Question Yet</h3>

@@ -10,6 +10,7 @@
                 <button class="dropbtn dropbtn-1" onclick="drop()"><img src="<?php echo URLROOT;?>/img/plus.png" class="icon"> Add New</button>
                 <div class="dropdown-content" id="myDropdown">
                     <a href="<?php echo URLROOT;?>/Questions/add">Question</a>
+                    <a href="<?php echo URLROOT;?>/Consults/add">Consultation</a>
                     <a href="<?php echo URLROOT;?>/Blogs/add">Blog</a>
                     <a href="<?php echo URLROOT;?>/Projects/add">Project</a>
                 </div>
@@ -20,12 +21,12 @@
                 <img class="dropbtn" src="<?php echo URLROOT;?>/img/profile.png" class="nav-icon" style="width: 25px;">
                 <div class="dropdown-content dropdown-content2" id="myDropdown2">
                     <a href="<?php echo URLROOT;?>/Profile/View">Profile</a>
-                    <a href="<?php echo URLROOT;?>/Moderator/approve">Approvals</a>
+                    <!-- <a href="<?php echo URLROOT;?>/Moderator/approve">Approvals</a> -->
                     <a href="<?php echo URLROOT;?>/Blogs/index">Blogs</a>
                     <a href="<?php echo URLROOT;?>/Events/index">Events</a>
                     <a href="<?php echo URLROOT;?>/Projects/index">Projects</a>
                     <a href="<?php echo URLROOT;?>/SkillTest/index">Skill Test</a>
-                    <a href="<?php echo URLROOT;?>/Subscription/index">Subscription</a>
+                    <a href="<?php echo URLROOT;?>/Subscriptions/index">Subscription</a>
                     <a href="<?php echo URLROOT?>/Users/logout" style="border-bottom:none">Log-out</a>
                 </div>
             </div> 

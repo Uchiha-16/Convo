@@ -6,6 +6,12 @@
             $this->db = new Database;
         }
 
+        public function getUsers() {
+            $this->db->query('SELECT userID FROM user');
+            $results = $this->db->resultSet();
+            return $results;
+        }
+
         public function getAnswers($QID) {
             $this->db->query('SELECT answer.threadID as threadID, answer.content as content, answer.embedlink as link, answer.attachment as attachment, answer.date as date, 
             answer.rating as rating, user.userID as userID, user.uname as uname, user.firstName as fName, user.lastName as lName, user.pfp as pfp, 
@@ -54,6 +60,12 @@
             }
         }
 
+        public function getLastID() {
+            $this->db->query('SELECT threadID from answer ORDER BY threadID DESC LIMIT 1');
+            $row = $this->db->single();
+            return $row;
+        }
+
         public function upvote($threadID){
             $this->db->query('UPDATE answer SET rating = rating + 1 WHERE threadID = :threadID');
             $this->db->bind(':threadID', $threadID);
@@ -94,11 +106,12 @@
             }
         }
 
-        public function addInteraction($userID, $threadID, $interaction){
-            $this->db->query('INSERT INTO interactions(userID, threadID, interaction) VALUES (:userID, :threadID, :interaction)');
-            $this->db->bind(':userID', $userID);
+        public function addInteraction($threadID, $userID, $interaction){
+            $this->db->query('INSERT INTO interactions(threadID, userID, interaction) VALUES (:threadID, :userID, :interaction)');
             $this->db->bind(':threadID', $threadID);
-            $this->db->bind(':interatcion', $interaction);
+            $this->db->bind(':userID', $userID);
+            $this->db->bind(':interaction', $interaction);
+
             if($this->db->execute()) {
                 return true;
             } else {
@@ -106,11 +119,12 @@
             }
         }
 
-        public function setInteraction($userID, $threadID, $interaction){
+        public function setInteraction($threadID, $userID, $interaction){
             $this->db->query('UPDATE interactions SET interaction = :interaction WHERE userID = :userID AND threadID = :threadID');
             $this->db->bind(':userID', $userID);
             $this->db->bind(':threadID', $threadID);
-            $this->db->bind(':interatcion', $interaction);
+            $this->db->bind(':interaction', $interaction);
+
             if($this->db->execute()) {
                 return true;
             } else {
@@ -118,24 +132,21 @@
             }
         }
 
-        public function getInteraction($userID, $threadID){
-            $this->db->query('SELECT interaction FROM interactions WHERE userID = :userID AND threadID = :threadID');
+        public function getInteraction($threadID, $userID){
+            $this->db->query('SELECT * FROM interactions WHERE userID = :userID AND threadID = :threadID');
             $this->db->bind(':userID', $userID);
             $this->db->bind(':threadID', $threadID);
             $row = $this->db->single();
             return $row;
         }
 
-        public function interactionExist($userID, $threadID){
-            $this->db->query('SELECT interaction FROM interactions WHERE userID = :userID AND threadID = :threadID');
-            $this->db->bind(':userID', $userID);
+        public function interactionExist($threadID, $userID){
+            $this->db->query('SELECT * FROM interactions WHERE threadID = :threadID AND userID = :userID');
             $this->db->bind(':threadID', $threadID);
+            $this->db->bind(':userID', $userID);
 
-            if($this->db->rowCount() > 0) {
-                return true;
-            } else {
-                return false;
-            }
+            $row = $this->db->single();
+            return $row;
         }
 
         public function getRating($threadID){
