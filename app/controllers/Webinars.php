@@ -26,12 +26,12 @@
                 $path = parse_url($link, PHP_URL_PATH); // extract the path component of the URL
                 $segments = explode('/', $path); // split the path into an array of segments
                 $last_segment = end($segments); // extract the last segment of the array
-                echo $playlist;
                 //Input Data
                 $data = [
                     'title' => trim($_POST['title']),
                     'tag' => $tag,
                     'playlist' => $playlist,
+                    'newP' => isset($_POST['newP']) ? trim($_POST['newP']) : '',
                     'videolink' => $last_segment,
                     'thumbnail' => ($_FILES['thumbnail']),
                     'thumbnail_name' => time().'_'.($_FILES['thumbnail']['name']),
@@ -42,7 +42,7 @@
                     'tag_err' => '',
                     'playlist_err' => '',
                 ];
-
+                
                 //validate each inputs
                 // Validate Title
                 if(empty($data['title'])) {
@@ -78,7 +78,7 @@
                 }
 
                 // Validate Playlist
-                if($data['playlist'] == '0') {
+                if($data['playlist'] == '0' && empty($data['newP'])) {
                     $data['playlist_err'] = 'Please Select One or More Playlists';
                 }
 
@@ -93,15 +93,22 @@
                                 die('Something went wrong when inserting the tags');
                             }
                         }
-                        foreach($data['playlist'] as $playlist){
-                           if(!($this->webinarModel->webinarPlaylist($playlist, $LastID->webinarID)))
-                            {
-                                die('Something went wrong when Selecting the Playlist');
+                        
+                        if(count($data['playlist']) != 0){
+                            foreach($data['playlist'] as $playlist){
+                                if(!($this->webinarModel->webinarPlaylist($playlist, $LastID->webinarID))){
+                                        die('Something went wrong when Selecting the Playlist');
+                                }
                             }
                         }
-                            flash('reg_flash','Webinar Added Successfully');
-                            redirect('webinars/home');
                         
+                            flash('reg_flash','Webinar Added Successfully!');
+                            redirect('webinars/home');
+
+                        if(isset($data['newP'])){
+                            $this->webinarModel->webinarPlaylist($data['newP'], $LastID->webinarID);
+                        }
+
                     } else {
                         die('Something went wrong');
                     }
