@@ -84,7 +84,7 @@
                             }
                         }
                             flash('reg_flash','Project Added Successfully');
-                            redirect('projects/view');
+                            redirect('projects/projects');
                         
                     } else {
                         die('Something went wrong');
@@ -112,6 +112,15 @@
                 ];
                 $this->view('projects/add', $data);
             }
+        }
+
+        public function viewProjects(){
+            $userID = $_SESSION['userID'];
+            $projects = $this->projectModel->getProjects($userID);
+            $data = [
+                'projects' => $projects
+            ];
+            $this->view('projects/Projects', $data);
         }
 
 

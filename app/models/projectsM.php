@@ -9,9 +9,9 @@
 //****************************************************************Create Question*************************************************************************************************************
     public function add($data) {
         $query1 = 'INSERT INTO `project`(title, description, deadline, availableslot, type, availability, payment, duration, expertID) VALUES  (:title, :description, :deadline, :slot, :type, :availability, :payment, :duration, :userID)';
-        $query2 = 'INSERT INTO `project`(title, description, deadline, availableslot, type, availability, payment, duration, CID) VALUES  (:title, :description, :deadline, :slot, :type, :availability, :payment, :duration, :userID)';
-        $query = $query1."UNION".$query2; 
-        $this->db->query($query);
+        //$query2 = 'INSERT INTO `project`(title, description, deadline, availableslot, type, availability, payment, duration, CID) VALUES  (:title, :description, :deadline, :slot, :type, :availability, :payment, :duration, :userID)';
+        //$query = $query1."UNION".$query2; 
+        $this->db->query($query1);
         // Bind values
         $this->db->bind(':title', $data['title']);
         $this->db->bind(':description', $data['description']);
@@ -32,11 +32,11 @@
     }
 
     // Get Last UserID
-    // public function getLastID() {
-    //     $this->db->query('SELECT PID from project ORDER BY PID DESC LIMIT 1');
-    //     $row = $this->db->single();
-    //     return $row;
-    // }
+    public function getLastID() {
+        $this->db->query('SELECT PID from project ORDER BY PID DESC LIMIT 1');
+        $row = $this->db->single();
+        return $row;
+    }
 
     public function getUserTags($userID) {
         $this->db->query('SELECT GROUP_CONCAT(tag SEPARATOR ",") as tags FROM usertag WHERE userID = :userID');
