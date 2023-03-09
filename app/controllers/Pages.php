@@ -17,6 +17,7 @@
             $i = 0;
             foreach($questions as $question) {
                 $count[$i] = $this->pagesM->answerCount($question->QID);
+                $count[$i]->QID = $question->QID;
                 $i++;
             }
 
@@ -59,9 +60,18 @@
 
                 $tags = $this->pagesM->getQuestionTags($str2);
 
+                $count = array();
+                $c = 0;
+                foreach($questions as $question) {
+                    $count[$c] = $this->pagesM->answerCount($question->QID);
+                    $count[$c]->QID = $question->QID;
+                    $c++;
+                }
+
                 $data = [
                     'questions' => $questions,
                     'tags' => $tags,
+                    'count' => $count
                 ];
 
             $this->view('pages/seeker', $data);
@@ -96,10 +106,18 @@
                 
                 $tags = $this->pagesM->getQuestionTags($str2);
 
-    
+                $count = array();
+                $c = 0;
+                foreach($questions as $question) {
+                    $count[$c] = $this->pagesM->answerCount($question->QID);
+                    $count[$c]->QID = $question->QID;
+                    $c++;
+                }
+
                 $data = [
                     'questions' => $questions,
                     'tags' => $tags,
+                    'count' => $count
                 ];
 
             $this->view('pages/expert', $data);

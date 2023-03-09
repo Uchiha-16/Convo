@@ -57,7 +57,7 @@
         //getQuestions
         public function getQuestions() {
             $this->db->query('SELECT question.QID as QID, question.title as title, question.content as content, question.date as date, question.rating as rating, 
-            GROUP_CONCAT(questiontag.tag SEPARATOR ",") as tags, question.moderatorID as modID FROM question JOIN questiontag ON question.QID = questiontag.QID WHERE userID = :userID GROUP BY question.QID');
+            GROUP_CONCAT(questiontag.tag SEPARATOR ",") as tags, question.moderatorID as modID FROM question JOIN questiontag ON question.QID = questiontag.QID WHERE userID = :userID GROUP BY question.QID ORDER BY question.date DESC');
             $this->db->bind(':userID', $_SESSION['userID']);
             $row = $this->db->resultSet();
             return $row;

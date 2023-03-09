@@ -56,7 +56,14 @@
                             <p class="line-clamp"><?php echo $question->content ?></p>
                             <div class="date-count">
                                 <label><?php echo convertTime($question->date); ?></label>
-                                <label style="font-weight:600; float:right">3 Answers</label><br>
+                                <?php for ($i = 0; $i < count($data['count']); $i++) : ?>
+                                    <?php if ($data['count'][$i]->QID == $question->QID) : ?>
+                                            <label style="font-weight:600; float:right"><?php echo $data['count'][$i]->count; ?> Answers</label><br>
+                                            <?php break; ?>
+                                    
+                                    <?php endif; ?>
+                                
+                            <?php endfor; ?>
                                 <label style="font-weight:600; float:right">Overall Rating: <?php echo $question->rating; ?></label><br>
                                 <!-- <form action="<?php echo URLROOT; ?>/answers/viewA/<?php echo $question->QID; ?>">
                                 <button style="float:right" class="read-more">READ MORE</button>
@@ -76,7 +83,7 @@
 
             </div>
             <div class="RHS">
-                <form action="<?php echo URLROOT; ?>/Questions/myQuestions"><button type="submit" style="float:right" class="read-more one">MyQuestions</button></form>
+                <form action="<?php echo URLROOT; ?>/Questions/myQuestions"><button type="submit" style="float:right" class="read-more attend">MyQuestions</button></form>
                 <div class="filter-div">
                     <div style="display:flex">
                         <img src="<?php echo URLROOT; ?>/img/filter.png">

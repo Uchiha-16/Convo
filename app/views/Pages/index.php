@@ -84,7 +84,7 @@
 
             <div class="RHS">
                 <?php if(isset($_SESSION['userID'])) : ?>
-                    <form action="<?php echo URLROOT; ?>/Questions/myquestions"><button type="submit" style="float:right" class="read-more attend">My Questions</button></form>
+                    <form action="<?php echo URLROOT; ?>/Questions/myquestions"><button type="submit" style="float:right" class="read-more go">My Questions</button></form>
                 <?php endif; ?>
                 <div class="filter-div">
                     <div style="display:flex">
