@@ -200,10 +200,12 @@
                                             <span class="comment-time"> Aug 26, 2018 at 17:50</span>
                                         </div>
                                     </div>
-                                    <div class="add-comment">
-                                        <input type="search" name="comment" style="font-size: 13px; width: 95%; border-radius: 10px 0 0 10px;" placeholder="Add a comment...">
-                                        <img src="<?php echo URLROOT; ?>/img/submit.png" class="submit">
-                                    </div>
+                                    <?php if(isset($_SESSION['role'])): ?>
+                                        <div class="add-comment">
+                                            <input type="search" name="comment" style="font-size: 13px; width: 95%; border-radius: 10px 0 0 10px;" placeholder="Add a comment...">
+                                            <img src="<?php echo URLROOT; ?>/img/submit.png" class="submit">
+                                        </div>
+                                    <?php endif; ?>
                                 </div>
                         </div>
                         <?php $i++; ?>
