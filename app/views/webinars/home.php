@@ -42,40 +42,52 @@
                         <div class="LHS">
                         
                             <?php foreach ($data['webinars'] as $webinar) : ?>
+                                
+                                <div class="vid-slider">
+                                    <div class="vid-wrapper">
 
-                                <div class="video" onclick="view()">
-                                    <div>
-                                        <img src="<?php echo URLROOT; ?>/img/thumbnails/<?php echo $webinar->thumbnail ?>" class="thumbnail">
-                                    </div>
-                                    <div>
-                                        <div class="qdp">
+                                        <div class="video">
                                             <div>
-                                                <?php if ($webinar->pfp != NULL) : ?>
-                                                    <img src="<?php echo URLROOT; ?>/img/pfp/<?php echo $webinar->pfp ?>" />
-                                                <?php else : ?>
-                                                    <img src="<?php echo URLROOT; ?>/img/pfp/user.jpg" />
-                                                <?php endif; ?>
+                                                <img src="<?php echo URLROOT; ?>/img/thumbnails/<?php echo $webinar->thumbnail ?>" class="thumbnail">
                                             </div>
-                                            <div class="video-content">
-                                                <p class="text"><?php echo $webinar->title ?></p>
-                                                <label class="qdp-1-2"><?php echo $webinar->date ?></label>
+                                            <div>
+                                                <div class="qdp">
+                                                    <div>
+                                                        <?php if ($webinar->pfp != NULL) : ?>
+                                                            <img src="<?php echo URLROOT; ?>/img/pfp/<?php echo $webinar->pfp ?>" />
+                                                        <?php else : ?>
+                                                            <img src="<?php echo URLROOT; ?>/img/pfp/user.jpg" />
+                                                        <?php endif; ?>
+                                                    </div>
+                                                    <div class="video-content">
+                                                        <p class="text"><?php echo $webinar->title ?></p>
+                                                        <label class="qdp-1-2"><?php echo $webinar->date ?></label>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
+
                                     </div>
                                 </div>
 
-                                <!-- View -->
+                            <?php endforeach; ?>
+
+                            <!-- Popup -->
+                            <div class="video-popup">
                                 <div class="video-view" id="1">
-                                    <img src="<?php echo URLROOT; ?>/img/cancel.png" class="cancel" onclick="cancel()">
-                                    <iframe width="550" height="325" src="https://www.youtube.com/embed/Nxtv1LfdSBk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                    <h3>What is the big problem or question that this new academic discipline that you keep talking about would address?</h3>
+                                    <div>
+                                        <img src="<?php echo URLROOT; ?>/img/cancel.png" class="cancel" onclick="cancel()">
+                                        <iframe width="550" height="325" src="https://www.youtube.com/embed/<?php echo $data['webinars']->videolink ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    </div>
+                                    <div>
+                                        <h3>What is the big problem or question that this new academic discipline that you keep talking about would address?</h3>
+                                    </div>
                                     <div style="display:flex;">
                                         <label class="qdp-1-2">21 July 2022</label>
                                         <span class="qdp-1-2 qdp-1-3">By Varsha Wijethunge</span>
                                     </div>
                                 </div>
-
-                            <?php endforeach; ?>
+                            </div>
 
                         </div>
 
