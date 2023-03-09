@@ -1,5 +1,6 @@
 <?php
     class Chats extends Controller {
+        private $chatsModel;
         public function __construct() {
             $this->chatsModel = $this -> model('chatsM');
         }

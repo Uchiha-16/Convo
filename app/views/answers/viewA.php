@@ -112,6 +112,9 @@
                     <?php endif; ?>
                         <?php $i = 0; ?>
                     <?php foreach ($data['answers'] as $answer) : ?><br>
+                    <script>
+                        var CURRENT_THREAD = <?php echo $answer->threadID; ?>;
+                    </script>
                         <div class="answerbox">
                             
                                 
@@ -200,10 +203,11 @@
                                             <span class="comment-time"> Aug 26, 2018 at 17:50</span>
                                         </div>
                                     </div>
+                                    <div id="msg"></div>
                                     <?php if(isset($_SESSION['role'])): ?>
                                         <div class="add-comment">
-                                            <input type="search" name="comment" style="font-size: 13px; width: 95%; border-radius: 10px 0 0 10px;" placeholder="Add a comment...">
-                                            <img src="<?php echo URLROOT; ?>/img/submit.png" class="submit">
+                                            <input type="search" name="comment" id="comment"  style="font-size: 13px; width: 95%; border-radius: 10px 0 0 10px;" placeholder="Add a comment...">
+                                            <img src="<?php echo URLROOT; ?>/img/submit.png" class="submit" id="commentbtn">
                                         </div>
                                     <?php endif; ?>
                                 </div>
@@ -233,5 +237,8 @@
 </body>
 
 </html>
-
+<script>
+    
+    var CURRENT_USER = <?php echo $_SESSION['userID']; ?>;
+</script>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

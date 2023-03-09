@@ -1,5 +1,6 @@
 <?php
     class Blogs extends Controller {
+        private $blogsModel;
         public function __construct() {
             $this->blogsModel = $this -> model('blogsM');
         }
