@@ -112,9 +112,6 @@
                     <?php endif; ?>
                         <?php $i = 0; ?>
                     <?php foreach ($data['answers'] as $answer) : ?><br>
-                    <script>
-                        var CURRENT_THREAD = <?php echo $answer->threadID; ?>;
-                    </script>
                         <div class="answerbox">
                             
                                 
@@ -186,29 +183,19 @@
                             <?php else: ?>
                                 <div class="comment-section" style="padding-left: 0;">
                             <?php endif; ?>
-                                    <div class="comment">
-                                        <div class="user-comment">
-                                            <span>Ck editor was more feature compared to tinymce editor go for ck editor</span>
-                                            <span class="name"> – Vinoth Narayan</span>
-                                            <span class="comment-time"> Aug 26, 2018 at 17:32</span>
-                                        </div>
-                                        <div class="user-comment">
-                                            <span>You say "like w3schools", and ask if it can be done?</span>
-                                            <span class="name"> – ASDFGerte</span>
-                                            <span class="comment-time"> Aug 26, 2018 at 17:35</span>
-                                        </div>
-                                        <div class="user-comment">
-                                            <span>You can look on Codepen.</span>
-                                            <span class="name"> – Kamil Naja</span>
-                                            <span class="comment-time"> Aug 26, 2018 at 17:50</span>
-                                        </div>
-                                    </div>
-                                    <div id="msg"></div>
+                            <div class="comment">
+                                <button class="read-more one" id="com-<?php echo $answer->threadID ?>" onclick="loadC(<?php echo $answer->threadID ?>)">See Comments</button>
+                                
+                                    <div id="results-<?php echo $answer->threadID ?>"></div>
+                            </div>
                                     <?php if(isset($_SESSION['role'])): ?>
+                                        <form method="post">
                                         <div class="add-comment">
-                                            <input type="search" name="comment" id="comment"  style="font-size: 13px; width: 95%; border-radius: 10px 0 0 10px;" placeholder="Add a comment...">
-                                            <img src="<?php echo URLROOT; ?>/img/submit.png" class="submit" id="commentbtn">
+                                                <input type="search" name="comment" id="comment-<?php echo $answer->threadID ?>"  style="font-size: 13px; width: 95%; border-radius: 10px 0 0 10px;" placeholder="Add a comment...">
+                                                <img src="<?php echo URLROOT; ?>/img/submit.png" class="submit" id="commentbtn-<?php echo $answer->threadID ?>" onclick="loadComments(<?php echo $answer->threadID ?>)">   
                                         </div>
+                                        </form>
+                                        <div id="msg-<?php echo $answer->threadID ?>"></div>
                                     <?php endif; ?>
                                 </div>
                         </div>

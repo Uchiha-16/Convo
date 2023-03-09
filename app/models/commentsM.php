@@ -19,5 +19,13 @@
                 return false;
             }
         }
+
+        public function getComments($AID){
+            $this->db->query('SELECT threadcomment.threadID as threadID, threadcomment.content as comment, threadcomment.date as date, user.firstName as fName, user.lastName as lName
+                              FROM threadcomment JOIN user ON threadcomment.userID = user.userID WHERE threadID = :threadID ORDER BY date DESC');
+            $this->db->bind(':threadID', $AID);
+            $results = $this->db->resultSet();
+            return $results;
+        }
     }
 ?>

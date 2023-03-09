@@ -21,6 +21,8 @@
                 'date' => date("Y-m-d H:i:s")
             ];
 
+            echo $data['userID'] . $data['comment'] . $data['threadID'] . $data['date'];
+
             if($this->commentsM->add($data)){
                 flash('comment_message', 'Comment Added');
             } else {
@@ -28,6 +30,18 @@
             }
             
 
+        }
+
+        public function show($AID){
+            $comments = $this->commentsM->getComments($AID);
+
+            foreach($comments as $comment){
+                    echo '<div class="user-comment">';
+                        echo '<span>'. $comment->comment .'</span>';
+                        echo '<span class="name"> – '.$comment->fName .' ' .$comment->lName .'</span>';
+                        echo '<span class="comment-time">'.' '.convertTime($comment->date) .'</span>';
+                    echo '</div>';
+            }
         }
 
     }
