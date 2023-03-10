@@ -70,6 +70,20 @@
                                     </div>
                                 </div>
 
+                                <div class="video-view" id="data">
+                                    <div>
+                                        <img src="<?php echo URLROOT; ?>/img/cancel.png" class="cancel" onclick="cancel()">
+                                        <iframe width="550" height="325" src="https://www.youtube.com/embed/<?php echo $webinar->videolink ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    </div>
+                                    <div>
+                                        <h3><?php echo $webinar->title ?></h3>
+                                    </div>
+                                    <div style="display:flex;">
+                                        <label class="qdp-1-2"><?php echo $webinar->date ?></label>
+                                        <span class="qdp-1-2 qdp-1-3">By <?php echo $webinar->name ?></span>
+                                    </div>
+                                </div>
+
                             <?php endforeach; ?>
 
                             <!-- Popup -->
@@ -77,7 +91,7 @@
                                 <div class="video-view" id="1">
                                     <div>
                                         <img src="<?php echo URLROOT; ?>/img/cancel.png" class="cancel" onclick="cancel()">
-                                        <iframe width="550" height="325" src="https://www.youtube.com/embed/<?php echo $data['webinars']->videolink ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                        <iframe width="550" height="325" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                     </div>
                                     <div>
                                         <h3>What is the big problem or question that this new academic discipline that you keep talking about would address?</h3>
@@ -86,6 +100,7 @@
                                         <label class="qdp-1-2">21 July 2022</label>
                                         <span class="qdp-1-2 qdp-1-3">By Varsha Wijethunge</span>
                                     </div>
+                                    <span class="close-video"></span>
                                 </div>
                             </div>
 
