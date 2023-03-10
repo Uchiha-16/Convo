@@ -3,7 +3,7 @@
 }
 .LHS{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: auto 1fr;
     padding-top: 1rem;
     padding-right: 2rem;
@@ -12,9 +12,9 @@
     background: white;
     display: grid;
     grid-template-rows: 65% 35%;
-    width: 16rem;
-    height: 13rem;
-    margin: 0 1rem 2rem 0;
+    width: 18rem;
+    height: 15rem;
+    margin: 0 1rem 3rem 0;
     border-radius: 16px;
     cursor: pointer;
     transition: .3s all;

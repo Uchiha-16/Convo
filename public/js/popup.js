@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $('.vid-slider .video').on('click', function () {
+    $('.vid-slider .vid').on('click', function () {
         // get required DOM Elements
         var iframe_src = $(this).children('iframe').attr('src'),
             iframe = $('.video-popup'),
