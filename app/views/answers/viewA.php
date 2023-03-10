@@ -183,8 +183,8 @@
                             <?php else: ?>
                                 <div class="comment-section" style="padding-left: 0;">
                             <?php endif; ?>
-                            <div class="comment">
-                                <button class="read-more one" id="com-<?php echo $answer->threadID ?>" onclick="loadC(<?php echo $answer->threadID ?>)">See Comments</button>
+                            <div class="comment" onclick="loadC(<?php echo $answer->threadID ?>)">
+                                <button class="read-more one" id="com-<?php echo $answer->threadID ?>" >See Comments</button>
                                 
                                     <div id="results-<?php echo $answer->threadID ?>"></div>
                             </div>
