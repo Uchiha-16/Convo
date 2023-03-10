@@ -34,6 +34,8 @@
                 $i++;
             }
 
+            $rating = $this->answersM->getQuestionRating($QID, $userID);
+
             // print($interaction[0]->interaction);
 
             $data = [
@@ -42,7 +44,9 @@
                 'Quser' => $Quser,
                 'count' => $count,
                 'QID' => $QID,
-                'interaction' => $interaction
+                'interaction' => $interaction,
+                'rating' => $rating,
+
             ];
         
             $this->view('answers/viewA', $data);
@@ -215,5 +219,39 @@
                 echo $rating->rating;
             }
         }
+
+        public function rating($QID){
+            $userID = $_SESSION['userID'];
+            $count = $_POST['count'];
+            $QID = $QID;
+
+            $data = [
+                'userID' => $userID,
+                'rating' => $count,
+                'QID' => $QID,
+            ];
+
+            echo $data['userID'] . $data['rating'] . $data['QID'];
+
+            $exists = $this->answersM->checkRating($data);
+
+            if($exists){
+                if($this->answersM->updateRating($data)){
+                    flash('reg_flash', 'Rating Updated Successfully!');
+                    redirect('questions/myQuestions');
+                } else {
+                    die('Something went wrong');
+                }
+            } else {
+                if($this->answersM->addRating($data)){
+                    flash('reg_flash', 'Rating Added Successfully!');
+                    redirect('questions/myQuestions');
+                } else {
+                    die('Something went wrong');
+                }
+            }
+        }
+
+        
 }   
 ?>

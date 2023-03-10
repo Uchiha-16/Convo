@@ -136,6 +136,26 @@
                     return false;
                 }
             }
+
+            public function addRating($userID, $QID, $rating) {
+                $this->db->query('INSERT INTO questionrating (QID, userID, rating) VALUES(:QID, :userID, :rating)');
+                $this->db->bind(':QID', $QID);
+                $this->db->bind(':userID', $userID);
+                $this->db->bind(':rating', $rating);
+                if($this->db->execute()) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+
+            public function getRating($QID){
+                $this->db->query('SELECT AVG(rating) as rating FROM questionrating WHERE QID = :QID');
+                $this->db->bind(':QID', $QID);
+                $row = $this->db->single();
+                return $row;
+            }
+
 }
 
 ?>

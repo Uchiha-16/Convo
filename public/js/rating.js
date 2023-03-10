@@ -15,3 +15,41 @@ stars.forEach((star, index1) => {
 });
 
 
+//Count Active classes for the stars
+function countActive() {
+    var active = document.querySelectorAll(".stars .active");
+    var count = active.length;
+    //alert ("Rating: " + count + " stars");
+
+    $(document).ready(function() {
+        $.ajax({
+            url: URLROOT + '/Answers/rating/'+ QID,
+            method: 'post',
+            data: {count: count},
+            dataType: 'text',
+            success: function() {
+                //alert ("Rating: " + count + " stars");
+            }
+        })
+        $.ajax({
+            url: URLROOT + '/Questions/viewR/'+QID,                
+            dataType: 'html',
+            success: function(results) {
+                // alert(results);
+                $('.qrate').html(results);
+            }
+        })
+        
+
+    });
+}
+
+
+// $(document).ready(function() {
+//     $('.stars').click(function(event) {
+//         event.preventDefault();
+//         event.stopPropagation();
+//     //onload show rating
+       
+//     })
+// });

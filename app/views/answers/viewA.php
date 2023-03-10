@@ -75,7 +75,7 @@
                         <p><?php echo $data['question']->content; ?></p>
                         <div class="date-count">
                             <label><?php echo convertTime($data['question']->date); ?></label>
-                            <label style="font-weight:600; float:right">Overall Rating: <?php echo $data['question']->rating; ?></label><br><br>
+                            <div class="qrate"><label style="font-weight:600; float:right">Overall Rating: <?php echo $data['question']->rating; ?></label></div><br><br>
                             <?php if (isset($_SESSION['role'])) : ?>
                                 <?php if (($_SESSION['role']) == 'expert') : ?>
                                     <form action="<?php echo URLROOT; ?>/Answers/add/<?php echo $data['QID'] ?>">
@@ -87,12 +87,21 @@
                             <?php if (isset($_SESSION['role'])) : ?>
                                 <div class="rating-box">
                                     <header>Rate this question</header>
-                                    <div class="stars">
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
+                                    <div class="stars" onclick="countActive()">
+                                    <?php if($data['rating']->rating > 0) : ?>
+                                        <?php for($i = 0; $i < $data['rating']->rating; $i++) : ?>
+                                            <i class="fa-solid fa-star active"></i>
+                                        <?php endfor; ?>
+                                        <?php for($i = 0; $i < 5 - $data['rating']->rating; $i++) : ?>
+                                            <i class="fa-solid fa-star"></i>
+                                        <?php endfor; ?>
+                                        <?php else : ?>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             <?php endif; ?>
@@ -225,7 +234,7 @@
 
 </html>
 <script>
-    
+    var QID = <?php echo $data['QID']; ?>;
     var CURRENT_USER = <?php echo $_SESSION['userID']; ?>;
 </script>
 <?php require APPROOT . '/views/inc/footer.php'; ?>
