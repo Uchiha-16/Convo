@@ -13,64 +13,6 @@
 
                 <?php endif; ?>
                             
-
-.vid {
-    /* vertical-align: top; */
-    position: relative;
-    /* border: 1px solid; */
-    padding: 2px;
-    cursor: pointer;
-}
-
-.vid::before {
-content: '';
-position: absolute;
-top: 0;
-right: 0;
-bottom: 0;
-left: 0;
-}
-
-h2.vid-head {
-font-size: 20px;
-color: #333;
-}
-
-/* Video Popup */
-.video-popup {
-position: fixed;
-top: 0;
-right: 0;
-bottom: 0;
-left: 0;
-display: flex;
-justify-content: center;
-align-items: center;
-z-index: 998;
-background: rgba(0, 0, 0, .7);
-cursor: pointer;
-display: none !important;
-}
-
-.video-popup.show-video {
-display: flex !important;
-}
-
-.iframe-wrapper {
-position: relative;
-}
-
-.iframe-wrapper .close-video {
-content: '';
-position: absolute;
-width: 25px;
-height: 25px;
-top: -20px;
-right: 0;
-background: url(https://image.flaticon.com/icons/svg/149/149690.svg) #fff;
-border-radius: 50%;
-background-size: cover;
-}
             </style>
             </head>
 
@@ -124,8 +66,14 @@ background-size: cover;
                                                     </div>
                                                     <div class="video-content">
                                                         <p class="text"><?php echo $webinar->title ?></p>
-                                                        <label class="qdp-1-2"><?php echo $webinar->date ?></label>
-                                                        <span class="qdp-1-2 qdp-1-3" style="display:none;">By <?php echo $webinar->name ?></span>
+                                                        <div class="webinar-details">
+                                                            <div>
+                                                                <label class="qdp-1-2"><?php echo $webinar->date ?></label>
+                                                            </div>
+                                                            <div style="text-align: right;">
+                                                                <span class="qdp-1-2 qdp-1-3">By <?php echo $webinar->name ?></span>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -134,27 +82,13 @@ background-size: cover;
                                     </div>
                                 </div>
 
-                                <!-- <div class="video-view" id="data">
-                                    <div>
-                                        <img src="<?php //echo URLROOT; ?>/img/cancel.png" class="cancel" onclick="cancel()">
-                                        <iframe width="550" height="325" src="https://www.youtube.com/embed/<?php //echo $webinar->videolink ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                    </div>
-                                    <div>
-                                        <h3><?php //echo $webinar->title ?></h3>
-                                    </div>
-                                    <div style="display:flex;">
-                                        <label class="qdp-1-2"><?php // echo $webinar->date ?></label>
-                                        <span class="qdp-1-2 qdp-1-3">By <?php // echo $webinar->name ?></span>
-                                    </div>
-                                </div> -->
-
                             <?php endforeach; ?>
 
                             <!-- Popup -->
                             <div class="video-popup">
                                 <div class="iframe-wrapper">
-                                    <iframe width="400" height="300" src="" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                    <span class="close-video"></span>
+                                    <iframe width="800" height="500" src="" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    <span class="close-video"><i class="fa-solid fa-xmark"></i></span>
                                 </div>
                             </div>
 

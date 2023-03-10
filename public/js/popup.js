@@ -4,7 +4,7 @@ $(document).ready(function () {
         var iframe_src = $(this).children('iframe').attr('src'),
             iframe = $('.video-popup'),
             iframe_video = $('.video-popup iframe'),
-            close_btn = $('.close-video');
+            close_btn = $('.close-video i');
         iframe_src = iframe_src + '?autoplay=1&rel=0'; // for autoplaying the popup video
 
         // change the video source with the clicked one

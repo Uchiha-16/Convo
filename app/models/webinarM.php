@@ -83,8 +83,9 @@
         //getWebinars
         public function getwebinars() {
             $this->db->query('SELECT webinar.webinarID as webinarID, webinar.webinarTitle as title, webinar.date as date, 
-            webinar.videolink as videolink, webinar.thumbnail as thumbnail, webinar.expertID as expertID, user.pfp as pfp, CONCAT(user.firstName, " ", user.lastName) as name 
-            FROM webinar, expert, user WHERE webinar.expertID = expert.expertID AND webinar.expertID = user.userID;');
+            webinar.videolink as videolink, webinar.thumbnail as thumbnail, webinar.expertID as expertID, user.pfp as pfp, CONCAT(user.firstName, " ", user.lastName) as name,
+            GROUP_CONCAT(webinar.tag SEPARATOR ",") as tags 
+            FROM webinar, expert, user, webinartag WHERE webinar.expertID = expert.expertID AND webinar.expertID = user.userID;');
 
             $row = $this->db->resultSet();
             return $row;

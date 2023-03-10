@@ -29,13 +29,14 @@
 }
 .video-content{
     display: grid;
-    grid-template-rows: 4.8fr 1fr;
+    grid-template-rows: 3fr 1fr;
+}
+.qdp-1-3{
+    margin-right: 8px;
 }
 .text{
     font-size: 11px;
-    margin-left: 6px;
-    margin-bottom: 0;
-    margin-top: 8px;
+    margin: 8px 8px 0 10px;
     font-weight: 600;
 }
 .qdp{
@@ -51,8 +52,24 @@
     font-size: 9px;
     margin-left: 6px;
 }
-.qdp-1-3{
-    margin-left: 24rem;
+.vid {
+    position: relative;
+    padding: 2px;
+    cursor: pointer;
+}
+
+.vid::before {
+content: '';
+position: absolute;
+top: 0;
+right: 0;
+bottom: 0;
+left: 0;
+}
+
+h2.vid-head {
+font-size: 20px;
+color: #333;
 }
 
 /*============================================== Webinar View ==========================================*/
@@ -131,6 +148,54 @@
     right: 1rem;
     top: 0.9rem;
 }
+.webinar-details{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+}
+
+/* Video Popup */
+.video-popup {
+position: fixed;
+top: 0;
+right: 0;
+bottom: 0;
+left: 0;
+display: flex;
+justify-content: center;
+align-items: center;
+z-index: 998;
+background: rgba(0, 0, 0, .7);
+cursor: pointer;
+display: none !important;
+}
+
+.video-popup.show-video {
+display: flex !important;
+}
+
+.iframe-wrapper {
+position: relative;
+}
+
+.iframe-wrapper .close-video {
+content: '';
+    position: absolute;
+    width: 23px;
+    height: 23px;
+    top: -20px;
+    right: 0;
+    background: orangered;
+    border-radius: 50%;
+    background-size: cover;
+}
+.close-video i{
+    font-size: 19px;
+    display: grid;
+    justify-content: center;
+    padding-top: 2px;
+}
+
 
 /*============================================== Webinar Stat ==========================================*/
 .webinar-stat{
