@@ -6,12 +6,57 @@
             .nav{
                 grid-template-columns: 5% 6% 6% 6% 51% 10% 4% 4% 4%;
             }
+            .icon-1{
+                width: 50px;
+                height: 50px;
+                align-items: center;
+                border: 1px solid #bdbdbd;
+                border-radius: 50%;
+                border-color: #000000 1px solid;
+                margin-right: 10px;
+            }
+            .name-field{
+                margin: 0;
+                padding: 0;
+            }
+            .name-tag{
+                margin-left: 1rem;
+            }
+            .tag-top{
+                padding-bottom: 1rem;
+                border-bottom: 1px solid rgba(128,128,128, .4);
+            }
+            .question {
+                font-size: 18px;
+            }
+            .description {
+                font-size: 13px;
+                color: #4f4f4f;
+            }
+            .tag-button{
+                line-height: 22px;
+                padding: 0 22px 0 22px;
+                width: auto;
+                margin-right: 1rem;
+            }
+            .tag-field {
+                font-size: 10px;
+                margin-top: 20px;
+                margin-bottom: 20px;
+                color: #6B6B6B;
+            }
+            .tag-field button{
+                color: #6B6B6B;
+            }
+            .tag-detail{
+                display: inline;
+            }
         </style>
     </head>
 <body>
 <?php require APPROOT . '/views/inc/components/Enavbar.php'; ?>
 
-        <div class="container-div">
+<div class="container-div">
             <div class="content-body">
                 <div class="LHS">
                     <br><br>
@@ -19,46 +64,46 @@
                         <h3 class="home-head">Connecting People with a Passion for doing...</h3>
                     </div>
 
-
-                    <div class="question-card">
-                        <div class="tag-top">
-                                <img class="icon-1" src="pfp/1670874489-original.jpg" alt="profile" class="profile">
-                            <div class="name-tag">
-                                <p class="name-field">Induwara Pathirana</p>
-                                <label class="qdp-1-2">Lecturer, Faculty of Medicine, University of Colombo</label>
-                                <!-- <p class="ins-field">University of Colombo School of Computing</p> -->
+                    <?php foreach($data['projects'] as $project) : ?> 
+                        <div class="question-card">
+                            <div class="tag-top">
+                                    <img class="icon-1" src="<?php echo URLROOT;?>/img/pfp/<?php echo $project->pfp?>">
+                                <div class="name-tag">
+                                    <p class="name-field"><?php echo $project->firstName," ",$project->lastName;?></p>
+                                    <label class="qdp-1-2">Lecturer, Faculty of Medicine, University of Colombo</label>
+                                    <!-- <p class="ins-field">University of Colombo School of Computing</p> -->
+                                </div>
+                                <div></div>
                             </div>
-                            <div></div>
-                        </div>
-                        <div class="tag-question">
-                            <h2 class="question">Looking for Professional on Metaverse to Conduct a Training Session...</h2>
-                        </div>
-                        <div class="tag-question">
-                            <p class="description">I need a professional with strong understanding & knowledge on Metaverse, who able to deliver basic concept of Metaverse for my clients, especially relating Metaverse with education sector. That is to conduct a few classes (5) about Metaverse with the aims to let target audience have basic understanding on Metaverse and the future development of it. Preferably someone who can teach in English, will be credited too.</p>
-                        </div>
-                        
-                        <div class="tag-detail">
-                            <p><b>Deadline: </b>20th December 2022</p>
-                            <p><b>Slots available: </b>22</p>
-                            <p><b>Type: </b>Shifts</p>
-                            <p><b>Availability: </b>Open to all undergraduates in the field of Computing</p>
-                            <p><b>Payment: </b>LKR 10000 per Hour</p>
-                        </div>
-                        <div class="tag-field">
-                            <button class="tag-button">Computer Science</button>
-                            <button class="tag-button">IT</button>
-                        </div>
-                        <div class="tag-bottom">
-                            <label class="qdp-1-2">Published: October 25, 2022<br>Project duration: More than 6 months</label><a href="login-form.php"><button class="answer-btn" formaction="#">Apply Now!</button></a>  
-                        </div>
+                            <div class="tag-question">
+                                <h2 class="question"><?php echo $project->title;?></h2>
+                            </div>
+                            <div class="tag-question">
+                                <p class="description"><?php echo $project->description;?></p>
+                            </div>
+                            
+                            <div class="tag-detail">
+                                <p><b>Deadline: </b><?php echo $project->deadline;?></p>
+                                <p><b>Slots available: </b><?php echo $project->availableslot;?></p>
+                                <p><b>Type: </b><?php echo $project->type;?></p>
+                                <p><b>Availability: </b><?php echo $project->availability;?></p>
+                                <p><b>Payment: </b>LKR <?php echo $project->payment;?></p>
+                            </div>
+                            <div class="tag-field">
+                                <button class="tag-button">Computer Science</button>
+                                <button class="tag-button">IT</button>
+                            </div>
+                            <div class="tag-bottom">
+                                <label class="qdp-1-2">Published: October 25, 2022<br>Project duration: <?php echo $project->duration;?></label><a href="login-form.php"><button class="answer-btn" formaction="#">Apply Now!</button></a>  
+                            </div>
 
-                    </div>
-
+                        </div>
+                    <?php endforeach; ?>
             
                 </div>
                 <div class="RHS">
-                    <form action="myProjects.php"><button type="submit" style="float:right" class="read-more attend">My Project</button></form>
-                    <form action="addProject.php"><button type="submit" style="float:right" class="read-more attend">Add Project</button></form><br><br>
+                    <form action="<?php echo URLROOT;?>/projects/viewMyProjects"><button type="submit" style="float:right" class="read-more attend">My Project</button></form>
+                    <form action="<?php echo URLROOT;?>/projects/add"><button type="submit" style="float:right" class="read-more attend">Add Project</button></form><br><br>
                     <div class="filter-div">
                         <div style="display:flex">
                             <img src="../images/filter.png">

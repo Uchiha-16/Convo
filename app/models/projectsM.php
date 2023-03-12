@@ -44,6 +44,7 @@
         $row = $this->db->single();
         return $row;
     }
+
     //Insert Tag
     // public function projectTag($tag, $LastID) {
     //         $this->db->query('INSERT INTO tag (QID, tag) VALUES(:QID, :tag)');
@@ -67,6 +68,24 @@
     //     $row = $this->db->resultSet();
     //     return $row;
     // }
+
+    //----------------------------------View All Projects-----------------------------------------------------------
+    //get project
+    public function getAllProjects() {
+        $this->db->query('SELECT * FROM project inner join user on project.expertID = user.userID');
+        $row = $this->db->resultSet();
+        return $row;
+    }
+    
+    //-------------------------------View My Projects---------------------------------------------------------------
+    //get project
+    public function getMyProjects() {
+        $this->db->query('SELECT * FROM project inner join user on project.expertID = user.userID WHERE project.expertID = :userID');
+        $this->db->bind(':userID', $_SESSION['userID']);
+        $row = $this->db->resultSet();
+        return $row;
+    }
+
 
 }
 ?>

@@ -84,7 +84,7 @@
                             }
                         }
                             flash('reg_flash','Project Added Successfully');
-                            redirect('projects/projects');
+                            redirect('projects/home');
                         
                     } else {
                         die('Something went wrong');
@@ -114,15 +114,26 @@
             }
         }
 
-        public function viewProjects(){
-            $userID = $_SESSION['userID'];
-            $projects = $this->projectModel->getProjects($userID);
+        public function viewAllProjects(){
+            $projects = $this->projectModel->getAllProjects();
+            //$userDetails = $this->projectModel->getAllUsers($userID);
             $data = [
                 'projects' => $projects
+                //'userDetails' => $userDetails
             ];
-            $this->view('projects/Projects', $data);
+            $this->view('projects/home', $data);
         }
 
+        public function viewMyProjects(){
+            $userID = $_SESSION['userID'];
+            $projects = $this->projectModel->getMyProjects();
+            //$userDetails = $this->projectModel->getAllUsers($userID);
+            $data = [
+                'projects' => $projects
+                
+            ];
+            $this->view('projects/myProjects', $data);
+        }
 
     }
 
