@@ -86,6 +86,58 @@
         return $row;
     }
 
+    public function getProjectTags($PID) {
+        $this->db->query('SELECT * FROM questiontag WHERE projectID = :PID');
+        $this->db->bind(':PID', $PID);
+        $row = $this->db->resultSet();
+        return $row;
+    }
+
+
+
+    //--------------------------------Edit Projects---------------------------------------------------------------
+    public function editProject($data) {
+        $this->db->query('UPDATE project SET title = :title, description = :description, deadline = :deadline, availableslot = :slot, type = :type, availability = :availability, payment = :payment, duration = :duration WHERE PID = :PID');
+        // Bind values
+        $this->db->bind(':title', $data['title']);
+        $this->db->bind(':description', $data['description']);
+        $this->db->bind(':deadline', $data['deadline']);
+        $this->db->bind(':slot', $data['slot']);
+        $this->db->bind(':type', $data['type']);
+        $this->db->bind(':availability', $data['availability']);
+        $this->db->bind(':payment', $data['payment']);
+        $this->db->bind(':duration', $data['duration']);
+        $this->db->bind(':PID', $data['PID']);
+        
+        // Execute
+        if($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function getProjectByID($PID) {
+        $this->db->query('SELECT * FROM project WHERE PID = :PID');
+        $this->db->bind(':PID', $PID);
+        $row = $this->db->single();
+        return $row;
+    }
+    
+
+    //--------------------------------Delete Projects---------------------------------------------------------------
+    public function deleteProject($PID) {
+        $this->db->query('DELETE FROM project WHERE PID = :PID');
+        // Bind values
+        $this->db->bind(':PID', $PID);
+        
+        // Execute
+        if($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 }
 ?>

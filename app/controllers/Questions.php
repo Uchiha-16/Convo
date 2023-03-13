@@ -209,7 +209,9 @@
                     die('Something went wrong');
                     redirect('questions/myQuestions');
                 }
-            }
+        }
+
+        
         
     }
 ?>

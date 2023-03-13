@@ -1,117 +1,117 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
         <link href="<?php echo URLROOT; ?>/css/style1.css" rel="stylesheet" type="text/css"/>
-        <link rel='stylesheet' type='text/css' media='screen' href="<?php echo URLROOT; ?>/css/expert-home.css">
-        <link rel='stylesheet' type='text/css' media='screen' href="<?php echo URLROOT; ?>/css/project-home.css">
         <style>
             .nav{
                 grid-template-columns: 5% 6% 6% 6% 51% 10% 4% 4% 4%;
-            }
-            .icon-1{
-                width: 50px;
-                height: 50px;
-                align-items: center;
-                border: 1px solid #bdbdbd;
-                border-radius: 50%;
-                border-color: #000000 1px solid;
-                margin-right: 10px;
-            }
-            .name-field{
-                margin: 0;
-                padding: 0;
-            }
-            .name-tag{
-                margin-left: 1rem;
-            }
-            .tag-top{
-                padding-bottom: 1rem;
-                border-bottom: 1px solid rgba(128,128,128, .4);
-            }
-            .question {
-                font-size: 18px;
-            }
-            .description {
-                font-size: 13px;
-                color: #4f4f4f;
-            }
-            .tag-button{
-                line-height: 22px;
-                padding: 0 22px 0 22px;
-                width: auto;
-                margin-right: 1rem;
-            }
-            .tag-field {
-                font-size: 10px;
-                margin-top: 20px;
-                margin-bottom: 20px;
-                color: #6B6B6B;
-            }
-            .tag-field button{
-                color: #6B6B6B;
-            }
-            .tag-detail{
-                display: inline;
             }
         </style>
     </head>
 <body>
 <?php require APPROOT . '/views/inc/components/Enavbar.php'; ?>
 
-<div class="container-div">
-            <div class="content-body">
-                <div class="LHS">
-                    <br><br>
-                    <div class="home-item1-1">
-                        <h3 class="home-head">Connecting People with a Passion for doing...</h3>
-                    </div>
+    <div class="container-div">
+        <div class="content-body">
+            <div class="LHS">
+                <div class="screen">
+                    <h3 class="screen-title">Add Project</h3>
+                    <div><hr></div>
+                    <form action="<?php echo URLROOT;?>/projects/edit/<?php echo $data['PID']; ?>" method="POST">
+                        <div class="form-group">
+                            <label for="title">Title<span class="star">*</span></label><br>
+                            <div class="form-field-div">
+                                <input type="text" name="title" id="title" class="form-control" placeholder="Enter title" value="<?php echo $data['title'];?> required><br><br>
+                            </div>
 
-                    <?php foreach($data['projects'] as $project) : ?> 
-                        <div class="question-card">
-                            <div class="tag-top">
-                                    <img class="icon-1" src="<?php echo URLROOT;?>/img/pfp/<?php echo $_SESSION['pfp']?>">
-                                <div class="name-tag">
-                                    <p class="name-field"><?php echo $_SESSION['firstName']," ",$_SESSION['lastName'];?></p>
-                                    <label class="qdp-1-2">Lecturer, Faculty of Medicine, University of Colombo</label>
-                                    <!-- <p class="ins-field">University of Colombo School of Computing</p> -->
+                            <div class="form-field-1">
+                                <div class="form-field-div">
+                                    <label for="tag">Field</label><br>
+                                    <select name="tag" id="tag" class="form-control" required>
+                                        <!-- <option value="Computer Science">Computer Science</option>
+                                        <option value="Information Technology">Information Technology</option>
+                                        <option value="Software Engineering">Software Engineering</option>
+                                        <option value="Data Science">Data Science</option> -->
+                                        <?php $tagArray = explode(",", $data['tags']->tags); ?>
+                                        <?php foreach ($tagArray as $tag) : ?>
+                                            <option value="<?php echo $tag; ?>"><?php echo $tag; ?></option>
+                                        <?php endforeach; ?>
+                                        <?php 
+                                            // $result1=mysqli_query ($conn,"SELECT tag FROM usertag WHERE $_SESSION[userID]=usertag.userID");
+                                            // while($row1=mysqli_fetch_array($result1)){
+                                            //     echo "<option value='$row1[tag]'>$row1[tag]</option>";
+                                            // }
+                                        ?>
+                                    </select><br><br>
                                 </div>
-                                <div></div>
-                            </div>
-                            <div class="tag-question">
-                                <h2 class="question"><?php echo $project->title;?></h2>
-                            </div>
-                            <div class="tag-question">
-                                <p class="description"><?php echo $project->description;?></p>
+                                
+                                <div class="form-field-div">
+                                    <label for="slot">Available Slots</label><br>
+                                    <input type="text" name="slot" id="slot" class="form-control" value="<?php echo $data['slot'];?> required><br><br>
+                                </div>
                             </div>
                             
-                            <div class="tag-detail">
-                                <p><b>Deadline: </b><?php echo $project->deadline;?></p>
-                                <p><b>Slots available: </b><?php echo $project->availableslot;?></p>
-                                <p><b>Type: </b><?php echo $project->type;?></p>
-                                <p><b>Availability: </b><?php echo $project->availability;?></p>
-                                <p><b>Payment: </b>LKR <?php echo $project->payment;?></p>
-                            </div>
-                            <div class="tag-field">
-                                <button class="tag-button">
-                                    <div class="tag">Computer Science</div>
-                                </button>
-                            </div>
-                            <form action="<?php echo URLROOT;?>/projects/edit/<?php echo $project->PID;?>" style="width: 50%; float:left">
-                                <button class="read-more edit-btn" type="submit"> <img style="width: 17px;" src="../img/edit.png">Edit</button>
-                            </form>
-                            <form action="" style="width: 40%; float:left"></form>
-                            <form action="<?php echo URLROOT;?>/projects/delete/<?php echo $project->PID;?>" style="width: 50%; float:left">
-                                <button class="read-more edit-btn" onclick="return confirm('Are you sure you want to delete this record?')"> <img style="width: 17px;" src="../img/delete.png">Delete</button>
-                            </form>
-                            <div class="tag-bottom">
-                                <label class="qdp-1-2">Published: October 25, 2022<br>Project duration: <?php echo $project->duration;?></label><a href="login-form.php"><button class="answer-btn" formaction="#">Apply Now!</button></a>  
+                            <div class="form-field-2">
+                                <div class="form-field-div">
+                                    <label for="deadline">Deadline</label><br>
+                                    <input type="date" name="deadline" id="deadline" class="form-control" required><br><br>
+                                </div>
+                                
+                                <div class="form-field-div">
+                                    <label for="type">Type</label><br>
+                                    <select name="type" id="type" class="form-control">
+                                        <option value="Project">Project</option>
+                                        <option value="Research">Research</option>
+                                    </select><br><br>
+                                </div>
+                                
+                                <div class="form-field-div">
+                                    <label for="availability">Availability</label><br>
+                                    <select name="availability" id="availability" class="form-control">
+                                        <option value="Part-time">Part-time</option>
+                                        <option value="Full-time">Full-time</option>
+                                    </select><br><br>
+                                </div>
                             </div>
 
+                            <div class="form-field-1">
+                                <div class="form-field-div">
+                                    <label for="payment">Payment</label><br>
+                                    <input type="currency" name="payment" id="payment" class="form-control" required><br><br>
+                                </div>
+                                <div class="form-field-div">
+                                    <label for="duration">Duration</label><br>
+                                    <select name="duration" id="duration" class="form-control">
+                                        <option value="3 months">3 months</option>
+                                        <option value="6 months">6 months</option>
+                                        <option value="1 year">1 year</option>
+                                        <option value="more than a year">More than a year</option>
+                                    </select><br><br>
+                                </div>
+                                
+                            </div>
+                            
+                            <div>
+                                <label for="description">Description</label><br>
+                                <textarea name="description" id="description" class="form-textarea" placeholder="Enter description" required></textarea><br><br>
+                            </div>
+                            
+                            <div class="button-field">
+                                <button type="submit" name="submit" value="Submit" class="submit-btn"><center>Post</center></button>
+                                <button class="discard-btn" onclick="confirmation()"><center>Discard</center></button>
+                            </div>
+                            
                         </div>
-                    <?php endforeach; ?>
-            
+
+                    </form>
+                    
+
+
+
+
                 </div>
+            </div>
                 <div class="RHS">
-                    <form action="<?php echo URLROOT;?>/projects/viewAllProjects"><button type="submit" style="float:right" class="read-more attend">All Projects</button></form>
-                    <form action="addProject.php"><button type="submit" style="float:right" class="read-more attend">Add Project</button></form><br><br>
+                    <form action="<?php echo URLROOT;?>/projects/viewAllProjects"><button type="submit" style="float:right" class="read-more attend">Projects</button></form>
+                    <form action="myProjects.php"><button type="submit" style="float:right" class="read-more attend">My Projects</button></form>
                     <div class="filter-div">
                         <div style="display:flex">
                             <img src="../images/filter.png">
@@ -275,46 +275,61 @@
                                 </div>
                                 
                                 <!-- Filter 3 -->
-<!--
                                 <div class="checkbox-1">
-                                    <span class="checkbox-title" onclick="filter3()">Availability <i class="arrow up" id="up3" style="margin-left: 0.7rem;"></i><i class="arrow down" id="down3" style="margin-left: 0.7rem;"></i></span>
+                                    <span class="checkbox-title" onclick="filter3()">Expert <i class="arrow up" id="up3" style="margin-left: 4.3rem;"></i><i class="arrow down" id="down3" style="margin-left: 6.66rem;"></i></span>
                                     <ul id="checkbox-3">
                                         <li>
                                             <label for="checkbox1">
-                                                <input type="checkbox" value="last 3 months" name="QA[]" id="checkbox1"/>My questions
+                                                <input type="checkbox" value="last 3 months" name="publishDate[]" id="checkbox1"/>Varsha Wijethunge
                                             </label>
                                         </li>     
                                         <li>
                                             <label for="checkbox2">
-                                                <input type="checkbox" value="last 6 months" name="QA[]" id="checkbox2"/>Answered
+                                                <input type="checkbox" value="last 6 months" name="publishDate[]" id="checkbox2"/>Induwara Pathirana
                                             </label>
                                         </li>        
                                         <li>
                                             <label for="checkbox3">
-                                                <input type="checkbox" value="last year" name="QA[]" id="checkbox3"/>Not answered
+                                                <input type="checkbox" value="last year" name="publishDate[]" id="checkbox3"/>John Silva
                                             </label>
                                         </li>
                                     </ul>
                                 </div>
--->
                                 
-                                
+                                <!-- Filter 4 -->
+                                <div class="checkbox-1">
+                                    <span class="checkbox-title" onclick="filter4()">Playlist <i class="arrow up" id="up4" style="margin-left: 4.3rem;"></i><i class="arrow down" id="down4" style="margin-left: 6.5rem;"></i></span>
+                                    <ul id="checkbox-4">
+                                        
+                                    </ul>
+                                </div>
                                 
                             </form>
+                        </div>
                     </div>
                 </div>
-            </div>
             </div>
             <div>
                 <footer><a href="index.php">About Us</a> <p> | </p> &copy; Convo 2022 All rights reserved.</footer>
             </div>
         </div>
         
+        <!-- View
+        <div class="video-view" id="1">
+            <img src="../images/cancel.png" class="cancel" onclick="cancel()">
+            <iframe width="550" height="325" src="https://www.youtube.com/embed/Nxtv1LfdSBk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <h3>What is the big problem or question that this new academic discipline that you keep talking about would address?</h3>
+            <div style="display:flex;">
+                <label class="qdp-1-2">21 July 2022</label>
+                <span class="qdp-1-2 qdp-1-3">By Varsha Wijethunge</span>
+            </div>
+        </div> -->
+        
         <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="arrow up"></i><br></button>
             
         <div id="body"></div>
-    
-    <script>
+        
+        <script>
             function view(){
                 document.getElementById("1").style.display = "grid";
             }
@@ -322,7 +337,8 @@
                 document.getElementById("1").style.display = "none";
             }
         </script>
-    <script>
+        
+        <script>
             //Get the button:
             mybutton = document.getElementById("myBtn");
 
@@ -343,7 +359,8 @@
               document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
             }
         </script>
-    <script>
+        
+        <script>
             /* When the user clicks on the button, 
             toggle between hiding and showing the dropdown content */
             function drop() {
@@ -405,8 +422,17 @@
                 }
             }
         </script>
+        
+
+
+
+
+
 
 </body>
 
 
+
+
 <?php require APPROOT . '/views/inc/footer.php'; ?>
+  
