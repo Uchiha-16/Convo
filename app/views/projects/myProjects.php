@@ -92,13 +92,12 @@
                             <div class="tag-field">
                                 <button class="tag-button">
                                     <div class="tag">Computer Science</div>
-                                </button>
                             </div>
-                            <form action="<?php echo URLROOT;?>/projects/edit/<?php echo $project->PID;?>" style="width: 50%; float:left">
+                            <form action="<?php echo URLROOT;?>/Projects/edit/<?php echo $project->PID;?>" style="width: 50%; float:left">
                                 <button class="read-more edit-btn" type="submit"> <img style="width: 17px;" src="../img/edit.png">Edit</button>
                             </form>
                             <form action="" style="width: 40%; float:left"></form>
-                            <form action="<?php echo URLROOT;?>/projects/delete/<?php echo $project->PID;?>" style="width: 50%; float:left">
+                            <form action="<?php echo URLROOT;?>/Projects/delete/<?php echo $project->PID;?>" style="width: 50%; float:left">
                                 <button class="read-more edit-btn" onclick="return confirm('Are you sure you want to delete this record?')"> <img style="width: 17px;" src="../img/delete.png">Delete</button>
                             </form>
                             <div class="tag-bottom">
