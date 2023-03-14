@@ -3,6 +3,14 @@
         public function __construct() {
             $this->projectModel = $this -> model('projectsM');
         }
+        
+        public function index(){
+            //$projects = $this->projectModel->getProjects();
+            $data = [
+                //'projects' => $projects
+            ];
+            $this->view('projects/index', $data);
+        }
 
         public function add(){
 
@@ -204,7 +212,7 @@
                 //Make sure errors are empty
                 if(empty($data['title_err']) && empty($data['content_err']) && empty($data['tag_err'])) {
                     // Adding Question
-                    if($this->projectModel->edit($data)) {
+                    if($this->projectModel->editProjects($data)) {
                         $LastID = $this->projectModel->getLastID();
                         foreach($data['tag'] as $tag){
                            if(!($this->projectModel->projectTag($tag, $LastID->PID)))
@@ -213,7 +221,7 @@
                             }
                         }
                             flash('reg_flash','Project Updated Successfully');
-                            redirect('projects/viewMyProjects');
+                            redirect('projects/myProjects');
                         
                     } else {
                         die('Something went wrong');
@@ -227,7 +235,7 @@
 
                 $project = $this->projectModel->getProjectByID($PID);
                 
-                if($project->userID != $_SESSION['userID']){
+                if($project->expertID != $_SESSION['userID']){
                     redirect('projects/viewMyProjects');
                 }
 
@@ -244,18 +252,19 @@
                     'title_err' => '',
                     'content_err' => '',
                     'tag_err' => '',
-                    'tags' => $tags,
+                    //'tags' => $tags,
                 ];
                 $this->view('projects/edit', $data);
             }
+            
         }
 
-        public function delete($PID){
+        public function deleteProject($PID){
             $project = $this->projectModel->getProjectByID($PID);
-            if($project->userID != $_SESSION['userID']){
+            if($project->expertID != $_SESSION['userID']){
                 redirect('projects/viewMyProjects');
             }
-            if($this->projectModel->delete($PID)){
+            if($this->projectModel->deleteProject($PID)){
                 flash('reg_flash','Project Deleted Successfully');
                 redirect('projects/viewMyProjects');
             } else {
@@ -264,8 +273,5 @@
             }
         }
     }
-
-
-
 
 ?>

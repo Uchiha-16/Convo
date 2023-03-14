@@ -230,10 +230,16 @@
                                 <?php echo "<script>var visibility = " . $visibility . ";</script>"; ?>
 
                                 <script>
-                                    var checkbox = document.querySelector("input[type='checkbox'][value='" + visibility + "']");
-                                    if (checkbox) {
-                                        checkbox.checked = true;
+                                    if(visibility == "anonymus"){
+                                        document.getElementById("anonymus").checked = true;
+                                    }else {
+                                        document.getElementById("anonymus").checked = false;
                                     }
+                                    // var checkbox = document.querySelector("input[type='checkbox'][value='" + visibility + "']");
+                                    // alert(checkbox);
+                                    // if (checkbox) {
+                                    //     checkbox.checked = true;
+                                    // }
                                 </script>
                             </tr>
                             <tr>

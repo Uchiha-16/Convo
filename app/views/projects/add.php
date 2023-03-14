@@ -44,7 +44,7 @@
                 <div class="screen">
                     <h3 class="screen-title">Add Project</h3>
                     <div><hr></div>
-                    <form action="" method="POST">
+                    <form action="<?php echo URLROOT; ?>/Projects/add" method="POST">
                         <div class="form-group">
                             <label for="title">Title</label><br>
                             <div class="form-field-div">
