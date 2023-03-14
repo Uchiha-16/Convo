@@ -259,7 +259,7 @@
             
         }
 
-        public function delete($PID){
+        public function deleteProject($PID){
             $project = $this->projectModel->getProjectByID($PID);
             if($project->expertID != $_SESSION['userID']){
                 redirect('projects/viewMyProjects');
@@ -273,8 +273,5 @@
             }
         }
     }
-
-
-
 
 ?>
