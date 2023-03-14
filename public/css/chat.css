@@ -1,0 +1,82 @@
+.info p{
+    border-bottom: 1px solid rgba(128,128,128, .4);
+    width: 15rem;
+}
+.info input[type=search]{
+    width: 15rem;
+        height: 2rem;
+font-size: 13px;
+}
+.chat{
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+    padding: 1rem;
+    font-size: 14px;
+}
+
+.selected{
+    background: #D9D9D9;
+}
+.filter-div{
+    margin-top: 2.3rem;
+}
+.filter-div input[type=search]{
+    width: 10rem;
+    padding-right: 1rem;
+    padding-left: 1rem;
+}
+.filter-div p{
+    width: 10rem;
+}
+.qdp-1{
+    padding-left: 0;
+}
+.qdp-1 label{
+    font-size: 12px;
+}
+.qdp-1-2{
+    font-size: 9px;
+}
+.filter-div img {
+    width: 45px;
+}
+.qdp img {
+    width: 2.5rem;
+}
+.qdp{
+    margin-bottom: .5rem;
+}
+.content-display{
+    display: grid;
+    grid-template-rows: 85% 15%;
+}
+.send{
+    background: #1D8FAC;
+    box-shadow: inset 0px 4.69318px 14.0795px rgb(0 0 0 / 9%);
+    color: white;
+    display: flex;
+}
+.send input[type=search]{
+    background: transparent;  
+    box-shadow: none;
+        height: 100%;
+    font-size: 14px;
+    color: white;
+}
+.send input[type=search]::placeholder{
+    color: white;
+}
+.submit{
+    cursor: pointer;
+}
+.dlg-box{
+    display: flex;
+    column-gap: 1rem;
+align-items: center;
+}
+.dlg-box img{
+        width: 2rem;
+}
+.message p{
+        margin-bottom: 0;
+}

@@ -4,210 +4,160 @@
             $this->webinarModel = $this -> model('webinarM');
         }
 
-        // public function add(){
-        //     if($_SERVER['REQUEST_METHOD'] == 'POST') {
-        //         // Form is submitting
-        //         // Validate the data
-        //         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-        //         date_default_timezone_set('Asia/Colombo');
-        //         $checkbox_value = isset($_POST['visibility']) ? 'anonymus' : 'public';
-        //         $tag = isset($_POST['tag']) ? $_POST['tag'] : '0';
-        //         $resourceID = isset($_POST['resourceID']) ? $_POST['resourceID'] : '0';
+        public function add(){
 
-        //         //Input Data
-        //         $data = [
-        //             'title' => trim($_POST['title']),
-        //             'content' => trim($_POST['content']),
-        //             'tag' => $tag,
-        //             'date' => date('Y-m-d H:i:s'),
-        //             'visibility' => $checkbox_value,
-        //             'rating' => 0,
-        //             'resourceID' => $resourceID,    
-        //             'title_err' => '',
-        //             'content_err' => '',
-        //             'tag_err' => '',
-        //         ];
+            // my playlists
+            $webinarsPlaylist = $this->webinarModel->getPlaylist();
+            //$this->view('webinars/add', $data);
+            // Form is submitting
+            if($_SERVER['REQUEST_METHOD'] == 'POST') {
+                // Validate the data
+                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+                date_default_timezone_set('Asia/Colombo');
 
-        //         //validate each inputs
-        //         // Validate Title
-        //         if(empty($data['title'])) {
-        //             $data['title_err'] = 'Please enter Title';
-        //         }
+                //TAG
+                $tag = isset($_POST['tag']) ? $_POST['tag'] : '0';
 
-        //         // Validate Content
-        //         if(empty($data['content'])) {
-        //             $data['content_err'] = 'Please enter Content';
-        //         }
+                //PLAYLIST
+                $playlist = isset($_POST['playlist']) ? $_POST['playlist'] : '0';
 
-        //         // Validate Tag
-        //         if($data['tag'] == '0') {
-        //             $data['tag_err'] = 'Please Select One or More Tags';
-        //         }
+                //VIDEO LINK
+                $link = $_POST['link'];
+                $path = parse_url($link, PHP_URL_PATH); // extract the path component of the URL
+                $segments = explode('/', $path); // split the path into an array of segments
+                $last_segment = end($segments); // extract the last segment of the array
+                //Input Data
+                $data = [
+                    'title' => trim($_POST['title']),
+                    'tag' => $tag,
+                    'playlist' => $playlist,
+                    'newP' => isset($_POST['newP']) ? trim($_POST['newP']) : '',
+                    'videolink' => $last_segment,
+                    'thumbnail' => ($_FILES['thumbnail']),
+                    'thumbnail_name' => time().'_'.($_FILES['thumbnail']['name']),
+                    'date' => date('Y-m-d H:i:s'),
+                    'title_err' => '',
+                    'link_err' => '',
+                    'thumbnail_err' => '',
+                    'tag_err' => '',
+                    'playlist_err' => '',
+                ];
+                
+                //validate each inputs
+                // Validate Title
+                if(empty($data['title'])) {
+                    $data['title_err'] = 'Please Enter Title';
+                }
 
-        //         // if(empty($data['tag_err'])){
-        //         //     foreach($data['tag'] as $tag){
-        //         //        $experts =  $this->questionModel->getExpertID($tag);
+                //Validate thumbnail
+                if($data['thumbnail']['size'] > 0){
+                    if(uploadImage($data['thumbnail']['tmp_name'], $data['thumbnail_name'], '/img/thumbnails/')) {
+                        //done
+                    }else{
+                        $data['thumbnail_err'] = 'Something Went Wrong when uploading the image';
+                    }
+                }else{
+                    $data['thumbnail_name'] = null;
+                }
 
-        //         //     }
-        //         // }
+                // Validate videolink
+                if(empty($data['videolink'])) {
+                    $data['link_err'] = 'Please Enter Video Link';
+                }else{
+                    $link = trim($link);
+          
+                    // Check if the input matches the expected format of a YouTube video URL
+                    if(!(preg_match('/^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/(watch\?v=)?([a-zA-Z0-9_-]{11})|(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/embed\/([a-zA-Z0-9_-]{11})/', $link))) {
+                        $data['link_err'] = 'Please Enter Valid Video Link';
+                    }
+                }
 
-        //         // Make sure errors are empty
-        //         if(empty($data['title_err']) && empty($data['content_err']) && empty($data['tag_err'])) {
-        //             // Adding Question
-        //             if($this->questionModel->add($data)) {
-        //                 $LastID = $this->questionModel->getLastID();
-        //                 foreach($data['tag'] as $tag){
-        //                    if(!($this->questionModel->questionTag($tag, $LastID->QID)))
-        //                     {
-        //                         die('Something went wrong with inserting the tags');
-        //                     }
-        //                 }
-        //                     flash('reg_flash','Question Added Successfully');
-        //                     redirect('Pages/seeker');
+                // Validate Tag
+                if($data['tag'] == '0') {
+                    $data['tag_err'] = 'Please Select One or More Tags';
+                }
+
+                // Validate Playlist
+                if($data['playlist'] == '0' && empty($data['newP'])) {
+                    $data['playlist_err'] = 'Please Select One or More Playlists';
+                }
+
+                // Make sure errors are empty
+                if(empty($data['title_err']) && empty($data['link_err']) && empty($data['tag_err']) && empty($data['thumbnail_err']) && empty($data['playlist_err'])) {
+                    // Adding Webinar
+                    if($this->webinarModel->add($data)) {
+                        $LastID = $this->webinarModel->getLastID();
+                        foreach($data['tag'] as $tag){
+                           if(!($this->webinarModel->webinarTag($tag, $LastID->webinarID)))
+                            {
+                                die('Something went wrong when inserting the tags');
+                            }
+                        }
                         
-        //             } else {
-        //                 die('Something went wrong');
-        //             }
-        //         } else {
-        //             // Load view with errors
-        //             $this->view('questions/add', $data);
-        //         }
-        //     }
-        //     else {
-        //         $data = [
-        //             'title' => '',
-        //             'content' => '',
-        //             'tag' => '',
-        //             'date' => '',
-        //             'visibility' => '',
-        //             'rating' => '',
-        //             'resourceID' => '',
-        //             'title_err' => '',
-        //             'content_err' => '',
-        //             'tag_err' => '',
-        //         ];
-        //         $this->view('questions/add', $data);
-        //     }
-        // }
+                        if(count($data['playlist']) != 0){
+                            foreach($data['playlist'] as $playlist){
+                                if(!($this->webinarModel->webinarPlaylist($playlist, $LastID->webinarID))){
+                                        die('Something went wrong when Selecting the Playlist');
+                                }
+                            }
+                        }
+                        
+                            flash('reg_flash','Webinar Added Successfully!');
+                            redirect('webinars/home');
+
+                        if(isset($data['newP'])){
+                            $this->webinarModel->webinarPlaylist($data['newP'], $LastID->webinarID);
+                        }
+
+                    } else {
+                        die('Something went wrong');
+                    }
+                } else {
+                    // Load view with errors
+                    $this->view('webinars/add', $data);
+                }
+            }
+            else {
+                $data = [
+                    'title' => '',
+                    'tag' => '',
+                    'playlist' => '',
+                    'videolink' => '',
+                    'thumbnail' => '',
+                    'date' => '',  
+                    'title_err' => '',
+                    'link_err' => '',
+                    'thumbnail_err' => '',
+                    'tag_err' => '',
+                    'playlist_err' => '',
+                    'webinarsPlaylist' => $webinarsPlaylist,
+                ];
+                $this->view('webinars/add', $data);
+            }
+
+            
+        }
+
+        
+
+        public function myWebinars(){
+            $webinars = $this->webinarModel->getmywebinars();
+            
+            $data = [
+                'webinars' => $webinars,
+            ];
+            
+            $this->view('webinars/myWebinars', $data);
+        }
 
         public function home(){
+            $webinars = $this->webinarModel->getwebinars();
             
-
-            $data = [];
+            $data = [
+                'webinars' => $webinars,
+            ];
+            
             $this->view('webinars/home', $data);
-              
-
         }
-        // public function edit($QID){
-        //     if($_SERVER['REQUEST_METHOD'] == 'POST') {
-        //         // Form is submitting
-        //         // Validate the data
-        //         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-        //         date_default_timezone_set('Asia/Colombo');
-        //         $checkbox_value = isset($_POST['visibility']) ? 'anonymus' : 'public';
-        //         $tag = isset($_POST['tag']) ? $_POST['tag'] : '0';
-        //         $resourceID = isset($_POST['resourceID']) ? $_POST['resourceID'] : '0';
-                
-        //         //Input Data
-        //         $data = [
-        //             'QID' => $QID,
-        //             'title' => trim($_POST['title']),
-        //             'content' => trim($_POST['content']),
-        //             'tag' => $tag,
-        //             'date' => date('Y-m-d H:i:s'),
-        //             'visibility' => $checkbox_value,
-        //             'resourceID' => $resourceID,    
-        //             'title_err' => '',
-        //             'content_err' => '',
-        //             'tag_err' => '',
-        //         ];
-
-                
-
-        //         //validate each inputs
-        //         // Validate Title
-        //         if(empty($data['title'])) {
-        //             $data['title_err'] = 'Please enter Title';
-        //         }
-
-        //         // Validate Content
-        //         if(empty($data['content'])) {
-        //             $data['content_err'] = 'Please enter Content';
-        //         }
-
-        //         // Validate Tag
-        //         if($data['tag'] == '0') {
-        //             $data['tag_err'] = 'Please Select One or More Tags';
-        //         }
-
-        //         // if(empty($data['tag_err'])){
-        //         //     foreach($data['tag'] as $tag){
-        //         //        $experts =  $this->questionModel->getExpertID($tag);
-
-        //         //     }
-        //         // }
-
-        //         // Make sure errors are empty
-        //         if(empty($data['title_err']) && empty($data['content_err']) && empty($data['tag_err'])) {
-        //             // Updating the Question
-        //             $this->questionModel->deleteQuestionTag($QID);
-        //             if($this->questionModel->edit($data)) {
-        //                 foreach($data['tag'] as $tag){
-        //                    if(!($this->questionModel->questionTag($tag, $QID)))
-        //                     {
-        //                         die('Something went wrong with inserting the tags');
-        //                     }
-        //                 }
-        //                     flash('reg_flash','Question Updated Successfully');
-        //                     redirect('questions/myQuestions');
-                        
-        //             } else {
-        //                 die('Something went wrong');
-        //             }
-        //         } else {
-        //             // Load view with errors
-        //             $this->view('questions/editQuestion', $data);
-        //         }
-        //     }
-        //     else {
-
-        //         $question = $this->questionModel->getQuestionByID($QID);
-                
-        //         //check the owner of the question
-        //         if($question->userID != $_SESSION['userID']){
-        //             redirect('questions/myQuestions');
-        //         }
-
-        //         $data = [
-        //             'QID' => $QID,
-        //             'title' => $question->title,
-        //             'content' => $question->content,
-        //             'tag' =>  $question->tags,
-        //             'visibility' => $question->visibility,
-        //             'title_err' => '',
-        //             'content_err' => '',
-        //             'tag_err' => '',
-        //         ];
-        //         $this->view('questions/editQuestion', $data);
-        //     }
-        // }
-
-        // public function delete($QID) {
-                // Get existing post from model
-            //     $question = $this->questionModel->getQuestionByID($QID);
-            //     //check the owner of the question
-            //     if($question->userID != $_SESSION['userID']){
-            //         redirect('questions/myQuestions');
-            //     }
-
-            //     if($this->questionModel->delete($QID)) {
-            //         flash('reg_flash', 'Question Deleted Successfully!');
-            //         redirect('questions/myQuestions');
-            //     } else {
-            //         die('Something went wrong');
-            //         redirect('questions/myQuestions');
-            //     }
-            // }
-        
     }
 ?>

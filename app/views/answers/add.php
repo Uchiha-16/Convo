@@ -1,385 +1,223 @@
-<link href="../stylesheets/event.css" rel="stylesheet" type="text/css"/>
-        <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
-        <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
-        <link rel="stylesheet" href="../stylesheets/mobile.css" rel="stylesheet" type="text/css">
+<?php require APPROOT . '/views/inc/header.php'; ?>
+<link href="<?php echo URLROOT; ?>/css/event.css" rel="stylesheet" type="text/css" />
 
-        <!-- scripts -->
-        <script src="https://kit.fontawesome.com/a061f2abcc.js" crossorigin="anonymous"></script>
-        
-        
-        <!-- styles -->
-        <style>
-            .nav{
-                grid-template-columns: 5% 6% 6% 6% 51% 10% 4% 4% 4%;
-            }
-            .add-event textarea{
-                height: 23rem;
-            }
-            .filter-div{
-/*                margin-top: 3.6rem;*/
-                display: none;
-            }
-        </style>
-        
-    </head>
-    <body>
-        <!-- nav bar -->
-        <?php include 'Enavbar.php'; ?>
-        
-        <!-- body content -->
-        <div class="container-div">
-            <div class="content-body">
-                <div class="LHS">
-                    <br><br><br>
-                    
-                    <!-- Question 1 -->
-                    <div class="question-div">
-                        <div class="content-display">
-                            <h2>What are some alternatives to String Theory that have been researched/developed?</h2>
-                            <p>The only finite mathematical framework that incorporates both the standard model of particle physics and gravity under one umbrella that I am aware of is string theory. I would like to know whether there are any other mathematical possibilities exist which do not depend on supersymmetry and still consistent with the standard model and gravity and produce finite answers. In a nutshell my question is: can there be any alternative to string theory? (Remember, I am not talking about only gravity. I am talking about gravity as well as other phenomena).</p>
-                            <div class="qdp">
-                                <div>
-                                    <img src="../images/p2.jpg"/>
-                                </div>
-                                <div class="qdp-1">
-                                    <label>Dilky Liyanage</label><br>
-                                    <label class="qdp-1-2">University of Colombo</label>
-                                </div>
+
+
+
+<style>
+    .nav {
+        grid-template-columns: 5% 6% 6% 6% 51% 10% 4% 4% 4%;
+    }
+</style>
+</head>
+
+<body>
+
+
+    <?php if (($_SESSION['role']) == 'expert') : ?>
+        <?php require APPROOT . '/views/inc/components/Enavbar.php'; ?>
+    <?php elseif (($_SESSION['role']) == 'expert/mod') : ?>
+        <?php require APPROOT . '/views/inc/components/EMnavbar.php'; ?>
+    <?php endif; ?>
+
+    <!-- body content -->
+    <div class="container-div">
+        <div class="content-body">
+            <div class="LHS">
+                <br><br><br>
+
+                <!-- Question 1 -->
+                <div class="question-div">
+                    <div class="content-display">
+                        <h2><?php echo $data['question']->title; ?></h2>
+                        <p style="font-size: 15px;"><?php echo $data['question']->content; ?>.</p>
+                        <div class="qdp" style="padding-top: 1rem; border-top: 1px solid rgba(128,128,128, .2);">
+                            <div>
+                            <?php if ($data['question']->visibility == "anonymus") : ?>
+                                <img src="<?php echo URLROOT; ?>/img/pfp/anonymus.png" />
                             </div>
-                            <div class="info">
+                            <div class="qdp-1">
+                                <label class="expert">Anonymus User</label> <br>
+                            <?php else : ?>
+                                <img src="<?php echo URLROOT; ?>/img/pfp/<?php echo $data['Quser']->pfp; ?> " />
+                            </div>
+                            <div class="qdp-1">
+                                <label><?php echo $data['Quser']->fName . " " . $data['Quser']->lName; ?></label><br>
+                                <?php if (isset($_SESSION['role'])) : ?>
+                                <?php if (($_SESSION['role']) == 'expert') : ?>
+                                    <!-- should be experts qualification in short -->
+                                    <label class="qdp-1-2"><?php echo $data['Quser']->uname; ?></label>
+                                <?php endif; ?>
+                                <?php endif; ?>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                        <div class="info">
                             <div class="tags">
                                 <label>Category</label><br>
-                                <div class="tag">Physics</div>
-                                <div class="tag">Science</div>
-                                <div class="tag">Mathematics</div>
+                                <?php $tagArray = explode(",", $data['question']->tags); ?>
+                                <?php foreach ($tagArray as $tag) : ?>
+                                    <div class="tag"><?php echo $tag ?></div>
+                                <?php endforeach; ?>
+                                <br><br>
                             </div>
                         </div>
-                            <div class="date-count">
-                                <label>October 2, 2022</label>
-                                <label style="font-weight:600; float:right">1 Answer</label><br>
-                                <button class="read-more" style="width:100%;">Save for later</button>
-                            </div>
-                        </div>
-                    </div> 
-                    
-                    <!-- Answer -->
-                    <div class="question-div add-event">
-                        <form action="" method="POST">
-                            <h3 style="color: #0D5F75;">Add Answer</h3>
-                            <table>
-                                <tr>
-                                    <td colspan="3">
-                                        <p class="desc">Make sure to check the other answers before adding the same answer again. Enter a clear and concise answer that others will easily understand.</p>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3">
-                                        <div class="qdp">
-                                            <div>
-                                                <img src="../images/p1.jpg"/>
-                                            </div>
-                                            <div class="qdp-1">
-                                                <label>Varsha Wijethunge</label><br>
-                                                <label class="qdp-1-2">University of Colombo</label>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3">
-                                        <h4 style="margin-bottom:.5rem">Answer</h4>
-
-
-                                        <section>
-                                            <div class="row">
-                                                <div class="col">
-                                                    <div class="first box">
-                                                        <input id="font-size" type="number" value="16" min="1" max="100" onchange="f1(this)">
-                                                    </div>
-                                                    <div class="second box">
-                                                        <button type="button" onclick="f2(this)">
-                                                            <i class="fa-solid fa-bold"></i>
-                                                        </button>
-                                                        <button type="button" onclick="f3(this)">
-                                                            <i class="fa-solid fa-italic"></i>
-                                                        </button>
-                                                        <button type="button" onclick="f4(this)">
-                                                            <i class="fa-solid fa-underline"></i>
-                                                        </button>
-                                                    </div>
-                                                    <div class="third box">
-                                                        <button type="button" onclick="f5(this)">
-                                                            <i class="fa-solid fa-align-left"></i>
-                                                        </button>
-                                                        <button type="button" onclick="f6(this)">
-                                                            <i class="fa-solid fa-align-center"></i>
-                                                        </button>
-                                                        <button type="button" onclick="f7(this)">
-                                                            <i class="fa-solid fa-align-right"></i>
-                                                        </button>
-                                                    </div>
-                                                    <div class="fourth box">
-                                                        <button type="button" onclick="f8(this)">aA</button>
-                                                        <button type="button" onclick="f9()">
-                                                            <i class="fa-solid fa-text-slash"></i>
-                                                        </button>
-                                                        <input type="color" onchange="f10(this)">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <br>
-                                            <div class="row row1">
-                                                <div class="col col1">
-                                                    <textarea id="textarea1" class="inputform" type="text" name="desc" placeholder="Enter an explanation in text format..."></textarea>
-                                                </div>
-                                            </div>
-                                        </section>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3" style="padding-top: 1rem;">
-                                        <label for="file" id="attatchment">
-                                            <img src="../images/thumbnail.png"> Add Thumbnail
-                                            <input style="border: none; display:none;" type="file" id="file" name="pfp" value="">
-                                        </label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3">
-                                        <br><br>
-                                        <div class="add">
-                                            <button style="float:right" class="read-more attend submit" type="submit" name="create">Publish</button>
-                                            <button style="float:right" class="read-more attend submit" type="reset">Cancel</button>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-                        </form>
-                    </div>
-                    
-                </div>
-                
-                
-                
-                <div class="RHS">
-                    <div class="filter-div">
-                        <div style="display:flex">
-                            <img src="../images/filter.png">
-                            <label>Filters</label><button class="read-more go">Go</button>
-                        </div>
-                        <div>
-                            <form action="" method="POST">
-                                
-                                <!-- Filter 1 -->
-                                <div class="checkbox-1">
-                                    <span class="checkbox-title" onclick="filter1()">Category <i class="arrow up" id="up"></i><i class="arrow down" id="down"></i></span>
-                                    <ul id="checkbox-1">
-                                        <li>
-                                            <label for="checkbox1">
-                                                <input type="checkbox" value="agricultureScience" name="tag[]" id="checkbox1"/>Agriculture Science
-                                            </label>
-                                        </li>     
-                                        <li>
-                                            <label for="checkbox2">
-                                                <input type="checkbox" value="anthropology" name="tag[]" id="checkbox2"/>Anthropology
-                                            </label>
-                                        </li>        
-                                        <li>
-                                            <label for="checkbox3">
-                                                <input type="checkbox" value="biology" name="tag[]" id="checkbox3"/>Biology
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label for="checkbox4">
-                                                <input type="checkbox" value="Chemistry" name="tag[]" id="checkbox4"/>Chemistry
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label for="checkbox5">
-                                                <input type="checkbox" value="CS" name="tag[]" id="checkbox5"/>Computer Science
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label for="checkbox6">
-                                                <input type="checkbox" value="design" name="tag[]" id="checkbox6"/>Design
-                                            </label>
-                                        </li>       
-                                        <li>
-                                            <label for="checkbox7">
-                                                <input type="checkbox" value="economics" name="tag[]" id="checkbox7"/>Economics
-                                            </label>
-                                        </li>        
-                                        <li>
-                                            <label for="checkbox8">
-                                                <input type="checkbox" value="education" name="tag[]" id="checkbox8"/>Education
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label for="checkbox9">
-                                                <input type="checkbox" value="engineering" name="tag[]" id="checkbox9"/>Engineering
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label for="checkbox10">
-                                                <input type="checkbox" value="EA" name="tag[]" id="checkbox10"/>Entertaintment &amp; Arts
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label for="checkbox11">
-                                                <input type="checkbox" value="geoscience" name="tag[]" id="checkbox11"/>Geoscience
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label for="checkbox12">
-                                                <input type="checkbox" value="history" name="tag[]" id="checkbox12"/>History
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label for="checkbox13">
-                                                <input type="checkbox" value="law" name="tag[]" id="checkbox13"/>Law
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label for="checkbox14">
-                                                <input type="checkbox" value="linguistics" name="tag[]" id="checkbox14"/>Linguistics
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label for="checkbox15">
-                                                <input type="checkbox" value="literature" name="tag[]" id="checkbox15"/>literature
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label for="checkbox16">
-                                                <input type="checkbox" value="mathematics" name="tag[]" id="checkbox16"/>Mathematics
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label for="checkbox17">
-                                                <input type="checkbox" value="Medicine" name="tag[]" id="checkbox17"/>Medicine
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label for="checkbox18">
-                                                <input type="checkbox" value="linguistics" name="tag[]" id="checkbox18"/>Linguistics
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label for="checkbox19">
-                                                <input type="checkbox" value="philosophy" name="tag[]" id="checkbox19"/>Philosophy
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label for="checkbox20" for="checkbox1">
-                                                <input type="checkbox" value="physics" name="tag[]" id="checkbox20"/>Physics
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label for="checkbox21">
-                                                <input type="checkbox" value="PS" name="tag[]" id="checkbox21"/>Political Science
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label for="checkbox22">
-                                                <input type="checkbox" value="psychology" name="tag[]" id="checkbox22"/>Psychology
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label for="checkbox23">
-                                                <input type="checkbox" value="RS" name="tag[]" id="checkbox23"/>Religious Studies
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label for="checkbox24">
-                                                <input type="checkbox" value="socialScience" name="tag[]" id="checkbox24"/>Social Science
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label for="checkbox25">
-                                                <input type="checkbox" value="spaceScience" name="tag[]" id="checkbox25"/>Space Science
-                                            </label>
-                                        </li>
-                                    </ul>
-                                </div>
-                                
-                                <!-- Filter 2 -->
-                                <div class="checkbox-1">
-                                    <span class="checkbox-title" onclick="filter2()">Publish date <i class="arrow up" id="up2" style="margin-left: 4.3rem;"></i><i class="arrow down" id="down2" style="margin-left: 4.3rem;"></i></span>
-                                    <ul id="checkbox-2">
-                                        <li>
-                                            <label for="checkbox1">
-                                                <input type="checkbox" value="last 3 months" name="publishDate[]" id="checkbox1"/>Last 3 months
-                                            </label>
-                                        </li>     
-                                        <li>
-                                            <label for="checkbox2">
-                                                <input type="checkbox" value="last 6 months" name="publishDate[]" id="checkbox2"/>Last 6 months
-                                            </label>
-                                        </li>        
-                                        <li>
-                                            <label for="checkbox3">
-                                                <input type="checkbox" value="last year" name="publishDate[]" id="checkbox3"/>Last year
-                                            </label>
-                                        </li>
-                                    </ul>
-                                </div>
-                                
-                                <!-- Filter 3 -->
-                                <div class="checkbox-1">
-                                    <span class="checkbox-title" onclick="filter3()">Questions &amp; answers <i class="arrow up" id="up3" style="margin-left: 0.7rem;"></i><i class="arrow down" id="down3" style="margin-left: 0.7rem;"></i></span>
-                                    <ul id="checkbox-3">
-                                        <li>
-                                            <label for="checkbox1">
-                                                <input type="checkbox" value="last 3 months" name="QA[]" id="checkbox1"/>My questions
-                                            </label>
-                                        </li>     
-                                        <li>
-                                            <label for="checkbox2">
-                                                <input type="checkbox" value="last 6 months" name="QA[]" id="checkbox2"/>Answered
-                                            </label>
-                                        </li>        
-                                        <li>
-                                            <label for="checkbox3">
-                                                <input type="checkbox" value="last year" name="QA[]" id="checkbox3"/>Not answered
-                                            </label>
-                                        </li>
-                                    </ul>
-                                </div>
-                                
-                                <!-- Filter 4 -->
-                                <div class="checkbox-1">
-                                    <span class="checkbox-title" onclick="filter#()">Rating <i class="arrow up" id="up4" style="margin-left: 6.7rem;"></i><i class="arrow down" id="down4" style="margin-left: 6.7rem;"></i></span>
-<!--
-                                    <ul id="checkbox-3">
-                                        <li>
-                                            <label for="checkbox1">
-                                                <input type="checkbox" value="last 3 months" name="QA[]" id="checkbox1"/>My questions
-                                            </label>
-                                        </li>     
-                                        <li>
-                                            <label for="checkbox2">
-                                                <input type="checkbox" value="last 6 months" name="QA[]" id="checkbox2"/>Answered
-                                            </label>
-                                        </li>        
-                                        <li>
-                                            <label for="checkbox3">
-                                                <input type="checkbox" value="last year" name="QA[]" id="checkbox3"/>Not answered
-                                            </label>
-                                        </li>
-                                    </ul>
--->
-                                </div>
-                                
-                            </form>
+                        <div class="date-count">
+                            <label><?php echo convertTime($data['question']->date); ?></label>
+                            <label style="font-weight:600; float:right">Overall Rating: <?php echo $data['question']->rating;?></label><br>
                         </div>
                     </div>
                 </div>
+
+                <!-- Answer -->
+                <div class="question-div add-event">
+                    <form action="<?php echo URLROOT; ?>/answers/add/<?php echo $data['question']->QID; ?>" method="POST" enctype="multipart/form-data">
+                        <table>
+                            <tr>
+                                <td colspan="3">
+                                    <p class="p1">Add an Answer</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" style="border-bottom: 1px solid rgba(128,128,128, .2); padding-bottom: 1rem;">
+                                    <h4 style="margin-bottom:1.5rem">Description<span class="star">*</span></h4>
+
+                                    <!-- Text Editor -->
+                                    <div class="textEditor">
+                                        <div>
+                                            <div class="options">
+                                                <!-- Text Format -->
+                                                <button id="bold" class="option-button format">
+                                                    <i class="fa-solid fa-bold"></i>
+                                                </button>
+                                                <button id="italic" class="option-button format">
+                                                    <i class="fa-solid fa-italic"></i>
+                                                </button>
+                                                <button id="underline" class="option-button format">
+                                                    <i class="fa-solid fa-underline"></i>
+                                                </button>
+                                                <button id="strikethrough" class="option-button format">
+                                                    <i class="fa-solid fa-strikethrough"></i>
+                                                </button>
+                                                <button id="superscript" class="option-button script">
+                                                    <i class="fa-solid fa-superscript"></i>
+                                                </button>
+                                                <button id="subscript" class="option-button script">
+                                                    <i class="fa-solid fa-subscript"></i>
+                                                </button>
+                                                <!-- List -->
+                                                <button id="insertOrderedList" class="option-button">
+                                                    <div class="fa-solid fa-list-ol"></div>
+                                                </button>
+                                                <button id="insertUnorderedList" class="option-button">
+                                                    <i class="fa-solid fa-list"></i>
+                                                </button>
+                                                <!-- Undo/Redo -->
+                                                <button id="undo" class="option-button">
+                                                    <i class="fa-solid fa-rotate-left"></i>
+                                                </button>
+                                                <button id="redo" class="option-button">
+                                                    <i class="fa-solid fa-rotate-right"></i>
+                                                </button>
+                                                <!-- Link -->
+                                                <button id="createLink" class="adv-option-button">
+                                                    <i class="fa fa-link"></i>
+                                                </button>
+                                                <button id="unlink" class="option-button">
+                                                    <i class="fa fa-unlink"></i>
+                                                </button>
+                                                <!-- Alignment -->
+                                                <button id="justifyLeft" class="option-button align">
+                                                    <i class="fa-solid fa-align-left"></i>
+                                                </button>
+                                                <button id="justifyCenter" class="option-button align">
+                                                    <i class="fa-solid fa-align-center"></i>
+                                                </button>
+                                                <button id="justifyRight" class="option-button align">
+                                                    <i class="fa-solid fa-align-right"></i>
+                                                </button>
+                                                <button id="justifyFull" class="option-button align">
+                                                    <i class="fa-solid fa-align-justify"></i>
+                                                </button>
+                                                <!-- Color -->
+                                                <div class="input-wrapper">
+                                                    <input type="color" id="foreColor" class="adv-option-button" />
+                                                    <label for="foreColor">Font Color</label>
+                                                </div>
+                                                <div class="input-wrapper">
+                                                    <input type="color" id="backColor" class="adv-option-button" />
+                                                    <label for="backColor">Highlight Color</label>
+                                                </div>
+                                            </div>
+
+                                            <textarea id="text-input" name="content"><?php echo $data['content']; ?></textarea>
+                                            <span class="error"><?php echo $data['content_err']; ?></span>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="3" style="border-bottom: 1px solid rgba(128,128,128, .2); padding-bottom: 1rem;">
+                                    <h4 style="margin-bottom:.5rem">Video Link</h4><br>
+                                    <label class="steps"><b>Step 1:</b> Upload your video to YouTube/ Or go to your uploaded YouTube video.</label><br><br>
+                                    <label class="steps"><b>Step 2:</b> Copy the YouTube "Sharing Link" relevant to your video. You can copy either the embedded link as well.<br>
+                                        <label style="color: #117ea6; font-size:13px; margin-left:3.2rem"><b>Sharing Link Example:</b> https://youtu.be/2ybLD6_2gKM</label><br>
+                                        <label style="color: #117ea6; font-size:13px; margin-left:3.2rem"><b>Embeded Link Example:</b> https://www.youtube.com/embed/2ybLD6_2gKM</label></label><br><br>
+                                    <label class="steps"><b>Step 3:</b> Paste the link to the following field.</label><br><br>
+                                    <label class="steps">Make sure that it is the <b>‘Shared/ Embeded video link’</b>.</label><br><br>
+                                    <input class="inputform" type="text" name="link" placeholder="Please include the video link here.">
+
+                                </td>
+                            <tr>
+                                <td colspan="3" style="padding-top: 1rem;">
+                                            <h4 style="margin-bottom:.5rem">Add Thumbnail <img src="<?php echo URLROOT; ?>/img/thumbnail.png" style="width: 17px;"> <span class="star">*</span></h4>
+
+                                            <label style="font-size: 14px; color:black">Upload a picture that shows what's in your video.
+                                                A good thumbnail stands out and draws viewers' attention.<br><b>Make sure it is in 16:9 ratio</b>.</label><br><br>
+                                            <br>  
+                                            <!-- Add image section -->                                   
+                                            <div class="avatar-upload">
+                                                <div class="avatar-edit">
+                                                    <input type='file' name="image" id="imageUpload" accept=".png, .jpg, .jpeg" />
+                                                    <label for="imageUpload"></label>
+                                                </div>
+                                                <div class="avatar-preview">
+                                                    <div id="imagePreview" style="background-image: url(<?php echo URLROOT; ?>/img/thumbnailpic.png);">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- -->
+                                            <span class="error"><?php echo $data['image_err']; ?></span>
+                                        </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <br><br>
+                                    <div class="add">
+                                        <button style="float:right" class="read-more attend submit" type="reset">Cancel</button>
+                                        <button style="float:right" class="read-more attend submit" type="submit" name="submit" onclick="webinarPublish()">Publish</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+
             </div>
-            <div>
-                <footer><a href="index.php">About Us</a> <p> | </p> &copy; Convo 2022 All rights reserved.</footer>
+
+
+            <div class="RHS">
+                <form action="<?php echo URLROOT; ?>/Pages/expert"><button type="submit" style="float:right" class="read-more attend">Home</button></form>
             </div>
         </div>
-        
-        <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="arrow up"></i><br></button>
-            
-        <?php require APPROOT . '/views/inc/footer.php'; ?>
+        <div>
+            <footer><a href="<?php echo URLROOT; ?>/Pages/about">About Us</a>
+                <p> | </p> &copy; Convo 2022 All rights reserved.
+            </footer>
+        </div>
+    </div>
+
+    <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="arrow up"></i><br></button>
+
+    <?php require APPROOT . '/views/inc/footer.php'; ?>

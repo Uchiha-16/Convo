@@ -1,23 +1,52 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
-        <link href="<?php echo URLROOT; ?>/css/style1.css" rel="stylesheet" type="text/css"/>
-        <style>
-            .nav{
-                grid-template-columns: 5% 6% 6% 6% 51% 10% 4% 4% 4%;
-            }
-        </style>
-    </head>
-<body>
-<?php require APPROOT . '/views/inc/components/Enavbar.php'; ?>
 
-    <div class="container-div">
-        <div class="content-body">
-            <div class="LHS">
+
+        <link href="<?php echo URLROOT; ?>/css/event.css" rel="stylesheet" type="text/css"/>
+        <link href="<?php echo URLROOT; ?>/css/webinar.css" rel="stylesheet" type="text/css"/>
+        <link href="<?php echo URLROOT; ?>/css/expert-signup.css" rel="stylesheet" type="text/css"/>
+        <link href="<?php echo URLROOT; ?>/css/add-project.css" rel="stylesheet" type="text/css"/>
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<style>
+    <?php if (($_SESSION['role']) == 'seeker') : ?>
+    <?php elseif (($_SESSION['role']) == 'expert') : ?>
+      .nav {
+        grid-template-columns: 5% 6% 6% 6% 51% 10% 4% 4% 4%;
+    }
+
+    <?php endif; ?>
+</style>
+
+<script type="text/javascript">
+    function confirmation(){
+      if(confirm("Are you sure you want to discard this blog?")){
+        window.location.href = "<?php echo URLROOT; ?>/Blogs/index";
+      }
+    }
+</script>
+
+</head>
+
+<body>
+<?php if (($_SESSION['role']) == 'expert') : ?>
+        <?php require APPROOT . '/views/inc/components/Enavbar.php'; ?>
+<?php elseif (($_SESSION['role']) == 'expert/mod') : ?>
+        <?php require APPROOT . '/views/inc/components/EMnavbar.php'; ?> 
+    <?php endif; ?>
+        
+        <!-- body content -->
+        <div class="container-div">
+            <div class="content-body">
+                <div class="LHS">
                 <div class="screen">
                     <h3 class="screen-title">Add Project</h3>
                     <div><hr></div>
-                    <form action="<?php echo URLROOT;?>/projects/viewAllProjects" method="POST">
+                    <form action="" method="POST">
                         <div class="form-group">
-                            <label for="title">Title<span class="star">*</span></label><br>
+                            <label for="title">Title</label><br>
                             <div class="form-field-div">
                                 <input type="text" name="title" id="title" class="form-control" placeholder="Enter title" required><br><br>
                             </div>
@@ -112,9 +141,11 @@
                 <div class="RHS">
                     <form action="<?php echo URLROOT;?>/projects/viewAllProjects"><button type="submit" style="float:right" class="read-more attend">Projects</button></form>
                     <form action="myProjects.php"><button type="submit" style="float:right" class="read-more attend">My Projects</button></form>
+                    
+                    <br><br>
                     <div class="filter-div">
                         <div style="display:flex">
-                            <img src="../images/filter.png">
+                            <img src="<?php echo URLROOT; ?>/img/filter.png">
                             <label>Filters</label><button class="read-more go">Go</button>
                         </div>
                         <div>
@@ -423,16 +454,5 @@
             }
         </script>
         
-
-
-
-
-
-
-</body>
-
-
-
-
-<?php require APPROOT . '/views/inc/footer.php'; ?>
-  
+    </body>
+</html>

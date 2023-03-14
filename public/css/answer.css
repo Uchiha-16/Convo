@@ -1,0 +1,124 @@
+.answerbox {
+    grid-template-rows: auto auto auto;
+    margin-right: 3rem;
+    margin-bottom: 2rem;
+    height: auto;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 21px rgba(0, 0, 0, 0.07);
+    border-radius: 20px;
+    display: grid;
+    padding: 2rem;
+}
+
+.question-div{
+    padding: 2rem 2rem 0.5rem 2rem;
+}
+
+.info-1 {
+    display: grid;
+    grid-template-columns: auto 10%;
+}
+.info-1 .qdp{
+    padding-left: 5.5rem;
+}
+.info-1 .qdp img{
+    width: 50px;
+}
+.info-1 .qdp{
+    grid-template-columns: 50px auto;
+}
+.info-1 .qdp-1{
+    display: grid;
+    margin-bottom: auto;
+    margin-top: auto;
+}
+.info-1 .date-count {
+    margin-top: 1rem;
+    text-align: right;
+    padding-right: 0;
+}
+.info-1 .reactbtn{
+    width: auto;
+}
+.answercontent {
+    display: grid;
+    grid-template-columns: 5.5rem auto;
+}
+.answercontent-1 iframe{
+    border-radius: .7rem;
+}
+.answercontent-1 p{
+    font-size: 15px;
+}
+.answerrating {
+    text-align: center;
+    padding-right: 2rem;
+    margin-bottom: 2rem;
+}
+
+.upvote {
+    background: none;
+    border: none;
+    font-size: 60px;
+	color: #95a5a6;
+	outline: none;
+    cursor: pointer;
+    transition: 0.2s all;
+}
+
+.downvote {
+    background: none;
+    border: none;
+    font-size: 60px;
+	color: #95a5a6;
+	outline: none;
+    cursor: pointer;
+    transition: 0.2s all;
+}
+
+.vote {
+    color: #0D5F75;
+}
+.answerrating label{
+    font-size: 15px;
+    font-weight: bold;
+    color: #19758d;
+}
+.ratinglabel {
+    font-size: 20px;
+    color: #7E7E7E;
+}
+.comment-section{
+    padding-left: 5.5rem;
+    font-size: 12px;
+    margin-top: 1rem;
+}
+.comment{
+    padding: 0 0 1rem 0;
+    border-top: 1px solid #3b555d38;
+}
+.user-comment {
+    border-bottom: 1px solid #3b555d38;
+    padding-bottom: 1rem;
+    margin: 1rem 0 1rem 0;
+}
+.comment-time{
+    color: #9fa4a8;
+}
+.name {
+    color: #19758d;
+    cursor: pointer;
+}
+.add-comment{
+    display: flex;
+}
+.submit {
+    background: #19758d;
+    border-radius: 0 50% 50% 0;
+    width: 2.4rem;
+    cursor: pointer;
+    transition: .3s all;
+}
+.submit:hover {
+    background: #04546a;
+}

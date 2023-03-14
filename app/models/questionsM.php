@@ -23,10 +23,9 @@
                 return false;
             }
         }
-
         // Get Last QID
         public function getLastID() {
-            $this->db->query('SELECT QID from question ORDER BY userID DESC LIMIT 1');
+            $this->db->query('SELECT QID from question ORDER BY QID DESC LIMIT 1');
             $row = $this->db->single();
             return $row;
         }
@@ -47,10 +46,9 @@
         }
 
         //getExpertDetails
-        public function getExpertID($tag) {
-            $this->db->query('SELECT expert.expertID as ID, user.firstName, user.lastName FROM user JOIN expert ON user.userID = expert.expertID 
-                            JOIN usertag ON user.userID = usertag.userID WHERE usertag.tag = :tag');
-            $this->db->bind(':tag', $tag);
+        public function getExperts($tag) {
+            $this->db->query('SELECT DISTINCT expert.expertID as ID, user.firstName, user.lastName 
+                              FROM user JOIN expert ON user.userID = expert.expertID JOIN usertag ON user.userID = usertag.userID WHERE ' . $tag .'');
             $row = $this->db->resultSet();
             return $row;
         }
@@ -59,7 +57,7 @@
         //getQuestions
         public function getQuestions() {
             $this->db->query('SELECT question.QID as QID, question.title as title, question.content as content, question.date as date, question.rating as rating, 
-            GROUP_CONCAT(questiontag.tag SEPARATOR ",") as tags, question.moderatorID as modID FROM question JOIN questiontag ON question.QID = questiontag.QID WHERE userID = :userID GROUP BY question.QID');
+            GROUP_CONCAT(questiontag.tag SEPARATOR ",") as tags, question.moderatorID as modID FROM question JOIN questiontag ON question.QID = questiontag.QID WHERE userID = :userID GROUP BY question.QID ORDER BY question.date DESC');
             $this->db->bind(':userID', $_SESSION['userID']);
             $row = $this->db->resultSet();
             return $row;
@@ -138,6 +136,26 @@
                     return false;
                 }
             }
+
+            public function addRating($userID, $QID, $rating) {
+                $this->db->query('INSERT INTO questionrating (QID, userID, rating) VALUES(:QID, :userID, :rating)');
+                $this->db->bind(':QID', $QID);
+                $this->db->bind(':userID', $userID);
+                $this->db->bind(':rating', $rating);
+                if($this->db->execute()) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+
+            public function getRating($QID){
+                $this->db->query('SELECT AVG(rating) as rating FROM questionrating WHERE QID = :QID');
+                $this->db->bind(':QID', $QID);
+                $row = $this->db->single();
+                return $row;
+            }
+
 }
 
 ?>
