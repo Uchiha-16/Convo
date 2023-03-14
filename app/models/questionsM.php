@@ -52,6 +52,12 @@
             $row = $this->db->resultSet();
             return $row;
         }
+
+        public function getUsers() {
+            $this->db->query('SELECT userID FROM user');
+            $results = $this->db->resultSet();
+            return $results;
+        }
 //****************************************************************Retrive Questions************************************************************************************************************* */
 
         //getQuestions
