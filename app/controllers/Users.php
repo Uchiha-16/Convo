@@ -189,14 +189,18 @@
                     'password' => trim($_POST['password']),
                     'confirm_password' => trim($_POST['confirm_password']),
                     'tag' => $tag,
-                    'role' => 'seeker',
+                    'linkedin' => trim($_POST['linkedin']),
+                    'qualifications' => trim($_POST['qualifications']),
+                    'role' => 'expert',
                     'fname_err' => '',
                     'lname_err' => '',
                     'email_err' => '',
                     'uname_err' => '',
                     'password_err' => '',
                     'confirm_password_err' => '',
-                    'tag_err' => ''
+                    'tag_err' => '',
+                    'linkedin_err' => '',
+                    'qualifications_err' => ''
                 ];
 
 
@@ -264,8 +268,18 @@
                     $data['tag_err'] = 'Please Select One or More Tags';
                 }
 
+                // Validate LinkedIn
+                if(empty($data['linkedin'])) {
+                    $data['linkedin_err'] = 'Please enter LinkedIn';
+                }
+
+                // Validate Qualifications
+                if(empty($data['qualifications'])) {
+                    $data['qualifications_err'] = 'Please enter Qualifications';
+                }
+
                 // Make sure errors are empty
-                if(empty($data['fname_err']) && empty($data['email_err']) && empty($data['lname_err']) && empty($data['uname_err']) && empty($data['password_err']) && empty($data['confirm_password_err']) && empty($data['tag_err'])) {
+                if(empty($data['fname_err']) && empty($data['email_err']) && empty($data['lname_err']) && empty($data['uname_err']) && empty($data['password_err']) && empty($data['confirm_password_err']) && empty($data['tag_err']) && empty($data['linkedin_err']) && empty($data['qualifications_err'])) {
                     // Validated
 
                     // Hash Password
@@ -305,6 +319,8 @@
                     'password' => '',
                     'confirm_password' => '',
                     'tag' => '',
+                    'linkedin' => '',
+                    'qualifications' => '',
                     'role' => '',
                     'fname_err' => '',
                     'lname_err' => '',
@@ -313,6 +329,8 @@
                     'password_err' => '',
                     'confirm_password_err' => '',
                     'tag_err' => '',
+                    'linkedin_err' => '',
+                    'qualifications_err' => ''
                 ];
 
                 // Load view
@@ -333,20 +351,25 @@
                     'pfp' => ($_FILES['pfp']),
                     'pfp_name' => time().'_'.($_FILES['pfp']['name']),
                     'fname' => trim($_POST['fname']),
-                    'lname' => trim($_POST['lname']),
                     'email' => trim($_POST['email']),
-                    'uname' => trim($_POST['uname']),
                     'password' => trim($_POST['password']),
                     'confirm_password' => trim($_POST['confirm_password']),
                     'tag' => $tag,
-                    'role' => 'seeker',
+                    'bio' => trim($_POST['bio']),
+                    'weblink' => trim($_POST['weblink']),
+                    'type' => trim($_POST['type']),
+                    'contact' => trim($_POST['contact']),
+                    'role' => 'company',
                     'fname_err' => '',
-                    'lname_err' => '',
                     'email_err' => '',
                     'uname_err' => '',
                     'password_err' => '',
                     'confirm_password_err' => '',
-                    'tag_err' => ''
+                    'tag_err' => '',
+                    'bio_err' => '',
+                    'weblink_err' => '',
+                    'type_err' => '',
+                    'contact_err' => ''
                 ];
 
 
@@ -449,20 +472,23 @@
                     'pfp' => '',
                     'pfp_name' => '',
                     'fname' => '',
-                    'lname' => '',
                     'email' => '',
-                    'uname' => '',
                     'password' => '',
                     'confirm_password' => '',
                     'tag' => '',
+                    'bio' => '',
+                    'weblink' => '',
+                    'type' => '',
                     'role' => '',
                     'fname_err' => '',
-                    'lname_err' => '',
                     'email_err' => '',
-                    'uname_err' => '',
                     'password_err' => '',
                     'confirm_password_err' => '',
                     'tag_err' => '',
+                    'bio_err' => '',
+                    'weblink_err' => '',
+                    'type_err' => '',
+                    'contact_err' => ''
                 ];
 
                 // Load view
