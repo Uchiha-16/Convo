@@ -1,17 +1,16 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 
+<link href="<?php echo URLROOT; ?>/css/event.css" rel="stylesheet" type="text/css" />
 <link href="<?php echo URLROOT; ?>/css/addconsult.css" rel="stylesheet" type="text/css"/>
 
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <style>
-    <?php if (($_SESSION['role']) == 'seeker') : ?>
-    <?php elseif (($_SESSION['role']) == 'expert') : ?>
+    <?php if (($_SESSION['role']) == 'expert' || ($_SESSION['role']) == 'premium') : ?>
       .nav {
         grid-template-columns: 5% 6% 6% 6% 51% 10% 4% 4% 4%;
     }
-
     <?php endif; ?>
 </style>
 
@@ -60,7 +59,8 @@
                                 <tr>
                                     <td colspan="3">
                                         <h4 style="margin-bottom:.5rem">Title <span class="star">*</span></h4>
-                                        <input class="inputform" type="text" name="title" placeholder="Enter title here..." required>
+                                        <input class="inputform" type="text" name="title" placeholder="Enter title here..." value="<?php echo $data['title']; ?>">
+                                        <span class="error"><?php echo $data['title_err']; ?></span>
                                     </td>
                                 </tr>
                                 
@@ -122,66 +122,59 @@
 
                                                 <li><input type="checkbox" value="spaceScience" name="tag[]" id="checkbox25"/><label for="checkbox25">Space Science</label></li>
                                             </ul>
-                                            <div class="select">
+
+                                            
+                                            <!-- <div class="select">
                                                 <label>All tags selected?</label>
-                                                <button style="float:right" class="read-more submit" type="submit" name="submit">Yes, I'm good.</button>
+                                                <button style="float:right" class="read-more submit" type="submit" name="submit" onclick="getTags(tag[])">Yes, I'm good.</button>
                                                 <button style="float:right" class="read-more submit" type="submit" name="submit">No</button>
-                                            </div>
+                                            </div> -->
                                         </div>
+                                        <span class="error"><?php echo $data['tag_err']; ?></span>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td colspan="3">
-                                        <h4 style="margin-bottom:.5rem">Description</h4>
+                                <script>
+                                   // Define an empty array to store the selected checkbox values
+                                var selectedValues = [];
 
+                                // Get all checkboxes with the 'tag[]' name
+                                var checkboxes = document.getElementsByName('tag[]');
 
-                                        <section>
-                                            <div class="row">
-                                                <div class="col">
-                                                    <div class="first box">
-                                                        <input id="font-size" type="number" value="16" min="1" max="100" onchange="f1(this)">
-                                                    </div>
-                                                    <div class="second box">
-                                                        <button type="button" onclick="f2(this)">
-                                                            <i class="fa-solid fa-bold"></i>
-                                                        </button>
-                                                        <button type="button" onclick="f3(this)">
-                                                            <i class="fa-solid fa-italic"></i>
-                                                        </button>
-                                                        <button type="button" onclick="f4(this)">
-                                                            <i class="fa-solid fa-underline"></i>
-                                                        </button>
-                                                    </div>
-                                                    <div class="third box">
-                                                        <button type="button" onclick="f5(this)">
-                                                            <i class="fa-solid fa-align-left"></i>
-                                                        </button>
-                                                        <button type="button" onclick="f6(this)">
-                                                            <i class="fa-solid fa-align-center"></i>
-                                                        </button>
-                                                        <button type="button" onclick="f7(this)">
-                                                            <i class="fa-solid fa-align-right"></i>
-                                                        </button>
-                                                    </div>
-                                                    <div class="fourth box">
-                                                        <button type="button" onclick="f8(this)">aA</button>
-                                                        <button type="button" onclick="f9()">
-                                                            <i class="fa-solid fa-text-slash"></i>
-                                                        </button>
-                                                        <input type="color" onchange="f10(this)">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <br>
-                                            <div class="row row1">
-                                                <div class="col col1">
-                                                    <textarea id="textarea1" class="inputform" type="text" name="desc" placeholder="Describe the Event..."></textarea>
-                                                </div>
-                                            </div>
-                                        </section>
-                                    </td>
-                                </tr>
-                                <tr>
+                                // Loop through the checkboxes and add an onchange event listener
+                                for (var i = 0; i < checkboxes.length; i++) {
+                                    checkboxes[i].addEventListener('change', function() {
+                                        // If the checkbox is checked, add its value to the selectedValues array
+                                        if (this.checked) {
+                                            selectedValues.push(this.value);
+                                        // alert(selectedValues);
+                                        }
+                                        // If the checkbox is unchecked, remove its value from the selectedValues array
+                                        else {
+                                            var index = selectedValues.indexOf(this.value);
+                                            if (index !== -1) {
+                                                selectedValues.splice(index, 1);
+                                            }
+                                        }
+                                        
+                                        if(selectedValues.length == 0){
+                                            $('.resource').html('Please Select One of More Tags');
+                                        }else{
+                                        //Send AJAX request to server
+                                        $.ajax({
+                                            url: '<?php echo URLROOT;?>/Consults/resourceName',
+                                            method: 'POST',
+                                            data: {selectedValues: selectedValues},
+                                            success: function(response) {
+                                                $('.resource').html(response);
+                                            }
+                                        });
+                                    }
+
+                                        
+                                    });
+                                }                       
+                                </script>
+                            <tr>
     <!--                                <td style="padding-right:1rem; width:50%;">-->
                                     <td class="rp">
 
@@ -190,30 +183,21 @@
                                             <span class="checkbox-title" onclick="filter3()"><h4>Resource People <span class="star">*</span>
                                             <i class="arrow up" id="up3" style="margin-left: 4.3rem;"></i><i class="arrow down" id="down3" style="margin-left: 4.3rem;"></i></h4></span>
                                             <ul id="checkbox-3">
-                                                <?php
-                                                    // $sql = "SELECT user.firstName, user.lastName FROM user, expert WHERE userID = expertID;";
-                                                    // $experts = mysqli_query($conn, $sql);
-                                                    // while($expertrow = mysqli_fetch_assoc($experts)){
-                                                    //     $fname = $expertrow['firstName'];
-                                                    //     $lname = $expertrow['lastName'];
-                                                    //     echo '<li>';
-                                                    //     echo '<label for="checkbox1">';
-                                                    //     echo '<input type="checkbox" value="last 3 months" name="rp[]" id="checkbox1"/>';
-                                                    //     echo $fname.' '.$lname;
-                                                    //     echo '</label>';
-                                                    //     echo '</li>';
-                                                    // }
-                                                ?>
+                                                <div class="resource">Please Select One of More Tags</div>
                                             </ul>
+                                            
                                     </div>
+                                       <!-- <span class="error"><?php //echo $data['rp_err']; ?></span>  -->
                                     </td>
-                                    <td class="date">
+                                    <td class="date" style="float:none">
                                         <h4>Date <span class="star">*</span></h4>
-                                        <input class="inputform" type="date" name="title" required>
+                                        <input class="inputform"  type="date" name="date" value="<?php echo $data['date']; ?>" required>
+                                        <span class="error"><?php echo $data['date_err']; ?></span>
                                     </td>
-                                    <td class="time">
+                                    <td class="time" style="float:none">
                                         <h4>Time <span class="star">*</span></h4>
-                                        <input class="inputform" type="time" name="title" required>
+                                        <input class="inputform" type="time" name="time" value="<?php echo $data['time']; ?>" required>
+                                        <span class="error"><?php echo $data['time_err']; ?></span>
                                     </td>
                                 </tr>
                                 <tr>

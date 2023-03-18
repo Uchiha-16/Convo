@@ -564,13 +564,11 @@
                         } elseif($loggedUser->role == 'seeker'){
                             redirect('pages/seeker');
                         }elseif($loggedUser->role == 'seeker/mod'){
-                            redirect('pages/seeker/mod');
+                            redirect('pages/seeker');
                         }elseif($loggedUser->role == 'expert/mod'){
-                            redirect('pages/expert/mod');
-                        }elseif($loggedUser->role == 'seeker/premium'){ //PREMIUM DANNOOOOOOOOO !!!!!!!!!!!!!!!
-                            redirect('pages/seeker/premium');
-                        }elseif($loggedUser->role == 'seeker/mod/premium'){
-                            redirect('pages/seeker/mod/premium');
+                            redirect('pages/expert');
+                        }elseif($loggedUser->role == 'premium'){ //PREMIUM DANNOOOOOOOOO !!!!!!!!!!!!!!!
+                            redirect('pages/seeker');
                         }else {
                             redirect('pages/admin');
                         }

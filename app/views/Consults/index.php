@@ -7,12 +7,10 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <style>
-    <?php if (($_SESSION['role']) == 'seeker') : ?>
-    <?php elseif (($_SESSION['role']) == 'expert') : ?>
+    <?php if (($_SESSION['role']) == 'expert' || ($_SESSION['role']) == 'premium') : ?>
       .nav {
         grid-template-columns: 5% 6% 6% 6% 51% 10% 4% 4% 4%;
     }
-
     <?php endif; ?>
 </style>
 
