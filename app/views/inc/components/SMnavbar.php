@@ -19,7 +19,7 @@
                 <img class="dropbtn" src="<?php echo URLROOT; ?>/img/profile.png" class="nav-icon" style="width: 25px;">
                 <div class="dropdown-content dropdown-content2" id="myDropdown2">
                     <a href="<?php echo URLROOT;?>/Profile/View">Profile</a>
-                    <a href="<?php echo URLROOT;?>/Moderator/approve">Approvals</a>
+                    <a href="<?php echo URLROOT;?>/Moderators/approve">Approvals</a>
                     <a href="<?php echo URLROOT;?>/Blogs/index">Blogs</a>
                     <a href="<?php echo URLROOT;?>/Events/index">Events</a>
                     <a href="<?php echo URLROOT;?>/Projects/index">Projects</a>
