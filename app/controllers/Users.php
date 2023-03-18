@@ -382,7 +382,7 @@
                 //validate each inputs
                 // Validate fName
                 if(empty($data['fname'])) {
-                    $data['fname_err'] = 'Please enter First name';
+                    $data['fname_err'] = 'Please enter Company name';
                 }
 
                 // Validate fName
@@ -432,13 +432,33 @@
                     }
                 }
 
+                //Validate bio
+                if(empty($data['bio'])) {
+                    $data['bio_err'] = 'Please enter bio';
+                }
+
+                //Validate weblink
+                if(empty($data['weblink'])) {
+                    $data['weblink_err'] = 'Please enter weblink';
+                }
+
+                //Validate type
+                if(empty($data['type'])) {
+                    $data['type_err'] = 'Please enter type';
+                }
+
+                //Validate contact
+                if(empty($data['contact'])) {
+                    $data['contact_err'] = 'Please enter contact';
+                }
+
                 // Validate Tag
                 if($data['tag'] == '0') {
                     $data['tag_err'] = 'Please Select One or More Tags';
                 }
 
                 // Make sure errors are empty
-                if(empty($data['fname_err']) && empty($data['email_err']) && empty($data['lname_err']) && empty($data['uname_err']) && empty($data['password_err']) && empty($data['confirm_password_err']) && empty($data['tag_err'])) {
+                if(empty($data['fname_err']) && empty($data['email_err']) && empty($data['lname_err']) && empty($data['uname_err']) && empty($data['password_err']) && empty($data['confirm_password_err']) && empty($data['tag_err']) && empty($data['bio_err']) && empty($data['weblink_err']) && empty($data['type_err']) && empty($data['contact_err'])) {
                     // Validated
 
                     // Hash Password
@@ -478,6 +498,7 @@
                     'tag' => '',
                     'bio' => '',
                     'weblink' => '',
+                    'contact' => '',
                     'type' => '',
                     'role' => '',
                     'fname_err' => '',

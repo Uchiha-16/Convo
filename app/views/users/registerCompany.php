@@ -68,9 +68,9 @@
                     </script>
                     <table>
                     <tr>
-                            <td colspan="2"><input type="email" placeholder="Email" name="email"
-                                    value="<?php echo $data['email']; ?>" /><br><br>
-                                <span class="error"><?php echo $data['email_err']; ?></span>
+                            <td colspan="2"><input type="text"  placeholder="Company Name" name="fname"
+                                    value="<?php echo $data['fname']; ?>" /><br><br>
+                                <span class="error"><?php echo $data['fname_err']; ?></span>
                             </td>
                         </tr>
                         <tr>
@@ -96,7 +96,7 @@
                         </tr>
                         <tr>
                             <td>
-                                    <select name="country" id="country" required><br></br>
+                                    <select name="country" id="country" required style="width:40%;"><br></br>
 
                                         <option value=""  selected disabled hidden>select country</option>
                                         <option value="AF">Afghanistan</option>
