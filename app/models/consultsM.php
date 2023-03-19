@@ -6,21 +6,16 @@
             $this->db = new Database;
         }
 
-        public function getConsults() {
-            $this->db->query('SELECT * FROM consults');
-            $results = $this->db->resultSet();
-            return $results;
-        }
-
         public function add($data) {
-            $this->db->query('INSERT INTO consults (title, content, tag, date, time, resourceID) VALUES(:title, :content, :tag, :date, :time, :resourceID)');
+            $this->db->query('INSERT INTO consultation (userID, expertID, title, tags,  date, time, status) VALUES(:userID, :expertID, :title, :tags, :date, :time, "pending")');
             // Bind values
+            $this->db->bind(':userID', $data['userID']);
+            $this->db->bind(':expertID', $data['expertID']);
             $this->db->bind(':title', $data['title']);
-            $this->db->bind(':content', $data['content']);
-            $this->db->bind(':tag', $data['tag']);
+            $this->db->bind(':tags', $data['tags']);
             $this->db->bind(':date', $data['date']);
             $this->db->bind(':time', $data['time']);
-            $this->db->bind(':resourceID', $data['resourceID']);
+
             // Execute
             if($this->db->execute()) {
                 return true;
@@ -34,6 +29,21 @@
                               INNER JOIN usertag ON user.userID = usertag.userID  WHERE ' . $str );
             $results = $this->db->resultSet();
             return $results;
+        }
+
+        public function getConsults($userID) {
+            $this->db->query('SELECT DISTINCT consultation.title as title, consultation.date as date , consultation.time as time, user.firstName as fName, user.lastName as lName 
+                              FROM consultation JOIN user ON consultation.expertID = user.userID WHERE consultation.userID = :userID AND consultation.status = "approved"');
+            $this->db->bind(':userID', $userID);
+            $row = $this->db->resultSet();
+            return $row;
+        }
+
+        public function MygetConsults($userID) {
+            $this->db->query('SELECT * FROM consultation WHERE userID = :userID AND status = "pending"');
+            $this->db->bind(':userID', $userID);
+            $row = $this->db->resultSet();
+            return $row;
         }
     }
 ?>

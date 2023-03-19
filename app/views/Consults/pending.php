@@ -38,7 +38,7 @@
             <div class="content-body">
                 <div class="LHS">
                     <h3>My Consultations</h3><br>
-
+            
                     <?php foreach($data['consults'] as $consults) : ?>
                     <div class="question-div">
                         <div class="info">
@@ -61,22 +61,22 @@
                         </div>
                         <div class="content-display">
                             <h3><?php echo $consults->title ?></h3>
-                            <label class="name-label"> Approved By <?php echo $consults->fName. " ". $consults->lName; ?></label>
-                            <label class="time-label"><?php echo $consults->time; ?></label>
+                            <label class="name-label"><?php echo $_SESSION['firstName']. ' ' . $_SESSION['lastName']; ?></label>
+                            <label class="time-label"><?php echo $consults->time ?></label>
                             <div class="date-count">
                                 <button style="float:left" class="decline">Decline</button>
                             </div>
                         </div>
                         <div class="appointment">
-                            <label>Upcoming</label>
+                            <label>Pending</label>
                         </div>
                     </div> 
                     <?php endforeach; ?>
-            
+                
                    
                 </div>
                 <div class="RHS">
-                <form action="<?php echo URLROOT; ?>/Consults/requests"><button type="submit" style="float:right" class="read-more attend">Appointment Requests</button></form>
+                <form action="<?php echo URLROOT; ?>/Consults/index"><button type="submit" style="float:right" class="read-more attend">Pending Appointments</button></form>
                 <form action="<?php echo URLROOT; ?>/Consults/add"><button type="submit" style="float:right" class="read-more attend">Add Appointment</button></form>
                 <br><br><br><br><br><br>
                     <div class="filter-div">
@@ -86,7 +86,7 @@
                         </div>
                         <div>
                             <form action="" method="POST">
-                            
+                                
                                 <!-- Filter 1 -->
                                 <div class="checkbox-1">
                                     <span class="checkbox-title" onclick="filter1()">Category <i class="arrow up" id="up"></i><i class="arrow down" id="down"></i></span>
@@ -294,14 +294,13 @@
                 </div>
             </div>
             <div>
-                <footer><a href="<?php echo URLROOT; ?>/Pages/about">About Us</a> <p> | </p> &copy; Convo 2022 All rights reserved.</footer>
+                <footer><a href="index.php">About Us</a> <p> | </p> &copy; Convo 2022 All rights reserved.</footer>
             </div>
         </div>
         
         <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="arrow up"></i><br></button>
             
         <div id="body"></div>
-        
     </body>
     <?php
 // }else{ echo "<h1>Please login first .</h1>";?>

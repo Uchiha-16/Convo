@@ -6,10 +6,16 @@
         }
 
         public function index(){
-            // $blogs = $this->blogsModel->getBlogs();
+
+            $userID = $_SESSION['userID'];
+            $consults = $this->consultsModel->getConsults($userID);
+
+            
+
             $data = [
-                // 'blogs' => $blogs
+                'consults' => $consults
             ];
+
             $this->view('consults/index', $data);
         }
 
@@ -20,21 +26,35 @@
                 $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
                 date_default_timezone_set('Asia/Colombo');
                 $tag = isset($_POST['tag']) ? $_POST['tag'] : '0';
+                
+
+                if($tag != '0')
+                    $tag = implode(",", $tag);
+
+                echo $tag;
+
+                $resource = isset($_POST['rp']) ? $_POST['rp'] : '0';
+
+                if($resource != '0')
+                    $resource = implode(",", $resource);
 
                 //Input Data
                 $data = [
+                    'userID' => $_SESSION['userID'],
                     'title' => trim($_POST['title']),
-                    'tag' => $tag,
+                    'tags' => $tag,
                     'date' => trim($_POST['date']),
                     'time' => trim($_POST['time']),
-                    'resourceID' => trim($_POST['rp']),    
+                    'expertID' => $resource,    
+                    'userID_err' => '',
                     'title_err' => '',
                     'tag_err' => '',
                     'date_err' => '',
                     'time_err' => '',
-                    'rp_err' => '',
+                    'expertID_err' => '',
                 ];
 
+                print_r($data);
                 //validate each inputs
                 // Validate Title
                 if(empty($data['title'])) {
@@ -42,7 +62,7 @@
                 }
 
                 // Validate Tag
-                if($data['tag'] == '0') {
+                if($data['tags'] == '0') {
                     $data['tag_err'] = 'Please Select One or More Tags';
                 }
 
@@ -57,25 +77,17 @@
                 }
 
                 // Validate Resource
-                if($data['resourceID'] == '0') {
-                    $data['rp_err'] = 'Please Select One Resource Person';
+                if($data['expertID'] == '0') {
+                    $data['expertID_err'] = 'Please Select One Resource Person';
                 }
 
 
                 // Make sure errors are empty
-                if(empty($data['title_err']) && empty($data['tag_err']) && empty($data['date_err']) && empty($data['time_err'])) {
+                if(empty($data['userID_err']) && empty($data['title_err']) && empty($data['tag_err']) && empty($data['date_err']) && empty($data['time_err']) && empty($data['expertID_err'])) {
                     // Adding Question
                     if($this->consultsModel->add($data)) {
-                        $LastID = $this->consultsModel->getLastID();
-
-                        foreach($data['tag'] as $tag){
-                           if(!($this->consultsModel->questionTag($tag, $LastID->QID)))
-                            {
-                                die('Something went wrong with inserting the tags');
-                            }
-                        }
-                            flash('reg_flash','Question Added Successfully');
-                            redirect('questions/myquestions');
+                            flash('reg_flash','Consultation Added Successfully');
+                            redirect('consults/requests');
                         
                     } else {
                         die('Something went wrong');
@@ -87,16 +99,18 @@
             }
             else {
                 $data = [
+                    'userID' => '',
                     'title' => '',
-                    'tag' => '',
+                    'tags' => '',
                     'date' => '',
                     'time' => '',
-                    'resourceID' => '',   
+                    'expertID' => '',   
+                    'userID_err' => '',
                     'title_err' => '',
                     'tag_err' => '',
                     'date_err' => '',
                     'time_err' => '',
-                    'rp_err' => '',
+                    'expertID_err' => '',
                 ];
                 $this->view('consults/add', $data);
             }
@@ -124,11 +138,24 @@
             foreach($data as $d){
                 echo '<li>';
                     echo '<label for="checkbox1">';
-                        echo '<input type="checkbox" value="last 3 months" name="rp[]" id="checkbox1"/>';
+                        echo '<input type="checkbox" value="'. $d->expertID .'" name="rp[]" id="checkbox1"/>';
                         echo '<span class="checkbox">'. $d->fName ." ". $d->lName . '</span>';
                     echo '</label>';
                 echo '</li>';
             }
+        }
+
+        public function pending(){
+
+            $userID = $_SESSION['userID'];
+            $consults = $this->consultsModel->MygetConsults($userID);
+
+            $data = [
+                'consults' => $consults
+            ];
+
+            // print_r($data);
+            $this->view('consults/pending', $data);
         }
     }
 

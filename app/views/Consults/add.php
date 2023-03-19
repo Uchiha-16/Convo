@@ -187,7 +187,7 @@
                                             </ul>
                                             
                                     </div>
-                                       <!-- <span class="error"><?php //echo $data['rp_err']; ?></span>  -->
+                                       <span class="error"><?php echo $data['expertID_err']; ?></span> 
                                     </td>
                                     <td class="date" style="float:none">
                                         <h4>Date <span class="star">*</span></h4>
