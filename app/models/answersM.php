@@ -156,6 +156,47 @@
             return $row;
         }
 
+        //****************************************************************Rate Question************************************************************************************************************* */
+        public function checkRating($data) {
+            $this->db->query('SELECT * FROM questionrating WHERE QID = :QID AND userID = :userID');
+            $this->db->bind(':QID', $data['QID']);
+            $this->db->bind(':userID', $data['userID']);
+            $row = $this->db->single();
+            return $row;
+        }
+
+        public function updateRating($data) {
+            $this->db->query('UPDATE questionrating SET rating = :rating WHERE QID = :QID AND userID = :userID');
+            $this->db->bind(':rating', $data['rating']);
+            $this->db->bind(':QID', $data['QID']);
+            $this->db->bind(':userID', $data['userID']);
+            if($this->db->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        public function addRating($data) {
+            $this->db->query('INSERT INTO questionrating (QID, userID, rating) VALUES(:QID, :userID, :rating)');
+            $this->db->bind(':QID', $data['QID']);
+            $this->db->bind(':userID', $data['userID']);
+            $this->db->bind(':rating', $data['rating']);
+            if($this->db->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        public function getQuestionRating($QID, $userID) {
+            $this->db->query('SELECT rating FROM questionrating WHERE QID = :QID AND userID = :userID');
+            $this->db->bind(':QID', $QID);
+            $this->db->bind(':userID', $userID);
+            $row = $this->db->single();
+            return $row;
+        }
+
     }   
 
 ?>

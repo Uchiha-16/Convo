@@ -28,19 +28,19 @@
         <div class="c1">
             <img src="<?php echo URLROOT; ?>/img/logoWhite.png" alt="Convo" id="logo" />
             <p class="quote">Hitch your wagon to a star...</p>
-            <img src="<?php echo URLROOT; ?>/img/seeker.png" alt="seeker" class="icon" />
-            <h2>SEEKER</h2>
-            <p class="desc">If you are a curious person who seeks for<br>
-                answers and wants to gain knowledge<br>
-                through discussions,<br>
-                this is the perfect role for you !</p><br>
-            <a href="../signup.php" id="choose">
+            <img src="<?php echo URLROOT; ?>/img/expert.png" alt="expert" class="icon" />
+            <h2>EXPERT</h2>
+            <p class="desc">If you are a person who likes to impart wisdom<br>
+                            and knowledge in areas of your expertise, commit your time<br>
+                            to guide and teach the seekers,<br>
+                            this is the perfect role for you !</p><br>
+            <a href="<?php echo URLROOT; ?>/Users/signup" id="choose">
                 <p>&lt;&lt;Change Role&gt;&gt;</p>
             </a><br>
         </div>
         <div class="grid-container-seeker">
             <div>
-                <form name="" action="<?php echo URLROOT?>/Users/register" method="POST" enctype="multipart/form-data">
+                <form name="" action="<?php echo URLROOT?>/Users/registerExpert" method="POST" enctype="multipart/form-data">
 
                     <div class="user-img">
                         <label for="file" id="uploadbtn">
@@ -101,6 +101,18 @@
                                     name="confirm_password" id="p2" onkeyup='validate();'
                                     value="<?php echo $data['confirm_password']; ?>" /><br><br>
                                 <span class="error"><?php echo $data['confirm_password_err']; ?></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><input type="text" placeholder="Linkedin Profile Link" name="linkedin"
+                                    value="<?php echo $data['linkedin']; ?>" /><br><br>
+                                <span class="error"><?php echo $data['linkedin_err']; ?></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><input type="text" placeholder="Qualifications" name="qualifications"
+                                    value="<?php echo $data['qualifications']; ?>" /><br><br>
+                                <span class="error"><?php echo $data['qualifications_err']; ?></span>
                             </td>
                         </tr>
                         <tr>
@@ -216,6 +228,7 @@
 
 
                         </tr>
+                       
 
                         <tr>
                             <td colspan="2">

@@ -63,12 +63,18 @@
                 if(empty($data['title_err']) && empty($data['content_err']) && empty($data['tag_err'])) {
                     // Adding Question
                     if($this->questionModel->add($data)) {
+                        $users = $this->questionModel->getUsers();
                         $LastID = $this->questionModel->getLastID();
+
                         foreach($data['tag'] as $tag){
                            if(!($this->questionModel->questionTag($tag, $LastID->QID)))
                             {
                                 die('Something went wrong with inserting the tags');
                             }
+                        }
+
+                        foreach($users as $user){
+                            $this->questionModel->addRating($user->userID, $LastID->QID, 0);
                         }
                             flash('reg_flash','Question Added Successfully');
                             redirect('questions/myquestions');
@@ -217,7 +223,16 @@
                     die('Something went wrong');
                     redirect('questions/myQuestions');
                 }
-            }
+        }
+
+        public function viewR($QID){
+
+            $rating = $this->questionModel->getRating($QID);
+            $rate = round($rating->rating, 1);
+            echo '<label style="font-weight:600; float:right">Overall Rating: ' . $rate .'</label>';
+        }
+
+
         
     }
 ?>

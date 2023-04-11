@@ -44,7 +44,7 @@
                 <div class="screen">
                     <h3 class="screen-title">Add Project</h3>
                     <div><hr></div>
-                    <form action="" method="POST">
+                    <form action="<?php echo URLROOT; ?>/Projects/add" method="POST">
                         <div class="form-group">
                             <label for="title">Title</label><br>
                             <div class="form-field-div">
@@ -55,10 +55,14 @@
                                 <div class="form-field-div">
                                     <label for="tag">Field</label><br>
                                     <select name="tag" id="tag" class="form-control" required>
-                                        <option value="Computer Science">Computer Science</option>
+                                        <!-- <option value="Computer Science">Computer Science</option>
                                         <option value="Information Technology">Information Technology</option>
                                         <option value="Software Engineering">Software Engineering</option>
-                                        <option value="Data Science">Data Science</option>
+                                        <option value="Data Science">Data Science</option> -->
+                                        <?php $tagArray = explode(",", $data['tags']->tags); ?>
+                                        <?php foreach ($tagArray as $tag) : ?>
+                                            <option value="<?php echo $tag; ?>"><?php echo $tag; ?></option>
+                                        <?php endforeach; ?>
                                         <?php 
                                             // $result1=mysqli_query ($conn,"SELECT tag FROM usertag WHERE $_SESSION[userID]=usertag.userID");
                                             // while($row1=mysqli_fetch_array($result1)){
@@ -135,9 +139,9 @@
                 </div>
             </div>
                 <div class="RHS">
-                    <form action="project-home.php"><button type="submit" style="float:right" class="read-more attend">Projects</button></form>
+                    <form action="<?php echo URLROOT;?>/projects/viewAllProjects"><button type="submit" style="float:right" class="read-more attend">Projects</button></form>
                     <form action="myProjects.php"><button type="submit" style="float:right" class="read-more attend">My Projects</button></form>
-
+                    
                     <br><br>
                     <div class="filter-div">
                         <div style="display:flex">
@@ -337,20 +341,20 @@
                 </div>
             </div>
             <div>
-                <footer><a href="<?php echo URLROOT; ?>/Pages/about">About Us</a> <p> | </p> &copy; Convo 2022 All rights reserved.</footer>
+                <footer><a href="index.php">About Us</a> <p> | </p> &copy; Convo 2022 All rights reserved.</footer>
             </div>
         </div>
         
-        <!-- View -->
+        <!-- View
         <div class="video-view" id="1">
-            <img src="<?php echo URLROOT; ?>/img/cancel.png" class="cancel" onclick="cancel()">
+            <img src="../images/cancel.png" class="cancel" onclick="cancel()">
             <iframe width="550" height="325" src="https://www.youtube.com/embed/Nxtv1LfdSBk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             <h3>What is the big problem or question that this new academic discipline that you keep talking about would address?</h3>
             <div style="display:flex;">
                 <label class="qdp-1-2">21 July 2022</label>
                 <span class="qdp-1-2 qdp-1-3">By Varsha Wijethunge</span>
             </div>
-        </div>
+        </div> -->
         
         <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="arrow up"></i><br></button>
             
