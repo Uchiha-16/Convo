@@ -52,7 +52,7 @@
                                 </tr>
                                 <tr>
                                     <td colspan="3">
-                                        <p class="desc">Make sure you did try before adding an appointment. Enter a clear and concise Title and Description that<br> Experts will easily understand about your appointment. <br>
+                                        <p class="desc">Make sure you did try searching the question before adding an appointment. Enter a clear and concise Title that<br> Experts will easily understand about your appointment. <br>
                                                 Note: Experts have the full authority to accept or decline the appointment..</p>
                                     </td>
                                 </tr>
@@ -217,6 +217,11 @@
                 <div class="RHS">
                     <form action="<?php echo URLROOT; ?>/Consults/requests"><button type="submit" style="float:right" class="read-more attend">Appointment Requests</button></form>
                     <form action="<?php echo URLROOT;?>/Consults/index"><button type="submit" style="float:right" class="read-more attend">Pending Appointments</button></form>
+                    <?php if($_SESSION['role'] == 'expert'): ?>
+                    <form action="<?php echo URLROOT;?>/Consults/accepted"><button type="submit" style="float:right" class="read-more attend">Accepted Appointments</button></form>
+                     <form action="<?php echo URLROOT;?>/Consults/accept"><button type="submit" style="float:right" class="read-more attend">Accept Appointments</button></form>
+                    <?php endif; ?>
+                    
                 </div>
             </div>
             <div>

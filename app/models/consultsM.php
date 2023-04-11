@@ -39,9 +39,27 @@
             return $row;
         }
 
-        public function MygetConsults($userID) {
-            $this->db->query('SELECT * FROM consultation WHERE userID = :userID AND status = "pending"');
+
+        public function getRequests($userID){
+            $this->db->query('SELECT DISTINCT consultation.title as title, consultation.date as date , consultation.time as time, user.firstName as fName, user.lastName as lName 
+            FROM consultation JOIN user ON consultation.expertID = user.userID WHERE consultation.status = "pending" AND consultation.userID = :userID');
             $this->db->bind(':userID', $userID);
+            $row = $this->db->resultSet();
+            return $row;
+        }
+
+        public function AcceptedConsults($id) {
+            $this->db->query('SELECT DISTINCT consultation.title as title, consultation.date as date , consultation.time as time, user.firstName as fName, user.lastName as lName 
+            FROM consultation JOIN user ON consultation.userID = user.userID WHERE consultation.expertID = :id AND consultation.status = "approved"');
+            $this->db->bind(':id', $id);
+            $row = $this->db->resultSet();
+            return $row;
+        }
+
+        public function AcceptConsults($id) {
+            $this->db->query('SELECT DISTINCT consultation.title as title, consultation.date as date , consultation.time as time, user.firstName as fName, user.lastName as lName 
+            FROM consultation JOIN user ON consultation.userID = user.userID WHERE consultation.expertID = :id AND consultation.status = "pending"');
+            $this->db->bind(':id', $id);
             $row = $this->db->resultSet();
             return $row;
         }

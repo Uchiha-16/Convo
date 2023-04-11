@@ -37,7 +37,7 @@
         <div class="container-div">
             <div class="content-body">
                 <div class="LHS">
-                    <h3>My Appointments</h3><br>
+                    <h3>My Consultations</h3><br>
 
                     <?php foreach($data['consults'] as $consults) : ?>
                     <div class="question-div">
@@ -78,12 +78,9 @@
                 <div class="RHS">
                 <form action="<?php echo URLROOT; ?>/Consults/requests"><button type="submit" style="float:right" class="read-more attend">Appointment Requests</button></form>
                 <form action="<?php echo URLROOT; ?>/Consults/add"><button type="submit" style="float:right" class="read-more attend">Add Appointment</button></form>
-                <?php if($_SESSION['role'] == 'expert'): ?>
-                    <form action="<?php echo URLROOT;?>/Consults/accepted"><button type="submit" style="float:right" class="read-more attend">Accepted Appointments</button></form>
-                     <form action="<?php echo URLROOT;?>/Consults/accept"><button type="submit" style="float:right" class="read-more attend">Accept Appointments</button></form>
-                     <br><br><br><br>
-                     <?php endif; ?>
-                <br><br><br><br><br>
+                <form action="<?php echo URLROOT; ?>/Consults/index"><button type="submit" style="float:right" class="read-more attend">Pending Appointment</button></form>
+                <form action="<?php echo URLROOT; ?>/Consults/accepted"><button type="submit" style="float:right" class="read-more attend">Accepted Appointment</button></form>
+                <br><br><br><br><br><br><br><br><br>
                     <div class="filter-div">
                         <div style="display:flex">
                             <img src="<?php echo URLROOT; ?>/img/filter.png">

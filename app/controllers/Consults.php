@@ -117,8 +117,16 @@
         }
 
         public function requests(){
-            $data = [];
+
+            $userID = $_SESSION['userID'];
+
+            $consults = $this->consultsModel->getRequests($userID);
+            $data = [
+                'consults' => $consults
+            ];
             $this->view('consults/requests', $data);
+
+            // print_r($data);
         }
 
         public function resourceName(){
@@ -145,17 +153,30 @@
             }
         }
 
-        public function pending(){
+        public function accepted() {
+                
+                $userID = $_SESSION['userID'];
+                $consults = $this->consultsModel->AcceptedConsults($userID);
+    
+                $data = [
+                    'consults' => $consults
+                ];
+    
+                //print_r($data);
+                $this->view('consults/accepted', $data);
 
+        }
+
+        public function accept(){
             $userID = $_SESSION['userID'];
-            $consults = $this->consultsModel->MygetConsults($userID);
-
-            $data = [
-                'consults' => $consults
-            ];
-
-            // print_r($data);
-            $this->view('consults/pending', $data);
+                $consults = $this->consultsModel->AcceptConsults($userID);
+    
+                $data = [
+                    'consults' => $consults
+                ];
+    
+                //print_r($data);
+                $this->view('consults/accept', $data);
         }
     }
 

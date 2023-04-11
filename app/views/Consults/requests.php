@@ -37,89 +37,55 @@
         <div class="container-div">
             <div class="content-body">
                 <div class="LHS">
-                    <h3>My Consultations</h3><br>
+                    <h3>My Requested Appointments</h3><br>
             
+                    <?php foreach($data['consults'] as $consults) : ?>
                     <div class="question-div">
                         <div class="info">
+                            <?php 
+                            $dateString = $consults->date;
+                            $dateTime = new DateTime($dateString);
+
+                            $year = $dateTime->format('Y');
+                            $month = $dateTime->format('M');
+                            $day = $dateTime->format('d');
+?>
                             <div class="calander">
                                 <div class="cal1">
-                                    <label>Jan</label>
+                                    <label><?php echo $month ?></label>
                                 </div>
                                 <div class="cal2">
-                                    <label>12</label>
+                                    <label><?php echo $day?></label>
                                 </div>
                             </div>
                         </div>
                         <div class="content-display">
-                            <h3>How you should prepare for new Covid-19 Virus for upcoming months?</h3>
-                            <label class="name-label">Varsha Wijethunge</label>
-                            <label class="time-label">3.00PM - 4.00PM</label>
+                            <h3><?php echo $consults->title ?></h3>
+                            <label class="name-label">Waiting For Approval From <?php echo $consults->fName. " ". $consults->lName; ?></label>
+                            <label class="time-label"><?php echo $consults->time ?></label>
                             <div class="date-count">
-                                <button style="float:left" class="accept">Accept</button>
-                                <button style="float:right" class="decline">Decline</button>
+                                <button style="float:left" class="decline">Decline</button>
                             </div>
                         </div>
                         <div class="appointment">
-                            <label>Appointment</label>
+                            <label>Pending</label>
                         </div>
                     </div> 
+                    <?php endforeach; ?>
                     
-                     <!-- Consultation 2  -->
-                     <div class="question-div">
-                        <div class="info">
-                            <div class="calander">
-                                <div class="cal1">
-                                    <label>MAR</label>
-                                </div>
-                                <div class="cal2">
-                                    <label>21</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="content-display">
-                            <h3>How you should prepare for new Covid-19 Virus for upcoming months?</h3>
-                            <label class="name-label">Varsha Wijethunge</label>
-                            <label class="time-label">3.00PM - 4.00PM</label>
-                            <div class="date-count">
-                                <button style="float:left" class="accept">Accept</button>
-                                <button style="float:right" class="decline">Decline</button>
-                            </div>
-                        </div>
-                        <div class="appointment">
-                            <label>Appointment</label>
-                        </div>
-                    </div> 
-                    <!-- Consultation 3  -->
-                    <div class="question-div">
-                        <div class="info">
-                            <div class="calander">
-                                <div class="cal1">
-                                    <label>OCT</label>
-                                </div>
-                                <div class="cal2">
-                                    <label>30</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="content-display">
-                            <h3>How you should prepare for new Covid-19 Virus for upcoming months?</h3>
-                            <label class="name-label">Varsha Wijethunge</label>
-                            <label class="time-label">3.00PM - 4.00PM</label>
-                            <div class="date-count">
-                                <button style="float:left" class="accept">Accept</button>
-                                <button style="float:right" class="decline">Decline</button>
-                            </div>
-                        </div>
-                        <div class="appointment">
-                            <label>Appointment</label>
-                        </div>
-                    </div> 
+                      
                    
                 </div>
                 <div class="RHS">
                 <form action="<?php echo URLROOT; ?>/Consults/index"><button type="submit" style="float:right" class="read-more attend">Pending Appointments</button></form>
                 <form action="<?php echo URLROOT; ?>/Consults/add"><button type="submit" style="float:right" class="read-more attend">Add Appointment</button></form>
-                <br><br><br><br><br><br>
+                <?php if($_SESSION['role'] == 'expert'): ?>
+                    <form action="<?php echo URLROOT;?>/Consults/accepted"><button type="submit" style="float:right" class="read-more attend">Accepted Appointments</button></form>
+                     <form action="<?php echo URLROOT;?>/Consults/accept"><button type="submit" style="float:right" class="read-more attend">Accept Appointments</button></form>
+                     <br><br><br><br>
+                     <?php endif; ?>
+                   
+                <br><br><br><br><br>
                     <div class="filter-div">
                         <div style="display:flex">
                             <img src="<?php echo URLROOT; ?>/img/filter.png">
