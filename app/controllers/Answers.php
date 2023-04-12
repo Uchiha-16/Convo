@@ -71,7 +71,7 @@
                 $interaction = 'new';
                 //Input Data
                 $data = [
-                    'content' => trim($_POST['content']),
+                    'content' => $_POST['content'],
                     'date' => date('Y-m-d H:i:s'),
                     'embedlink' => $last_segment,
                     'image' => ($_FILES['image']),

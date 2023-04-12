@@ -17,14 +17,17 @@
         <link href="<?php echo URLROOT; ?>/css/textEditor.css" rel="stylesheet" type="text/css"/>
         <!-- <link href="<?php //echo URLROOT; ?>/css/consultpage.css" rel="stylesheet" type="text/css"/>
         <link href="<?php //echo URLROOT; ?>/css/calander.css" rel="stylesheet" type="text/css"/> -->
+
         <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
         <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
         <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/mobile.css" rel="stylesheet" type="text/css">
 
+        
+
         <script src="https://kit.fontawesome.com/a061f2abcc.js" crossorigin="anonymous"></script>
         <script src="<?php echo URLROOT; ?>/js/script.js" defer></script>
         <script src="<?php echo URLROOT; ?>/js/index.js" type="text/javascript" defer></script>
-        <script src="<?php echo URLROOT; ?>/js/textEditor.js" type="text/javascript"></script>
+        
         <script src="<?php echo URLROOT; ?>/js/imageUpload.js" type="text/javascript"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="<?php echo URLROOT; ?>/js/comments.js" type="text/javascript"></script>
