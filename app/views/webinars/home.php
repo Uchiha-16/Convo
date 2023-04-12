@@ -49,16 +49,6 @@
                             <div></div>
                             <div></div>
 
-                            <div>
-                                <?php for ($i = 0; $i < count($data['usertag']); $i++) : ?>
-                                    
-                                            <div class="tag"><?php echo $data['usertag'][$i] ?></div>
-                                        
-                                    
-                                <?php endfor; ?>
-                            </div>
-                            <div></div>
-                            <div></div>
                         
                             <?php foreach ($data['webinars'] as $webinar) : ?>
                                 

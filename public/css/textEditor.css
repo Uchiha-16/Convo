@@ -19,6 +19,14 @@
   background-color: #ffffff;
   outline: none;
   color: #020929;
+  cursor: pointer;
+}
+.adv-option-button{
+  cursor: pointer;
+}
+.textEditor button:hover {
+  background-color: #b6e1e2;
+  transition: .3s all;
 }
 .textEditor select {
   padding: 7px;
