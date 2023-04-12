@@ -204,7 +204,6 @@
                                     <td colspan="3">
                                         <br><br>
                                         <div class="add">
-                                            <button style="float:right" class="read-more attend submit" type="submit" name="submit">Create</button>
                                             <button style="float:right" class="read-more attend submit" type="reset" onclick=confirmation() >Reset</button>
                                         </div>
                                     </td>
@@ -215,11 +214,11 @@
                     
                 </div>
                 <div class="RHS">
-                    <form action="<?php echo URLROOT; ?>/Consults/requests"><button type="submit" style="float:right" class="read-more attend">Appointment Requests</button></form>
-                    <form action="<?php echo URLROOT;?>/Consults/index"><button type="submit" style="float:right" class="read-more attend">Pending Appointments</button></form>
+                    <form action="<?php echo URLROOT; ?>/Consults/requests"><button type="submit" style="float:right; width: 250px;" class="read-more attend">Pending Appointments</button></form>
+                    <form action="<?php echo URLROOT;?>/Consults/index"><button type="submit" style="float:right; width: 250px;" class="read-more attend">Upcoming Appointments</button></form>
                     <?php if($_SESSION['role'] == 'expert'): ?>
-                    <form action="<?php echo URLROOT;?>/Consults/accepted"><button type="submit" style="float:right" class="read-more attend">Accepted Appointments</button></form>
-                     <form action="<?php echo URLROOT;?>/Consults/accept"><button type="submit" style="float:right" class="read-more attend">Accept Appointments</button></form>
+                    <form action="<?php echo URLROOT;?>/Consults/accepted"><button type="submit" style="float:right; width: 250px;" class="read-more attend">Accepted Appointments</button></form>
+                     <form action="<?php echo URLROOT;?>/Consults/accept"><button type="submit" style="float:right; width: 250px;" class="read-more attend">Accept Appointments</button></form>
                     <?php endif; ?>
                     
                 </div>

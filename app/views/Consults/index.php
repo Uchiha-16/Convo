@@ -59,12 +59,27 @@
                                 </div>
                             </div>
                         </div>
+
+                        <?php date_default_timezone_set('Asia/Colombo'); 
+                        
+                        // Convert the future date to a Unix timestamp
+                            $futureTimestamp = strtotime($dateString);
+
+                            // Get the current Unix timestamp
+                            $currentTimestamp = time();
+
+                            // Calculate the time difference between the future and current timestamps
+                            $timeDifference = $futureTimestamp - $currentTimestamp;
+
+                            // Convert the time difference to days
+                            $daysRemaining = ceil($timeDifference / (60 * 60 * 24));
+?>
                         <div class="content-display">
                             <h3><?php echo $consults->title ?></h3>
                             <label class="name-label"> Approved By <?php echo $consults->fName. " ". $consults->lName; ?></label>
                             <label class="time-label"><?php echo $consults->time; ?></label>
                             <div class="date-count">
-                                <button style="float:left" class="decline">Decline</button>
+                            <button style="float:left" class="decline"><?php echo $daysRemaining ?> Days Remaining</button>
                             </div>
                         </div>
                         <div class="appointment">
@@ -76,7 +91,7 @@
                    
                 </div>
                 <div class="RHS">
-                <form action="<?php echo URLROOT; ?>/Consults/requests"><button type="submit" style="float:right" class="read-more attend">Appointment Requests</button></form>
+                <form action="<?php echo URLROOT; ?>/Consults/requests"><button type="submit" style="float:right" class="read-more attend">Pending Appointments</button></form>
                 <form action="<?php echo URLROOT; ?>/Consults/add"><button type="submit" style="float:right" class="read-more attend">Add Appointment</button></form>
                 <?php if($_SESSION['role'] == 'expert'): ?>
                     <form action="<?php echo URLROOT;?>/Consults/accepted"><button type="submit" style="float:right" class="read-more attend">Accepted Appointments</button></form>

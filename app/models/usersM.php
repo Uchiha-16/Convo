@@ -101,5 +101,35 @@
             $row = $this->db->single();
             return $row->role;
         }
+
+        //addExpert 
+        public function addexpert($userID, $linkedin) {
+            $this->db->query('INSERT INTO expert (expertID, linkedin) VALUES(:expertID, :linkedin)');
+            // Bind values
+            $this->db->bind(':expertID', $userID,);
+            $this->db->bind(':linkedin', $linkedin);
+
+            // Execute
+            if($this->db->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        //addexpertQualification
+        public function addexpertQ($userID, $qualification) {
+            $this->db->query('INSERT INTO expertqualification (expertID, qualification) VALUES(:expertID, :qualification)');
+            // Bind values
+            $this->db->bind(':expertID', $userID,);
+            $this->db->bind(':qualification', $qualification);
+
+            // Execute
+            if($this->db->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        }
     }
 ?>

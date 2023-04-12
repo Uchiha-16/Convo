@@ -91,10 +91,10 @@
                    
                 </div>
                 <div class="RHS">
-                <form action="<?php echo URLROOT; ?>/Consults/requests"><button type="submit" style="float:right" class="read-more attend">Appointment Requests</button></form>
+                <form action="<?php echo URLROOT; ?>/Consults/requests"><button type="submit" style="float:right" class="read-more attend">Pending Appointments</button></form>
                 <form action="<?php echo URLROOT; ?>/Consults/add"><button type="submit" style="float:right" class="read-more attend">Add Appointment</button></form>
-                <form action="<?php echo URLROOT; ?>/Consults/index"><button type="submit" style="float:right" class="read-more attend">Pending Appointment</button></form>
-                <form action="<?php echo URLROOT; ?>/Consults/accept"><button type="submit" style="float:right" class="read-more attend">Accept Appointment</button></form>
+                <form action="<?php echo URLROOT; ?>/Consults/index"><button type="submit" style="float:right" class="read-more attend">Upcoming Appointments</button></form>
+                <form action="<?php echo URLROOT; ?>/Consults/accept"><button type="submit" style="float:right" class="read-more attend">Accept Appointments</button></form>
                 <br><br><br><br><br><br><br><br><br>
                     <div class="filter-div">
                         <div style="display:flex">

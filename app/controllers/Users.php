@@ -177,6 +177,9 @@
                 // Validate the data
                 $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
                 $tag = isset($_POST['tag']) ? $_POST['tag'] : '0';
+                
+
+                //print_r($tag);
 
                 //Input Data
                 $data = [
@@ -202,7 +205,6 @@
                     'linkedin_err' => '',
                     'qualifications_err' => ''
                 ];
-
 
                 // Validate Image
                 if(uploadImage($data['pfp']['tmp_name'], $data['pfp_name'], '/img/pfp/')) {
@@ -288,6 +290,8 @@
                     // Register User
                     if($this->userModel->register($data)) {
                         $LastID = $this->userModel->getLastID();
+                        $this->userModel->addexpert($LastID->userID, $data['linkedin']);
+                        $this->userModel->addexpertQ($LastID->userID, $data['qualifications']);
                         foreach($data['tag'] as $tag){
                            if(!($this->userModel->registerTag($tag, $LastID->userID)))
                             {
@@ -295,6 +299,7 @@
                             }
                         }
                             flash('reg_flash','New account created Successfully! (｡◕‿◕｡)');
+                            print_r($data);
                             redirect('Users/login');
                         
                     } else {

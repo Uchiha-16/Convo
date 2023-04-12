@@ -41,7 +41,7 @@
 
 
         public function getRequests($userID){
-            $this->db->query('SELECT DISTINCT consultation.title as title, consultation.date as date , consultation.time as time, user.firstName as fName, user.lastName as lName 
+            $this->db->query('SELECT DISTINCT consultation.consultID as consultID, consultation.title as title, consultation.date as date , consultation.time as time, user.firstName as fName, user.lastName as lName 
             FROM consultation JOIN user ON consultation.expertID = user.userID WHERE consultation.status = "pending" AND consultation.userID = :userID');
             $this->db->bind(':userID', $userID);
             $row = $this->db->resultSet();
@@ -57,11 +57,22 @@
         }
 
         public function AcceptConsults($id) {
-            $this->db->query('SELECT DISTINCT consultation.title as title, consultation.date as date , consultation.time as time, user.firstName as fName, user.lastName as lName 
+            $this->db->query('SELECT DISTINCT consultation.consultID as consultID, consultation.title as title, consultation.date as date , consultation.time as time, user.firstName as fName, user.lastName as lName 
             FROM consultation JOIN user ON consultation.userID = user.userID WHERE consultation.expertID = :id AND consultation.status = "pending"');
             $this->db->bind(':id', $id);
             $row = $this->db->resultSet();
             return $row;
+        }
+
+        public function DeclineConsults($consultID, $expertID){
+            $this->db->query('UPDATE consultation SET status = "declined", approvedBy = :expertID WHERE consultID = :consultID');
+            $this->db->bind(':consultID', $consultID);
+            $this->db->bind(':expertID', $expertID);
+            if($this->db->execute()) {
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 ?>

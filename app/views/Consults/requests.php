@@ -15,9 +15,11 @@
 </style>
 
 <script type="text/javascript">
-    function confirmation(){
-      if(confirm("Are you sure you want to discard this blog?")){
-        window.location.href = "<?php echo URLROOT; ?>/Blogs/index";
+    function confirmationDecline(consultID){
+      if(confirm("Are you sure you want to decline this appointment?")){
+        window.location.href = "<?php echo URLROOT; ?>/Consults/decline/" + consultID;
+      }else {
+        return false;
       }
     }
 </script>
@@ -64,7 +66,7 @@
                             <label class="name-label">Waiting For Approval From <?php echo $consults->fName. " ". $consults->lName; ?></label>
                             <label class="time-label"><?php echo $consults->time ?></label>
                             <div class="date-count">
-                                <button style="float:left" class="decline">Decline</button>
+                                    <button type="submit" style="float:left" class="decline" onclick="confirmationDecline(<?php echo $consults->consultID;?>)">Decline</button>
                             </div>
                         </div>
                         <div class="appointment">
@@ -77,7 +79,7 @@
                    
                 </div>
                 <div class="RHS">
-                <form action="<?php echo URLROOT; ?>/Consults/index"><button type="submit" style="float:right" class="read-more attend">Pending Appointments</button></form>
+                <form action="<?php echo URLROOT; ?>/Consults/index"><button type="submit" style="float:right" class="read-more attend">Upcoming Appointments</button></form>
                 <form action="<?php echo URLROOT; ?>/Consults/add"><button type="submit" style="float:right" class="read-more attend">Add Appointment</button></form>
                 <?php if($_SESSION['role'] == 'expert'): ?>
                     <form action="<?php echo URLROOT;?>/Consults/accepted"><button type="submit" style="float:right" class="read-more attend">Accepted Appointments</button></form>

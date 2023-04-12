@@ -15,9 +15,11 @@
 </style>
 
 <script type="text/javascript">
-    function confirmation(){
-      if(confirm("Are you sure you want to discard this blog?")){
-        window.location.href = "<?php echo URLROOT; ?>/Blogs/index";
+    function confirmationDecline(consultID){
+        if(confirm("Are you sure you want to decline this appointment?")){
+        window.location.href = "<?php echo URLROOT; ?>/Consults/declineAccept/" + consultID;
+      }else {
+        return false;
       }
     }
 </script>
@@ -61,10 +63,11 @@
                         </div>
                         <div class="content-display">
                             <h3><?php echo $consults->title ?></h3>
-                            <label class="name-label"> Approved By <?php echo $consults->fName. " ". $consults->lName; ?></label>
+                            <label class="name-label"> Requested By <?php echo $consults->fName. " ". $consults->lName; ?></label>
                             <label class="time-label"><?php echo $consults->time; ?></label>
                             <div class="date-count">
-                                <button style="float:left" class="decline">Decline</button>
+                                <button style="float:left" class="accept">Accept</button>
+                                <button style="float:right" class="decline" onclick="confirmationDecline(<?php echo $consults->consultID;?>)">Decline</button>
                             </div>
                         </div>
                         <div class="appointment">
@@ -76,16 +79,18 @@
                    
                 </div>
                 <div class="RHS">
-                <form action="<?php echo URLROOT; ?>/Consults/requests"><button type="submit" style="float:right" class="read-more attend">Appointment Requests</button></form>
+                <form action="<?php echo URLROOT; ?>/Consults/requests"><button type="submit" style="float:right" class="read-more attend">Pending Appointments</button></form>
                 <form action="<?php echo URLROOT; ?>/Consults/add"><button type="submit" style="float:right" class="read-more attend">Add Appointment</button></form>
-                <form action="<?php echo URLROOT; ?>/Consults/index"><button type="submit" style="float:right" class="read-more attend">Pending Appointment</button></form>
-                <form action="<?php echo URLROOT; ?>/Consults/accepted"><button type="submit" style="float:right" class="read-more attend">Accepted Appointment</button></form>
+                <form action="<?php echo URLROOT; ?>/Consults/index"><button type="submit" style="float:right" class="read-more attend">Upcoming Appointments</button></form>
+                <form action="<?php echo URLROOT; ?>/Consults/accepted"><button type="submit" style="float:right" class="read-more attend">Accepted Appointments</button></form>
                 <br><br><br><br><br><br><br><br><br>
                     <div class="filter-div">
                         <div style="display:flex">
                             <img src="<?php echo URLROOT; ?>/img/filter.png">
                             <label>Filters</label><button class="read-more go">Go</button>
                         </div>
+
+        
                         <div>
                             <form action="" method="POST">
                             

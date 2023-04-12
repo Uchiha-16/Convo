@@ -168,7 +168,7 @@
         }
 
         public function accept(){
-            $userID = $_SESSION['userID'];
+                $userID = $_SESSION['userID'];
                 $consults = $this->consultsModel->AcceptConsults($userID);
     
                 $data = [
@@ -178,6 +178,34 @@
                 //print_r($data);
                 $this->view('consults/accept', $data);
         }
+        
+        public function declineAccept($consultID){
+
+                $userID = $_SESSION['userID'];
+                $consults = $this->consultsModel->DeclineConsults($consultID, $userID);
+    
+                if($consults) {
+                    flash('reg_flash', 'Appointment Declined!');
+                    redirect('Consults/accept');
+                } else {
+                    die('Something went wrong');
+                    redirect('Consults/accept');
+                }
+        }
+
+        public function decline($consultID){
+
+            $userID = $_SESSION['userID'];
+            $consults = $this->consultsModel->DeclineConsults($consultID, $userID);
+
+            if($consults) {
+                flash('reg_flash', 'Appointment Declined!');
+                redirect('Consults/requests');
+            } else {
+                die('Something went wrong');
+                redirect('Consults/requests');
+            }
+    }
     }
 
 ?>
