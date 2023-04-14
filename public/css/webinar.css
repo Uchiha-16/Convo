@@ -71,9 +71,7 @@ h2.vid-head {
 font-size: 20px;
 color: #333;
 }
-.vid-slider{
-    margin-top: 1rem;
-}
+
 /*============================================== Webinar View ==========================================*/
 
 .close-video {
@@ -228,6 +226,9 @@ content: '';
 }
 .table-thumbnail{
     width: 20%;
+}
+.table-thumbnail img{
+    width: 6rem;
 }
 .table-date{
     width: 21%;

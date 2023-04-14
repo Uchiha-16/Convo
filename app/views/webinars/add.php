@@ -114,7 +114,7 @@
                                                     Playlists can help viewers discover your content faster.</label>
 
                                                 <ul class="dropdown" id="dropdown">
-                                                    <!-- Add New -->
+                                                    <!-- Add New --> 
                                                     <li>
                                                         <input type="checkbox" value="1" id="checkbox0" id="newPlaylist" onchange="showDiv('hidden_div', this)" />
                                                         <label for="checkbox0">Add new</label><br>

@@ -74,7 +74,7 @@
         // public function getExpertID($tag) {
         //     $this->db->query('SELECT expert.expertID as ID, user.firstName, user.lastName FROM user JOIN expert ON user.userID = expert.expertID 
         //                     JOIN usertag ON user.userID = usertag.userID WHERE usertag.tag = :tag');
-        //     $this->db->bind(':tag', $tag);
+        //     $this->db->bind(':tag', $tag); 
         //     $row = $this->db->resultSet();
         //     return $row;
         // }

@@ -8,7 +8,7 @@
 
             // my playlists
             $webinarsPlaylist = $this->webinarModel->getPlaylist();
-            //$this->view('webinars/add', $data);
+            //$this->view('webinars/add', $data); 
             // Form is submitting
             if($_SERVER['REQUEST_METHOD'] == 'POST') {
                 // Validate the data
@@ -105,7 +105,7 @@
                             flash('reg_flash','Webinar Added Successfully!');
                             redirect('webinars/home');
 
-                        if(isset($data['newP'])){
+                        if($data['newP'] != ''){
                             $this->webinarModel->webinarPlaylist($data['newP'], $LastID->webinarID);
                         }
 
@@ -141,10 +141,10 @@
         
 
         public function myWebinars(){
-            $webinars = $this->webinarModel->getmywebinars();
+            $mywebinars = $this->webinarModel->getmywebinars();
             
             $data = [
-                'webinars' => $webinars,
+                'mywebinars' => $mywebinars,
             ];
             
             $this->view('webinars/myWebinars', $data);
