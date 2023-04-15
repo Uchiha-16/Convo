@@ -23,11 +23,11 @@
                 <div class="content-body">
                     <div class="LHS">
                         <div class="question-div add-event">
-                            <form name="" action="<?php echo URLROOT; ?>/Webinars/add" method="POST" enctype="multipart/form-data">
+                            <form name="" action="<?php echo URLROOT; ?>/Webinars/edit/<?php echo $data['WID']; ?>" method="POST" enctype="multipart/form-data">
                                 <table>
                                     <tr>
                                         <td colspan="3">
-                                            <p class="p1">Webinar Details</p>
+                                            <p class="p1">Edit Webinar Details</p>
                                         </td>
                                     </tr>
                                     <tr>
@@ -45,63 +45,71 @@
                                                 <label>Please Select <b>all the Tags</b> which are Related to your
                                                     Webinar.</label>
                                                 <ul class="dropdown" id="dropdown">
+                                                    <?php $tagarray = explode(",", $data['tag']); ?>
+                                                    <?php $tagarrayjson = json_encode($tagarray); ?>
 
-                                                    <li><input type="checkbox" value="agricultureScience" name="tag[]" id="checkbox1" value="<?php echo $data['tag']; ?>" /><label for="checkbox1">Agriculture Science</label></li>
+                                                    <li><input type="checkbox" value="agricultureScience" name="tag[]" id="checkbox1" /><label for="checkbox1">Agriculture Science</label></li>
 
-                                                    <li><input type="checkbox" value="anthropology" name="tag[]" id="checkbox2" value="<?php echo $data['tag']; ?>" /><label for="checkbox2">Anthropology</label></li>
+                                                    <li><input type="checkbox" value="anthropology" name="tag[]" id="checkbox2" /><label for="checkbox2">Anthropology</label></li>
 
-                                                    <li><input type="checkbox" value="biology" name="tag[]" id="checkbox3" value="<?php echo $data['tag']; ?>" /><label for="checkbox3">Biology</label></li>
+                                                    <li><input type="checkbox" value="biology" name="tag[]" id="checkbox3" /><label for="checkbox3">Biology</label></li>
 
-                                                    <li><input type="checkbox" value="Chemistry" name="tag[]" id="checkbox4" value="<?php echo $data['tag']; ?>" /><label for="checkbox4">Chemistry</label></li>
+                                                    <li><input type="checkbox" value="Chemistry" name="tag[]" id="checkbox4" /><label for="checkbox4">Chemistry</label></li>
 
-                                                    <li><input type="checkbox" value="CS" name="tag[]" id="checkbox5" value="<?php echo $data['tag']; ?>" /><label for="checkbox5">Computer
-                                                            Science</label></li>
+                                                    <li><input type="checkbox" value="CS" name="tag[]" id="checkbox5" /><label for="checkbox5">Computer Science</label></li>
 
-                                                    <li><input type="checkbox" value="design" name="tag[]" id="checkbox6" value="<?php echo $data['tag']; ?>" /><label for="checkbox6">Design</label></li>
+                                                    <li><input type="checkbox" value="design" name="tag[]" id="checkbox6" /><label for="checkbox6">Design</label></li>
 
-                                                    <li><input type="checkbox" value="economics" name="tag[]" id="checkbox7" value="<?php echo $data['tag']; ?>" /><label for="checkbox7">Economics</label></li>
+                                                    <li><input type="checkbox" value="economics" name="tag[]" id="checkbox7" /><label for="checkbox7">Economics</label></li>
 
-                                                    <li><input type="checkbox" value="education" name="tag[]" id="checkbox8" value="<?php echo $data['tag']; ?>" /><label for="checkbox8">Education</label></li>
+                                                    <li><input type="checkbox" value="education" name="tag[]" id="checkbox8" /><label for="checkbox8">Education</label></li>
 
-                                                    <li><input type="checkbox" value="engineering" name="tag[]" id="checkbox9" value="<?php echo $data['tag']; ?>" /><label for="checkbox9">Engineering</label></li>
+                                                    <li><input type="checkbox" value="engineering" name="tag[]" id="checkbox9" /><label for="checkbox9">Engineering</label></li>
 
-                                                    <li><input type="checkbox" value="EA" name="tag[]" id="checkbox10" value="<?php echo $data['tag']; ?>" /><label for="checkbox10">Entertaintment &amp; Arts</label></li>
+                                                    <li><input type="checkbox" value="EA" name="tag[]" id="checkbox10" /><label for="checkbox10">Entertaintment &amp; Arts</label></li>
 
-                                                    <li><input type="checkbox" value="geoscience" name="tag[]" id="checkbox11" value="<?php echo $data['tag']; ?>" /><label for="checkbox11">Geoscience</label></li>
+                                                    <li><input type="checkbox" value="geoscience" name="tag[]" id="checkbox11" /><label for="checkbox11">Geoscience</label></li>
 
-                                                    <li><input type="checkbox" value="history" name="tag[]" id="checkbox12" value="<?php echo $data['tag']; ?>" /><label for="checkbox12">History</label></li>
+                                                    <li><input type="checkbox" value="history" name="tag[]" id="checkbox12" /><label for="checkbox12">History</label></li>
 
-                                                    <li><input type="checkbox" value="law" name="tag[]" id="checkbox13" value="<?php echo $data['tag']; ?>" /><label for="checkbox13">Law</label></li>
+                                                    <li><input type="checkbox" value="law" name="tag[]" id="checkbox13" /><label for="checkbox13">Law</label></li>
 
-                                                    <li><input type="checkbox" value="linguistics" name="tag[]" id="checkbox14" value="<?php echo $data['tag']; ?>" /><label for="checkbox14">Linguistics</label></li>
+                                                    <li><input type="checkbox" value="linguistics" name="tag[]" id="checkbox14" /><label for="checkbox14">Linguistics</label></li>
 
-                                                    <li><input type="checkbox" value="literature" name="tag[]" id="checkbox15" value="<?php echo $data['tag']; ?>" /><label for="checkbox15">literature</label></li>
+                                                    <li><input type="checkbox" value="literature" name="tag[]" id="checkbox15" /><label for="checkbox15">Literature</label></li>
 
-                                                    <li><input type="checkbox" value="mathematics" name="tag[]" id="checkbox16" value="<?php echo $data['tag']; ?>" /><label for="checkbox16">Mathematics</label></li>
+                                                    <li><input type="checkbox" value="mathematics" name="tag[]" id="checkbox16" /><label for="checkbox16">Mathematics</label></li>
 
-                                                    <li><input type="checkbox" value="Medicine" name="tag[]" id="checkbox17" value="<?php echo $data['tag']; ?>" /><label for="checkbox17">Medicine</label></li>
+                                                    <li><input type="checkbox" value="Medicine" name="tag[]" id="checkbox17" /><label for="checkbox17">Medicine</label></li>
 
-                                                    <li><input type="checkbox" value="linguistics" name="tag[]" id="checkbox18" value="<?php echo $data['tag']; ?>" /><label for="checkbox18">Linguistics</label></li>
+                                                    <li><input type="checkbox" value="linguistics" name="tag[]" id="checkbox18" /><label for="checkbox18">Linguistics</label></li>
 
-                                                    <li><input type="checkbox" value="philosophy" name="tag[]" id="checkbox19" value="<?php echo $data['tag']; ?>" /><label for="checkbox19">Philosophy</label></li>
+                                                    <li><input type="checkbox" value="philosophy" name="tag[]" id="checkbox19" /><label for="checkbox19">Philosophy</label></li>
 
-                                                    <li><input type="checkbox" value="physics" name="tag[]" id="checkbox20" value="<?php echo $data['tag']; ?>" /><label for="checkbox20" for="checkbox1">Physics</label></li>
+                                                    <li><input type="checkbox" value="physics" name="tag[]" id="checkbox20" /><label for="checkbox20" for="checkbox1">Physics</label></li>
 
-                                                    <li><input type="checkbox" value="PS" name="tag[]" id="checkbox21" value="<?php echo $data['tag']; ?>" /><label for="checkbox21">Political
-                                                            Science</label></li>
+                                                    <li><input type="checkbox" value="PS" name="tag[]" id="checkbox21" /><label for="checkbox21">Political Science</label></li>
 
-                                                    <li><input type="checkbox" value="psychology" name="tag[]" id="checkbox22" value="<?php echo $data['tag']; ?>" /><label for="checkbox22">Psychology</label></li>
+                                                    <li><input type="checkbox" value="psychology" name="tag[]" id="checkbox22" /><label for="checkbox22">Psychology</label></li>
 
-                                                    <li><input type="checkbox" value="RS" name="tag[]" id="checkbox23" value="<?php echo $data['tag']; ?>" /><label for="checkbox23">Religious
-                                                            Studies</label></li>
+                                                    <li><input type="checkbox" value="RS" name="tag[]" id="checkbox23" /><label for="checkbox23">Religious Studies</label></li>
 
-                                                    <li><input type="checkbox" value="socialScience" name="tag[]" id="checkbox24" value="<?php echo $data['tag']; ?>" /><label for="checkbox24">Social
-                                                            Science</label></li>
+                                                    <li><input type="checkbox" value="socialScience" name="tag[]" id="checkbox24" /><label for="checkbox24">Social Science</label></li>
 
-                                                    <li><input type="checkbox" value="spaceScience" name="tag[]" id="checkbox25" value="<?php echo $data['tag']; ?>" /><label for="checkbox25">Space
-                                                            Science</label></li>
+                                                    <li><input type="checkbox" value="spaceScience" name="tag[]" id="checkbox25" /><label for="checkbox25">Space Science</label></li>
                                                 </ul>
                                             </div>
+                                            <?php echo "<script>var checkboxValues = " . $tagarrayjson . ";</script>"; ?>
+
+                                            <script>
+                                                for (var i = 0; i < checkboxValues.length; i++) {
+                                                    var checkbox = document.querySelector("input[type='checkbox'][value='" + checkboxValues[i] + "']");
+                                                    if (checkbox) {
+                                                        checkbox.checked = true;
+                                                    }
+                                                }
+                                            </script>
+
                                             <span class="error"><?php echo $data['tag_err']; ?></span>
                                         </td>
                                     </tr>
@@ -122,6 +130,10 @@
                                                             <input class="inputform" type="text" name="newP" id="playlist" placeholder="Add a unique name to your new playlist">
                                                         </div>
                                                     </li>
+
+                                                    <?php $playlistarray = explode(",", $data['playlist']); ?>
+                                                    <?php $playlistarrayjson = json_encode($playlistarray); ?>
+
                                                     <?php $count = 26; ?>
                                                     <?php foreach ($data['webinarsPlaylist'] as $webinarsPlaylist) : ?>
                                                         <li>
@@ -132,6 +144,18 @@
                                                     <?php endforeach; ?>
                                                 </ul>
                                             </div>
+
+                                            <?php echo "<script>var checkboxValues2 = " . $playlistarrayjson . ";</script>"; ?>
+
+                                            <script>
+                                                for (var i = 0; i < checkboxValues2.length; i++) {
+                                                    var checkbox2 = document.querySelector("input[type='checkbox'][value='" + checkboxValues2[i] + "']");
+                                                    if (checkbox2) {
+                                                        checkbox2.checked = true;
+                                                    }
+                                                }
+                                            </script>
+
                                             <span class="error"><?php echo $data['playlist_err']; ?></span>
                                         </td>
                                     </tr>
@@ -144,7 +168,7 @@
                                                 <label style="color: #117ea6; font-size:13px; margin-left:3.2rem"><b>Embeded Link Example:</b> https://www.youtube.com/embed/2ybLD6_2gKM</label></label><br><br>
                                             <label class="steps"><b>Step 3:</b> Paste the link to the following field.</label><br><br>
                                             <label class="steps">Make sure that it is the <b>‘Shared/ Embeded video link’</b>.</label><br><br>
-                                            <input class="inputform" type="text" name="link" placeholder="Please include the video link here." value="">
+                                            <input class="inputform" type="text" name="link" placeholder="Please include the video link here." value="https://youtu.be/<?php echo $data['videolink']; ?>">
                                             <span class="error"><?php echo $data['link_err']; ?></span>
                                         </td>
                                     </tr>
@@ -158,11 +182,11 @@
                                             <!-- Add image section -->                                   
                                             <div class="avatar-upload">
                                                 <div class="avatar-edit">
-                                                    <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" name="thumbnail"/>
+                                                    <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" name="thumbnail" value="<?php echo $data['thumbnail']; ?>"/>
                                                     <label for="imageUpload"></label>
                                                 </div>
                                                 <div class="avatar-preview">
-                                                    <div id="imagePreview" style="background-image: url(<?php echo URLROOT; ?>/img/thumbnailpic.png);">
+                                                    <div id="imagePreview" style="background-image: url(<?php echo URLROOT; ?>/img/thumbnails/<?php echo $data['thumbnail']; ?>);">
                                                     </div>
                                                 </div>
                                             </div>
@@ -180,8 +204,8 @@
                                         <td colspan="3">
                                             <br><br>
                                             <div class="add">
-                                                <button style="float:right" class="read-more attend submit" type="reset">Cancel</button>
-                                                <button style="float:right" class="read-more attend submit" type="submit" name="submit">Publish</button>
+                                                <button style="float:right" class="read-more attend submit" type="reset">Reset</button>
+                                                <button style="float:right" class="read-more attend submit" type="submit" name="submit">Update</button>
                                             </div>
                                         </td>
                                     </tr>

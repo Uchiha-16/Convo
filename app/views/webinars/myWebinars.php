@@ -30,16 +30,24 @@
                         <!-- TH --> 
                         <tr>
                             <th colspan="2">Video</th>
-                            <th colspan="3" style="padding-left:2rem;">Date</th>
+                            <th colspan="3">Date</th>
                         </tr>
                         <!-- section -->
                         <?php foreach ($data['mywebinars'] as $mywebinar) : ?>
                             <tr>
                                 <td class="table-thumbnail"><img src="<?php echo URLROOT; ?>/img/thumbnails/<?php echo $mywebinar->thumbnail ?>"></td>
-                                <td><?php echo $mywebinar->title ?><br><span>hgjhhj</span></td>
+                                <td class="cell"><?php echo $mywebinar->title ?><br><span><b>Playlist: </b><?php echo $mywebinar->playlistName ?></span></td>
                                 <td class="table-date"><?php echo $mywebinar->date ?><br><span>Published</span></td>
-                                <td class="edit" style="font-size: 16px;font-weight: 500;width: 6%;">Edit</td>
-                                <td class="edit remove" style="font-size: 16px;font-weight: 500;width: 13%;">Remove</td>
+                                <td class="edit" style="font-size: 16px;font-weight: 500;width: 9%;">
+                                    <form action="<?php echo URLROOT; ?>/webinars/edit/<?php echo $mywebinar->webinarID; ?>">
+                                        <button class="edit" type="submit">Edit</button>
+                                    </form>    
+                                </td>
+                                <td style="font-size: 16px;font-weight: 500;width: 13%;">
+                                    <form action="<?php echo URLROOT; ?>/webinars/delete/<?php echo $mywebinar->webinarID; ?>">
+                                        <button class="remove" onclick="return confirm('Are you sure you want to delete this record?')">Remove</button>
+                                    </form>
+                                </td>
                             </tr>
                         <?php endforeach; ?>
                     </table>
@@ -238,7 +246,13 @@
                             <div class="checkbox-1">
                                 <span class="checkbox-title" onclick="filter4()">Playlist <i class="arrow up" id="up4" style="margin-left: 6.5rem;"></i><i class="arrow down" id="down4" style="margin-left: 6.5rem;"></i></span>
                                 <ul id="checkbox-4">
-
+                                    <?php foreach ($data['myplaylist'] as $myplaylist) : ?>
+                                        <li>
+                                            <label for="checkbox1">
+                                                <input type="checkbox" value="last 3 months" name="publishDate[]" id="checkbox1" /><?php echo $myplaylist->playlistName ?>
+                                            </label>
+                                        </li>
+                                    <?php endforeach; ?>
                                 </ul>
                             </div>
 

@@ -189,7 +189,7 @@
 
                 $question = $this->questionModel->getQuestionByID($QID);
                 
-                //check the owner of the question
+                //check the owner of the question 
                 if($question->userID != $_SESSION['userID']){
                     redirect('questions/myQuestions');
                 }
@@ -209,7 +209,7 @@
         }
 
         public function delete($QID) {
-                // Get existing post from model
+                // Get existing post from model 
                 $question = $this->questionModel->getQuestionByID($QID);
                 //check the owner of the question
                 if($question->userID != $_SESSION['userID']){

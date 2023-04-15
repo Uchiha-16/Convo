@@ -25,7 +25,7 @@
     <?php endif; ?>
 
 
-    <!-- body content -->
+    <!-- body content --> 
     <div class="container-div">
         <div class="content-body">
             <div class="LHS">

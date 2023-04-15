@@ -16,7 +16,7 @@
             $this->db->bind(':rating', $data['rating']);
             $this->db->bind(':userID', $_SESSION['userID']);
 
-            // Execute
+            // Execute 
             if($this->db->execute()) {
                 return true;
             } else {
