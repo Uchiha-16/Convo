@@ -43,6 +43,12 @@
                 <div class="container-div">
                     <div class="content-body">
                         <div class="LHS">
+                            <div>
+                                <h3>Webinars Related to your fields...</h3>
+                            </div>
+                            <div></div>
+                            <div></div>
+
                         
                             <?php foreach ($data['webinars'] as $webinar) : ?>
                                 

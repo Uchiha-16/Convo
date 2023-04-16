@@ -2,7 +2,7 @@
 <div class="nav">
             <div><a href="<?php echo URLROOT;?>/Pages/expert"><img src="<?php echo URLROOT;?>/img/logo%20with%20name%20WHITE%201.png" id="logo"></a></div>
             <div class="nav-hover"><a href="<?php echo URLROOT;?>/Pages/expert">Home</a></div>
-            <div class="nav-hover"><a href="consulthome.php">Consult</a></div>
+            <div class="nav-hover"><a href="<?php echo URLROOT;?>/Consults/index">Consult</a></div>
             <div class="nav-hover"><a href="<?php echo URLROOT;?>/Webinars/home">Webinar</a></div>
             <div><input type="search" name="search" placeholder="Search for questions..."/></div>
             <?php if(isset($_SESSION['userID'])) : ?>
@@ -20,7 +20,7 @@
                 <img class="dropbtn" src="<?php echo URLROOT;?>/img/profile.png" class="nav-icon" style="width: 25px;">
                 <div class="dropdown-content dropdown-content2" id="myDropdown2">
                     <a href="<?php echo URLROOT;?>/Profile/View">Profile</a>
-                    <a href="<?php echo URLROOT;?>/Moderator/approve">Approvals</a>
+                    <!-- <a href="<?php echo URLROOT;?>/Moderator/approve">Approvals</a> -->
                     <a href="<?php echo URLROOT;?>/Blogs/index">Blogs</a>
                     <a href="<?php echo URLROOT;?>/Events/index">Events</a>
                     <a href="<?php echo URLROOT;?>/Projects/index">Projects</a>

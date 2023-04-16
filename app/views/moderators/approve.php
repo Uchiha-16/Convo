@@ -1,11 +1,11 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 
 <style>
-    <?php if (($_SESSION['role']) == 'seeker') : ?>
-    <?php elseif (($_SESSION['role']) == 'premium') : ?>
+    /* <?php if (($_SESSION['role']) == 'seeker/mod') : ?>
+    <?php elseif (($_SESSION['role']) == 'expert/mod') : ?>
       .nav {
         grid-template-columns: 5% 6% 6% 6% 51% 10% 4% 4% 4%;
-    }
+    } */
 
     <?php endif; ?>
 </style>
@@ -14,10 +14,8 @@
 <body>
 <?php if($_SESSION['role'] == 'seeker/mod'): ?>
     <?php require APPROOT . '/views/inc/components/SMnavbar.php'; ?>
-<?php elseif($_SESSION['role'] == 'premium'): ?>
-    <?php require APPROOT . '/views/inc/components/Pnavbar.php'; ?>
-<?php else: ?>
-    <?php require APPROOT . '/views/inc/components/Snavbar.php'; ?>
+<?php elseif($_SESSION['role'] == 'expert/mod'): ?>
+    <?php require APPROOT . '/views/inc/components/EMnavbar.php'; ?>
 <?php endif; ?>
 
     <!-- body content -->
@@ -27,7 +25,9 @@
                 <h3>Questions and Discussions</h3><br>
 
                 <?php foreach ($data['questions'] as $question) : ?>
-
+                    <div class="alert success">
+                        <?php flash('reg_flash'); ?>
+                    </div>
                     <div class="question-div">
                         <div class="info">
                             <div class="qdp">
@@ -63,19 +63,14 @@
                             <h3><?php echo $question->title ?></h3>
                             <p class="line-clamp"><?php echo $question->content ?></p>
                             <div class="date-count">
-                                <label><?php echo convertTime($question->date); ?></label>
-                                <?php for ($i = 0; $i < count($data['count']); $i++) : ?>
-                                    <?php if ($data['count'][$i]->QID == $question->QID) : ?>
-                                            <label style="font-weight:600; float:right"><?php echo $data['count'][$i]->count; ?> Answers</label><br>
-                                            <?php break; ?>
-                                    
-                                    <?php endif; ?>
-                                
-                            <?php endfor; ?>
-                                <label style="font-weight:600; float:right">Overall Rating: <?php echo $question->rating; ?></label><br>
-                                <form action="<?php echo URLROOT; ?>/answers/viewA/<?php echo $question->QID; ?>">
-                                    <button style="float:right" class="read-more">READ MORE</button>
-                                </form>
+                            <div class="read-more-btn">
+                                    <form style="width:50%;" action="<?php echo URLROOT; ?>/moderators/accept/<?php echo $question->QID; ?>">
+                                        <button class="read-more one" type="submit">Approve</button>
+                                    </form>
+                                    <form style="width:50%;" action="<?php echo URLROOT; ?>/moderators/decline/<?php echo $question->QID; ?>">
+                                        <button class="read-more two">Decline</button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>

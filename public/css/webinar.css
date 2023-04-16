@@ -71,7 +71,9 @@ h2.vid-head {
 font-size: 20px;
 color: #333;
 }
-
+.vid-slider{
+    margin-top: 1rem;
+}
 /*============================================== Webinar View ==========================================*/
 
 .close-video {

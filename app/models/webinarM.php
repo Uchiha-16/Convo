@@ -81,12 +81,12 @@
 //****************************************************************Retrive Webinars************************************************************************************************************* */
 
         //getWebinars
-        public function getwebinars() {
-            $this->db->query('SELECT webinar.webinarID as webinarID, webinar.webinarTitle as title, webinar.date as date, 
-            webinar.videolink as videolink, webinar.thumbnail as thumbnail, webinar.expertID as expertID, user.pfp as pfp, CONCAT(user.firstName, " ", user.lastName) as name,
-            GROUP_CONCAT(webinar.tag SEPARATOR ",") as tags 
-            FROM webinar, expert, user, webinartag WHERE webinar.expertID = expert.expertID AND webinar.expertID = user.userID;');
+        public function getwebinars($tags) {
+            $this->db->query('SELECT DISTINCT webinar.webinarID as webinarID, webinar.webinarTitle as title, webinar.date as date, webinar.videolink as videolink,
+            webinar.thumbnail as thumbnail, webinar.expertID as expertID, user.pfp as pfp, CONCAT(user.firstName, " ", user.lastName) as name 
+            FROM webinar JOIN user ON webinar.expertID = user.userID JOIN webinartag ON webinar.webinarID = webinartag.webinarID WHERE ' . $tags .' ORDER BY webinar.date DESC;');
 
+            
             $row = $this->db->resultSet();
             return $row;
         }
@@ -103,13 +103,20 @@
             return $row;
         }
 
-        //getQuestionTags
-        // public function getQuestionTags($QID) {
-        //     $this->db->query('SELECT * FROM questiontag WHERE QID = :QID');
-        //     $this->db->bind(':QID', $QID);
-        //     $row = $this->db->resultSet();
-        //     return $row;
-        // }
+        //getWebinarTags
+        public function getWebinarTags() {
+            $this->db->query('SELECT webinarID, GROUP_CONCAT(webinartag.tag SEPARATOR ",") as tags FROM webinartag GROUP BY webinarID;' );
+            $row = $this->db->resultSet();
+            return $row;
+        }
+
+        //getUserTag
+        public function getUserTag() {
+            $this->db->query('SELECT tag FROM usertag WHERE userID = :userID');
+            $this->db->bind(':userID', $_SESSION['userID']);
+            $row = $this->db->resultSet();
+            return $row;
+        }
 
 //****************************************************************Edit Question************************************************************************************************************* */
 

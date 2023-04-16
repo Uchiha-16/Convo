@@ -203,7 +203,6 @@ ul.dropdown li input[type="checkbox"]:focus+label {
     width: 30%;
     font-size: 14px;
     float: right;
-    padding-top: 2rem;
 }
 
 .time, .date, .rp {

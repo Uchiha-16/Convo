@@ -15,11 +15,9 @@
 </style>
 
 <script type="text/javascript">
-    function confirmationDecline(consultID){
-      if(confirm("Are you sure you want to decline this appointment?")){
-        window.location.href = "<?php echo URLROOT; ?>/Consults/decline/" + consultID;
-      }else {
-        return false;
+    function confirmation(){
+      if(confirm("Are you sure you want to discard this blog?")){
+        window.location.href = "<?php echo URLROOT; ?>/Blogs/index";
       }
     }
 </script>
@@ -39,7 +37,7 @@
         <div class="container-div">
             <div class="content-body">
                 <div class="LHS">
-                    <h3>My Requested Appointments</h3><br>
+                    <h3>My Consultations</h3><br>
             
                     <?php foreach($data['consults'] as $consults) : ?>
                     <div class="question-div">
@@ -63,10 +61,10 @@
                         </div>
                         <div class="content-display">
                             <h3><?php echo $consults->title ?></h3>
-                            <label class="name-label">Waiting For Approval From <?php echo $consults->fName. " ". $consults->lName; ?></label>
+                            <label class="name-label"><?php echo $_SESSION['firstName']. ' ' . $_SESSION['lastName']; ?></label>
                             <label class="time-label"><?php echo $consults->time ?></label>
                             <div class="date-count">
-                                    <button type="submit" style="float:left" class="decline" onclick="confirmationDecline(<?php echo $consults->consultID;?>)">Decline</button>
+                                <button style="float:left" class="decline">Decline</button>
                             </div>
                         </div>
                         <div class="appointment">
@@ -74,20 +72,13 @@
                         </div>
                     </div> 
                     <?php endforeach; ?>
-                    
-                      
+                
                    
                 </div>
                 <div class="RHS">
-                <form action="<?php echo URLROOT; ?>/Consults/index"><button type="submit" style="float:right" class="read-more attend">Upcoming Appointments</button></form>
+                <form action="<?php echo URLROOT; ?>/Consults/index"><button type="submit" style="float:right" class="read-more attend">Pending Appointments</button></form>
                 <form action="<?php echo URLROOT; ?>/Consults/add"><button type="submit" style="float:right" class="read-more attend">Add Appointment</button></form>
-                <?php if($_SESSION['role'] == 'expert'): ?>
-                    <form action="<?php echo URLROOT;?>/Consults/accepted"><button type="submit" style="float:right" class="read-more attend">Accepted Appointments</button></form>
-                     <form action="<?php echo URLROOT;?>/Consults/accept"><button type="submit" style="float:right" class="read-more attend">Accept Appointments</button></form>
-                     <br><br><br><br>
-                     <?php endif; ?>
-                   
-                <br><br><br><br><br>
+                <br><br><br><br><br><br>
                     <div class="filter-div">
                         <div style="display:flex">
                             <img src="<?php echo URLROOT; ?>/img/filter.png">

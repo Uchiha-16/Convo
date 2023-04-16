@@ -34,13 +34,13 @@
                 answers and wants to gain knowledge<br>
                 through discussions,<br>
                 this is the perfect role for you !</p><br>
-            <a href="../signup.php" id="choose">
+            <a href="<?php echo URLROOT?>/Users/signup" id="choose">
                 <p>&lt;&lt;Change Role&gt;&gt;</p>
             </a><br>
         </div>
         <div class="grid-container-seeker">
             <div>
-                <form name="" action="<?php echo URLROOT?>/Users/register" method="POST" enctype="multipart/form-data">
+                <form name="" action="<?php echo URLROOT?>/Users/registerSeeker" method="POST" enctype="multipart/form-data">
 
                     <div class="user-img">
                         <label for="file" id="uploadbtn">
