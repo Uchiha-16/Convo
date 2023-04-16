@@ -7,7 +7,7 @@
         }
 //****************************************************************Create Question************************************************************************************************************* */
         public function add($data) {
-            $this->db->query('INSERT into question (title, content, date, visibility, rating, userID) VALUES (:title, :content, :date, :visibility, :rating, :userID)');
+            $this->db->query('INSERT into question (title, content, date, visibility, rating, userID, expertID) VALUES (:title, :content, :date, :visibility, :rating, :userID, :expertID)');
             // Bind values
             $this->db->bind(':title', $data['title']);
             $this->db->bind(':content', $data['content']);
@@ -15,6 +15,7 @@
             $this->db->bind(':visibility', $data['visibility']);
             $this->db->bind(':rating', $data['rating']);
             $this->db->bind(':userID', $_SESSION['userID']);
+            $this->db->bind(':expertID', $data['resourceID']);
 
             // Execute
             if($this->db->execute()) {
@@ -58,6 +59,13 @@
             $results = $this->db->resultSet();
             return $results;
         }
+
+        public function resourceName($str){
+            $this->db->query('SELECT DISTINCT expert.expertID as expertID, user.firstName as fName, user.lastName as lName FROM user INNER JOIN expert ON user.userID = expert.expertID 
+                              INNER JOIN usertag ON user.userID = usertag.userID  WHERE ' . $str );
+            $results = $this->db->resultSet();
+            return $results;
+        }
 //****************************************************************Retrive Questions************************************************************************************************************* */
 
         //getQuestions
@@ -80,14 +88,15 @@
 //****************************************************************Edit Question************************************************************************************************************* */
 
         public function edit($data) {
-            $this->db->query('UPDATE question SET title = :title, content = :content, date = :date, visibility = :visibility WHERE QID = :QID');
+            $this->db->query('UPDATE question SET title = :title, content = :content, date = :date, visibility = :visibility, expertID = :resourceID WHERE QID = :QID');
             // Bind values
             $this->db->bind(':title', $data['title']);
             $this->db->bind(':content', $data['content']);
             $this->db->bind(':date', $data['date']);
             $this->db->bind(':visibility', $data['visibility']);
             $this->db->bind(':QID', $data['QID']);
-
+            $this->db->bind(':resourceID', $data['resourceID']);
+            
             // Execute
             if($this->db->execute()) {
                 return true;

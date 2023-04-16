@@ -22,6 +22,14 @@
         return false;
       }
     }
+
+    function confirmationAccept(consultID){
+        if(confirm("Are you sure you want to accept this appointment?")){
+        window.location.href = "<?php echo URLROOT; ?>/Consults/acceptConsult/" + consultID;
+      }else {
+        return false;
+      }
+    }
 </script>
 
 </head>
@@ -66,7 +74,7 @@
                             <label class="name-label"> Requested By <?php echo $consults->fName. " ". $consults->lName; ?></label>
                             <label class="time-label"><?php echo $consults->time; ?></label>
                             <div class="date-count">
-                                <button style="float:left" class="accept">Accept</button>
+                                <button style="float:left" class="accept" onclick="confirmationAccept(<?php echo $consults->consultID;?>)">Accept</button>
                                 <button style="float:right" class="decline" onclick="confirmationDecline(<?php echo $consults->consultID;?>)">Decline</button>
                             </div>
                         </div>

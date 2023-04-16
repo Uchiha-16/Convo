@@ -37,7 +37,7 @@
         <div class="container-div">
             <div class="content-body">
                 <div class="LHS">
-                    <h3>My Consultations</h3><br>
+                    <h3>Accepted Consultations</h3><br>
 
                     <?php foreach($data['consults'] as $consults) : ?>
                     <div class="question-div">

@@ -1,5 +1,6 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 <link href="<?php echo URLROOT; ?>/css/chat.css" rel="stylesheet" type="text/css" />
+ <script src="<?php echo URLROOT; ?>/js/chat.js" ></script>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -41,10 +42,18 @@
                     <!-- Question 1 -->
                     <div class="question-div">
                         <div class="info">
-                            <p>Chats</p>
+                            <p>Your Chat Groups</p> 
                             <input type="search" name="search" placeholder="Search chat..."/>
-                            <br><br>
-                            <div class="chat group-1 selected">
+                            <br>
+                            <button class="read-more">Create a New Group</button>
+                            <br>
+                            <?php foreach($data['chats'] as $chats): ?>
+                                <div id="chat group-<?php echo $chats->chatID; ?>" class="chat" onclick="selected(<?php echo $chats->chatID; ?>); showchat(<?php echo $chats->chatID; ?>)">
+                                        <?php echo $chats->title; ?>
+                                    </div>
+                                <?php endforeach; ?>
+                          
+                            <!-- <div class="chat group-1">
                                 Team A
                             </div>
                             <div class="chat group-2">
@@ -53,57 +62,22 @@
                             <div class="chat group-3">
                                 Team ABC
                             </div>
-                            <div class="chat group-4">
+                            <div class="chat group-1">
                                 Team 00
-                            </div>
+                            </div> -->
+                             
                         </div>
+                        
                         <div class="content-display">
-                            <div>
-                                <div class="qdp dlg-box">
-                                    <div>
-                                        <img src="<?php echo URLROOT; ?>/img/induwara_pathirana.jpg"/>
-                                    </div>
-                                    <div class="message">
-                                        <p>Did China’s balloon violate international law?</p>
-                                        <label class="qdp-1-2">8:57 AM</label>
-                                    </div>
-                                </div>
-                                <div class="qdp dlg-box">
-                                    <div>
-                                        <img src="<?php echo URLROOT; ?>/img/pfp.jpg"/>
-                                    </div>
-                                    <div class="message">
-                                        <p>Was the balloon that suddenly appeared over the US last week undertaking surveillance? Or was it engaging in research, as China has claimed?</p>
-                                        <label class="qdp-1-2">8:58 AM</label>
-                                    </div>
-                                </div>
-                                <div class="qdp dlg-box">
-                                    <div>
-                                        <img src="<?php echo URLROOT; ?>/img/10.jpg"/>
-                                    </div>
-                                    <div class="message">
-                                        <p>However, while balloons may no longer be valued for their war-fighting ability, they retain a unique capacity to undertake surveillance because they fly at higher altitudes than aircraft, can remain stationary over sensitive sites, are harder to detect on radar, and can be camouflaged as civilian weather craft.</p>
-                                        <label class="qdp-1-2">9:00 AM</label>
-                                    </div>
-                                </div>
-                                <div class="qdp dlg-box">
-                                    <div>
-                                        <img src="<?php echo URLROOT; ?>/img/9.png"/>
-                                    </div>
-                                    <div class="message answer">
-                                        <p>International law does not extend to the distance at which satellites operate, which is traditionally seen as falling within the realm of space law.</p>
-                                        <label class="qdp-1-2">9:01 AM</label>
-                                    </div>
-                                </div>
-                            </div>
+
+                            <div id="results">Select a Group to see the chat</div>
+                          
                             <div class="send">
                                 <input type="search" name="search" placeholder="Type Something..."/>
                                 <img src="<?php echo URLROOT; ?>/img/submit.png" class="submit">
                             </div>
                         </div>
-                    </div>
-                    
-                    
+                        </div>
                 </div>
                 <div class="RHS">
                     <div class="filter-div">
@@ -114,7 +88,9 @@
                             <input type="search" name="search" placeholder="Search members..."/>
                             <br><br>
                         </div>
-                        <div class="qdp">
+                        <div id="members">
+                       Select a group to reveal its members</div>
+                        <!-- <div class="qdp">
                                     <div>
                                         <img src="<?php echo URLROOT; ?>/img/user.jpg"/>
                                     </div>
@@ -122,61 +98,8 @@
                                         <label>Dilky Liyanage</label><br>
                                         <label class="qdp-1-2" style="font-size:10px">University of Colombo</label>
                                     </div>
-                        </div>
-                        <div class="qdp">
-                                    <div>
-                                        <img src="<?php echo URLROOT; ?>/img/user.jpg"/>
-                                    </div>
-                                    <div class="qdp-1">
-                                        <label>Dilky Liyanage</label><br>
-                                        <label class="qdp-1-2" style="font-size:10px">University of Colombo</label>
-                                    </div>
-                        </div>
-                        <div class="qdp">
-                                    <div>
-                                        <img src="<?php echo URLROOT; ?>/img/user.jpg"/>
-                                    </div>
-                                    <div class="qdp-1">
-                                        <label>Varsha Wijethunge</label><br>
-                                        <label class="qdp-1-2" style="font-size:10px">University of Colombo</label>
-                                    </div>
-                        </div>
-                        <div class="qdp">
-                                    <div>
-                                        <img src="<?php echo URLROOT; ?>/img/user.jpg"/>
-                                    </div>
-                                    <div class="qdp-1">
-                                        <label>Induwara Pathirana</label><br>
-                                        <label class="qdp-1-2" style="font-size:10px">University of Colombo</label>
-                                    </div>
-                        </div>
-                        <div class="qdp">
-                                    <div>
-                                        <img src="<?php echo URLROOT; ?>/img/user.jpg"/>
-                                    </div>
-                                    <div class="qdp-1">
-                                        <label>Nethmini Abeykoon</label><br>
-                                        <label class="qdp-1-2" style="font-size:10px">University of Colombo</label>
-                                    </div>
-                        </div>
-                        <div class="qdp">
-                                    <div>
-                                        <img src="<?php echo URLROOT; ?>/img/user.jpg"/>
-                                    </div>
-                                    <div class="qdp-1">
-                                        <label>Samindu Cooray</label><br>
-                                        <label class="qdp-1-2" style="font-size:10px">University of Colombo</label>
-                                    </div>
-                        </div>
-                        <div class="qdp">
-                                    <div>
-                                        <img src="<?php echo URLROOT; ?>/img/user.jpg"/>
-                                    </div>
-                                    <div class="qdp-1">
-                                        <label>Nadeesha Nethmini</label><br>
-                                        <label class="qdp-1-2" style="font-size:10px">University of Colombo</label>
-                                    </div>
-                        </div>
+                        </div> -->
+                        
                                 
                             </form>
                         </div>
@@ -276,6 +199,5 @@
                 }
             }
         </script>
-        
-    </body>
-</html>
+
+<?php require APPROOT . '/views/inc/footer.php'; ?>

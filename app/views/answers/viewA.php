@@ -6,7 +6,7 @@
 
 <?php endif; ?>
 <style>
-    <?php if (($_SESSION['role']) == 'seeker') : ?><?php elseif (($_SESSION['role']) == 'expert') : ?>.nav {
+    <?php if (($_SESSION['role']) == 'seeker') : ?><?php elseif (($_SESSION['role']) == 'expert' || $_SESSION['role'] == 'premium') : ?>.nav {
         grid-template-columns: 5% 6% 6% 6% 51% 10% 4% 4% 4%;
     }
 
@@ -236,5 +236,6 @@
 <script>
     var QID = <?php echo $data['QID']; ?>;
     var CURRENT_USER = <?php echo $_SESSION['userID']; ?>;
+
 </script>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

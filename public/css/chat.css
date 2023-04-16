@@ -80,3 +80,17 @@ align-items: center;
 .message p{
         margin-bottom: 0;
 }
+.chatname {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.question-div {
+    margin-bottom: 0;
+}
+
+#results{
+    height: 21rem;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
