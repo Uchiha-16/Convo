@@ -92,7 +92,7 @@
                             }
                         }
                             flash('reg_flash','Project Added Successfully');
-                            redirect('projects/home');
+                            redirect('projects/viewMyProjects');
                         
                     } else {
                         die('Something went wrong');
@@ -259,7 +259,7 @@
             
         }
 
-        public function deleteProject($PID){
+        public function delete($PID){
             $project = $this->projectModel->getProjectByID($PID);
             if($project->expertID != $_SESSION['userID']){
                 redirect('projects/viewMyProjects');

@@ -15,7 +15,7 @@
                 <div class="screen">
                     <h3 class="screen-title">Add Project</h3>
                     <div><hr></div>
-                    <form action="<?php echo URLROOT;?>/projects/edit/<?php echo $data['PID']; ?>" method="POST">
+                    <form action="<?php echo URLROOT; ?>/projects/edit/<?php echo $data['PID']; ?>" method="POST">
                         <div class="form-group">
                             <label for="title">Title<span class="star">*</span></label><br>
                             <div class="form-field-div">
