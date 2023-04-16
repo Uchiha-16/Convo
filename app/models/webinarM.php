@@ -8,13 +8,14 @@
 //****************************************************************Create Webinar************************************************************************************************************* */
         public function add($data) {
             
-            $this->db->query('INSERT into webinar (webinarTitle, date, videolink, thumbnail, expertID) VALUES (:title, :date, :videolink, :thumbnail, :expertID)');
+            $this->db->query('INSERT into webinar (webinarTitle, date, videolink, thumbnail, expertID, published) VALUES (:title, :date, :videolink, :thumbnail, :expertID, :published)');
             // Bind values
             $this->db->bind(':title', $data['title']);
             $this->db->bind(':date', $data['date']);
             $this->db->bind(':videolink', $data['videolink']);
             $this->db->bind(':thumbnail', $data['thumbnail_name']);
             $this->db->bind(':expertID', $_SESSION['userID']);
+            $this->db->bind(':published', $data['published']);
 
             // Execute
             if($this->db->execute()) {
@@ -77,9 +78,8 @@
         public function getwebinars($tags) {
             $this->db->query('SELECT DISTINCT webinar.webinarID as webinarID, webinar.webinarTitle as title, webinar.date as date, webinar.videolink as videolink,
             webinar.thumbnail as thumbnail, webinar.expertID as expertID, user.pfp as pfp, CONCAT(user.firstName, " ", user.lastName) as name 
-            FROM webinar JOIN user ON webinar.expertID = user.userID JOIN webinartag ON webinar.webinarID = webinartag.webinarID WHERE ' . $tags .' ORDER BY webinar.date DESC;');
+            FROM webinar JOIN user ON webinar.expertID = user.userID JOIN webinartag ON webinar.webinarID = webinartag.webinarID WHERE webinar.published = "1" AND ' . $tags .' ORDER BY webinar.date DESC;');
 
-            
             $row = $this->db->resultSet();
             return $row;
         }
@@ -87,8 +87,8 @@
         //get myWebinars
         public function getmywebinars() {
             $this->db->query('SELECT webinar.webinarID as webinarID, webinar.webinarTitle as title, webinar.date as date, 
-            webinar.videolink as videolink, webinar.thumbnail as thumbnail, webinar.expertID as expertID, playlist.playlistName as playlistName
-            FROM webinar, playlist WHERE webinar.expertID = :expertID AND webinar.webinarID = playlist.webinarID ORDER BY webinar.date DESC;');
+            webinar.videolink as videolink, webinar.thumbnail as thumbnail, webinar.expertID as expertID, playlist.playlistName as playlistName,
+            webinar.published as published FROM webinar, playlist WHERE webinar.expertID = :expertID AND webinar.webinarID = playlist.webinarID ORDER BY webinar.date DESC;');
 
             $this->db->bind(':expertID', $_SESSION['userID']);
 
@@ -122,7 +122,7 @@
         //get myWebinars by ID
         public function getmywebinarsbyID($WID) {
             $this->db->query('SELECT webinar.webinarID as webinarID, webinar.webinarTitle as title, webinar.date as date, 
-            webinar.videolink as videolink, webinar.thumbnail as thumbnail, webinar.expertID as expertID FROM webinar 
+            webinar.videolink as videolink, webinar.thumbnail as thumbnail, webinar.published as published, webinar.expertID as expertID FROM webinar 
             WHERE webinar.expertID = :expertID AND webinar.webinarID = :WID;');
 
             $this->db->bind(':expertID', $_SESSION['userID']);
@@ -151,59 +151,40 @@
             }
         }
 
-//****************************************************************Edit Question************************************************************************************************************* */
+//****************************************************************Edit Webinar************************************************************************************************************* */
 
-        // public function edit($data) {
-        //     $this->db->query('UPDATE question SET title = :title, content = :content, date = :date, visibility = :visibility WHERE QID = :QID');
-        //     // Bind values
-        //     $this->db->bind(':title', $data['title']);
-        //     $this->db->bind(':content', $data['content']);
-        //     $this->db->bind(':date', $data['date']);
-        //     $this->db->bind(':visibility', $data['visibility']);
-        //     $this->db->bind(':QID', $data['QID']);
+        public function editwebinar($data) {
+            $this->db->query('UPDATE webinar SET webinarTitle = :title, date = :date, videolink = :videolink, thumbnail = :thumbnail WHERE webinarID = :WID');
+            // Bind values
+            $this->db->bind(':title', $data['title']);
+            $this->db->bind(':date', $data['date']);
+            $this->db->bind(':videolink', $data['videolink']);
+            $this->db->bind(':thumbnail', $data['thumbnail']);
+            $this->db->bind(':WID', $data['WID']);
 
-        //     // Execute
-        //     if($this->db->execute()) {
-        //         return true;
-        //     } else {
-        //         return false;
-        //     }
-        // }
-
-    //Get Question by ID
-        // public function getWebinarByID($WID) {
-        //     $this->db->query('SELECT webinar.webinarID as WID, webinar.webinarTitle as title, webinar.date as date, webinar.videolink as link,
-        //     webinar.thumbnail as thumbnail, webinar.expertID as userID FROM webinar JOIN webinartag ON webinar.webinarID = :WID JOIN playlist ON webinar.webinarID = playlist.webinarID');
-        //     //GROUP_CONCAT(questiontag.tag SEPARATOR ",") as tags,
-        //     $this->db->bind(':WID', $WID);
-        //     $row = $this->db->single();
-        //     return $row;
-        // }
-
-        //Delete QuestionTag
-        // public function deleteQuestionTag($QID) {
-        //     $this->db->query('DELETE FROM questiontag WHERE QID = :QID');
-        //     $this->db->bind(':QID', $QID);
-        //     if($this->db->execute()) {
-        //         return true;
-        //     } else {
-        //         return false;
-        //     }
-        // }
+            // Execute
+            if($this->db->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        }
 
         //Update Tags
-        // public function UpdateQTag($tag, $LastID) {
-        //     $this->db->query('UPDATE questiontag SET  VALUES(:user_id, :tag)');
-        //     // Bind values
-        //     $this->db->bind(':user_id', $LastID);
-        //     $this->db->bind(':tag', $tag);
+        public function editwebinartag($tag, $LastID) {
+            $this->db->query('UPDATE webinartag SET  VALUES(:user_id, :tag)');
+            // Bind values
+            $this->db->bind(':user_id', $LastID);
+            $this->db->bind(':tag', $tag);
 
         // Execute
-        // if($this->db->execute()) {
-        //     return true;
-        // } else {
-        //     return false;
-        // }
+        if($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+
+    
     }
 
 ?>

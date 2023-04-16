@@ -159,43 +159,47 @@
                                             <span class="error"><?php echo $data['playlist_err']; ?></span>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td colspan="3" style="border-bottom: 1px solid rgba(128,128,128, .2); padding-bottom: 1rem;">
-                                            <h4 style="margin-bottom:.5rem">Video Link <span class="star">*</span></h4><br>
-                                            <label class="steps"><b>Step 1:</b> Upload your video to YouTube/ Or go to your uploaded YouTube video.</label><br><br>
-                                            <label class="steps"><b>Step 2:</b> Copy the YouTube "Sharing Link" relevant to your video. You can copy either the embedded link as well.<br>
-                                                <label style="color: #117ea6; font-size:13px; margin-left:3.2rem"><b>Sharing Link Example:</b> https://youtu.be/2ybLD6_2gKM</label><br>
-                                                <label style="color: #117ea6; font-size:13px; margin-left:3.2rem"><b>Embeded Link Example:</b> https://www.youtube.com/embed/2ybLD6_2gKM</label></label><br><br>
-                                            <label class="steps"><b>Step 3:</b> Paste the link to the following field.</label><br><br>
-                                            <label class="steps">Make sure that it is the <b>‘Shared/ Embeded video link’</b>.</label><br><br>
-                                            <input class="inputform" type="text" name="link" placeholder="Please include the video link here." value="https://youtu.be/<?php echo $data['videolink']; ?>">
-                                            <span class="error"><?php echo $data['link_err']; ?></span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="3" style="padding-top: 1rem;">
-                                            <h4 style="margin-bottom:.5rem">Add Thumbnail <img src="<?php echo URLROOT; ?>/img/thumbnail.png" style="width: 17px;"> <span class="star">*</span></h4>
+                                    <?php if(!$data['published']) : ?>
+                                        <tr>
+                                            <td colspan="3" style="border-bottom: 1px solid rgba(128,128,128, .2); padding-bottom: 1rem;">
+                                                <h4 style="margin-bottom:.5rem">Video Link <span class="star">*</span></h4><br>
+                                                <label class="steps"><b>Step 1:</b> Upload your video to YouTube/ Or go to your uploaded YouTube video.</label><br><br>
+                                                <label class="steps"><b>Step 2:</b> Copy the YouTube "Sharing Link" relevant to your video. You can copy either the embedded link as well.<br>
+                                                    <label style="color: #117ea6; font-size:13px; margin-left:3.2rem"><b>Sharing Link Example:</b> https://youtu.be/2ybLD6_2gKM</label><br>
+                                                    <label style="color: #117ea6; font-size:13px; margin-left:3.2rem"><b>Embeded Link Example:</b> https://www.youtube.com/embed/2ybLD6_2gKM</label></label><br><br>
+                                                <label class="steps"><b>Step 3:</b> Paste the link to the following field.</label><br><br>
+                                                <label class="steps">Make sure that it is the <b>‘Shared/ Embeded video link’</b>.</label><br><br>
+                                                <input class="inputform" type="text" name="link" placeholder="Please include the video link here." value="https://youtu.be/<?php echo $data['videolink']; ?>">
+                                                <span class="error"><?php echo $data['link_err']; ?></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3" style="padding-top: 1rem;">
+                                                <h4 style="margin-bottom:.5rem">Add Thumbnail <img src="<?php echo URLROOT; ?>/img/thumbnail.png" style="width: 17px;"> <span class="star">*</span></h4>
 
-                                            <label style="font-size: 14px; color:black">Upload a picture that shows what's in your video.
-                                                A good thumbnail stands out and draws viewers' attention.<br><b>Make sure it is in 16:9 ratio</b>.</label><br><br>
-                                            <br>  
-                                            <!-- Add image section -->                                   
-                                            <div class="avatar-upload">
-                                                <div class="avatar-edit">
-                                                    <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" name="thumbnail" value="<?php echo $data['thumbnail']; ?>"/>
-                                                    <label for="imageUpload"></label>
-                                                </div>
-                                                <div class="avatar-preview">
-                                                    <div id="imagePreview" style="background-image: url(<?php echo URLROOT; ?>/img/thumbnails/<?php echo $data['thumbnail']; ?>);">
+                                                <label style="font-size: 14px; color:black">Upload a picture that shows what's in your video.
+                                                    A good thumbnail stands out and draws viewers' attention.<br><b>Make sure it is in 16:9 ratio</b>.</label><br><br>
+                                                <br>  
+                                                <!-- Add image section -->                                   
+                                                <div class="avatar-upload">
+                                                    <div class="avatar-edit">
+                                                        <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" name="thumbnail" value="<?php echo $data['thumbnail']; ?>"/>
+                                                        <label for="imageUpload"></label>
+                                                    </div>
+                                                    <div class="avatar-preview">
+                                                        <div id="imagePreview" style="background-image: url(<?php echo URLROOT; ?>/img/thumbnails/<?php echo $data['thumbnail']; ?>);">
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <!-- -->
-                                            <span class="error"><?php echo $data['thumbnail_err']; ?></span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="3" class="terms">
+                                                <!-- -->
+                                                <span class="error"><?php echo $data['thumbnail_err']; ?></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3" class="terms">
+                                        <?php else : ?>
+                                            <td colspan="3" class="terms" style="margin-top:0; border-top:0">
+                                        <?php endif; ?>
                                             <input type="checkbox" name="terms" class="terms-checkbox" required/>
                                             <label class="terms-label">By Publishing, you acknowledge that you agree to Convo's Terms of Service and Community Guidelines. Please be sure not to violate others' copyright or privacy rights.</label>
                                         </td>

@@ -37,7 +37,11 @@
                             <tr>
                                 <td class="table-thumbnail"><img src="<?php echo URLROOT; ?>/img/thumbnails/<?php echo $mywebinar->thumbnail ?>"></td>
                                 <td class="cell"><?php echo $mywebinar->title ?><br><span><b>Playlist: </b><?php echo $mywebinar->playlistName ?></span></td>
-                                <td class="table-date"><?php echo $mywebinar->date ?><br><span>Published</span></td>
+                                <td class="table-date"><?php echo $mywebinar->date ?><br>
+                                    <?php if($mywebinar->published) : ?><span>Published</span>
+                                    <?php else : ?><span>Draft</span>
+                                    <?php endif; ?>
+                                </td>
                                 <td class="edit" style="font-size: 16px;font-weight: 500;width: 9%;">
                                     <form action="<?php echo URLROOT; ?>/webinars/edit/<?php echo $mywebinar->webinarID; ?>">
                                         <button class="edit" type="submit">Edit</button>

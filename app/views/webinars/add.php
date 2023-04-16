@@ -180,8 +180,9 @@
                                         <td colspan="3">
                                             <br><br>
                                             <div class="add">
-                                                <button style="float:right" class="read-more attend submit" type="reset">Cancel</button>
                                                 <button style="float:right" class="read-more attend submit" type="submit" name="submit">Publish</button>
+                                                <button style="float:right" class="read-more attend submit" type="submit" name="draft">Save Draft</button>
+                                                <button style="float:right" class="read-more attend submit" type="reset">Reset</button>
                                             </div>
                                         </td>
                                     </tr>
