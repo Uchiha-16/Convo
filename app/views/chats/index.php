@@ -45,13 +45,15 @@
                             <p>Your Chat Groups</p> 
                             <input type="search" name="search" placeholder="Search chat..."/>
                             <br>
-                            <button class="read-more">Create a New Group</button>
-                            <br>
+                            <button class="read-more" onclick="showCreate()" style="margin-bottom: 10px;">Create a New Group</button>
+                            <br><br>
+                            <div class="chatgroups">
                             <?php foreach($data['chats'] as $chats): ?>
                                 <div id="chat group-<?php echo $chats->chatID; ?>" class="chat" onclick="selected(<?php echo $chats->chatID; ?>); showchat(<?php echo $chats->chatID; ?>)">
                                         <?php echo $chats->title; ?>
                                     </div>
                                 <?php endforeach; ?>
+                            </div>
                           
                             <!-- <div class="chat group-1">
                                 Team A
@@ -69,16 +71,69 @@
                         </div>
                         
                         <div class="content-display">
-
-                            <div id="results">Select a Group to see the chat</div>
+                        
+                            <div id="results">Select a Group to see the chat<br><span class="error"><?php echo $data['title_err']; ?></span><br>                            <span class="error"><?php echo $data['users_err']; ?></span></div>
+                            
                           
                             <div class="send">
                                 <input type="search" name="search" placeholder="Type Something..."/>
                                 <img src="<?php echo URLROOT; ?>/img/submit.png" class="submit">
                             </div>
+
+                           
                         </div>
+                    </div>
+                    <div id="popup">
+                        <form action="<?php echo URLROOT; ?>/Chats/create" method="POST">
+                        <table>
+                            <tr>
+                                <td colspan="2">
+                                    <p class="desc" >Create a User Discussion Group
+                                    </p>
+                                </td>
+                                <td>
+                                    <img src="<?php echo URLROOT; ?>/img/cancel1.png" style="width: 30px;float: right;" onclick="hideCreate()">
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <h4 style="margin-bottom:.5rem">Group Title <span class="star">*</span></h4>
+                                    <input class="inputform" type="text" name="title" placeholder="Enter title here..." value="<?php echo $data['title']; ?>">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <h4 style="margin-bottom:.5rem">Add Users to the group <span class="star">*</span></h4>
+                                    <div class="dropdown-div">
+                                        <form method="POST" id="innerform">
+                                            <label>Please Select <b>all the Users</b> you want to add to the group</label>
+                                            <ul class="dropdown" id="dropdown">
+                                            <?php $i = 0; ?>
+                                            <?php foreach($data['addusers'] as $user): ?>
+                                                <?php $i++; ?>
+                                                <li><input type="checkbox" value="<?php echo $user->userID; ?>" name="Cusers[]" id="checkbox<?php echo $i;?>" /><label for="checkbox<?php echo $i;?>"><?php echo $user->firstName." ". $user->lastName; ?></label></li>
+                                            <?php endforeach; ?>
+                                            </ul>
+
+                                    </div>
+                                    
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <br><br>
+                                    <div class="add">
+                                        <button style="float:right" class="read-more attend submit" type="submit" name="create">Create Group</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+
                         </div>
+                        
                 </div>
+                
+                
                 <div class="RHS">
                     <div class="filter-div">
                         <div>

@@ -43,36 +43,11 @@ function showchat(chatID) {
 
 
 
-//ajax to reload the chat messages without refresh
-// $(document).ready(function(){
-//     setInterval(function(){
-//         $('.content-display').load('index.php')
-//             }, 1000);
-//     });
-
-// //send message of the chat to controller
-//     $(document).ready(function(){
-//         $('.submit').click(function(){
-//             var message = $('input[name="search"]').val();
-//             $.post('index.php', {message:message}, function(data){
-//                 $('.content-display').html(data);
-//             });
-//         });
-//     });
-
-// //method see chat
-// function seechat(chatID){
-//     //reveal messeges
-//     $(document).ready(function() {
-//         //onload show the comments
-//             $.ajax({
-//                 url: URLROOT + '/Chats/show/'+chatID,
-//                 dataType: 'html',
-//                 success: function(results) {
-//                     $('#content-display-'+chatID).html(results);
-//                 }
-//             })
-            
-//             document.getElementById("com-"+threadId).style.display = "none";
-//     }
-// )};
+//show the popup to create a chat group
+function showCreate() {
+    document.getElementById("popup").style.display = "block";
+  }
+  
+  function hideCreate() {
+    document.getElementById("popup").style.display = "none";
+  }
