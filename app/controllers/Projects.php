@@ -43,8 +43,8 @@
                     'tag_err' => '',
                     'slot_err' => '',
                     'duration_err' => '',
-                    'tags' => $tags
-
+                    'tags' => $tags,
+                    'userRole' => $userRole
                 ];
 
                 //validate each inputs
@@ -73,12 +73,12 @@
                     $data['duration_err'] = 'Please enter Duration';
                 }
 
-                if(empty($data['tag_err'])){
-                    foreach($data['tag'] as $tag){
-                       $experts =  $this->projectModel->getExpertID($tag);
+                // if(empty($data['tag_err'])){
+                //     foreach($data['tag'] as $tag){
+                //        $experts =  $this->projectModel->getExpertID($tag);
 
-                    }
-                }
+                //     }
+                // }
 
                 //Make sure errors are empty
                 if(empty($data['title_err']) && empty($data['content_err']) && empty($data['tag_err'])) {

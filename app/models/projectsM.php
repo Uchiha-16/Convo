@@ -8,10 +8,15 @@
 
 //****************************************************************Create Question*************************************************************************************************************
     public function add($data) {
-        $query1 = 'INSERT INTO `project`(title, description, deadline, availableslot, type, availability, payment, duration, expertID) VALUES  (:title, :description, :deadline, :slot, :type, :availability, :payment, :duration, :userID)';
-        //$query2 = 'INSERT INTO `project`(title, description, deadline, availableslot, type, availability, payment, duration, CID) VALUES  (:title, :description, :deadline, :slot, :type, :availability, :payment, :duration, :userID)';
+
+        if($_SESSION['role']){
+            $query = 'INSERT INTO `project`(title, description, deadline, availableslot, type, availability, payment, duration, expertID) VALUES  (:title, :description, :deadline, :slot, :type, :availability, :payment, :duration, :userID)';
+        }else{
+            $query = 'INSERT INTO `project`(title, description, deadline, availableslot, type, availability, payment, duration, CID) VALUES  (:title, :description, :deadline, :slot, :type, :availability, :payment, :duration, :userID)';
+        }
+        //
         //$query = $query1."UNION".$query2; 
-        $this->db->query($query1);
+        $this->db->query($query);
         // Bind values
         $this->db->bind(':title', $data['title']);
         $this->db->bind(':description', $data['description']);
@@ -40,6 +45,13 @@
 
     public function getUserTags($userID) {
         $this->db->query('SELECT GROUP_CONCAT(tag SEPARATOR ",") as tags FROM usertag WHERE userID = :userID');
+        $this->db->bind(':userID', $userID);
+        $row = $this->db->single();
+        return $row;
+    }
+
+    public function getUserRole($userID){
+        $this->db->query('SELECT role FROM user WHERE userID = :userID');
         $this->db->bind(':userID', $userID);
         $row = $this->db->single();
         return $row;
