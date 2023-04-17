@@ -171,20 +171,37 @@
         }
 
         //Update Tags
-        public function editwebinartag($tag, $LastID) {
-            $this->db->query('UPDATE webinartag SET  VALUES(:user_id, :tag)');
+        public function editwebinartag($tag, $WID) {
+            $this->db->query('UPDATE webinartag SET VALUES(:wid, :tag)');
             // Bind values
-            $this->db->bind(':user_id', $LastID);
+            $this->db->bind(':wid', $WID);
             $this->db->bind(':tag', $tag);
 
-        // Execute
-        if($this->db->execute()) {
-            return true;
-        } else {
-            return false;
+            // Execute
+            if($this->db->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+
         }
 
-    
+        //Update Playlist
+        public function editplaylist($playlist, $WID) {
+            $this->db->query('UPDATE playlist SET VALUES(:playlist, :wid, :expertID)');
+            // Bind values
+            $this->db->bind(':wid', $WID);
+            $this->db->bind(':playlist', $playlist);
+            $this->db->bind(':expertID', $_SESSION['userID']);
+
+            // Execute
+            if($this->db->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+
+        }
     }
 
 ?>

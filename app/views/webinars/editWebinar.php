@@ -197,9 +197,9 @@
                                         </tr>
                                         <tr>
                                             <td colspan="3" class="terms">
-                                        <?php else : ?>
+                                    <?php else : ?>
                                             <td colspan="3" class="terms" style="margin-top:0; border-top:0">
-                                        <?php endif; ?>
+                                    <?php endif; ?>
                                             <input type="checkbox" name="terms" class="terms-checkbox" required/>
                                             <label class="terms-label">By Publishing, you acknowledge that you agree to Convo's Terms of Service and Community Guidelines. Please be sure not to violate others' copyright or privacy rights.</label>
                                         </td>
@@ -208,8 +208,14 @@
                                         <td colspan="3">
                                             <br><br>
                                             <div class="add">
-                                                <button style="float:right" class="read-more attend submit" type="reset">Reset</button>
-                                                <button style="float:right" class="read-more attend submit" type="submit" name="submit">Update</button>
+                                                <?php if(!$data['published']) : ?>
+                                                    <button style="float:right" class="read-more attend submit" type="submit" name="draft">Save Draft</button>
+                                                    <button style="float:right" class="read-more attend submit" type="submit" name="submit">Publish</button>
+                                                    <button style="float:right" class="read-more attend submit" type="reset">Reset</button>
+                                                <?php else : ?>
+                                                    <button style="float:right" class="read-more attend submit" type="submit" name="submit">Update</button>
+                                                    <button style="float:right" class="read-more attend submit" type="reset">Reset</button>
+                                                <?php endif; ?>
                                             </div>
                                         </td>
                                     </tr>
