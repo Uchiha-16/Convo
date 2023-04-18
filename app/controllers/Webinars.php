@@ -143,7 +143,7 @@
 
         public function myWebinars(){
             $mywebinars = $this->webinarModel->getmywebinars();
-            $myplaylist = $this->webinarModel->getplaylist();
+            $myplaylist = $this->webinarModel->getPlaylists();
             //print_r($mywebinars);
             
             $data = [

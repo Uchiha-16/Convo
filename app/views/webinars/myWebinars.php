@@ -36,7 +36,13 @@
                         <?php foreach ($data['mywebinars'] as $mywebinar) : ?>
                             <tr>
                                 <td class="table-thumbnail"><img src="<?php echo URLROOT; ?>/img/thumbnails/<?php echo $mywebinar->thumbnail ?>"></td>
-                                <td class="cell"><?php echo $mywebinar->title ?><br><span><b>Playlist: </b><?php echo $mywebinar->playlistName ?></span></td>
+                                <td class="cell"><?php echo $mywebinar->title ?><br>
+                                    <span><b>Playlist: </b><?php foreach($data['myplaylist'] as $playlist) {
+                                        if($playlist->webinarID == $mywebinar->webinarID) {
+                                            echo $playlist->playlistName;
+                                        }
+                                    } ?></span><br>
+                                </td>
                                 <td class="table-date"><?php echo $mywebinar->date ?><br>
                                     <?php if($mywebinar->published) : ?><span>Published</span>
                                     <?php else : ?><span>Draft</span>

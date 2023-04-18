@@ -64,7 +64,7 @@
         
 
         public function getplaylist() {
-            $this->db->query('SELECT DISTINCT webinarID, playlistName FROM playlist WHERE expertID = :expertID;');
+            $this->db->query('SELECT DISTINCT playlistName FROM playlist WHERE expertID = :expertID');
 
             $this->db->bind(':expertID', $_SESSION['userID']);
 
@@ -88,7 +88,7 @@
         public function getmywebinars() {
             $this->db->query('SELECT DISTINCT webinar.webinarID as webinarID, webinar.webinarTitle as title, webinar.date as date, 
             webinar.videolink as videolink, webinar.thumbnail as thumbnail, webinar.expertID as expertID,
-            webinar.published as published FROM webinar, playlist WHERE webinar.expertID = :expertID AND webinar.webinarID = playlist.webinarID ORDER BY webinar.date DESC;');
+            webinar.published as published FROM webinar WHERE webinar.expertID = :expertID ORDER BY webinar.date DESC;');
 
             $this->db->bind(':expertID', $_SESSION['userID']);
 
@@ -169,6 +169,14 @@
             } else {
                 return false;
             }
+        }
+
+        //getWebinarPlayliats
+        public function getPlaylists() {
+            $this->db->query('SELECT webinarID, GROUP_CONCAT(playlist.playlistName SEPARATOR ",") as playlistName FROM playlist WHERE expertID = :expertID GROUP BY webinarID' );
+            $this->db->bind(':expertID', $_SESSION['userID']);
+            $rows = $this->db->resultSet();
+            return $rows;
         }
 
 //======================================================== delete ==============================================================//
