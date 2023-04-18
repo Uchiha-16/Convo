@@ -163,7 +163,7 @@
                 //     }
                 // }
 
-                // Make sure errors are empty
+                // Make sure errors are empty 
                 if(empty($data['title_err']) && empty($data['content_err']) && empty($data['tag_err'])) {
                     // Updating the Question
                     $this->questionModel->deleteQuestionTag($QID);

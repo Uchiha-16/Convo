@@ -104,7 +104,7 @@
                             }
                         }   
 
-                        if($data['newP'] != '0'){
+                        if(!(empty($data['newP']))){
                             $this->webinarModel->webinarPlaylist($data['newP'], $LastID->webinarID);
                         }
 
@@ -144,6 +144,7 @@
         public function myWebinars(){
             $mywebinars = $this->webinarModel->getmywebinars();
             $myplaylist = $this->webinarModel->getplaylist();
+            //print_r($mywebinars);
             
             $data = [
                 'mywebinars' => $mywebinars,
@@ -173,14 +174,25 @@
             $old_filename = $webinar->thumbnail;  // Replace with the actual filename
 
             
+
+            
             if($_SERVER['REQUEST_METHOD'] == 'POST') {
                 // Form is submitting
                 // Validate the data
                 $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
                 date_default_timezone_set('Asia/Colombo');
 
-                //VIDEO LINK
+                $tags = isset($_POST['tag']) ? $_POST['tag'] : '0';
+                    if($tags != '0'){
+                        $tags = implode(',', $tags);
+                    }
+
+                $playlist = isset($_POST['playlist']) ? $_POST['playlist'] : '0';
+                    if($playlist != '0'){
+                        $playlist = implode(',', $playlist);
+                    }
                 if($webinar->published == 0){
+                    //VIDEO LINK
                     $link =  $_POST['link'];
                     $path = parse_url($link, PHP_URL_PATH); // extract the path component of the URL
                     $segments = explode('/', $path); // split the path into an array of segments
@@ -207,8 +219,8 @@
                         $data = [
                             'WID' => $WID,
                             'title' => trim($_POST['title']),
-                            'tag' => isset($_POST['tag']) ? $_POST['tag'] : '0',
-                            'playlist' => isset($_POST['playlist']) ? $_POST['playlist'] : '0',
+                            'tag' => $tags,
+                            'playlist' => $playlist,
                             'newP' => isset($_POST['newP']) ? trim($_POST['newP']) : '0',
                             'videolink' => $last_segment,
                             'thumbnail' => $new_filename,
@@ -219,6 +231,7 @@
                             'thumbnail_err' => '',
                             'tag_err' => '',
                             'playlist_err' => '',
+                            'webinarsPlaylist' => $webinarsPlaylist,
                         ];
 
                     } else {
@@ -226,51 +239,22 @@
                         $data = [
                             'WID' => $WID,
                             'title' => trim($_POST['title']),
-                            'tag' => isset($_POST['tag']) ? $_POST['tag'] : '0',
-                            'playlist' => isset($_POST['playlist']) ? $_POST['playlist'] : '0',
+                            'tag' => $tags,
+                            'playlist' => $playlist,
                             'newP' => isset($_POST['newP']) ? trim($_POST['newP']) : '0',
                             'videolink' => $last_segment,
                             'thumbnail' => $old_filename,
                             'date' => date('Y-m-d H:i:s'),
-                            'published' => '0',
+                            'published' => isset($_POST['draft']) ? '0' : '1',
                             'title_err' => '',
                             'link_err' => '',
                             'thumbnail_err' => '',
                             'tag_err' => '',
                             'playlist_err' => '',
+                            'webinarsPlaylist' => $webinarsPlaylist,
                         ];
+                       // print_r($data['tag']);
                     }
-                }else{
-                    $last_segment = $webinar->videolink;
-
-                    // No new file was uploaded, so use the old filename
-                    $data = [
-                        'WID' => $WID,
-                        'title' => trim($_POST['title']),
-                        'tag' => isset($_POST['tag']) ? $_POST['tag'] : '0',
-                        'playlist' => isset($_POST['playlist']) ? $_POST['playlist'] : '0',
-                        'newP' => isset($_POST['newP']) ? trim($_POST['newP']) : '0',
-                        'videolink' => $last_segment,
-                        'thumbnail' => $old_filename,
-                        'date' => date('Y-m-d H:i:s'),
-                        'published' => '0',
-                        'title_err' => '',
-                        'link_err' => '',
-                        'thumbnail_err' => '',
-                        'tag_err' => '',
-                        'playlist_err' => '',
-                    ];
-                }
-                }
-
-                
-
-                    //validate each inputs
-                    // Validate Title
-                    if(empty($data['title'])) {
-                        $data['title_err'] = 'Please Enter Title';
-                    }
-
                     // Validate videolink
                     if(empty($data['videolink'])) {
                         $data['link_err'] = 'Please Enter Video Link';
@@ -282,53 +266,88 @@
                             $data['link_err'] = 'Please Enter Valid Video Link';
                         }
                     }
-
-                    // Validate Tag
-                    if($data['tag'] == '0') {
-                        $data['tag_err'] = 'Please Select One or More Tags';
-                    }
-
-                    // Validate Playlist
-                    if($data['playlist'] == '0' && empty($data['newP'])) {
-                        $data['playlist_err'] = 'Please Select One or More Playlists';
-                    }
-
-                    // Make sure errors are empty
-                    if(empty($data['title_err']) && empty($data['link_err']) && empty($data['tag_err']) && empty($data['thumbnail_err']) && empty($data['playlist_err'])) {
-                        // Adding Webinar
-                        if($this->webinarModel->editwebinar($data)) {
-                            foreach($data['tag'] as $tag){
-                                if(!($this->webinarModel->editwebinartag($tag, $WID))){
-                                    die('Something went wrong when inserting the tags');
-                                }
-                            }
-                            
-                            if($data['playlist'] != '0'){
-                                foreach($data['playlist'] as $playlist){
-                                    if(!($this->webinarModel->editplaylist($playlist, $WID))){
-                                        die('Something went wrong when Selecting the Playlist');
-                                    }
-                                }
-                            }   
-
-                            if($data['newP'] != '0'){
-                                $this->webinarModel->webinarPlaylist($data['newP'], $WID);
-                            }
-
-                            flash('reg_flash','Webinar Updated Successfully!');
-                            redirect('webinars/myWebinars');
-
-                        } else {
-                            die('Something went wrong');
-                        }
-                    } else {
-                        // Load view with errors
-                        $this->view('webinars/editWebinar', $data);
-                    }
                 }else{
+                    $last_segment = $webinar->videolink;
+
+                    // No new file was uploaded, so use the old filename
+                    $data = [
+                        'WID' => $WID,
+                        'title' => trim($_POST['title']),
+                        'tag' => $tags,
+                        'playlist' => $playlist,
+                        'newP' => isset($_POST['newP']) ? trim($_POST['newP']) : '0',
+                        'videolink' => 'https://youtu.be/'.$last_segment,
+                        'thumbnail' => $old_filename,
+                        'date' => date('Y-m-d H:i:s'),
+                        'published' => '1',
+                        'title_err' => '',
+                        'link_err' => '',
+                        'thumbnail_err' => '',
+                        'tag_err' => '',
+                        'playlist_err' => '',
+                        'webinarsPlaylist' => $webinarsPlaylist,
+                    ];
+                }
+                //validate each inputs
+                // Validate Title
+                if(empty($data['title'])) {
+                    $data['title_err'] = 'Please Enter Title';
+                }
+
+                // Validate Tag
+                if($data['tag'] == '0') {
+                    $data['tag_err'] = 'Please Select One or More Tags';
+                }else {
+                    $data['tag'] = explode(',', $data['tag']);
+                }
+
+                // Validate Playlist
+                if($data['playlist'] == '0' && empty($data['newP'])) {
+                    $data['playlist_err'] = 'Please Select One or More Playlists';
+                }else {
+                    $data['playlist'] = explode(',', $data['playlist']);
+                }
+
+                // Make sure errors are empty
+                if(empty($data['title_err']) && empty($data['link_err']) && empty($data['tag_err']) && empty($data['playlist_err'])) {
+                    // EDIT Webinar
+                    $this->webinarModel->deleteWebinarTag($WID);
+                    if($this->webinarModel->editwebinar($data)) {
+                        foreach($data['tag'] as $tag){
+                            if(!($this->webinarModel->webinartag($tag, $WID))){
+                                die('Something went wrong when inserting the tags');
+                            }
+                        }
+                        
+                        $this->webinarModel->deletePlaylist($WID);
+                        if($data['playlist'] != '0'){
+                            foreach($data['playlist'] as $playlist){
+                                if(!($this->webinarModel->webinarPlaylist($playlist, $WID))){
+                                    die('Something went wrong when Selecting the Playlist');
+                                }
+                            }
+                        }   
+
+                        if(!(empty($data['newP']))){
+                            $this->webinarModel->webinarPlaylist($data['newP'], $WID);
+                        }
+
+                        flash('reg_flash','Webinar Updated Successfully!');
+                        redirect('webinars/myWebinars');
+
+                    } else {
+                        die('Something went wrong');
+                    }
+                } else {
+                    // Load view with errors
+                    //echo ("Error");
+                    $this->view('webinars/editWebinar', $data);
+                }
+            }else{
                     $tag = $this->webinarModel->getWebinarTagsbyID($WID);
                     $playlist = $this->webinarModel->getPlaylistbyID($WID);
                     $webinar = $this->webinarModel->getmywebinarsbyID($WID);
+                    //print_r($webinar);
                     
                     $data = [
                         'WID' => $WID,

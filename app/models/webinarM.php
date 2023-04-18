@@ -64,7 +64,7 @@
         
 
         public function getplaylist() {
-            $this->db->query('SELECT DISTINCT playlistName FROM playlist WHERE expertID = :expertID;');
+            $this->db->query('SELECT DISTINCT webinarID, playlistName FROM playlist WHERE expertID = :expertID;');
 
             $this->db->bind(':expertID', $_SESSION['userID']);
 
@@ -86,8 +86,8 @@
 
         //get myWebinars
         public function getmywebinars() {
-            $this->db->query('SELECT webinar.webinarID as webinarID, webinar.webinarTitle as title, webinar.date as date, 
-            webinar.videolink as videolink, webinar.thumbnail as thumbnail, webinar.expertID as expertID, playlist.playlistName as playlistName,
+            $this->db->query('SELECT DISTINCT webinar.webinarID as webinarID, webinar.webinarTitle as title, webinar.date as date, 
+            webinar.videolink as videolink, webinar.thumbnail as thumbnail, webinar.expertID as expertID,
             webinar.published as published FROM webinar, playlist WHERE webinar.expertID = :expertID AND webinar.webinarID = playlist.webinarID ORDER BY webinar.date DESC;');
 
             $this->db->bind(':expertID', $_SESSION['userID']);
@@ -154,13 +154,14 @@
 //****************************************************************Edit Webinar************************************************************************************************************* */
 
         public function editwebinar($data) {
-            $this->db->query('UPDATE webinar SET webinarTitle = :title, date = :date, videolink = :videolink, thumbnail = :thumbnail WHERE webinarID = :WID');
+            $this->db->query('UPDATE webinar SET webinarTitle = :title, date = :date, videolink = :videolink, thumbnail = :thumbnail, published = :published WHERE webinarID = :WID');
             // Bind values
             $this->db->bind(':title', $data['title']);
             $this->db->bind(':date', $data['date']);
             $this->db->bind(':videolink', $data['videolink']);
             $this->db->bind(':thumbnail', $data['thumbnail']);
             $this->db->bind(':WID', $data['WID']);
+            $this->db->bind(':published', $data['published']);
 
             // Execute
             if($this->db->execute()) {
@@ -170,37 +171,26 @@
             }
         }
 
-        //Update Tags
-        public function editwebinartag($tag, $WID) {
-            $this->db->query('UPDATE webinartag SET VALUES(:wid, :tag)');
-            // Bind values
-            $this->db->bind(':wid', $WID);
-            $this->db->bind(':tag', $tag);
+//======================================================== delete ==============================================================//
 
-            // Execute
+        public function deleteWebinarTag($WID) {
+            $this->db->query('DELETE FROM webinartag WHERE webinarID = :WID');
+            $this->db->bind(':WID', $WID);
             if($this->db->execute()) {
                 return true;
             } else {
-                return false;
+                 return false;
             }
-
         }
 
-        //Update Playlist
-        public function editplaylist($playlist, $WID) {
-            $this->db->query('UPDATE playlist SET VALUES(:playlist, :wid, :expertID)');
-            // Bind values
-            $this->db->bind(':wid', $WID);
-            $this->db->bind(':playlist', $playlist);
-            $this->db->bind(':expertID', $_SESSION['userID']);
-
-            // Execute
+        public function deletePlaylist($WID) {
+            $this->db->query('DELETE FROM playlist WHERE webinarID = :WID');
+            $this->db->bind(':WID', $WID);
             if($this->db->execute()) {
                 return true;
             } else {
-                return false;
+                 return false;
             }
-
         }
     }
 

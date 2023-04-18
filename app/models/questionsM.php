@@ -69,7 +69,7 @@
             return $row;
         }
 
-        //getQuestionTags
+        //getQuestionTags 
         public function getQuestionTags($QID) {
             $this->db->query('SELECT * FROM questiontag WHERE QID = :QID');
             $this->db->bind(':QID', $QID);
@@ -88,7 +88,7 @@
             $this->db->bind(':visibility', $data['visibility']);
             $this->db->bind(':QID', $data['QID']);
 
-            // Execute
+            // Execute 
             if($this->db->execute()) {
                 return true;
             } else {

@@ -45,8 +45,10 @@
                                                 <label>Please Select <b>all the Tags</b> which are Related to your
                                                     Webinar.</label>
                                                 <ul class="dropdown" id="dropdown">
+                                                    <?php print_r($data['tag']); ?>
                                                     <?php $tagarray = explode(",", $data['tag']); ?>
                                                     <?php $tagarrayjson = json_encode($tagarray); ?>
+                                                    <?php print_r($tagarray); ?>
 
                                                     <li><input type="checkbox" value="agricultureScience" name="tag[]" id="checkbox1" /><label for="checkbox1">Agriculture Science</label></li>
 
@@ -187,7 +189,7 @@
                                                         <label for="imageUpload"></label>
                                                     </div>
                                                     <div class="avatar-preview">
-                                                        <div id="imagePreview" style="background-image: url(<?php echo URLROOT; ?>/img/thumbnails/<?php echo $data['thumbnail']; ?>);">
+                                                        <div id="imagePreview" ><img style="width:3rem;" src="<?php echo URLROOT; ?>/img/thumbnails/<?php echo $data['thumbnail']; ?>">
                                                         </div>
                                                     </div>
                                                 </div>
