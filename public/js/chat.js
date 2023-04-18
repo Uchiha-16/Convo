@@ -51,3 +51,61 @@ function showCreate() {
   function hideCreate() {
     document.getElementById("popup").style.display = "none";
   }
+
+  //function to send the message
+    function send(chatID) {
+        var message = document.getElementById("message").value;
+        //alert(message);
+        if (message != "") {
+            $.ajax({
+                url: URLROOT + '/Chats/send/'+chatID,
+                type: 'POST',
+                data: {message: message},
+                success: function(results) {
+                    alert("success"+chatID);
+                    //$('#results').html(results);
+                }
+            })
+        } setInterval(function() {
+            showchat(chatID);
+        }, 2000);
+    }
+
+//   $(document).ready(function() {
+//     // Load chat messages
+//     loadChat();
+
+//     // Send message when form is submitted
+//     $("#chatForm").on("submit", function(e) {
+//         e.preventDefault();
+//         var message = $("#message").val();
+//         if (message !== "") {
+//             $.ajax({
+//                 url: "process.php",
+//                 type: "POST",
+//                 data: {message: message},
+//                 success: function(response) {
+//                     $("#message").val("");
+//                     loadChat();
+//                 }
+//             });
+//         }
+//     });
+
+    // Refresh chat messages every 2 seconds
+//     setInterval(function() {
+//         loadChat();
+//     }, 2000);
+// });
+
+// Function to load chat messages
+// function loadChat() {
+//     $.ajax({
+//         url: "get_messages.php",
+//         type: "GET",
+//         success: function(response) {
+//             $("#chatbox").html(response);
+//             $("#chatbox").scrollTop($("#chatbox")[0].scrollHeight);
+//         }
+//     });
+// }

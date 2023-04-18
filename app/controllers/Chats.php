@@ -74,6 +74,10 @@
                         </div>
                     </div>';
             }
+            echo '<div class="send">
+                                <input type="text" name="text" id="message" placeholder="Type Something..."/>
+                                <button type="submit" class="submit-btn"><img src="'. URLROOT .'/img/submit.png" onclick="send('.$chatID.')" class="submit"></button>
+                            </div> ';
             
         }
 

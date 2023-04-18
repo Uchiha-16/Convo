@@ -72,13 +72,18 @@
                         
                         <div class="content-display">
                         
-                            <div id="results">Select a Group to see the chat<br><span class="error"><?php echo $data['title_err']; ?></span><br>                            <span class="error"><?php echo $data['users_err']; ?></span></div>
-                            
-                          
-                            <div class="send">
-                                <input type="search" name="search" placeholder="Type Something..."/>
-                                <img src="<?php echo URLROOT; ?>/img/submit.png" class="submit">
+                            <div id="results">
+                                <img class="result-img" src="<?php echo URLROOT; ?>/img/logoIcon.png"/>
+                                <span class="result-text">Select a group. Start your conversation...</span><br>
+                                <span class="error"><?php echo $data['title_err']; ?></span><br>                            
+                                <span class="error"><?php echo $data['users_err']; ?></span>
+                                
                             </div>
+                            
+                            <!-- <div class="send">
+                                <input type="text" name="text" id="message" placeholder="Type Something..."/>
+                                <button type="submit"><img src="/img/submit.png" onclick="send(" class="submit"></button>
+                            </div> -->
 
                            
                         </div>
