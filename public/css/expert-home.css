@@ -1,12 +1,12 @@
-body{
+/* body{
     background: #bdbdbd;
     mix-blend-mode: normal;
     font-family:'Inter', Helvetica, sans-serif;
     font-style: normal;
-    /* color: white; */
+    /* color: white; 
     width: 100%;
     height: 100%;
-}
+} */
 
 .logo{
     height: 20px;
@@ -275,7 +275,7 @@ body{
 }
 
 .description{
-    font-size: 15px;
+    font-size: 13px;
     font-weight: 500;
     padding-left: 5px;
     padding-right: 5px;

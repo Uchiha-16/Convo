@@ -6,7 +6,7 @@
             .nav{
                 grid-template-columns: 5% 6% 6% 6% 51% 10% 4% 4% 4%;
             }
-            .icon-1{
+            /* .icon-1{
                 width: 50px;
                 height: 50px;
                 align-items: center;
@@ -50,11 +50,23 @@
             }
             .tag-detail{
                 display: inline;
-            }
+            } */
         </style>
     </head>
 <body>
-<?php require APPROOT . '/views/inc/components/Enavbar.php'; ?>
+    <?php if (($_SESSION['role']) == 'seeker') : ?>
+        <?php require APPROOT . '/views/inc/components/Snavbar.php'; ?>
+    <?php elseif (($_SESSION['role']) == 'expert') : ?>
+        <?php require APPROOT . '/views/inc/components/Enavbar.php'; ?>
+    <?php elseif (($_SESSION['role']) == 'seeker/mod') : ?>
+        <?php require APPROOT . '/views/inc/components/SMnavbar.php'; ?> 
+    <?php elseif (($_SESSION['role']) == 'expert/mod') : ?>
+        <?php require APPROOT . '/views/inc/components/EMnavbar.php'; ?>
+    <?php elseif (($_SESSION['role']) == 'premium') : ?>
+        <?php require APPROOT . '/views/inc/components/Pnavbar.php'; ?>
+    <?php elseif (($_SESSION['role']) == 'admin') : ?>
+        <?php require APPROOT . '/views/inc/components/Anavbar.php'; ?>
+    <?php endif; ?>
 
 <div class="container-div">
             <div class="content-body">

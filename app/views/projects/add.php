@@ -137,6 +137,20 @@
                                 <label for="description">Description</label><br>
                                 <textarea name="description" id="description" class="form-textarea" placeholder="Enter description" required></textarea><br><br>
                             </div>
+                            <style>
+                                input, textarea{
+                                    font-weight: 400;
+                                    font-size: 15px;
+                                    text-align: left;
+                                    border-bottom: 4px solid #00A7AE;
+                                    box-shadow: rgba(81, 203, 238, 1);
+                                    border-top: none;
+                                    border-left: none;
+                                    border-right: none;
+                                    width: 65%;
+                                    height: 3rem;
+                                }
+                            </style>
                             
                             <div class="button-field">
                                 <button type="submit" name="submit" value="Submit" class="submit-btn"><center>Post</center></button>
