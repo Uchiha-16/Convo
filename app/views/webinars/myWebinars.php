@@ -37,7 +37,8 @@
                             <tr>
                                 <td class="table-thumbnail"><img src="<?php echo URLROOT; ?>/img/thumbnails/<?php echo $mywebinar->thumbnail ?>"></td>
                                 <td class="cell"><?php echo $mywebinar->title ?><br>
-                                    <span><b>Playlist: </b><?php foreach($data['myplaylist'] as $playlist) {
+                                    <span><b>Playlist: </b>
+                                    <?php foreach($data['myplaylist'] as $playlist) {
                                         if($playlist->webinarID == $mywebinar->webinarID) {
                                             echo $playlist->playlistName;
                                         }

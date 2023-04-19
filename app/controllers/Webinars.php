@@ -269,14 +269,13 @@
                 }else{
                     $last_segment = $webinar->videolink;
 
-                    // No new file was uploaded, so use the old filename
                     $data = [
                         'WID' => $WID,
                         'title' => trim($_POST['title']),
                         'tag' => $tags,
                         'playlist' => $playlist,
                         'newP' => isset($_POST['newP']) ? trim($_POST['newP']) : '0',
-                        'videolink' => 'https://youtu.be/'.$last_segment,
+                        'videolink' => $last_segment,
                         'thumbnail' => $old_filename,
                         'date' => date('Y-m-d H:i:s'),
                         'published' => '1',

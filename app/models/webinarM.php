@@ -78,7 +78,7 @@
         public function getwebinars($tags) {
             $this->db->query('SELECT DISTINCT webinar.webinarID as webinarID, webinar.webinarTitle as title, webinar.date as date, webinar.videolink as videolink,
             webinar.thumbnail as thumbnail, webinar.expertID as expertID, user.pfp as pfp, CONCAT(user.firstName, " ", user.lastName) as name 
-            FROM webinar JOIN user ON webinar.expertID = user.userID JOIN webinartag ON webinar.webinarID = webinartag.webinarID WHERE webinar.published = "1" AND ' . $tags .' ORDER BY webinar.date DESC;');
+            FROM webinar JOIN user ON webinar.expertID = user.userID AND webinar.published = "1" JOIN webinartag ON webinar.webinarID = webinartag.webinarID WHERE webinar.published = "1" AND ' . $tags .' ORDER BY webinar.date DESC;');
 
             $row = $this->db->resultSet();
             return $row;

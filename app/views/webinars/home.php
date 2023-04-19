@@ -63,7 +63,7 @@
 
                                             <div>
                                                 <div class="qdp">
-                                                    <div>
+                                                    <div style="height: 100%;">
                                                         <?php if ($webinar->pfp != NULL) : ?>
                                                             <img src="<?php echo URLROOT; ?>/img/pfp/<?php echo $webinar->pfp ?>" />
                                                         <?php else : ?>
