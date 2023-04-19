@@ -16,6 +16,8 @@
                 $tag = isset($_POST['tag']) ? $_POST['tag'] : '0';
                 $resourceID = isset($_POST['rp']) ? $_POST['rp'] : '0';
 
+                print_r($resourceID);
+
                 if($resourceID != '0'){
                     $resourceID = implode(',', $resourceID);
                 }
@@ -104,6 +106,31 @@
             }
         }
 
+
+        public function resourceName(){
+
+            $selectedValues = $_POST['selectedValues'];
+
+            $str = '';
+
+            foreach($selectedValues as $tag) {
+                $str = $str . 'usertag.tag = "' . $tag . '" OR ';
+
+            }
+            $str = substr($str, 0, -4);
+
+            $data = $this->questionModel->resourceName($str);
+            
+            foreach($data as $d){
+                echo '<li>';
+                    echo '<label for="checkbox1">';
+                        echo '<input type="checkbox" value="'. $d->expertID .'" name="rp[]" id="checkbox1"/>';
+                        echo '<span class="checkbox">'. $d->fName ." ". $d->lName . '</span>';
+                    echo '</label>';
+                echo '</li>';
+            }
+        }
+
         public function myquestions(){
             $questions = $this->questionModel->getQuestions();
             
@@ -189,7 +216,8 @@
 
                 $question = $this->questionModel->getQuestionByID($QID);
                 
-                //check the owner of the question 
+                
+                //check the owner of the question
                 if($question->userID != $_SESSION['userID']){
                     redirect('questions/myQuestions');
                 }
@@ -200,6 +228,7 @@
                     'content' => $question->content,
                     'tag' =>  $question->tags,
                     'visibility' => $question->visibility,
+                    'resourceID' => $question->resourceID,
                     'title_err' => '',
                     'content_err' => '',
                     'tag_err' => '',

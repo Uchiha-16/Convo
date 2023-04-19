@@ -20,6 +20,23 @@
         window.location.href = "<?php echo URLROOT; ?>/Consults/index";
       }
     }
+
+        $(function(){
+            var dtToday = new Date();
+        
+            var month = dtToday.getMonth() + 1;
+            var day = dtToday.getDate();
+            var year = dtToday.getFullYear();
+            if(month < 10)
+                month = '0' + month.toString();
+            if(day < 10)
+                day = '0' + day.toString();
+            
+            var maxDate = year + '-' + month + '-' + day;
+            //alert(maxDate);
+            $('#date').attr('min', maxDate);
+        });
+
 </script>
 
 </head>
@@ -191,7 +208,7 @@
                                     </td>
                                     <td class="date" style="float:none">
                                         <h4>Date <span class="star">*</span></h4>
-                                        <input class="inputform"  type="date" name="date" value="<?php echo $data['date']; ?>" required>
+                                        <input class="inputform"  type="date" name="date" id="date" value="<?php echo $data['date']; ?>" required>
                                         <span class="error"><?php echo $data['date_err']; ?></span>
                                     </td>
                                     <td class="time" style="float:none">
@@ -205,6 +222,7 @@
                                         <br><br>
                                         <div class="add">
                                             <button style="float:right" class="read-more attend submit" type="reset" onclick=confirmation() >Reset</button>
+                                            <button style="float:right" class="read-more attend submit" type="submit" name="create">Add Appointment</button>
                                         </div>
                                     </td>
                                 </tr>
