@@ -196,15 +196,15 @@ input[type=search]{
 .qdp{
     display: grid;
     grid-template-columns: 60px auto;
+    align-items: center;
 }
 .qdp img{
     border-radius: 50%;
-    width: 60px;
+    width: 50px;
 }
 .qdp-1{
     font-weight: 600;
     font-size: 14px;
-    padding-left: 1rem;
     margin-top: auto;
     margin-bottom: auto;
 }
