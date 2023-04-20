@@ -56,29 +56,36 @@ function confirmation() {
                             </div>
                             <div class="tags">
                                 <label>Category</label><br>
-                                <?php print_r($data['tags']); ?>
-                                <?php $tagArray = explode(",", $tags->tags); ?>
-                                <?php foreach ($tagArray as $tag) : ?>
-                                    <div class="tag"><?php echo $tag ?></div>
-                                <?php endforeach; ?>
+                                <?php for ($i = 0; $i < count($data['tags']); $i++) : ?>
+                                    <?php if ($data['tags'][$i]->EID == $event->EID) : ?>
+                                        <?php $tagArray = explode(",", $data['tags'][$i]->tags); ?>
+                                        <?php foreach ($tagArray as $tag) : ?>
+                                            <div class="tag"><?php echo $tag ?></div>
+                                        <?php endforeach; ?>
+                                    <?php endif; ?>
+                                <?php endfor; ?>
                             </div>
                         </div>
                         <div class="content-display">
                             <div class="flex">
-                                <button class="read-more webinar">Webinar</button>
-                                <button class="read-more webinar time"><?php echo $event->time ?></button>
+                                <button class="read-more webinar"><?php echo date("D, M j, Y", strtotime($event->date)) ?></button>
+                                <button class="read-more webinar time"><?php echo date("h:i A", strtotime($event->time)) ?></button>
                             </div><br>
                             <p>Resource person</p>
                             <div class="flex">
-                                <div class="qdp">
-                                    <div>
-                                        <img src="<?php echo URLROOT; ?>/img/user.jpg" />
-                                    </div>
-                                    <div class="qdp-1" style="margin-left: 1rem;">
-                                        <label>Dilky Liyanage</label><br>
-                                        <label class="qdp-1-2">Lecturer, Faculty of Medicine, University of Colombo</label>
-                                    </div>
-                                </div>
+                                <?php foreach ($data['resourcePerson'] as $RP) : ?>
+                                    <?php if ($RP->EID == $event->EID) : ?>
+                                        <div class="qdp">
+                                            <div>
+                                                <img src="<?php echo URLROOT; ?>/img/pfp/<?php echo $RP->pfp ?>" />
+                                            </div>
+                                            <div class="qdp-1" style="margin-left: 1rem;">
+                                                <label><?php echo $RP->name ?></label><br>
+                                                <label class="qdp-1-2">Lecturer, Faculty of Medicine, University of Colombo</label>
+                                            </div>
+                                        </div>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
                             </div>
                             <button style="float:right" class="read-more attend">ATTEND</button>
                         </div>

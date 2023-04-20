@@ -24,29 +24,36 @@
 
         //getEvents 
         public function getevents($tags) {
-            $this->db->query('SELECT DISTINCT event.eventID as eventID, event.eventTitle as title, event.date as date, event.time as time, 
+            $this->db->query('SELECT DISTINCT event.eventID as EID, event.eventTitle as title, event.date as date, event.time as time, 
             event.zoomlink as zoomlink, event.description as content, event.userID as userID, eventhandling.moderatorID as modID FROM event JOIN 
             user ON event.userID = user.userID JOIN eventhandling ON event.eventID = eventhandling.eventID AND 
-            eventhandling.moderatorID = event.userID join eventtag ON eventtag.eventID = event.eventID WHERE ' . $tags .' ORDER BY event.date DESC;');
+            eventhandling.moderatorID = event.userID join eventtag ON eventtag.eventID = event.eventID WHERE ' . $tags .' ORDER BY event.date ASC;');
             $row = $this->db->resultSet();
             return $row;
         }
 
         //getEventTags
-        public function getEventTags($EID) {
-            // $this->db->query('SELECT eventID, GROUP_CONCAT(eventtag.tag SEPARATOR ",") as tags FROM eventtag WHERE eventID = :EID GROUP BY eventID;' );
-            // $this->db->bind(':EID', $EID);
-            // $row = $this->db->resultSet();
-            // return $row;
+        public function getEventTags() {
+            $this->db->query('SELECT eventID as EID, GROUP_CONCAT(eventtag.tag SEPARATOR ",") as tags FROM eventtag GROUP BY eventID' );
+            $row = $this->db->resultSet();
+            return $row;
         }
 
-        //get Resource Person by event ID
-        public function getResourcePersonbyID($EID) {
-            // $this->db->query('SELECT eventhandling.expertID as expertID, CONCAT(user.firstName, " ", user.lastName) as name, user.pfp as pfp 
-            // FROM eventhandling JOIN user ON eventhandling.expertID = user.userID WHERE eventhandling.eventID = :EID;' );
-            // $this->db->bind(':EID', $EID);
-            // $row = $this->db->resultSet();
-            // return $row;
+        //get Resource Person
+        public function getResourcePerson($qual) {
+            $this->db->query('SELECT DISTINCT user.userID as userID, user.firstName as firstName, user.lastName as lastName, user.email as email, 
+            user.profilePic as profilePic, user.qualification as qualification, user.description as description, user.tag as tag FROM user JOIN 
+            expertqualification ON user.userID = expertqualification.expertID WHERE ' . $qual .';');
+            $row = $this->db->resultSet();
+            return $row;
+        }
+
+        //getQualification
+        public function getQualification(){
+            $this->db->query('SELECT eventhandling.eventID as EID, eventhandling.expertID as expertID, GROUP_CONCAT(expertqualification.qualification SEPARATOR ",") 
+            as qual FROM eventhandling JOIN expertqualification ON eventhandling.expertID = expertqualification.expertID GROUP BY eventhandling.expertID;');
+            $row = $this->db->resultSet();
+            return $row;
         }
     }
 ?>

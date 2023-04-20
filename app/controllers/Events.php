@@ -20,30 +20,19 @@
             $str = substr($str, 0, -4);
 
             $events = $this->eventsModel->getevents($str); 
-
-            $eid = array();
-                for($i = 0; $i < count($events); $i++) {
-                    $eid[$i] = $events[$i]->eventID;
-                }
-    
-                $str2 = '';
-    
-                foreach($eid as $id) {
-                    $str2 = $str2 . 'eventID = "' . $id . '" OR ';
-                }
-    
-                $str2 = substr($str2, 0, -4);
                 
-                $tags = $this->eventsModel->getEventTags($str2);
+            $tags = $this->eventsModel->getEventTags();
 
-                //$resourcePerson = $this->eventsModel->getResourcePerson();
-
+            $qual = $this->eventsModel->getQualification();
+            $resourcePerson = $this->eventsModel->getResourcePerson($qual);
+            
             $data = [
                 'events' => $events,
                 'tags' => $tags,
+                'resourcePerson' => $resourcePerson,
                 'usertag' => $usertag,
-                // 'resourcePerson' => $resourcePerson
             ];
+
 
             $this->view('events/index', $data);
         }
