@@ -370,7 +370,7 @@
         }
 
         public function home(){
-            $usertag = $this->webinarModel->getUserTag();
+            $usertag = $this->webinarModel->getUserTag(); 
 
             $str = '';
     

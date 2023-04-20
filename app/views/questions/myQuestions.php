@@ -51,7 +51,7 @@
                             <div class="tags">
                                 <label>Category</label><br>
                                 <?php $tagArray = explode(",", $question->tags); ?>
-                                <?php foreach ($tagArray as $tag) : ?>
+                                <?php foreach ($tagArray as $tag) : ?> 
                                     <div class="tag"><?php echo $tag ?></div>
                                 <?php endforeach; ?>
                                 <br><br>
