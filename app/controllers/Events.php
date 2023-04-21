@@ -24,7 +24,8 @@
             $tags = $this->eventsModel->getEventTags();
 
             $qual = $this->eventsModel->getQualification();
-            $resourcePerson = $this->eventsModel->getResourcePerson($qual);
+
+            $resourcePerson = $this->eventsModel->getResourcePerson();
             
             $data = [
                 'events' => $events,

@@ -40,10 +40,10 @@
         }
 
         //get Resource Person
-        public function getResourcePerson($qual) {
-            $this->db->query('SELECT DISTINCT user.userID as userID, user.firstName as firstName, user.lastName as lastName, user.email as email, 
-            user.profilePic as profilePic, user.qualification as qualification, user.description as description, user.tag as tag FROM user JOIN 
-            expertqualification ON user.userID = expertqualification.expertID WHERE ' . $qual .';');
+        public function getResourcePerson() {
+            $this->db->query('SELECT user.userID as userID, CONCAT(user.firstName, user.lastName) as name, user.email as email, 
+            user.pfp as pfp, GROUP_CONCAT(expertqualification.qualification SEPARATOR ",") as qualification FROM user JOIN 
+            expertqualification ON user.userID = expertqualification.expertID WHERE user.role = "expert";');
             $row = $this->db->resultSet();
             return $row;
         }
