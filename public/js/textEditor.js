@@ -115,3 +115,15 @@ const highlighterRemover = (className) => {
 };
 
 window.onload = initializer();
+
+
+// Set up a listener for the submit event
+// document.querySelector('form').addEventListener('submit', function (e) {
+//     // Get the text input element
+//     var textInput = document.getElementById('text-input');
+//     // Get the formatted text content of the div element
+//     var content = textInput.innerHTML;
+
+//     // Set the value of the hidden input field to the formatted text content
+//     document.querySelector('input[name="content"]').value = content;
+// });

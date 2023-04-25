@@ -17,7 +17,7 @@
             $this->db->bind(':userID', $_SESSION['userID']);
             $this->db->bind(':expertID', $data['resourceID']);
 
-            // Execute
+            // Execute 
             if($this->db->execute()) {
                 return true;
             } else {
@@ -77,7 +77,7 @@
             return $row;
         }
 
-        //getQuestionTags
+        //getQuestionTags 
         public function getQuestionTags($QID) {
             $this->db->query('SELECT * FROM questiontag WHERE QID = :QID');
             $this->db->bind(':QID', $QID);

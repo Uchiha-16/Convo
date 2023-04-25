@@ -139,7 +139,7 @@
 
                                             <li><input type="checkbox" value="linguistics" name="tag[]" id="checkbox14" /><label for="checkbox14">Linguistics</label></li>
 
-                                            <li><input type="checkbox" value="literature" name="tag[]" id="checkbox15" /><label for="checkbox15">literature</label></li>
+                                            <li><input type="checkbox" value="literature" name="tag[]" id="checkbox15" /><label for="checkbox15">Literature</label></li>
 
                                             <li><input type="checkbox" value="mathematics" name="tag[]" id="checkbox16" /><label for="checkbox16">Mathematics</label></li>
 

@@ -457,6 +457,10 @@ section .col1 textarea {
 	background-repeat: no-repeat;
 	background-position: center;
 }
+#imagePreview img{
+    width: 100%;
+    height: 100%;
+}
 
 /*========================= terms =====================*/
 
@@ -468,11 +472,12 @@ section .col1 textarea {
     padding: 3rem 2rem 0 2rem;
 }
 .terms-checkbox{
-    width: 14px;
+    width: 21px;
     font-size: 14px;
     height: auto;
     margin: 0;
     padding: 0;
+    cursor: pointer;
 }
 .terms-label{
     font-size: 14px;

@@ -190,7 +190,7 @@
                 //     }
                 // }
 
-                // Make sure errors are empty
+                // Make sure errors are empty 
                 if(empty($data['title_err']) && empty($data['content_err']) && empty($data['tag_err'])) {
                     // Updating the Question
                     $this->questionModel->deleteQuestionTag($QID);
@@ -238,7 +238,7 @@
         }
 
         public function delete($QID) {
-                // Get existing post from model
+                // Get existing post from model 
                 $question = $this->questionModel->getQuestionByID($QID);
                 //check the owner of the question
                 if($question->userID != $_SESSION['userID']){

@@ -3,7 +3,7 @@
         private $db;
 
         public function __construct() {
-            $this->db = new Database;
+            $this->db = new Database; 
         }
 
         public function getUsers() {
@@ -11,7 +11,7 @@
             $results = $this->db->resultSet();
             return $results;
         }
-
+ 
         public function getAnswers($QID) {
             $this->db->query('SELECT answer.threadID as threadID, answer.content as content, answer.embedlink as link, answer.attachment as attachment, answer.date as date, 
             answer.rating as rating, user.userID as userID, user.uname as uname, user.firstName as fName, user.lastName as lName, user.pfp as pfp, 

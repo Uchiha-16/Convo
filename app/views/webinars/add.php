@@ -114,7 +114,7 @@
                                                     Playlists can help viewers discover your content faster.</label>
 
                                                 <ul class="dropdown" id="dropdown">
-                                                    <!-- Add New -->
+                                                    <!-- Add New --> 
                                                     <li>
                                                         <input type="checkbox" value="1" id="checkbox0" id="newPlaylist" onchange="showDiv('hidden_div', this)" />
                                                         <label for="checkbox0">Add new</label><br>
@@ -172,7 +172,7 @@
                                     </tr>
                                     <tr>
                                         <td colspan="3" class="terms">
-                                            <input type="checkbox" name="terms" class="terms-checkbox" required />
+                                            <input type="checkbox" name="terms" class="terms-checkbox" required/>
                                             <label class="terms-label">By Publishing, you acknowledge that you agree to Convo's Terms of Service and Community Guidelines. Please be sure not to violate others' copyright or privacy rights.</label>
                                         </td>
                                     </tr>
@@ -180,8 +180,9 @@
                                         <td colspan="3">
                                             <br><br>
                                             <div class="add">
-                                                <button style="float:right" class="read-more attend submit" type="reset">Cancel</button>
-                                                <button style="float:right" class="read-more attend submit" type="submit" name="submit" onclick="webinarPublish()">Publish</button>
+                                                <button style="float:right" class="read-more attend submit" type="submit" name="submit">Publish</button>
+                                                <button style="float:right" class="read-more attend submit" type="submit" name="draft">Save Draft</button>
+                                                <button style="float:right" class="read-more attend submit" type="reset">Reset</button>
                                             </div>
                                         </td>
                                     </tr>
