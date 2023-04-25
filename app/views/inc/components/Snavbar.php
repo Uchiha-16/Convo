@@ -4,7 +4,7 @@
             <div><a href="<?php echo URLROOT; ?>/Pages/seeker"><img src="<?php echo URLROOT; ?>/img/logo%20with%20name%20WHITE%201.png" id="logo"></a></div>
             <div class="nav-hover"><a href="<?php echo URLROOT; ?>/Pages/seeker">Home</a></div>
             <div class="nav-hover"><a href="<?php echo URLROOT; ?>/Webinars/home">Webinar</a></div>
-            <div><input type="search" name="search" placeholder="Search for questions..."/></div>
+            <div><input type="search" name="search" id="live_search" placeholder="Search for questions..."/></div>
            
             <div class="dropdown-list">
                 <button class="dropbtn dropbtn-1" onclick="drop()"><img src="<?php echo URLROOT; ?>/img/plus.png" class="icon"> Add New</button>
@@ -32,7 +32,7 @@
                 <div><a href="<?php echo URLROOT; ?>/Pages/index"><img src="<?php echo URLROOT; ?>/img/logo%20with%20name%20WHITE%201.png" id="logo"></a></div>
                 <div class="nav-hover"><a href="<?php echo URLROOT; ?>/Pages/index">Home</a></div>
                 <div class="nav-hover"><a href="<?php echo URLROOT; ?>/Webinars/home">Webinar</a></div>
-                <div><input type="search" name="search" placeholder="Search for questions..."/></div>
+                <div><input type="search" name="search" id="live_search" placeholder="Search for questions..."/></div>
                     <style>
                         .nav {
                             grid-template-columns: 5% 6% 6% 57% 6% 6% 8% 6%;

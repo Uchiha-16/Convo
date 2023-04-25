@@ -64,7 +64,7 @@
                                     <?php endif; ?>
                                 
                             <?php endfor; ?>
-                                <label style="font-weight:600; float:right">Overall Rating: <?php echo $question->rating; ?></label><br>
+                                <label style="font-weight:600; float:right">Overall Rating: <?php echo round($question->rating,1); ?></label><br>
                                 <!-- <form action="<?php echo URLROOT; ?>/answers/viewA/<?php echo $question->QID; ?>">
                                 <button style="float:right" class="read-more">READ MORE</button>
                             </form> -->
