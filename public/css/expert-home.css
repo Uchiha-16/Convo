@@ -8,13 +8,13 @@
     height: 100%;
 } */
 
-.logo{
+/* .logo{
     height: 20px;
     width: auto;
     padding: 10px;
-}
+} */
 
-.nav-section{
+/* .nav-section{
     background-color: #0D5F75;
     color: #fff;
     display: flex;
@@ -39,8 +39,8 @@
     margin-right: 15px;
     color: #fff;
     font-style: normal;
-}
-
+} */
+/* 
 .search-bar{
     display: flex;
     align-items: center;
@@ -91,7 +91,7 @@
   border-color: #008296;
   box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
   outline: 0;
-}
+} */
 
 /* .icon{
     height: 25px;

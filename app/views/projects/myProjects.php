@@ -103,7 +103,8 @@
                             </div>
                             <div class="tag-field">
                                 <button class="tag-button">
-                                    <div class="tag">Computer Science</div>
+                                    <?php echo $project->tag?>
+                                </button>
                             </div>
                             <form action="<?php echo URLROOT;?>/Projects/edit/<?php echo $project->PID;?>" style="width: 50%; float:left">
                                 <button class="read-more edit-btn" type="submit"> <img style="width: 17px;" src="../img/edit.png">Edit</button>

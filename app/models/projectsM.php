@@ -58,19 +58,19 @@
     }
 
     //Insert Tag
-    // public function projectTag($tag, $LastID) {
-    //         $this->db->query('INSERT INTO tag (QID, tag) VALUES(:QID, :tag)');
-    //         // Bind values
-    //         $this->db->bind(':QID', $LastID);
-    //         $this->db->bind(':tag', $tag);
+    public function projectTag($tag, $LastID) {
+            $this->db->query('INSERT INTO projecttag (projectID, tag) VALUES (:projectID, :tag)');
+            // Bind values
+            $this->db->bind(':projectID', $LastID);
+            $this->db->bind(':tag', $tag);
 
-    //     // Execute
-    //     if($this->db->execute()) {
-    //         return true;
-    //     } else {
-    //         return false;
-    //     }
-    // }
+        // Execute
+        if($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     //getExpertDetails
     // public function getExpertID($tag) {
@@ -84,7 +84,7 @@
     //----------------------------------View All Projects-----------------------------------------------------------
     //get project
     public function getAllProjects() {
-        $this->db->query('SELECT * FROM project inner join user on project.expertID = user.userID');
+        $this->db->query('SELECT * FROM project inner join user on project.expertID = user.userID inner join projecttag on projecttag.projectID=project.PID');
         $row = $this->db->resultSet();
         return $row;
     }
@@ -92,15 +92,15 @@
     //-------------------------------View My Projects---------------------------------------------------------------
     //get project
     public function getMyProjects() {
-        $this->db->query('SELECT * FROM project inner join user on project.expertID = user.userID WHERE project.expertID = :userID');
+        $this->db->query('SELECT * FROM project inner join user on project.expertID = user.userID inner join projecttag on projecttag.projectID=project.PID WHERE project.expertID = :userID');
         $this->db->bind(':userID', $_SESSION['userID']);
         $row = $this->db->resultSet();
         return $row;
     }
 
     public function getProjectTags($PID) {
-        $this->db->query('SELECT * FROM questiontag WHERE projectID = :PID');
-        $this->db->bind(':PID', $PID);
+        $this->db->query('SELECT * FROM projecttag WHERE projectID = :projectID');
+        $this->db->bind(':projectID', $PID);
         $row = $this->db->resultSet();
         return $row;
     }
@@ -130,7 +130,7 @@
     }
 
     public function getProjectByID($PID) {
-        $this->db->query('SELECT * FROM project WHERE PID = :PID');
+        $this->db->query('SELECT * FROM project inner join projecttag on projecttag.projectID=project.PID WHERE project.PID = :PID');
         $this->db->bind(':PID', $PID);
         $row = $this->db->single();
         return $row;

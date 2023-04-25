@@ -102,8 +102,8 @@
                                 <p><b>Payment: </b>LKR <?php echo $project->payment;?></p>
                             </div>
                             <div class="tag-field">
-                                <button class="tag-button">Computer Science</button>
-                                <button class="tag-button">IT</button>
+                                <button class="tag-button"><?php echo $project->tag?></button>
+                                
                             </div>
                             <div class="tag-bottom">
                                 <label class="qdp-1-2">Published: October 25, 2022<br>Project duration: <?php echo $project->duration;?></label><a href="login-form.php"><button class="answer-btn" formaction="#">Apply Now!</button></a>  

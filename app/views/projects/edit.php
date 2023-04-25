@@ -1,25 +1,70 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
-        <link href="<?php echo URLROOT; ?>/css/style1.css" rel="stylesheet" type="text/css"/>
-        <style>
-            .nav{
-                grid-template-columns: 5% 6% 6% 6% 51% 10% 4% 4% 4%;
-            }
-        </style>
-    </head>
-<body>
-<?php require APPROOT . '/views/inc/components/Enavbar.php'; ?>
 
-    <div class="container-div">
-        <div class="content-body">
-            <div class="LHS">
+
+        <link href="<?php echo URLROOT; ?>/css/event.css" rel="stylesheet" type="text/css"/>
+        <link href="<?php echo URLROOT; ?>/css/webinar.css" rel="stylesheet" type="text/css"/>
+        <link href="<?php echo URLROOT; ?>/css/expert-signup.css" rel="stylesheet" type="text/css"/>
+        <link href="<?php echo URLROOT; ?>/css/add-project.css" rel="stylesheet" type="text/css"/>
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<style>
+    <?php if (($_SESSION['role']) == 'seeker') : ?>
+    <?php elseif (($_SESSION['role']) == 'expert') : ?>
+      .nav {
+        grid-template-columns: 5% 6% 6% 6% 51% 10% 4% 4% 4%;
+    }
+
+    <?php endif; ?>
+</style>
+
+<script type="text/javascript">
+    function confirmation(){
+      if(confirm("Are you sure you want to discard this blog?")){
+        window.location.href = "<?php echo URLROOT; ?>/Blogs/index";
+      }
+    }
+</script>
+
+</head>
+
+<body>
+    <?php if (($_SESSION['role']) == 'seeker') : ?>
+        <?php require APPROOT . '/views/inc/components/Snavbar.php'; ?>
+    <?php elseif (($_SESSION['role']) == 'expert') : ?>
+        <?php require APPROOT . '/views/inc/components/Enavbar.php'; ?>
+    <?php elseif (($_SESSION['role']) == 'seeker/mod') : ?>
+        <?php require APPROOT . '/views/inc/components/SMnavbar.php'; ?> 
+    <?php elseif (($_SESSION['role']) == 'expert/mod') : ?>
+        <?php require APPROOT . '/views/inc/components/EMnavbar.php'; ?>
+    <?php elseif (($_SESSION['role']) == 'premium') : ?>
+        <?php require APPROOT . '/views/inc/components/Pnavbar.php'; ?>
+    <?php elseif (($_SESSION['role']) == 'admin') : ?>
+        <?php require APPROOT . '/views/inc/components/Anavbar.php'; ?>
+    <?php endif; ?>
+        
+        <!-- body content -->
+        <div class="container-div">
+            <div class="content-body">
+                <div class="LHS">
+                    <style>
+                        .LHS {
+                            padding-left: 8px;
+                            display: grid;
+                            grid-template-columns: 100%;
+                        }
+                    </style>
                 <div class="screen">
-                    <h3 class="screen-title">Add Project</h3>
+                    <h3 class="screen-title">Edit Project</h3>
                     <div><hr></div>
-                    <form action="<?php echo URLROOT; ?>/projects/edit/<?php echo $data['PID']; ?>" method="POST">
+                    <form action="<?php echo URLROOT;?>/Projects/edit/<?php echo $data['PID'];?>" method="POST">
                         <div class="form-group">
-                            <label for="title">Title<span class="star">*</span></label><br>
+                            <label for="title">Title</label><br>
                             <div class="form-field-div">
-                                <input type="text" name="title" id="title" class="form-control" placeholder="Enter title" value="<?php echo $data['title'];?> required><br><br>
+                                <input type="text" name="title" id="title" class="form-control" placeholder="Enter title" value="<?php echo $data['title']; ?>">
+                                <span class="error"><?php echo $data['title_err']; ?></span><br>
                             </div>
 
                             <div class="form-field-1">
@@ -45,7 +90,7 @@
                                 
                                 <div class="form-field-div">
                                     <label for="slot">Available Slots</label><br>
-                                    <input type="text" name="slot" id="slot" class="form-control" value="<?php echo $data['slot'];?> required><br><br>
+                                    <input type="text" name="slot" id="slot" class="form-control" required><br><br>
                                 </div>
                             </div>
                             
@@ -93,6 +138,20 @@
                                 <label for="description">Description</label><br>
                                 <textarea name="description" id="description" class="form-textarea" placeholder="Enter description" required></textarea><br><br>
                             </div>
+                            <style>
+                                input, textarea{
+                                    font-weight: 400;
+                                    font-size: 15px;
+                                    text-align: left;
+                                    border-bottom: 4px solid #00A7AE;
+                                    box-shadow: rgba(81, 203, 238, 1);
+                                    border-top: none;
+                                    border-left: none;
+                                    border-right: none;
+                                    width: 65%;
+                                    height: 3rem;
+                                }
+                            </style>
                             
                             <div class="button-field">
                                 <button type="submit" name="submit" value="Submit" class="submit-btn"><center>Post</center></button>
@@ -112,9 +171,11 @@
                 <div class="RHS">
                     <form action="<?php echo URLROOT;?>/projects/viewAllProjects"><button type="submit" style="float:right" class="read-more attend">Projects</button></form>
                     <form action="myProjects.php"><button type="submit" style="float:right" class="read-more attend">My Projects</button></form>
+                    
+                    <br><br>
                     <div class="filter-div">
                         <div style="display:flex">
-                            <img src="../images/filter.png">
+                            <img src="<?php echo URLROOT; ?>/img/filter.png">
                             <label>Filters</label><button class="read-more go">Go</button>
                         </div>
                         <div>
@@ -423,16 +484,5 @@
             }
         </script>
         
-
-
-
-
-
-
-</body>
-
-
-
-
-<?php require APPROOT . '/views/inc/footer.php'; ?>
-  
+    </body>
+</html>
