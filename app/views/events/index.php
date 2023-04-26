@@ -1,6 +1,8 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 <link href="<?php echo URLROOT; ?>/css/event.css" rel="stylesheet" type="text/css" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link href="<?php echo URLROOT; ?>/css/calander.css" rel="stylesheet" type="text/css"/>
+
 
 <style>
 <?php if (($_SESSION['role'])=='seeker') : ?><?php elseif (($_SESSION['role'])=='expert') : ?>.nav {
@@ -81,7 +83,7 @@ function confirmation() {
                                             </div>
                                             <div class="qdp-1" style="margin-left: 1rem;">
                                                 <label><?php echo $RP->name ?></label><br>
-                                                <label class="qdp-1-2">Lecturer, Faculty of Medicine, University of Colombo</label>
+                                                <label class="qdp-1-2"><?php echo $RP->qual ?></label>
                                             </div>
                                         </div>
                                     <?php endif; ?>

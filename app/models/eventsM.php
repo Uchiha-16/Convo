@@ -41,19 +41,13 @@
 
         //get Resource Person
         public function getResourcePerson() {
-            $this->db->query('SELECT user.userID as userID, CONCAT(user.firstName, user.lastName) as name, user.email as email, 
-            user.pfp as pfp, GROUP_CONCAT(expertqualification.qualification SEPARATOR ",") as qualification FROM user JOIN 
-            expertqualification ON user.userID = expertqualification.expertID WHERE user.role = "expert";');
+            $this->db->query('SELECT user.userID as userID, CONCAT(user.firstName, " ", user.lastName) as name, user.email as email, user.pfp as 
+            pfp, eventhandling.eventID as EID, expert.qualification as qual FROM user JOIN eventhandling ON eventhandling.expertID = user.userID 
+            JOIN expert ON expert.expertID = eventhandling.expertID;');
             $row = $this->db->resultSet();
             return $row;
         }
 
-        //getQualification
-        public function getQualification(){
-            $this->db->query('SELECT eventhandling.eventID as EID, eventhandling.expertID as expertID, GROUP_CONCAT(expertqualification.qualification SEPARATOR ",") 
-            as qual FROM eventhandling JOIN expertqualification ON eventhandling.expertID = expertqualification.expertID GROUP BY eventhandling.expertID;');
-            $row = $this->db->resultSet();
-            return $row;
-        }
+        
     }
 ?>

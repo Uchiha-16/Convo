@@ -23,14 +23,15 @@
                 
             $tags = $this->eventsModel->getEventTags();
 
-            $qual = $this->eventsModel->getQualification();
-
             $resourcePerson = $this->eventsModel->getResourcePerson();
+
+            // $qualifications = $this->eventsModel->getQualification();
             
             $data = [
                 'events' => $events,
                 'tags' => $tags,
                 'resourcePerson' => $resourcePerson,
+                // 'qualifications' => $qualifications,
                 'usertag' => $usertag,
             ];
 
