@@ -8,7 +8,7 @@
 
 
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
 
 <style>
     <?php if (($_SESSION['role']) == 'seeker') : ?>
@@ -22,8 +22,8 @@
 
 <script type="text/javascript">
     function confirmation(){
-      if(confirm("Are you sure you want to discard this blog?")){
-        window.location.href = "<?php echo URLROOT; ?>/Blogs/index";
+      if(confirm("Are you sure you do not want to edit this Project?")){
+        window.location.href = "<?php echo URLROOT; ?>/projects/viewMyProjects";
       }
     }
 </script>
@@ -59,7 +59,7 @@
                 <div class="screen">
                     <h3 class="screen-title">Edit Project</h3>
                     <div><hr></div>
-                    <form action="<?php echo URLROOT;?>/Projects/edit/<?php echo $data['PID'];?>" method="POST">
+                    <form action="<?php echo URLROOT; ?>/Projects/edit" method="POST">
                         <div class="form-group">
                             <label for="title">Title</label><br>
                             <div class="form-field-div">

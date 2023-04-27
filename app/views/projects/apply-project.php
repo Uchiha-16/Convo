@@ -1,58 +1,35 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
-        <link href="<?php echo URLROOT; ?>/css/style1.css" rel="stylesheet" type="text/css"/>
-        <link rel='stylesheet' type='text/css' media='screen' href="<?php echo URLROOT; ?>/css/expert-home.css">
-        <link rel='stylesheet' type='text/css' media='screen' href="<?php echo URLROOT; ?>/css/project-home.css">
-        <style>
-            .nav{
-                grid-template-columns: 5% 6% 6% 6% 51% 10% 4% 4% 4%;
-            }
-            /* .icon-1{
-                width: 50px;
-                height: 50px;
-                align-items: center;
-                border: 1px solid #bdbdbd;
-                border-radius: 50%;
-                border-color: #000000 1px solid;
-                margin-right: 10px;
-            }
-            .name-field{
-                margin: 0;
-                padding: 0;
-            }
-            .name-tag{
-                margin-left: 1rem;
-            }
-            .tag-top{
-                padding-bottom: 1rem;
-                border-bottom: 1px solid rgba(128,128,128, .4);
-            }
-            .question {
-                font-size: 18px;
-            }
-            .description {
-                font-size: 13px;
-                color: #4f4f4f;
-            }
-            .tag-button{
-                line-height: 22px;
-                padding: 0 22px 0 22px;
-                width: auto;
-                margin-right: 1rem;
-            }
-            .tag-field {
-                font-size: 10px;
-                margin-top: 20px;
-                margin-bottom: 20px;
-                color: #6B6B6B;
-            }
-            .tag-field button{
-                color: #6B6B6B;
-            }
-            .tag-detail{
-                display: inline;
-            } */
-        </style>
-    </head>
+
+
+        <link href="<?php echo URLROOT; ?>/css/event.css" rel="stylesheet" type="text/css"/>
+        <link href="<?php echo URLROOT; ?>/css/webinar.css" rel="stylesheet" type="text/css"/>
+        <link href="<?php echo URLROOT; ?>/css/expert-signup.css" rel="stylesheet" type="text/css"/>
+        <link href="<?php echo URLROOT; ?>/css/add-project.css" rel="stylesheet" type="text/css"/>
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<style>
+    <?php if (($_SESSION['role']) == 'seeker') : ?>
+    <?php elseif (($_SESSION['role']) == 'expert') : ?>
+      .nav {
+        grid-template-columns: 5% 6% 6% 6% 51% 10% 4% 4% 4%;
+    }
+
+    <?php endif; ?>
+</style>
+
+<script type="text/javascript">
+    function confirmation(){
+      if(confirm("Are you sure you want to discard this blog?")){
+        window.location.href = "<?php echo URLROOT; ?>/Blogs/index";
+      }
+    }
+</script>
+
+</head>
+
 <body>
     <?php if (($_SESSION['role']) == 'seeker') : ?>
         <?php require APPROOT . '/views/inc/components/Snavbar.php'; ?>
@@ -67,66 +44,103 @@
     <?php elseif (($_SESSION['role']) == 'admin') : ?>
         <?php require APPROOT . '/views/inc/components/Anavbar.php'; ?>
     <?php endif; ?>
-
-<div class="container-div">
+        
+        <!-- body content -->
+        <div class="container-div">
             <div class="content-body">
                 <div class="LHS">
-                    <br><br>
-                    <div class="home-item1-1">
-                        <h3 class="home-head">Connecting People with a Passion for doing...</h3>
-                    </div>
+                    <style>
+                        .LHS {
+                            padding-left: 8px;
+                            display: grid;
+                            grid-template-columns: 100%;
+                        }
+                    </style>
+                <div class="screen">
+                    <h3 class="screen-title">Apply for the Project</h3>
+                    <div><hr></div>
+                    <form action="<?php echo URLROOT; ?>/Projects/apply" method="POST">
+                        <div class="form-group">
+                            <div>
+                                <label for="description">Cover Letter:</label><br>
+                                <textarea name="description" id="description" class="form-textarea" placeholder="Enter what you want to tell recruiter" required></textarea><br><br>
+                            </div>
+                            <style>
+                                input, textarea{
+                                    font-weight: 400;
+                                    font-size: 15px;
+                                    text-align: left;
+                                    border-bottom: 4px solid #00A7AE;
+                                    box-shadow: rgba(81, 203, 238, 1);
+                                    border-top: none;
+                                    border-left: none;
+                                    border-right: none;
+                                    width: 65%;
+                                    height: 3rem;
+                                }
+                            </style>
+                             
+                        
+                            <div class="custom-file-upload">
+                                <input type="file" id="cv_file" name="cv_file">
+                                <label for="cv_file" id="custom-file-label">Upload your resume</label>
+                            </div>
 
-                    <?php foreach($data['projects'] as $project) : ?> 
-                        <div class="question-card">
-                            <div class="tag-top">
-                                    <img class="icon-1" src="<?php echo URLROOT;?>/img/pfp/<?php echo $_SESSION['pfp']?>">
-                                <div class="name-tag">
-                                    <p class="name-field"><?php echo $_SESSION['firstName']," ",$_SESSION['lastName'];?></p>
-                                    <label class="qdp-1-2">Lecturer, Faculty of Medicine, University of Colombo</label>
-                                    <!-- <p class="ins-field">University of Colombo School of Computing</p> -->
-                                </div>
-                                <div></div>
-                            </div>
-                            <div class="tag-question">
-                                <h2 class="question"><?php echo $project->title;?></h2>
-                            </div>
-                            <div class="tag-question">
-                                <p class="description"><?php echo $project->description;?></p>
+                            <style>
+                                .custom-file-upload input[type="file"] {
+                                display: none;
+                                }
+
+                                .custom-file-upload #custom-file-label {
+                                background-color: #19758D;
+                                color: #fff;
+                                padding: 8px 12px;
+                                border-radius: 4px;
+                                cursor: pointer;
+                                }
+
+                                .custom-file-upload #custom-file-label:hover {
+                                background-color: #135b6d;
+                                }
+
+                            </style>
+                            
+                            <script>
+                                const fileInput = document.getElementById('cv_file');
+                                const customFileLabel = document.getElementById('custom-file-label');
+
+                                customFileLabel.addEventListener('click', function() {
+                                fileInput.click();
+                                });
+
+                                fileInput.addEventListener('change', function() {
+                                customFileLabel.innerHTML = fileInput.files[0].name;
+                                });
+                            </script>
+                            <br>
+                            <div class="button-field">
+                                <button type="submit" name="submit" value="Submit" class="submit-btn"><center>Apply</center></button>
+                                <button class="discard-btn" onclick="confirmation()"><center>Discard</center></button>
                             </div>
                             
-                            <div class="tag-detail">
-                                <p><b>Deadline: </b><?php echo $project->deadline;?></p>
-                                <p><b>Slots available: </b><?php echo $project->availableslot;?></p>
-                                <p><b>Type: </b><?php echo $project->type;?></p>
-                                <p><b>Availability: </b><?php echo $project->availability;?></p>
-                                <p><b>Payment: </b>LKR <?php echo $project->payment;?></p>
-                            </div>
-                            <div class="tag-field">
-                                <button class="tag-button">
-                                    <?php echo $project->tag?>
-                                </button>
-                            </div>
-                            <form action="<?php echo URLROOT;?>/Projects/edit/<?php echo $project->PID; ?>" style="width: 50%; float:left">
-                                <button class="read-more edit-btn" type="submit"> <img style="width: 17px;" src="../img/edit.png">Edit</button>
-                            </form>
-                            <form action="" style="width: 40%; float:left"></form>
-                            <form action="<?php echo URLROOT;?>/Projects/delete/<?php echo $project->PID;?>" style="width: 50%; float:left">
-                                <button class="read-more edit-btn" onclick="return confirm('Are you sure you want to delete this record?')"> <img style="width: 17px;" src="../img/delete.png">Delete</button>
-                            </form>
-                            <div class="tag-bottom">
-                                <label class="qdp-1-2">Published: October 25, 2022<br>Project duration: <?php echo $project->duration;?></label><a href="login-form.php"><button class="answer-btn" formaction="#">Apply Now!</button></a>  
-                            </div>
-
                         </div>
-                    <?php endforeach; ?>
-            
+
+                    </form>
+                    
+
+
+
+
                 </div>
+            </div>
                 <div class="RHS">
-                    <form action="<?php echo URLROOT;?>/projects/viewAllProjects"><button type="submit" style="float:right" class="read-more attend">All Projects</button></form>
-                    <form action="addProject.php"><button type="submit" style="float:right" class="read-more attend">Add Project</button></form><br><br>
+                    <form action="<?php echo URLROOT;?>/projects/viewAllProjects"><button type="submit" style="float:right" class="read-more attend">Projects</button></form>
+                    <form action="myProjects.php"><button type="submit" style="float:right" class="read-more attend">My Projects</button></form>
+                    
+                    <br><br>
                     <div class="filter-div">
                         <div style="display:flex">
-                            <img src="../images/filter.png">
+                            <img src="<?php echo URLROOT; ?>/img/filter.png">
                             <label>Filters</label><button class="read-more go">Go</button>
                         </div>
                         <div>
@@ -287,46 +301,61 @@
                                 </div>
                                 
                                 <!-- Filter 3 -->
-<!--
                                 <div class="checkbox-1">
-                                    <span class="checkbox-title" onclick="filter3()">Availability <i class="arrow up" id="up3" style="margin-left: 0.7rem;"></i><i class="arrow down" id="down3" style="margin-left: 0.7rem;"></i></span>
+                                    <span class="checkbox-title" onclick="filter3()">Expert <i class="arrow up" id="up3" style="margin-left: 4.3rem;"></i><i class="arrow down" id="down3" style="margin-left: 6.66rem;"></i></span>
                                     <ul id="checkbox-3">
                                         <li>
                                             <label for="checkbox1">
-                                                <input type="checkbox" value="last 3 months" name="QA[]" id="checkbox1"/>My questions
+                                                <input type="checkbox" value="last 3 months" name="publishDate[]" id="checkbox1"/>Varsha Wijethunge
                                             </label>
                                         </li>     
                                         <li>
                                             <label for="checkbox2">
-                                                <input type="checkbox" value="last 6 months" name="QA[]" id="checkbox2"/>Answered
+                                                <input type="checkbox" value="last 6 months" name="publishDate[]" id="checkbox2"/>Induwara Pathirana
                                             </label>
                                         </li>        
                                         <li>
                                             <label for="checkbox3">
-                                                <input type="checkbox" value="last year" name="QA[]" id="checkbox3"/>Not answered
+                                                <input type="checkbox" value="last year" name="publishDate[]" id="checkbox3"/>John Silva
                                             </label>
                                         </li>
                                     </ul>
                                 </div>
--->
                                 
-                                
+                                <!-- Filter 4 -->
+                                <div class="checkbox-1">
+                                    <span class="checkbox-title" onclick="filter4()">Playlist <i class="arrow up" id="up4" style="margin-left: 4.3rem;"></i><i class="arrow down" id="down4" style="margin-left: 6.5rem;"></i></span>
+                                    <ul id="checkbox-4">
+                                        
+                                    </ul>
+                                </div>
                                 
                             </form>
+                        </div>
                     </div>
                 </div>
-            </div>
             </div>
             <div>
                 <footer><a href="index.php">About Us</a> <p> | </p> &copy; Convo 2022 All rights reserved.</footer>
             </div>
         </div>
         
+        <!-- View
+        <div class="video-view" id="1">
+            <img src="../images/cancel.png" class="cancel" onclick="cancel()">
+            <iframe width="550" height="325" src="https://www.youtube.com/embed/Nxtv1LfdSBk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <h3>What is the big problem or question that this new academic discipline that you keep talking about would address?</h3>
+            <div style="display:flex;">
+                <label class="qdp-1-2">21 July 2022</label>
+                <span class="qdp-1-2 qdp-1-3">By Varsha Wijethunge</span>
+            </div>
+        </div> -->
+        
         <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="arrow up"></i><br></button>
             
         <div id="body"></div>
-    
-    <script>
+        
+        <script>
             function view(){
                 document.getElementById("1").style.display = "grid";
             }
@@ -334,7 +363,8 @@
                 document.getElementById("1").style.display = "none";
             }
         </script>
-    <script>
+        
+        <script>
             //Get the button:
             mybutton = document.getElementById("myBtn");
 
@@ -355,7 +385,8 @@
               document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
             }
         </script>
-    <script>
+        
+        <script>
             /* When the user clicks on the button, 
             toggle between hiding and showing the dropdown content */
             function drop() {
@@ -417,8 +448,6 @@
                 }
             }
         </script>
-
-</body>
-
-
-<?php require APPROOT . '/views/inc/footer.php'; ?>
+        
+    </body>
+</html>

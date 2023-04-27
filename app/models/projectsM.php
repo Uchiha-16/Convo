@@ -130,7 +130,7 @@
     }
 
     public function getProjectByID($PID) {
-        $this->db->query('SELECT * FROM project inner join projecttag on projecttag.projectID=project.PID WHERE project.PID = :PID');
+        $this->db->query('SELECT * FROM project inner join projecttag on project.PID=projecttag.projectID WHERE project.PID = :PID');
         $this->db->bind(':PID', $PID);
         $row = $this->db->single();
         return $row;
@@ -150,6 +150,20 @@
             return false;
         }
     }
-
+//------------------------Apply for Project-------------------
+    public function applyProject($data) {
+        $this->db->query('INSERT INTO applyproject (PID, userID, cv, description) VALUES  (:PID, :userID, :file, :description)');
+        // Bind values
+        $this->db->bind(':PID', $data['PID']);
+        $this->db->bind(':userID', $data['userID']);
+        $this->db->bind(':file', $data['file']);
+        $this->db->bind(':description',$data['description']);
+        // Execute
+        if($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
 ?>

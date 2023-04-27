@@ -267,6 +267,29 @@
                 redirect('projects/viewMyProjects');
             }
         }
+
+        public function apply(){
+            $userID = $_SESSION['userID'];
+            
+            $projects = $this->projectModel->applyProject($userID);
+            //$userDetails = $this->projectModel->getAllUsers($userID);
+            $data = [
+                'projects' => $projects,
+                'file' => ($_FILES['file']),
+                'file_name' => time().'_'.($_FILES['file']['name']),
+                'file_err' => '',
+                
+            ];
+
+            //validate image
+            if(uploadFile($data['file']['tmp_name'], $data['file_name'], '/files/cv/')) {
+                $data['file'] = $data['file_name'];
+            }else{
+                $data['file_err'] = 'Please upload your Resume';
+            }
+
+            $this->view('projects/apply-project', $data);
+        }
     }
 
 ?>
