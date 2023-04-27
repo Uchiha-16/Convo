@@ -268,27 +268,37 @@
             }
         }
 
-        public function apply(){
-            $userID = $_SESSION['userID'];
+        public function apply($PID){
+           // if($_SERVER['REQUEST_METHOD'] == 'POST') {
+                // Form is submitting
+                // Validate the data
+                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+                date_default_timezone_set('Asia/Colombo');
             
-            $projects = $this->projectModel->applyProject($userID);
-            //$userDetails = $this->projectModel->getAllUsers($userID);
-            $data = [
-                'projects' => $projects,
-                'file' => ($_FILES['file']),
-                'file_name' => time().'_'.($_FILES['file']['name']),
-                'file_err' => '',
-                
-            ];
+                $userID = $_SESSION['userID'];
+            
 
-            //validate image
-            if(uploadFile($data['file']['tmp_name'], $data['file_name'], '/files/cv/')) {
-                $data['file'] = $data['file_name'];
-            }else{
-                $data['file_err'] = 'Please upload your Resume';
-            }
+                //$userDetails = $this->projectModel->getAllUsers($userID);
+                $data = [
+                    'PID'=> $PID,
+                    'userID'=>$userID,
+                    //'projects' => $projects,
+                    'cv_file' => ($_FILES['cv_file']),
+                    'file_name' => time().'_'.($_FILES['cv_file']['name']),
+                    'file_err' => '',
+                    'description'=> trim($_POST['description'])
+                    
+                ];
+                $projects = $this->projectModel->applyProject($data);
+                //validate image
+                if(uploadFile($data['cv_file']['tmp_name'], $data['file_name'], '/files/cv/')) {
+                    $data['cv_file'] = $data['file_name'];
+                }else{
+                    $data['file_err'] = 'Please upload your Resume';
+                }
 
-            $this->view('projects/apply-project', $data);
+                $this->view('projects/apply-project', $data);
+           // }
         }
     }
 

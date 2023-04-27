@@ -152,11 +152,11 @@
     }
 //------------------------Apply for Project-------------------
     public function applyProject($data) {
-        $this->db->query('INSERT INTO applyproject (PID, userID, cv, description) VALUES  (:PID, :userID, :file, :description)');
+        $this->db->query('INSERT INTO applyproject (PID, userID, cv, description) VALUES  (:PID, :userID, :cv_file, :description)');
         // Bind values
         $this->db->bind(':PID', $data['PID']);
         $this->db->bind(':userID', $data['userID']);
-        $this->db->bind(':file', $data['file']);
+        $this->db->bind(':cv_file', $data['cv_file']);
         $this->db->bind(':description',$data['description']);
         // Execute
         if($this->db->execute()) {
