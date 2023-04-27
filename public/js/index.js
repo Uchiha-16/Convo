@@ -297,12 +297,12 @@ $(document).ready(function(){
     })
   }else{
     //redirect  to index controller
-    if(ROLE = 'seeker'){
-      window.location = URLROOT + "/Pages/seeker";
-    }else if(ROLE = 'expert'){
-      window.location = URLROOT + "/Pages/expert";
-    }else{
-      window.location = URLROOT + "/Pages";
+    if(ROLE == 'guest'){
+      window.location == URLROOT + "/pages/";
+    }else if(ROLE == 'seeker'){
+      window.location = URLROOT + "/pages/seeker";
+    }else if(ROLE == 'expert'){
+      window.location = URLROOT + "/pages/expert";
     }
 
   }

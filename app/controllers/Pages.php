@@ -134,7 +134,7 @@
                 $tags = $this->pagesM->getQuestionTags();
             }
             
-            print_r($search);
+            // print_r($search);
 
             $count = array();
             $c = 0;

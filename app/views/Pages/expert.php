@@ -15,7 +15,7 @@
     <!-- body content -->
     <div class="container-div">
         <div class="content-body">
-            <div class="LHS">
+            <div class="LHS" id="LHS">
                 <h3>Questions and Discussions</h3><br>
 
                 <?php foreach ($data['questions'] as $question) : ?>
