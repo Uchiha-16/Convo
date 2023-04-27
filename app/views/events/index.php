@@ -1,7 +1,6 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 <link href="<?php echo URLROOT; ?>/css/event.css" rel="stylesheet" type="text/css" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<link href="<?php echo URLROOT; ?>/css/calander.css" rel="stylesheet" type="text/css"/>
 
 
 <style>

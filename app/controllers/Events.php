@@ -38,6 +38,8 @@
 
             $this->view('events/index', $data);
         }
+
+        
     }
 
 ?>
