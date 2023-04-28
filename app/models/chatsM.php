@@ -67,19 +67,5 @@
                 return false;
             }
         }
-
-        //send messages to the database
-        public function send($chatID,$userID,$message,$date){
-            $this->db->query('INSERT INTO chatmsg (chatID, userID, content, date) VALUES (:chatID, :userID, :content, :date)');
-            $this->db->bind(':chatID', $chatID);
-            $this->db->bind(':userID', $userID);
-            $this->db->bind(':content', $message);
-            $this->db->bind(':date', $date);
-            if($this->db->execute()){
-                return true;
-            } else {
-                return false;
-            }
-        }
     }
 ?>

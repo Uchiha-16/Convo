@@ -29,7 +29,7 @@
         <script src="<?php echo URLROOT; ?>/js/index.js" type="text/javascript" defer></script>
         
         <script src="<?php echo URLROOT; ?>/js/imageUpload.js" type="text/javascript"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="<?php echo URLROOT; ?>/js/comments.js" type="text/javascript"></script>
         <script src="<?php echo URLROOT; ?>/js/popup.js" type="text/javascript"></script>
         

@@ -9,21 +9,12 @@ function selected(chatID) {
             elements[i].classList.remove("selected");
         }
     }
-
-    var conn = new WebSocket('ws://localhost:8080');
-    conn.onopen = function (e) {
-        console.log('Connection established!');
-        conn.send(JSON.stringify({
-            'newRoute': 'Personalchat'+chatID 
-        }));
-
-    };
 }
 
 //show the chat messages when clicked
 function showchat(chatID) {
     //reveal messeges
-
+    //alert("success"+chatID);
     $(document).ready(function() {
         //onload show the comments
         
@@ -31,10 +22,10 @@ function showchat(chatID) {
                 url: URLROOT + '/Chats/show/'+chatID,
                 dataType: 'html',
                 success: function(results) {
+                    //alert("success"+chatID);
                     $('#results').html(results);
                 }
             })
-            // setInterval(showchat(chatID),20000);
     }
 )
     //show group members
@@ -61,47 +52,60 @@ function showCreate() {
     document.getElementById("popup").style.display = "none";
   }
 
-  function typing(name){
-    conn.send(JSON.stringify({
-        'typing': 'y',
-        'name': name
-    }));
-}
+  //function to send the message
+    function send(chatID) {
+        var message = document.getElementById("message").value;
+        //alert(message);
+        if (message != "") {
+            $.ajax({
+                url: URLROOT + '/Chats/send/'+chatID,
+                type: 'POST',
+                data: {message: message},
+                success: function(results) {
+                    alert("success"+chatID);
+                    //$('#results').html(results);
+                }
+            })
+        } setInterval(function() {
+            showchat(chatID);
+        }, 2000);
+    }
 
-  function send(chatID,datesent,commentor) {
-  
-    conn.send(JSON.stringify({
-        'msg': input.value,
-        'name': commentor,
-        'date': datesent
-    }));
+//   $(document).ready(function() {
+//     // Load chat messages
+//     loadChat();
 
-    sendMessage(input.value, chatID,datesent);
+//     // Send message when form is submitted
+//     $("#chatForm").on("submit", function(e) {
+//         e.preventDefault();
+//         var message = $("#message").val();
+//         if (message !== "") {
+//             $.ajax({
+//                 url: "process.php",
+//                 type: "POST",
+//                 data: {message: message},
+//                 success: function(response) {
+//                     $("#message").val("");
+//                     loadChat();
+//                 }
+//             });
+//         }
+//     });
 
-    var chatWindow = document.getElementById('chattyping');
-    var newMessage = document.createElement('div');
-    newMessage.classList.add(
-        'qdp dlg-box'
-    );
-    newMessage.innerHTML = commentor + " : " + input.value + " " + datesent;
-    chatWindow.appendChild(newMessage);
-    input.value = '';
-}
+    // Refresh chat messages every 2 seconds
+//     setInterval(function() {
+//         loadChat();
+//     }, 2000);
+// });
 
-function sendMessage(message, chatID, date) {
-    let data = {
-        'message': message,
-        'chatID': chatID,
-        'date':date
-    };
-    fetch('<?php echo URLROOT;?>/Chats/send', {
-    method: "POST",
-    headers: {
-        "Content-Type": "application/json"
-    },
-    body: JSON.stringify(data)
-}).then(response => response.json())
-    .then(json => { 
-        console.log(json);
-    });
-}
+// Function to load chat messages
+// function loadChat() {
+//     $.ajax({
+//         url: "get_messages.php",
+//         type: "GET",
+//         success: function(response) {
+//             $("#chatbox").html(response);
+//             $("#chatbox").scrollTop($("#chatbox")[0].scrollHeight);
+//         }
+//     });
+// }

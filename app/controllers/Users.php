@@ -619,7 +619,6 @@
             unset($_SESSION['firstName']);
             unset($_SESSION['lastName']);
             unset($_SESSION['pfp']);
-            unset($_SESSION['role']);
             session_destroy();
             redirect('users/login');
         }
