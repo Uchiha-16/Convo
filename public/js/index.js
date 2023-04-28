@@ -308,3 +308,34 @@ $(document).ready(function(){
   }
   })
 })
+
+//================================Filter===========================================//
+// $(document).ready(function(){
+//   $("#filter").keyup(function(){
+//     var input = $(this).val();
+//     //alert(input);
+//     if(input != ""){
+//       // alert(input);
+//     $.ajax({
+//       url: URLROOT + '/Pages/search/',
+//       method: 'post',
+//       data: {keywords:input},
+//       dataType: 'text',
+//       success: function (response) {
+//         $("#LHS").html(response);
+//         //alert(ROLE);
+//       }
+//     })
+//   }else{
+//     //redirect  to index controller
+//     if(ROLE == 'guest'){
+//       window.location == URLROOT + "/pages/";
+//     }else if(ROLE == 'seeker'){
+//       window.location = URLROOT + "/pages/seeker";
+//     }else if(ROLE == 'expert'){
+//       window.location = URLROOT + "/pages/expert";
+//     }
+
+//   }
+//   })
+// })

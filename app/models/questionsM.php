@@ -7,13 +7,14 @@
         }
 //****************************************************************Create Question************************************************************************************************************* */
         public function add($data) {
-            $this->db->query('INSERT into question (title, content, date, visibility, rating, userID, expertID) VALUES (:title, :content, :date, :visibility, :rating, :userID, :expertID)');
+            $this->db->query('INSERT into question (title, content, date, visibility, rating, answercount, userID, expertID) VALUES (:title, :content, :date, :visibility, :rating, :count, :userID, :expertID)');
             // Bind values
             $this->db->bind(':title', $data['title']);
             $this->db->bind(':content', $data['content']);
             $this->db->bind(':date', $data['date']);
             $this->db->bind(':visibility', $data['visibility']);
             $this->db->bind(':rating', $data['rating']);
+            $this->db->bind(':count', $data['answercount']);
             $this->db->bind(':userID', $_SESSION['userID']);
             $this->db->bind(':expertID', $data['resourceID']);
 
