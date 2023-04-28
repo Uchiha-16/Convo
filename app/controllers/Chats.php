@@ -74,9 +74,10 @@
                         </div>
                     </div>';
             }
+            echo '<div id="chattyping"></div>';
             echo '<div class="send">
-                                <input type="text" name="text" id="message" placeholder="Type Something..."/>
-                                <button type="submit" class="submit-btn"><img src="'. URLROOT .'/img/submit.png" onclick="send('.$chatID.')" class="submit"></button>
+                                <input type="text" name="text" id="message" onkeyup="typing('.$_SESSION['firstName'].')" placeholder="Type Something..."/>
+                                <button type="submit" class="submit-btn" id="send-btn"><img src="'. URLROOT .'/img/submit.png" onclick="send('.$chatID.','.date('Y-m-d H:i:s').','.$_SESSION['firstName'].')" class="submit"></button>
                             </div> ';
             
         }
@@ -212,6 +213,33 @@
                 ];
                 $this->view('chats/index', $data);
             }
+        }
+
+        //method to send messages to the database
+        public function send(){
+            $_POST = json_decode(file_get_contents('php://input'), true);
+            if(!isset($_POST)){
+                $array['Status']= "Post not set";
+                echo json_encode($array);
+                die();
+            }
+            $message = $_POST['message'];
+            $user = $_SESSION['Name'];
+            $chatID = $_POST['chatID'];
+            $date = $_POST['date'];
+            
+            $result = $this->chatsModel->send($chatID,$user,$message,$date);
+          if($result) {
+                // json encode sent
+                $array['Status']= "Message sent";
+                echo json_encode($array);
+            } else {
+            
+                $array['Status']= "Message not sent";
+                echo json_encode($array);
+            }
+            
+                
         }
 
 

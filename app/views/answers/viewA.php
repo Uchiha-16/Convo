@@ -75,7 +75,7 @@
                         <p><?php echo $data['question']->content; ?></p>
                         <div class="date-count">
                             <label><?php echo convertTime($data['question']->date); ?></label>
-                            <div class="qrate"><label style="font-weight:600; float:right">Overall Rating: <?php echo $data['question']->rating; ?></label></div><br><br>
+                            <div class="qrate"><label style="font-weight:600; float:right">Overall Rating: <?php echo round($data['question']->rating,1); ?></label></div><br><br>
                             <?php if (isset($_SESSION['role'])) : ?>
                                 <?php if (($_SESSION['role']) == 'expert') : ?>
                                     <form action="<?php echo URLROOT; ?>/Answers/add/<?php echo $data['QID'] ?>">
