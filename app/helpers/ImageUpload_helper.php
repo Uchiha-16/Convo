@@ -22,5 +22,12 @@
     }
 }
 
+function round_half_up($num, $decimal_places) {
+    $factor = pow(10, $decimal_places);
+    $num = round($num * $factor);
+    return $num / $factor;
+}
+
+
 
 ?>
