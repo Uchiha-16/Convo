@@ -100,7 +100,7 @@ function confirmation() {
                     <?php if($_SESSION['role'] == 'seeker/mod' or $_SESSION['role'] == 'premium/mod') : ?>
                         <form action="<?php echo URLROOT; ?>/events/add"><button type="submit" style="float:right"
                                 class="read-more attend">Create Event</button></form>
-                        <form action="<?php echo URLROOT; ?>/events/pendingEvents"><button type="submit" style="float:right"
+                        <form action="<?php echo URLROOT; ?>/events/pending"><button type="submit" style="float:right"
                                 class="read-more attend">Pending Events</button></form>
                         <br><br>
                     <?php endif; ?>
@@ -316,95 +316,4 @@ function confirmation() {
 
     <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="arrow up"></i><br></button>
 
-    <div id="body"></div>
-
-    <script>
-    //Get the button:
-    mybutton = document.getElementById("myBtn");
-
-    // When the user scrolls down 20px from the top of the document, show the button
-    window.onscroll = function() {
-        scrollFunction()
-    };
-
-    function scrollFunction() {
-        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-            mybutton.style.display = "block";
-        } else {
-            mybutton.style.display = "none";
-        }
-    }
-
-    // When the user clicks on the button, scroll to the top of the document
-    function topFunction() {
-        document.body.scrollTop = 0; // For Safari
-        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-    }
-
-    /* When the user clicks on the button, 
-    toggle between hiding and showing the dropdown content */
-    function drop() {
-        document.getElementById("myDropdown").classList.toggle("show");
-    }
-
-    function drop2() {
-        document.getElementById("myDropdown2").classList.toggle("show");
-    }
-
-    // Close the dropdown if the user clicks outside of it
-    window.onclick = function(e) {
-        if (!e.target.matches('.dropbtn')) {
-            var myDropdown = document.getElementById("myDropdown");
-            var myDropdown2 = document.getElementById("myDropdown2");
-            if (myDropdown.classList.contains('show')) {
-                myDropdown.classList.remove('show');
-            }
-            if (myDropdown2.classList.contains('show')) {
-                myDropdown2.classList.remove('show');
-            }
-        }
-    }
-
-    function filter1() {
-        var x = document.getElementById('checkbox-1');
-        if (x.style.display === "none") {
-            x.style.display = "block";
-            document.getElementById('down').style.display = "none";
-            document.getElementById('up').style.display = "inline-block";
-        } else {
-            x.style.display = "none";
-            document.getElementById('up').style.display = "none";
-            document.getElementById('down').style.display = "inline-block";
-        }
-    }
-
-    function filter2() {
-        var x = document.getElementById('checkbox-2');
-        if (x.style.display === "none") {
-            x.style.display = "block";
-            document.getElementById('down2').style.display = "none";
-            document.getElementById('up2').style.display = "inline-block";
-        } else {
-            x.style.display = "none";
-            document.getElementById('up2').style.display = "none";
-            document.getElementById('down2').style.display = "inline-block";
-        }
-    }
-
-    function filter3() {
-        var x = document.getElementById('checkbox-3');
-        if (x.style.display === "none") {
-            x.style.display = "block";
-            document.getElementById('down3').style.display = "none";
-            document.getElementById('up3').style.display = "inline-block";
-        } else {
-            x.style.display = "none";
-            document.getElementById('up3').style.display = "none";
-            document.getElementById('down3').style.display = "inline-block";
-        }
-    }
-    </script>
-
-</body>
-
-</html>
+    <?php require APPROOT . '/views/inc/footer.php'; ?>

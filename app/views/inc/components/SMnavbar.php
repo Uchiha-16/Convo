@@ -9,6 +9,7 @@
             <div class="dropdown-list">
                 <button class="dropbtn dropbtn-1" onclick="drop()"><img src="<?php echo URLROOT; ?>/img/plus.png" class="icon"> Add New</button>
                 <div class="dropdown-content" id="myDropdown">
+                    <a href="<?php echo URLROOT; ?>/events/add">Event</a>
                     <a href="<?php echo URLROOT;?>/Questions/add">Question</a>
                     <a href="<?php echo URLROOT;?>/Blogs/add" style="border-bottom:none;">Blog</a>
                 </div>
