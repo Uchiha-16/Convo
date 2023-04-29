@@ -105,7 +105,107 @@ input[type=search]{
 .nav-hover a.active{
     box-shadow: inset 0 -2px 0 #48e7ed;
 }
+.notification{
+    background: none;
+    box-shadow: none;
+}
+.notify-count{
+  position: absolute;
+width: 1rem;
+height: 1rem;
+border-radius: 50%;
+background: #30302e;
+font-size: 10px;
+text-align: center;
+display: grid;
+justify-content: center;
+align-content: center;
+align-items: center;
+font-weight: bolder;
+right: 12rem;
+padding: 2px;
+top: 2rem;
+cursor: pointer;
+}
+#myDropdown3{
+    z-index: 100;
+    display: grid;
+    grid-template-rows: 4rem auto;
+    grid-template-columns: 1fr;
+    top: 6rem;
+    width: 16.5rem;
+    right: 3.2rem;
+    height: 38rem;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    margin: 0;
+}
+#myDropdown3 .head{
+    color: rgb(34, 33, 33);
+    text-align: left;
+    padding-left: 1rem;
+}
+.head .check-box {
+	transform: scale(2);
+}
 
+.head input[type="checkbox"] {
+    position: relative;
+    appearance: none;
+    width: 17px;
+    height: 7.5px;
+    background: #ccc;
+    border-radius: 50px;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: 0.4s;
+    left: 9.7rem;
+    border-bottom: none;
+    top: -1.15rem;
+}
+
+.head input:checked[type="checkbox"] {
+    background: #19758d;
+}
+
+.head input[type="checkbox"]::after {
+    position: absolute;
+    content: "";
+    width: 8px;
+    height: 8px;
+    top: 0;
+    left: 0px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    transform: scale(1.1);
+    transition: 0.4s;
+}
+
+.head input:checked[type="checkbox"]::after {
+    left: 50%;
+}
+.tabs{
+display: block;
+text-align: left;
+padding: 15px;
+font-size: 13px;
+border-top: 1px solid;
+border-left: 5px solid #ECECEC;
+}
+.tabs p{
+    margin: 0;
+}
+.tabs:hover{
+    border-left: 5px solid #00a7ae;
+    transition: .3s all;
+}
+#myDropdown3 a{
+    padding: 0;
+    display: block;
+    border:none;
+    box-shadow: none;
+}
 .dropdown-content {
     display: none;
     position: absolute;

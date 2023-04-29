@@ -83,7 +83,7 @@
         public function eventTags($EID){
             $this->db->query('SELECT GROUP_CONCAT(eventtag.tag SEPARATOR ",") as tags FROM eventtag WHERE eventtag.eventID = :EID;');
             $this->db->bind(':EID', $EID);
-            $row = $this->db->resultSet();
+            $row = $this->db->single();
             return $row;
         }
 

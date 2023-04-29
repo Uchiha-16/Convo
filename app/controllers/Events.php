@@ -179,11 +179,12 @@
 
             $event = $this->eventsModel->getEvent($EID);
             $tag = $this->eventsModel->eventTags($EID);
-
+            //print_r($tag);
+            
             $data = [
                 'userID' => $userID,
                 'event' => $event,
-                'tag' => $tag->tags,
+                'tag' => $tag,
                 'title_err' => '',
                 'content_err' => '',
                 'tag_err' => '',

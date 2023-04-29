@@ -125,7 +125,9 @@
                                                 <textarea id="textarea1" class="inputform" type="text" name="content"
                                                     placeholder="Describe the Event...."
                                                     value="<?php echo $data['event']->content; ?>">
-
+                                                    <?php if($data['event']->content) : ?>
+                                                        <?php echo $data['event']->content; ?>
+                                                    <?php endif ?>
                                                 </textarea>
                                                 <span class="error"><?php echo $data['content_err']; ?></span>
                                             </div>
@@ -142,7 +144,7 @@
                                             Event.</label>
                                         <ul class="dropdown" id="dropdown">
 
-                                            <?php $tagarray = explode(",", $data['tag']); ?>
+                                            <?php $tagarray = explode(",", $data['tag']->tags); ?>
                                             <?php $tagarrayjson = json_encode($tagarray); ?>
 
                                             <li><input type="checkbox" value="agricultureScience" name="tag[]"
@@ -315,7 +317,14 @@
                                             </h4>
                                         </span>
                                         <ul id="checkbox-3">
-                                            <div class="resource">Please Select One of More Tags</div>
+                                            <div class="resource">
+                                                <li>
+                                                <label for="checkbox1">
+                                                        <input type="checkbox" value="'. $d->expertID .'" name="rp[]" id="checkbox1"/>
+                                                        <span class="checkbox">'. $d->fName ." ". $d->lName . </span>
+                                                    </label>';
+                                                </li>
+                                            </div>
                                         </ul>
                                     </div>
                                 </td>
