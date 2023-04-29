@@ -16,7 +16,7 @@
                 $tag = isset($_POST['tag']) ? $_POST['tag'] : '0';
                 $resourceID = isset($_POST['rp']) ? $_POST['rp'] : '0';
 
-                print_r($resourceID);
+                //print_r($resourceID);
 
                 if($resourceID != '0'){
                     $resourceID = implode(',', $resourceID);
@@ -151,8 +151,10 @@
                 date_default_timezone_set('Asia/Colombo');
                 $checkbox_value = isset($_POST['visibility']) ? 'anonymus' : 'public';
                 $tag = isset($_POST['tag']) ? $_POST['tag'] : '0';
-                $resourceID = isset($_POST['resourceID']) ? $_POST['resourceID'] : '0';
-                
+                $resourceID = isset($_POST['rp']) ? $_POST['rp'] : '0';
+                if($resourceID != '0'){
+                    $resourceID = implode(',', $resourceID);
+                }
                 //Input Data
                 $data = [
                     'QID' => $QID,
@@ -223,6 +225,10 @@
                 if($question->userID != $_SESSION['userID']){
                     redirect('questions/myQuestions');
                 }
+                
+                $Experts = $this->questionModel->getExperts($question->expertID);
+           
+                
 
                 $data = [
                     'QID' => $QID,
@@ -230,7 +236,7 @@
                     'content' => $question->content,
                     'tag' =>  $question->tags,
                     'visibility' => $question->visibility,
-                    'resourceID' => $question->resourceID,
+                    'resourceID' => $Experts,
                     'title_err' => '',
                     'content_err' => '',
                     'tag_err' => '',

@@ -149,7 +149,7 @@
                 $count[$c]->QID = $question->QID;
                 $c++;
             }
-            echo '<h3>Search Results for '.$search.'</h3><br>';
+            echo '<h3>Search Results for "'.$search.'"</h3><br>';
             foreach($questions as $question){
                 echo '<div class="question-div">
                         <div class="info">
@@ -267,6 +267,9 @@
                 if(in_array('Answered',$QA)){
                     $QA1 = 1;
                     $QA2 = 1000;
+                    if((in_array('Not Answered',$QA))){
+                        $QA1 = 0;
+                    }
                 }   
                 elseif(in_array('Not Answered',$QA)){
                     $QA1 = 0;
@@ -318,8 +321,12 @@
                 $data = [
                     'questions' => $questions,
                     'tags' => $tags,
-                    'count' => $count
+                    'count' => $count,
+                    'date' => $_POST['publishDate'],
+                    'rating' => $_POST['rating'],
+                    'QA' => $_POST['QA']
                 ];
+                
                 // print_r($questions);
                 if(isset($_SESSION['userID'])){
                     if($_SESSION['role'] == 'seeker'){

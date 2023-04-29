@@ -47,14 +47,6 @@
             }
         }
 
-        //getExpertDetails
-        public function getExperts($tag) {
-            $this->db->query('SELECT DISTINCT expert.expertID as ID, user.firstName, user.lastName 
-                              FROM user JOIN expert ON user.userID = expert.expertID JOIN usertag ON user.userID = usertag.userID WHERE ' . $tag .'');
-            $row = $this->db->resultSet();
-            return $row;
-        }
-
         public function getUsers() {
             $this->db->query('SELECT userID FROM user');
             $results = $this->db->resultSet();
@@ -109,7 +101,7 @@
     //Get Question by ID
         public function getQuestionByID($QID) {
             $this->db->query('SELECT question.QID as QID, question.title as title, question.content as content, question.visibility as visibility,
-            GROUP_CONCAT(questiontag.tag SEPARATOR ",") as tags, question.userID as userID FROM question JOIN questiontag ON question.QID = questiontag.QID WHERE question.QID = :QID');
+            GROUP_CONCAT(questiontag.tag SEPARATOR ",") as tags, question.userID as userID,question.expertID as expertID FROM question JOIN questiontag ON question.QID = questiontag.QID WHERE question.QID = :QID');
             $this->db->bind(':QID', $QID);
             $row = $this->db->single();
             return $row;
@@ -125,26 +117,19 @@
                 return false;
             }
         }
-
-        //Update Tags
-        public function UpdateQTag($tag, $LastID) {
-            $this->db->query('UPDATE questiontag SET  VALUES(:user_id, :tag)');
-            // Bind values
-            $this->db->bind(':user_id', $LastID);
-            $this->db->bind(':tag', $tag);
-
-        // Execute
-        if($this->db->execute()) {
-            return true;
-        } else {
-            return false;
+        //get experts
+        public function getExperts($experts) {
+            $this->db->query('SELECT DISTINCT expert.expertID as expertID, user.firstName as fName, user.lastName as lName
+                              FROM user JOIN expert ON user.userID = expert.expertID JOIN usertag ON user.userID = usertag.userID WHERE expert.expertID IN ('.$experts.')');
+            $row = $this->db->resultSet();
+            return $row;
         }
-    }
+
 
 //****************************************************************Delete Question************************************************************************************************************* */
     
             public function delete($QID) {
-                $this->db->query('DELETE FROM question WHERE QID = :QID');
+                $this->db->query('DELETE * FROM question WHERE QID = :QID');
                 $this->db->bind(':QID', $QID);
                 if($this->db->execute()) {
                     return true;

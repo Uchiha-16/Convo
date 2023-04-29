@@ -239,12 +239,14 @@
                                         </span>
                                         <ul id="checkbox-3">
                                             <div class="resource">
-                                                <li>
-                                                <label for="checkbox1">
-                                                        <input type="checkbox" value="'. $d->expertID .'" name="rp[]" id="checkbox1"/>
-                                                        <span class="checkbox">'. $d->fName ." ". $d->lName . </span>
-                                                    </label>';
-                                                </li>
+                                                <?php foreach($data['resourceID'] as $d){
+                                                    echo '<li>';
+                                                        echo '<label for="checkbox1">';
+                                                            echo '<input type="checkbox" value="'. $d->expertID .'" name="rp[]" id="checkbox1" checked/>';
+                                                            echo '<span class="checkbox">'. $d->fName ." ". $d->lName . '</span>';
+                                                        echo '</label>';
+                                                    echo '</li>';
+                                                }?>
                                             </div>
                                         </ul>
                                     </div>
