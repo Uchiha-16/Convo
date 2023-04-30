@@ -44,7 +44,7 @@ function confirmation() {
     <div class="container-div">
         <div class="content-body">
             <div class="LHS">
-                <h3>Events</h3><br>
+                <h3>Join for sessions conducted online...</h3><br>
 
                 <!-- Events -->
                 <?php foreach ($data['events'] as $event) : ?>

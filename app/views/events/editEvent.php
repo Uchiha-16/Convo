@@ -57,7 +57,7 @@
 
                 <!-- Event 1 -->
                 <div class="question-div add-event">
-                    <form action="<?php echo URLROOT; ?>/Events/add" method="POST">
+                    <form action="<?php echo URLROOT; ?>/Events/editEvent/<?php echo $data['EID']; ?>" method="POST">
                         <table>
                             <tr>
                                 <td colspan="3">
@@ -317,13 +317,14 @@
                                         </span>
                                         <ul id="checkbox-3">
                                             <div class="resource">
-                                                <li>
-                                                    <label for="checkbox1">
-                                                        <input type="checkbox" value="'. $d->expertID .'" name="rp[]"
-                                                            id="checkbox1" />
-                                                        <span class="checkbox">'. $d->fName ." ". $d->lName . </span>
-                                                    </label>';
-                                                </li>
+                                                <?php foreach($data['checkedExperts'] as $d){
+                                                    echo '<li>';
+                                                        echo '<label for="checkbox1">';
+                                                            echo '<input type="checkbox" value="'. $d->userID .'" name="rp[]" id="checkbox1" checked/>';
+                                                            echo '<span class="checkbox">'. $d->fName ." ". $d->lName . '</span>';
+                                                        echo '</label>';
+                                                    echo '</li>';
+                                                }?>
                                             </div>
                                         </ul>
                                     </div>
@@ -348,7 +349,7 @@
                                         <button style="float:right" class="read-more attend submit"
                                             type="reset">Reset</button>
                                         <button style="float:right" class="read-more attend submit" type="submit"
-                                            name="create">Schedule</button>
+                                            name="create">Re-schedule</button>
                                     </div>
                                 </td>
                             </tr>

@@ -22,13 +22,14 @@
 
         //****************************************************************Retrive Events************************************************************************************************************* */
 
-        //getEvents 
-        public function getevents($tags) {
+        //getEvents for index
+        public function getevents($tags, $currentDate) {
             $this->db->query('SELECT DISTINCT event.eventID as EID, event.eventTitle as title, event.date as date, event.time as time, 
             event.zoomlink as zoomlink, event.description as content, event.userID as userID, eventhandling.moderatorID as modID FROM event JOIN 
             user ON event.userID = user.userID JOIN eventhandling ON event.eventID = eventhandling.eventID AND 
             eventhandling.moderatorID = event.userID join eventtag ON eventtag.eventID = event.eventID WHERE event.status = "approved" AND 
-            ' . $tags .' ORDER BY event.date ASC;');
+            date >= :currentDate AND ' . $tags .' ORDER BY event.date ASC;');
+            $this->db->bind(':currentDate', $currentDate);
             $row = $this->db->resultSet();
             return $row;
         }
@@ -87,6 +88,14 @@
             return $row;
         }
 
+        public function getEventExperts($EID){
+            $this->db->query('SELECT user.userID as userID, user.firstName as fName, user.lastName as lName FROM user JOIN eventhandling 
+            ON eventhandling.expertID = user.userID WHERE eventhandling.eventID = :EID;');
+            $this->db->bind(':EID', $EID);
+            $row = $this->db->resultSet();
+            return $row;
+        }
+
         //***************************************************************** INSERT ****************************************************************//
 
         public function add($data) {
@@ -129,6 +138,37 @@
                 $this->db->bind(':tag', $tag);
 
             // Execute
+            if($this->db->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        //*************************************************************** UPDATE ****************************************************************//
+        public function updateEvent($EID, $data){
+            $this->db->query('UPDATE event SET eventTitle = :title, date = :date, time = :time, zoomlink = :link, description = :content WHERE 
+            eventID = :EID');
+            // Bind values
+            $this->db->bind(':EID', $EID);
+            $this->db->bind(':title', $data['title']);
+            $this->db->bind(':date', $data['date']);
+            $this->db->bind(':time', $data['time']);
+            $this->db->bind(':link', $data['link']);
+            $this->db->bind(':content', $data['content']);
+
+            // Execute
+            if($this->db->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        //*************************************************************** DELETE ****************************************************************//
+        public function deleteEventTag($EID){
+            $this->db->query('DELETE FROM eventtag WHERE eventID = :EID');
+            $this->db->bind(':EID', $EID);
             if($this->db->execute()) {
                 return true;
             } else {
