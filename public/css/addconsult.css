@@ -215,7 +215,9 @@ ul.dropdown li input[type="checkbox"]:focus+label {
     border: none;
     color: black;
 }
-
+.time h4{
+    text-align: left;
+}
 .inputform::placeholder {
     font-size: 14px;
     text-align: left;

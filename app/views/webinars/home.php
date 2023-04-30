@@ -36,7 +36,7 @@
             
 
 
-                <!-- body content -->
+                <!-- body content --> 
                 <div class="alert success">
                     <?php flash('reg_flash'); ?>
                 </div>

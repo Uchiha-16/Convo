@@ -46,7 +46,7 @@
             }
         }
 
-        //Insert Playlist
+        //Insert Playlist 
         public function webinarPlaylist($playlist, $LastID) {
                 $this->db->query('INSERT INTO playlist (playlistName, webinarID, expertID) VALUES(:playlist, :webinarID, :expertID)');
                 // Bind values

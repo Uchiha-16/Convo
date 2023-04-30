@@ -32,7 +32,7 @@
             return $row;
         }
 
-        //Insert Tag
+        //Insert Tag 
         public function questionTag($tag, $LastID) {
                 $this->db->query('INSERT INTO questiontag (QID, tag) VALUES(:QID, :tag)');
                 // Bind values
