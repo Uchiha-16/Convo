@@ -22,6 +22,7 @@
             </div>
             <div class="dropbtn dropbtn-1 notification" onclick="drop3()">
                 <img class="dropbtn" src="<?php echo URLROOT; ?>/img/notification.png" class="nav-icon" style="width: 25px;">
+            </div>
                 <div class="dropdown-content content3" id="myDropdown3" style="top: 5.5rem;">
                     <div class="head">
                         <h4>Notifications</h4>
@@ -44,7 +45,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
                 
                 <!-- notification bar end -->
 
