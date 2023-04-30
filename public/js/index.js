@@ -297,17 +297,20 @@ $(document).ready(function(){
         $("#LHS").html(response);
         //alert(ROLE);
       }
+      
     })
-  }else{
-    //redirect  to index controller
-    if(ROLE == 'guest'){
-      window.location == URLROOT + "/pages/";
-    }else if(ROLE == 'seeker'){
-      window.location = URLROOT + "/pages/seeker";
-    }else if(ROLE == 'expert'){
-      window.location = URLROOT + "/pages/expert";
-    }
+    }else{
+      //redirect  to index controller
+    
+      if(ROLE == 'seeker'){
+        window.location = URLROOT + "/pages/seeker";
+      }else if(ROLE == 'expert'){
+        window.location = URLROOT + "/pages/expert";
+      }else{
+        window.location = URLROOT + "/pages/index";
+      }
 
-  }
+    }
   })
-})
+});
+
