@@ -123,8 +123,7 @@
                                         <div class="row row1">
                                             <div class="col col1">
                                                 <textarea id="textarea1" class="inputform" type="text" name="content"
-                                                    placeholder="Describe the Event...."
-                                                    value="<?php echo $data['event']->content; ?>">
+                                                    placeholder="Describe the Event....">
                                                     <?php if($data['event']->content) : ?>
                                                         <?php echo $data['event']->content; ?>
                                                     <?php endif ?>
@@ -319,8 +318,9 @@
                                         <ul id="checkbox-3">
                                             <div class="resource">
                                                 <li>
-                                                <label for="checkbox1">
-                                                        <input type="checkbox" value="'. $d->expertID .'" name="rp[]" id="checkbox1"/>
+                                                    <label for="checkbox1">
+                                                        <input type="checkbox" value="'. $d->expertID .'" name="rp[]"
+                                                            id="checkbox1" />
                                                         <span class="checkbox">'. $d->fName ." ". $d->lName . </span>
                                                     </label>';
                                                 </li>
