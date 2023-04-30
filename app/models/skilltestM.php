@@ -52,7 +52,11 @@
         // }
 /////////////////////////////////////////////////////////////////////////////////////////////////
 public function getTestQuestions($tag){
-    $query =  "SELECT  QPID,question,difficulty FROM questionpool WHERE QPID IN (SELECT QPID FROM questionpooltag WHERE tag= :tag)ORDER BY QPID";
+    $query =  "(SELECT QPID, question, difficulty FROM questionpool WHERE QPID IN (SELECT QPID FROM questionpooltag WHERE tag = :tag) AND difficulty = 'easy' ORDER BY RAND() LIMIT 5)
+    UNION ALL
+    (SELECT QPID, question, difficulty FROM questionpool WHERE QPID IN (SELECT QPID FROM questionpooltag WHERE tag = :tag) AND difficulty = 'medium' ORDER BY RAND() LIMIT 10)
+    UNION ALL
+    (SELECT QPID, question, difficulty FROM questionpool WHERE QPID IN (SELECT QPID FROM questionpooltag WHERE tag = :tag) AND difficulty = 'hard' ORDER BY RAND() LIMIT 5)";
     $this->db->query($query);
     $this->db->bind(':tag',$tag);
     $rows = $this->db->resultSet();
