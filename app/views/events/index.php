@@ -23,20 +23,96 @@ function confirmation() {
 </head>
 
 <body>
-    <?php if (($_SESSION['role']) == 'seeker') : ?>
-    <?php require APPROOT . '/views/inc/components/Snavbar.php'; ?>
-    <?php elseif (($_SESSION['role']) == 'expert') : ?>
-    <?php require APPROOT . '/views/inc/components/Enavbar.php'; ?>
-    <?php elseif (($_SESSION['role']) == 'seeker/mod') : ?>
-    <?php require APPROOT . '/views/inc/components/SMnavbar.php'; ?>
-    <?php elseif (($_SESSION['role']) == 'expert/mod') : ?>
-    <?php require APPROOT . '/views/inc/components/EMnavbar.php'; ?>
-    <?php elseif (($_SESSION['role']) == 'premium') : ?>
-    <?php require APPROOT . '/views/inc/components/Pnavbar.php'; ?>
-    <?php elseif (($_SESSION['role']) == 'admin') : ?>
-    <?php require APPROOT . '/views/inc/components/Anavbar.php'; ?>
-    <?php endif; ?>
+    <!-- nav bar -->
+    <div class="nav">
 
+        <?php if(isset($_SESSION['userID'])) : ?>
+        <div><a href="<?php echo URLROOT; ?>/Pages/seeker"><img
+                    src="<?php echo URLROOT; ?>/img/logo%20with%20name%20WHITE%201.png" id="logo"></a></div>
+        <div class="nav-hover"><a href="<?php echo URLROOT; ?>/Pages/seeker">Home</a></div>
+        <div class="nav-hover"><a href="<?php echo URLROOT; ?>/Webinars/home">Webinar</a></div>
+        <div><input id="live_search_event" type="search" name="search" placeholder="Search for questions..." /></div>
+
+        <div class="dropdown-list">
+            <button class="dropbtn dropbtn-1" onclick="drop()"><img src="<?php echo URLROOT; ?>/img/plus.png"
+                    class="icon"> Add New</button>
+            <div class="dropdown-content" id="myDropdown">
+                <a href="<?php echo URLROOT; ?>/events/add">Event</a>
+                <a href="<?php echo URLROOT;?>/Questions/add">Question</a>
+                <a href="<?php echo URLROOT;?>/Blogs/add" style="border-bottom:none;">Blog</a>
+            </div>
+        </div>
+
+
+        <!-- notification bar -->
+        <div class="notify-count">
+            <span>10</span>
+        </div>
+        <div class="dropbtn dropbtn-1 notification" onclick="drop3()">
+            <img class="dropbtn" src="<?php echo URLROOT; ?>/img/notification.png" class="nav-icon"
+                style="width: 25px;">
+        </div>
+        <div class="dropdown-content content3" id="myDropdown3" style="top: 5.5rem;">
+            <div class="head">
+                <h4>Notifications</h4>
+                <div class="check-box">
+                    <input type="checkbox">
+                </div>
+            </div>
+            <div style="display:block">
+                <div class="tabs">
+                    <P><b>New answer added to </b><span style="color:#00a7ae;">String Theory</span> by Varsha Wijethunge
+                    </P>
+                </div>
+                <div class="tabs">
+                    <P><b>Upcoming consultation </b>with <span style="color:#00a7ae;">Dilky Liyanage</span></P>
+                </div>
+                <div class="tabs">
+                    <P><b>Upcoming event </b>on <span style="color:#00a7ae;">Data Structures and Algorithms</span></P>
+                </div>
+                <div class="tabs">
+                    <P><b>You have been selected </b>to the <span style="color:#00a7ae;">A9 Project</span></P>
+                </div>
+            </div>
+        </div>
+        <!-- notification bar end -->
+
+        <div class="nav-hover"><a href="<?php echo URLROOT; ?>/Chats/index"><img
+                    src="<?php echo URLROOT; ?>/img/chat.png" class="nav-icon"></a></div>
+
+        <div class="dropbtn" onclick="drop2()">
+            <img class="dropbtn" src="<?php echo URLROOT; ?>/img/profile.png" class="nav-icon" style="width: 25px;">
+            <div class="dropdown-content dropdown-content2" id="myDropdown2">
+                <a href="<?php echo URLROOT;?>/Profiles/seeker">Profile</a>
+                <a href="<?php echo URLROOT;?>/Moderators/approve">Approvals</a>
+                <a href="<?php echo URLROOT;?>/Blogs/index">Blogs</a>
+                <a href="<?php echo URLROOT;?>/Events/index">Events</a>
+                <a href="<?php echo URLROOT;?>/Projects/index">Projects</a>
+                <a href="<?php echo URLROOT;?>/SkillTest/index">Skill Test</a>
+                <a href="<?php echo URLROOT;?>/Subscriptions/index">Subscription</a>
+                <a href="<?php echo URLROOT?>/Users/logout" style="border-bottom:none">Log-out</a>
+            </div>
+        </div>
+        <?php else : ?>
+        <div><a href="<?php echo URLROOT; ?>/Pages/index"><img
+                    src="<?php echo URLROOT; ?>/img/logo%20with%20name%20WHITE%201.png" id="logo"></a></div>
+        <div class="nav-hover"><a href="<?php echo URLROOT; ?>/Pages/index">Home</a></div>
+        <div class="nav-hover"><a href="<?php echo URLROOT; ?>/Webinars/home">Webinar</a></div>
+        <div><input type="search" name="search" placeholder="Search for questions..." /></div>
+        <style>
+        .nav {
+            grid-template-columns: 5% 6% 6% 57% 6% 6% 8% 6%;
+        }
+        </style>
+        <div class="nav-hover"><a href="<?php echo URLROOT;?>/Users/login">Login</a></div>
+        <div class="nav-hover"><a href="<?php echo URLROOT;?>/Users/signup">Register</a></div>
+        <div class="nav-hover"><a href="<?php echo URLROOT; ?>/Pages/about">About us</a></div>
+        <?php endif; ?>
+
+    </div>
+    <!-- nav bar end -->
+
+    
     <!-- body content -->
     <div class="alert success">
         <?php flash('reg_flash'); ?>
@@ -48,69 +124,71 @@ function confirmation() {
 
                 <!-- Events -->
                 <?php foreach ($data['events'] as $event) : ?>
-                    <div class="question-div" style="margin-bottom: 3rem;">
-                        <div class="info">
-                            <div>
-                                <p>TOPIC</p>
-                                <h3><?php echo $event->title ?></h3>
-                                <span><?php echo $event->content ?></span>
-                            </div>
-                            <div class="tags">
-                                <label>Category</label><br>
-                                <?php for ($i = 0; $i < count($data['tags']); $i++) : ?>
-                                    <?php if ($data['tags'][$i]->EID == $event->EID) : ?>
-                                        <?php $tagArray = explode(",", $data['tags'][$i]->tags); ?>
-                                        <?php foreach ($tagArray as $tag) : ?>
-                                            <div class="tag"><?php echo $tag ?></div>
-                                        <?php endforeach; ?>
-                                    <?php endif; ?>
-                                <?php endfor; ?>
-                            </div>
+                <div class="question-div" style="margin-bottom: 3rem;">
+                    <div class="info">
+                        <div>
+                            <p>TOPIC</p>
+                            <h3><?php echo $event->title ?></h3>
+                            <span><?php echo $event->content ?></span>
                         </div>
-                        <div class="content-display">
-                            <div class="flex">
-                                <button class="read-more webinar"><?php echo date("D, M j, Y", strtotime($event->date)) ?></button>
-                                <button class="read-more webinar time"><?php echo date("h:i A", strtotime($event->time)) ?></button>
-                            </div><br>
-                            <p>Resource person</p>
-                            <div class="flex">
-                                <?php foreach ($data['resourcePerson'] as $RP) : ?>
-                                    <?php if ($RP->EID == $event->EID) : ?>
-                                        <div class="qdp">
-                                            <div>
-                                                <img src="<?php echo URLROOT; ?>/img/pfp/<?php echo $RP->pfp ?>" />
-                                            </div>
-                                            <div class="qdp-1" style="margin-left: 1rem;">
-                                                <label><?php echo $RP->name ?></label><br>
-                                                <label class="qdp-1-2"><?php echo $RP->qual ?></label>
-                                            </div>
-                                        </div>
-                                    <?php endif; ?>
-                                <?php endforeach; ?>
-                            </div>
-                            <button style="float:right" class="read-more attend">ATTEND</button>
+                        <div class="tags">
+                            <label>Category</label><br>
+                            <?php for ($i = 0; $i < count($data['tags']); $i++) : ?>
+                            <?php if ($data['tags'][$i]->EID == $event->EID) : ?>
+                            <?php $tagArray = explode(",", $data['tags'][$i]->tags); ?>
+                            <?php foreach ($tagArray as $tag) : ?>
+                            <div class="tag"><?php echo $tag ?></div>
+                            <?php endforeach; ?>
+                            <?php endif; ?>
+                            <?php endfor; ?>
                         </div>
                     </div>
+                    <div class="content-display">
+                        <div class="flex">
+                            <button
+                                class="read-more webinar"><?php echo date("D, M j, Y", strtotime($event->date)) ?></button>
+                            <button
+                                class="read-more webinar time"><?php echo date("h:i A", strtotime($event->time)) ?></button>
+                        </div><br>
+                        <p>Resource person</p>
+                        <div class="flex">
+                            <?php foreach ($data['resourcePerson'] as $RP) : ?>
+                            <?php if ($RP->EID == $event->EID) : ?>
+                            <div class="qdp">
+                                <div>
+                                    <img src="<?php echo URLROOT; ?>/img/pfp/<?php echo $RP->pfp ?>" />
+                                </div>
+                                <div class="qdp-1" style="margin-left: 1rem;">
+                                    <label><?php echo $RP->name ?></label><br>
+                                    <label class="qdp-1-2"><?php echo $RP->qual ?></label>
+                                </div>
+                            </div>
+                            <?php endif; ?>
+                            <?php endforeach; ?>
+                        </div>
+                        <button style="float:right" class="read-more attend">ATTEND</button>
+                    </div>
+                </div>
                 <?php endforeach; ?>
 
             </div>
             <div class="RHS">
 
                 <?php if(isset($_SESSION['userID'])) : ?>
-                    <?php if($_SESSION['role'] == 'seeker/mod' or $_SESSION['role'] == 'premium/mod') : ?>
-                        <form action="<?php echo URLROOT; ?>/events/add"><button type="submit" style="float:right"
-                                class="read-more attend">Create Event</button></form>
-                        <form action="<?php echo URLROOT; ?>/events/pending"><button type="submit" style="float:right"
-                                class="read-more attend">Pending Events</button></form>
-                        <br><br>
-                    <?php endif; ?>
-                    <?php if($_SESSION['role'] == 'expert') : ?>
-                        <form action="<?php echo URLROOT; ?>/events/eventRequests"><button type="submit" style="float:right"
-                                class="read-more attend">Event Requests</button></form>
-                        <form action="<?php echo URLROOT; ?>/events/myEvents"><button type="submit" style="float:right"
-                                class="read-more attend">My Events</button></form>
-                        <br><br>
-                    <?php endif; ?>
+                <?php if($_SESSION['role'] == 'seeker/mod' or $_SESSION['role'] == 'premium/mod') : ?>
+                <form action="<?php echo URLROOT; ?>/events/add"><button type="submit" style="float:right"
+                        class="read-more attend">Create Event</button></form>
+                <form action="<?php echo URLROOT; ?>/events/pending"><button type="submit" style="float:right"
+                        class="read-more attend">Pending Events</button></form>
+                <br><br>
+                <?php endif; ?>
+                <?php if($_SESSION['role'] == 'expert') : ?>
+                <form action="<?php echo URLROOT; ?>/events/eventRequests"><button type="submit" style="float:right"
+                        class="read-more attend">Event Requests</button></form>
+                <form action="<?php echo URLROOT; ?>/events/myEvents"><button type="submit" style="float:right"
+                        class="read-more attend">My Events</button></form>
+                <br><br>
+                <?php endif; ?>
                 <?php endif; ?>
 
                 <div class="filter-div">

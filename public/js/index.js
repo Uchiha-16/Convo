@@ -314,3 +314,28 @@ $(document).ready(function(){
   })
 });
 
+//================================ Search Bar - EVENT ===========================================//
+$(document).ready(function () {
+  $("#live_search_event").keyup(function () {
+    var input = $(this).val();
+    //alert(input);
+    if (input != "") {
+      // alert(input);
+      $.ajax({
+        url: URLROOT + '/Events/search/',
+        method: 'post',
+        data: { keywords: input },
+        dataType: 'text',
+        success: function (response) {
+          $("#LHS").html(response);
+          //alert(ROLE);
+        }
+
+      })
+    } else {
+      //redirect  to index controller
+      window.location = URLROOT + "/events/index";
+    }
+  })
+});
+

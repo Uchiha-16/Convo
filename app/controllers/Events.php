@@ -307,6 +307,205 @@
                 $this->view('events/editEvent', $data);
             }
         }
+
+        //get search results
+        public function search() {
+            $search = $_POST['keywords'];
+            
+            // print($str);
+            if(isset($_SESSION['userID'])){
+                $events = $this->eventsModel->search($search);
+            }
+            
+            // print_r($search);
+            echo '<h3>Search Results for "'.$search.'"</h3><br>';
+            foreach($events as $event){
+                echo '<div class="question-div" style="margin-bottom: 3rem;">
+                        <div class="info">
+                            <div>
+                                <p>TOPIC</p>
+                                <h3>'.$event->title.'</h3>
+                                <span>'.$event->content.'</span>
+                            </div>';
+                    echo '<div class="tags">
+                            <label>Category</label><br>';
+                            $tags = $this->eventsModel->eventTags($event->EID);
+                            $tagArray = explode(",", $tags->tags);
+                            foreach ($tagArray as $tag) :
+                                    echo '<div class="tag">'.$tag.'</div>';
+                            endforeach;
+                    echo '</div>
+                    </div>
+                    <div class="content-display">
+                        <div class="flex">
+                            <button
+                                class="read-more webinar">'.date("D, M j, Y", strtotime($event->date)).'</button>
+                            <button
+                                class="read-more webinar time">'.date("h:i A", strtotime($event->time)).'</button>
+                        </div><br>
+                        <p>Resource person</p>
+                        <div class="flex">';
+                            $resourcePerson = $this->eventsModel->getEventExperts($event->EID);
+                            foreach ($resourcePerson as $RP) :
+                                if ($RP->EID == $event->EID) :
+                                    echo '<div class="qdp">
+                                        <div>
+                                            <img src="'.URLROOT.'/img/pfp/'.$RP->pfp.'" />
+                                        </div>
+                                        <div class="qdp-1" style="margin-left: 1rem;">
+                                            <label>'.$RP->name.'</label><br>
+                                            <label class="qdp-1-2">'.$RP->qual.'</label>
+                                        </div>
+                                    </div>';
+                                endif;
+                            endforeach;
+                        echo '</div>
+                        <button style="float:right" class="read-more attend">ATTEND</button>
+                    </div>
+                </div>';
+            }        
+        }
+
+        //filter by category
+        // public function filter() {
+            
+        //     $date = isset($_POST['publishDate']) ? $_POST['publishDate'] : '0';
+        //     $QA = isset($_POST['QA']) ? $_POST['QA'] : '0';
+        //     $rating = isset($_POST['rating']) ? $_POST['rating'] : '0';
+
+        //     // print_r($date);
+        //     // print_r($QA);
+        //     // print_r($rating);
+           
+        //     if($date == 0 && $QA == 0 && $rating == 0){
+        //         if(isset($_SESSION['userID'])){
+        //             if($_SESSION['role'] == 'seeker'){
+        //                 $this->seeker();
+        //             }elseif($_SESSION['role'] == 'expert'){
+        //                 $this->expert();
+        //             }elseif($_SESSION['role'] == 'company'){
+        //                 $this->company();
+        //             }    
+        //         }else{
+        //             $this->index();
+        //         }
+                
+        //     }else{
+        //         if($date != 0){
+        //             if(in_array('last year', $date)){
+        //                 $date = 12;
+        //             }elseif(in_array('last 6 months', $date)){
+        //                 $date = 6;
+        //             }elseif(in_array('last 3 months', $date)){
+        //                 $date = 3;
+        //             }else{
+        //                 $date = 24;
+        //         }
+        //     }else{
+        //         $date = 24;
+        //     }
+            
+        //     if($rating != 0){
+        //         if(in_array(5,$rating)){
+        //             $rating = 5;
+        //         }elseif(in_array(4,$rating)){
+        //             $rating = 4;
+        //         }
+        //         elseif(in_array(3,$rating)){
+        //             $rating = 3;
+        //         }
+        //         elseif(in_array(2,$rating)){
+        //             $rating = 2;
+        //         }
+        //         elseif(in_array(1,$rating)){
+        //             $rating = 1;
+        //         }else{
+        //             $rating = 5;
+        //         }
+        //     }else{
+        //         $rating = 5;
+        //     }
+        //     if($QA != 0){
+        //         if(in_array('Answered',$QA)){
+        //             $QA1 = 1;
+        //             $QA2 = 1000;
+        //             if((in_array('Not Answered',$QA))){
+        //                 $QA1 = 0;
+        //             }
+        //         }   
+        //         elseif(in_array('Not Answered',$QA)){
+        //             $QA1 = 0;
+        //             $QA2 = 0;
+    
+        //         }else{
+        //             $QA1 = 0;
+        //             $QA2 = 1000;
+        //         }
+        //     }else{
+        //         $QA1 = 0;
+        //         $QA2 = 1000;
+        //     }
+    
+        //         // print_r($date);
+        //         // print_r($QA1);
+        //         // print_r($QA2);
+        //         // print_r($rating);
+
+        //         if(isset($_SESSION['userID'])){
+        //             $usertag = $this->pagesM->getUserTag();
+
+        //             $str = '';
+    
+        //             foreach($usertag as $tag) {
+        //                 $str = $str . 'questiontag.tag = "' . $tag->tag . '" OR ';
+    
+        //             }
+    
+        //             $str = substr($str, 0, -4);
+    
+        //             $questions = $this->pagesM->filter($date,$QA1,$QA2,$rating,$str);
+        //         }else{
+        //             $questions = $this->pagesM->filterIndex($date,$QA1,$QA2,$rating);
+        //         }
+                
+
+        //         $tags = $this->pagesM->getQuestionTags();
+
+        //         $count = array();
+        //         $c = 0;
+        //         foreach($questions as $question) {
+        //             $count[$c] = $this->pagesM->answerCount($question->QID);
+        //             $count[$c]->QID = $question->QID;
+        //             $c++;
+        //         }
+
+                
+        //         $data = [
+        //             'questions' => $questions,
+        //             'tags' => $tags,
+        //             'count' => $count,
+        //             'date' => $_POST['publishDate'],
+        //             'rating' => $_POST['rating'],
+        //             'QA' => $_POST['QA']
+        //         ];
+                
+        //         // print_r($questions);
+        //         if(isset($_SESSION['userID'])){
+        //             if($_SESSION['role'] == 'seeker'){
+        //                 $this->view('pages/seeker', $data);
+        //             }
+        //             elseif($_SESSION['role'] == 'expert'){
+        //                 $this->view('pages/expert', $data);
+        //             }else{
+        //                 $this->view('pages/company', $data);
+        //             }
+        //         }else{
+        //             $this->view('pages/index', $data);
+        //         }
+
+                    
+        //     }
+        // }
     }
 
 ?>
