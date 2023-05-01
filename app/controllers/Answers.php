@@ -56,90 +56,98 @@
         public function add($QID){
             $question = $this->answersM->getQuestion($QID);
             $Quser = $this->answersM->Quser($QID);
-        
 
-            if($_SERVER['REQUEST_METHOD'] == 'POST') {
-                // Form is submitting
-                // Validate the data
-                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-                date_default_timezone_set('Asia/Colombo');
+            if(isset($_POST['content'])){
+                // Get the formatted text from the POST data
+                $content = $_POST['content'];
+                
+                // Encode the formatted text for safe storage in the database
+                $content = htmlentities($content);
+                
 
-                $link = $_POST['link'];
-                $path = parse_url($link, PHP_URL_PATH); // extract the path component of the URL
-                $segments = explode('/', $path); // split the path into an array of segments
-                $last_segment = end($segments); // extract the last segment of the array
-                $interaction = 'new';
-                //Input Data
-                $data = [
-                    'content' => $_POST['content'],
-                    'date' => date('Y-m-d H:i:s'),
-                    'embedlink' => $last_segment,
-                    'image' => ($_FILES['image']),
-                    'image_name' => time().'_'.($_FILES['image']['name']),
-                    'rating' => 0,
-                    'QID' => $QID,
-                    'expertID' => $_SESSION['userID'],    
-                    'content_err' => '',
-                    'image_err' => '',
-                    'question' => $question,
-                    'Quser' => $Quser,
-                ];
+                if($_SERVER['REQUEST_METHOD'] == 'POST') {
+                    // Form is submitting
+                    // Validate the data
+                    $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+                    date_default_timezone_set('Asia/Colombo');
 
-                // Validate Content
-                if(empty($data['content'])) {
-                    $data['content_err'] = 'Please enter Content';
-                }
+                    $link = $_POST['link'];
+                    $path = parse_url($link, PHP_URL_PATH); // extract the path component of the URL
+                    $segments = explode('/', $path); // split the path into an array of segments
+                    $last_segment = end($segments); // extract the last segment of the array
+                    $interaction = 'new';
+                    //Input Data
+                    $data = [
+                        'content' => $content,
+                        'date' => date('Y-m-d H:i:s'),
+                        'embedlink' => $last_segment,
+                        'image' => ($_FILES['image']),
+                        'image_name' => time().'_'.($_FILES['image']['name']),
+                        'rating' => 0,
+                        'QID' => $QID,
+                        'expertID' => $_SESSION['userID'],    
+                        'content_err' => '',
+                        'image_err' => '',
+                        'question' => $question,
+                        'Quser' => $Quser,
+                    ];
 
-                if($data['image']['size'] > 0){
-                    if(uploadImage($data['image']['tmp_name'], $data['image_name'], '/img/answerImg/')) {
-                        //done
-                    }else{
-                        $data['image_err'] = 'Something Went Wrong when uploading the image';
+                    // Validate Content
+                    if(empty($data['content'])) {
+                        $data['content_err'] = 'Please enter Content';
                     }
-                }else{
-                    $data['image_name'] = null;
-                }
 
-
-
-
-                // Make sure errors are empty
-                if(empty($data['content_err']) && empty($data['image_err'])) {
-                    // Adding Question
-                    if($this->answersM->add($data)) {
-                        $LastID = $this->answersM->getLastID();
-                        $users = $this->answersM->getUsers();
-                        foreach($users as $user) {
-                            $this->answersM->addInteraction($LastID->threadID, $user->userID, $interaction);
+                    if($data['image']['size'] > 0){
+                        if(uploadImage($data['image']['tmp_name'], $data['image_name'], '/img/answerImg/')) {
+                            //done
+                        }else{
+                            $data['image_err'] = 'Something Went Wrong when uploading the image';
                         }
-                        
-                        flash('reg_flash','Answer Added Successfully');
-                        redirect('answers/viewA/'.$QID.'');
-                        
-                    } else {
-                        die('Something went wrong');
+                    }else{
+                        $data['image_name'] = null;
                     }
-                } else {
-                    // Load view with errors
+
+
+
+
+                    // Make sure errors are empty
+                    if(empty($data['content_err']) && empty($data['image_err'])) {
+                        // Adding Question
+                        if($this->answersM->add($data)) {
+                            $LastID = $this->answersM->getLastID();
+                            $users = $this->answersM->getUsers();
+                            foreach($users as $user) {
+                                $this->answersM->addInteraction($LastID->threadID, $user->userID, $interaction);
+                            }
+                            
+                            flash('reg_flash','Answer Added Successfully');
+                            redirect('answers/viewA/'.$QID.'');
+                            
+                        } else {
+                            die('Something went wrong');
+                        }
+                    } else {
+                        // Load view with errors
+                        $this->view('answers/add', $data);
+                    }
+                }
+                else {
+                    $data = [
+                        'content' => '',
+                        'date' => '',
+                        'embedlink' => '',
+                        'attachment' => '',
+                        'attachmentName' => '',
+                        'rating' => '', 
+                        'QID' => '',
+                        'expertID' => '',    
+                        'content_err' => '', 
+                        'image_err' => '',
+                        'question' => $question,
+                        'Quser' => $Quser,
+                    ];
                     $this->view('answers/add', $data);
                 }
-            }
-            else {
-                $data = [
-                    'content' => '',
-                    'date' => '',
-                    'embedlink' => '',
-                    'attachment' => '',
-                    'attachmentName' => '',
-                    'rating' => '', 
-                    'QID' => '',
-                    'expertID' => '',    
-                    'content_err' => '', 
-                    'image_err' => '',
-                    'question' => $question,
-                    'Quser' => $Quser,
-                ];
-                $this->view('answers/add', $data);
             }
         }
 

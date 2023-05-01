@@ -4,8 +4,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <style>
-    <?php if (($_SESSION['role']) == 'seeker') : ?><?php elseif (($_SESSION['role']) == 'expert') : ?>
-        .nav {
+    <?php if (($_SESSION['role']) == 'seeker') : ?><?php elseif (($_SESSION['role']) == 'expert' || $_SESSION['role'] == 'premium') : ?>.nav {
         grid-template-columns: 5% 6% 6% 6% 51% 10% 4% 4% 4%;
         }
 
@@ -184,19 +183,52 @@
                                                 <li><input type="checkbox" value="spaceScience" name="tag[]" id="checkbox25" value="<?php echo $data['tag']; ?>" /><label for="checkbox25">Space Science</label></li>
                                             </ul>
 
-                                            <div class="select">
-                                                <label>All tags selected?</label>
-                                                <button style="float:right" class="read-more submit mybutton" type="submit" name="tagcomplete" value="search">Yes, I'm good.</button>
-                                                <button style="float:right" class="read-more submit" type="reset" name="reset">No</button>
-                                            </div>
-                                        </form>
-                                        <?php
-                                        // display experts of the relavant tags
-                                        ?>
                                     </div>
                                     <span class="error"><?php echo $data['tag_err']; ?></span>
                                 </td>
                             </tr>
+
+                            <script>
+                                   // Define an empty array to store the selected checkbox values
+                                var selectedValues = [];
+
+                                // Get all checkboxes with the 'tag[]' name
+                                var checkboxes = document.getElementsByName('tag[]');
+
+                                // Loop through the checkboxes and add an onchange event listener
+                                for (var i = 0; i < checkboxes.length; i++) {
+                                    checkboxes[i].addEventListener('change', function() {
+                                        // If the checkbox is checked, add its value to the selectedValues array
+                                        if (this.checked) {
+                                            selectedValues.push(this.value);
+                                        // alert(selectedValues);
+                                        }
+                                        // If the checkbox is unchecked, remove its value from the selectedValues array
+                                        else {
+                                            var index = selectedValues.indexOf(this.value);
+                                            if (index !== -1) {
+                                                selectedValues.splice(index, 1);
+                                            }
+                                        }
+                                        
+                                        if(selectedValues.length == 0){
+                                            $('.resource').html('Please Select One of More Tags');
+                                        }else{
+                                        //Send AJAX request to server
+                                        $.ajax({
+                                            url: '<?php echo URLROOT;?>/Questions/resourceName',
+                                            method: 'POST',
+                                            data: {selectedValues: selectedValues},
+                                            success: function(response) {
+                                                $('.resource').html(response);
+                                            }
+                                        });
+                                    }
+
+                                        
+                                    });
+                                }                       
+                                </script>
                             <tr>
                                 <td class="rp">
                                     <div class="checkbox-1">
@@ -206,13 +238,7 @@
                                             </h4>
                                         </span>
                                         <ul id="checkbox-3">
-                                            <li>
-                                                <?php foreach ($data['response'] as $expert) : ?>
-                                                    <input type="checkbox" value="<?php echo $expert->expertID; ?>" name="expert[]" id="checkbox<?php echo $expert->expertID; ?>" />
-                                                    <label for="checkbox<?php echo $expert->expertID; ?>"><?php echo $expert->fName; ?></label>
-                                                <?php endforeach; ?>
-
-                                            </li>
+                                            <div class="resource">Please Select One of More Tags</div>
                                         </ul>
                                     </div>
                                 </td>

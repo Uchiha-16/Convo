@@ -1,10 +1,10 @@
 <!-- nav bar -->
 <div class="nav">
             <div><a href="<?php echo URLROOT;?>/Pages/expert"><img src="<?php echo URLROOT;?>/img/logo%20with%20name%20WHITE%201.png" id="logo"></a></div>
-            <div class="nav-hover"><a href="<?php echo URLROOT;?>/Pages/expert">Home</a></div>
+            <div class="nav-hover"><a href="<?php echo URLROOT;?>/Pages/seeker">Home</a></div>
             <div class="nav-hover"><a href="<?php echo URLROOT;?>/Consults/index">Consult</a></div>
             <div class="nav-hover"><a href="<?php echo URLROOT;?>/Webinars/home">Webinar</a></div>
-            <div><input type="search" name="search" placeholder="Search for questions..."/></div>
+            <div><input id="live_search" type="search" name="search" placeholder="Search for questions..."/></div>
             <?php if(isset($_SESSION['userID'])) : ?>
             <div class="dropdown-list">
                 <button class="dropbtn dropbtn-1" onclick="drop()"><img src="<?php echo URLROOT;?>/img/plus.png" class="icon"> Add New</button>

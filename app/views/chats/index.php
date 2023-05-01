@@ -1,8 +1,55 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 <link href="<?php echo URLROOT; ?>/css/chat.css" rel="stylesheet" type="text/css" />
+ <script src="<?php echo URLROOT; ?>/js/chat.js" ></script>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+            let timeoutHandle = window.setTimeout(function(){ 
+            document.getElementById('chattyping').innerHTML = '';
+        }, 2000);
+        
+        
 
+
+        conn.onmessage = function (e) {
+            let data = JSON.parse(e.data);
+            console.log(data);
+            if (typeof data.msg !== 'undefined') {
+
+                // document.getElementById('typing').innerHTML = '';
+                // let commentElem = document.createElement('div');
+                // commentElem.classList.add('col-11');
+                // commentElem.classList.add('fill-container');
+                // commentElem.innerHTML = \"<div class='row  no-gap padding-3 bg-white shadow-small border-rounded'><div class='col-12 fill-container left small bold'>\" + data.name + \"</div><div class='col-12 wordwrap fill-container left padding-bottom-2 '>\" + data.msg + \"</div><div class='col-12 fill-container right small grey '>\" +data.date + \"</div></div>\";
+
+                var chatWindow = document.getElementById('chattyping');
+
+                var newMessage = document.createElement('div');
+                newMessage.innerHTML = '<div><img src="<?php echo URLROOT;?>/img/pfp/${data.pfp} "/></div><p>${data.msg}</p><label class="qdp-1-2">${data.date}</label></div>';
+                newMessage.classList.add(
+                    'qdp dlg-box'
+                );
+                chatWindow.appendChild(newMessage);
+                document.getElementById('chattyping').appendChild(commentElem);
+            }
+            else if (typeof data.typing !== 'undefined') {
+                document.getElementById('chattyping').innerHTML = data.name + " is typing...";
+                window.clearTimeout(timeoutHandle);
+                timeoutHandle = window.setTimeout(function () {
+                    document.getElementById('chattyping').innerHTML = '';
+                }, 2000);
+            }
+        };
+        var input = document.getElementById('message');
+        input.addEventListener("keypress", function (event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                document.getElementById("send-btn").click();
+            }
+        });
+
+
+    </script>
 <style>
     <?php if (($_SESSION['role']) == 'seeker') : ?>
     <?php elseif (($_SESSION['role']) == 'expert') : ?>
@@ -41,10 +88,20 @@
                     <!-- Question 1 -->
                     <div class="question-div">
                         <div class="info">
-                            <p>Chats</p>
+                            <p>Your Chat Groups</p> 
                             <input type="search" name="search" placeholder="Search chat..."/>
+                            <br>
+                            <button class="read-more" onclick="showCreate()" style="margin-bottom: 10px;">Create a New Group</button>
                             <br><br>
-                            <div class="chat group-1 selected">
+                            <div class="chatgroups">
+                            <?php foreach($data['chats'] as $chats): ?>
+                                <div id="chat group-<?php echo $chats->chatID; ?>" class="chat" onclick="selected(<?php echo $chats->chatID; ?>); showchat(<?php echo $chats->chatID; ?>)">
+                                        <?php echo $chats->title; ?>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+                          
+                            <!-- <div class="chat group-1">
                                 Team A
                             </div>
                             <div class="chat group-2">
@@ -53,58 +110,81 @@
                             <div class="chat group-3">
                                 Team ABC
                             </div>
-                            <div class="chat group-4">
+                            <div class="chat group-1">
                                 Team 00
-                            </div>
+                            </div> -->
+                             
                         </div>
+                        
                         <div class="content-display">
-                            <div>
-                                <div class="qdp dlg-box">
-                                    <div>
-                                        <img src="<?php echo URLROOT; ?>/img/induwara_pathirana.jpg"/>
-                                    </div>
-                                    <div class="message">
-                                        <p>Did China’s balloon violate international law?</p>
-                                        <label class="qdp-1-2">8:57 AM</label>
-                                    </div>
-                                </div>
-                                <div class="qdp dlg-box">
-                                    <div>
-                                        <img src="<?php echo URLROOT; ?>/img/pfp.jpg"/>
-                                    </div>
-                                    <div class="message">
-                                        <p>Was the balloon that suddenly appeared over the US last week undertaking surveillance? Or was it engaging in research, as China has claimed?</p>
-                                        <label class="qdp-1-2">8:58 AM</label>
-                                    </div>
-                                </div>
-                                <div class="qdp dlg-box">
-                                    <div>
-                                        <img src="<?php echo URLROOT; ?>/img/10.jpg"/>
-                                    </div>
-                                    <div class="message">
-                                        <p>However, while balloons may no longer be valued for their war-fighting ability, they retain a unique capacity to undertake surveillance because they fly at higher altitudes than aircraft, can remain stationary over sensitive sites, are harder to detect on radar, and can be camouflaged as civilian weather craft.</p>
-                                        <label class="qdp-1-2">9:00 AM</label>
-                                    </div>
-                                </div>
-                                <div class="qdp dlg-box">
-                                    <div>
-                                        <img src="<?php echo URLROOT; ?>/img/9.png"/>
-                                    </div>
-                                    <div class="message answer">
-                                        <p>International law does not extend to the distance at which satellites operate, which is traditionally seen as falling within the realm of space law.</p>
-                                        <label class="qdp-1-2">9:01 AM</label>
-                                    </div>
-                                </div>
+                        
+                            <div id="results">
+                                <img class="result-img" src="<?php echo URLROOT; ?>/img/logoIcon.png"/>
+                                <span class="result-text">Select a group. Start your conversation...</span><br>
+                                <span class="error"><?php echo $data['title_err']; ?></span><br>                            
+                                <span class="error"><?php echo $data['users_err']; ?></span>
+                                
                             </div>
-                            <div class="send">
-                                <input type="search" name="search" placeholder="Type Something..."/>
-                                <img src="<?php echo URLROOT; ?>/img/submit.png" class="submit">
-                            </div>
+                            
+                            <!-- <div class="send">
+                                <input type="text" name="text" id="message" placeholder="Type Something..."/>
+                                <button type="submit"><img src="/img/submit.png" onclick="send(" class="submit"></button>
+                            </div> -->
+
+                           
                         </div>
                     </div>
-                    
-                    
+                    <div id="popup">
+                        <form action="<?php echo URLROOT; ?>/Chats/create" method="POST">
+                        <table>
+                            <tr>
+                                <td colspan="2">
+                                    <p class="desc" >Create a User Discussion Group
+                                    </p>
+                                </td>
+                                <td>
+                                    <img src="<?php echo URLROOT; ?>/img/cancel1.png" style="width: 30px;float: right;" onclick="hideCreate()">
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <h4 style="margin-bottom:.5rem">Group Title <span class="star">*</span></h4>
+                                    <input class="inputform" type="text" name="title" placeholder="Enter title here..." value="<?php echo $data['title']; ?>">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <h4 style="margin-bottom:.5rem">Add Users to the group <span class="star">*</span></h4>
+                                    <div class="dropdown-div">
+                                        <form method="POST" id="innerform">
+                                            <label>Please Select <b>all the Users</b> you want to add to the group</label>
+                                            <ul class="dropdown" id="dropdown">
+                                            <?php $i = 0; ?>
+                                            <?php foreach($data['addusers'] as $user): ?>
+                                                <?php $i++; ?>
+                                                <li><input type="checkbox" value="<?php echo $user->userID; ?>" name="Cusers[]" id="checkbox<?php echo $i;?>" /><label for="checkbox<?php echo $i;?>"><?php echo $user->firstName." ". $user->lastName; ?></label></li>
+                                            <?php endforeach; ?>
+                                            </ul>
+
+                                    </div>
+                                    
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <br><br>
+                                    <div class="add">
+                                        <button style="float:right" class="read-more attend submit" type="submit" name="create">Create Group</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+
+                        </div>
+                        
                 </div>
+                
+                
                 <div class="RHS">
                     <div class="filter-div">
                         <div>
@@ -114,7 +194,9 @@
                             <input type="search" name="search" placeholder="Search members..."/>
                             <br><br>
                         </div>
-                        <div class="qdp">
+                        <div id="members">
+                       Select a group to reveal its members</div>
+                        <!-- <div class="qdp">
                                     <div>
                                         <img src="<?php echo URLROOT; ?>/img/user.jpg"/>
                                     </div>
@@ -122,61 +204,8 @@
                                         <label>Dilky Liyanage</label><br>
                                         <label class="qdp-1-2" style="font-size:10px">University of Colombo</label>
                                     </div>
-                        </div>
-                        <div class="qdp">
-                                    <div>
-                                        <img src="<?php echo URLROOT; ?>/img/user.jpg"/>
-                                    </div>
-                                    <div class="qdp-1">
-                                        <label>Dilky Liyanage</label><br>
-                                        <label class="qdp-1-2" style="font-size:10px">University of Colombo</label>
-                                    </div>
-                        </div>
-                        <div class="qdp">
-                                    <div>
-                                        <img src="<?php echo URLROOT; ?>/img/user.jpg"/>
-                                    </div>
-                                    <div class="qdp-1">
-                                        <label>Varsha Wijethunge</label><br>
-                                        <label class="qdp-1-2" style="font-size:10px">University of Colombo</label>
-                                    </div>
-                        </div>
-                        <div class="qdp">
-                                    <div>
-                                        <img src="<?php echo URLROOT; ?>/img/user.jpg"/>
-                                    </div>
-                                    <div class="qdp-1">
-                                        <label>Induwara Pathirana</label><br>
-                                        <label class="qdp-1-2" style="font-size:10px">University of Colombo</label>
-                                    </div>
-                        </div>
-                        <div class="qdp">
-                                    <div>
-                                        <img src="<?php echo URLROOT; ?>/img/user.jpg"/>
-                                    </div>
-                                    <div class="qdp-1">
-                                        <label>Nethmini Abeykoon</label><br>
-                                        <label class="qdp-1-2" style="font-size:10px">University of Colombo</label>
-                                    </div>
-                        </div>
-                        <div class="qdp">
-                                    <div>
-                                        <img src="<?php echo URLROOT; ?>/img/user.jpg"/>
-                                    </div>
-                                    <div class="qdp-1">
-                                        <label>Samindu Cooray</label><br>
-                                        <label class="qdp-1-2" style="font-size:10px">University of Colombo</label>
-                                    </div>
-                        </div>
-                        <div class="qdp">
-                                    <div>
-                                        <img src="<?php echo URLROOT; ?>/img/user.jpg"/>
-                                    </div>
-                                    <div class="qdp-1">
-                                        <label>Nadeesha Nethmini</label><br>
-                                        <label class="qdp-1-2" style="font-size:10px">University of Colombo</label>
-                                    </div>
-                        </div>
+                        </div> -->
+                        
                                 
                             </form>
                         </div>
@@ -192,7 +221,8 @@
             
         <div id="body"></div>
         
-        <script>
+ <script>
+
             //Get the button:
             mybutton = document.getElementById("myBtn");
 
@@ -276,6 +306,5 @@
                 }
             }
         </script>
-        
-    </body>
-</html>
+
+<?php require APPROOT . '/views/inc/footer.php'; ?>

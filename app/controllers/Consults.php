@@ -31,7 +31,7 @@
                 if($tag != '0')
                     $tag = implode(",", $tag);
 
-                echo $tag;
+                //echo $tag;
 
                 $resource = isset($_POST['rp']) ? $_POST['rp'] : '0';
 
@@ -54,7 +54,7 @@
                     'expertID_err' => '',
                 ];
 
-                print_r($data);
+                //print_r($data);
                 //validate each inputs
                 // Validate Title
                 if(empty($data['title'])) {
@@ -205,7 +205,21 @@
                 die('Something went wrong');
                 redirect('Consults/requests');
             }
-    }
+        }
+
+        public function acceptConsult($consultID){
+                
+                $userID = $_SESSION['userID'];
+                $consults = $this->consultsModel->Accept($consultID, $userID);
+    
+                if($consults) {
+                    flash('reg_flash', 'Appointment Accepted!');
+                    redirect('Consults/accept');
+                } else {
+                    die('Something went wrong');
+                    redirect('Consults/accept');
+                }
+        }
     }
 
 ?>

@@ -2,7 +2,7 @@
 <link href="<?php echo URLROOT; ?>/css/event.css" rel="stylesheet" type="text/css" />
 <link href="<?php echo URLROOT; ?>/css/addconsult.css" rel="stylesheet" type="text/css" />
 <style>
-    <?php if (($_SESSION['role']) == 'seeker') : ?><?php elseif (($_SESSION['role']) == 'expert') : ?>.nav {
+    <?php if (($_SESSION['role']) == 'seeker') : ?><?php elseif (($_SESSION['role']) == 'expert' || $_SESSION['role'] == 'premium') : ?>.nav {
         grid-template-columns: 5% 6% 6% 6% 51% 10% 4% 4% 4%;
     }
 
@@ -139,7 +139,7 @@
 
                                             <li><input type="checkbox" value="linguistics" name="tag[]" id="checkbox14" /><label for="checkbox14">Linguistics</label></li>
 
-                                            <li><input type="checkbox" value="literature" name="tag[]" id="checkbox15" /><label for="checkbox15">literature</label></li>
+                                            <li><input type="checkbox" value="literature" name="tag[]" id="checkbox15" /><label for="checkbox15">Literature</label></li>
 
                                             <li><input type="checkbox" value="mathematics" name="tag[]" id="checkbox16" /><label for="checkbox16">Mathematics</label></li>
 
@@ -188,36 +188,66 @@
 
                                 </td>
                             </tr>
+                            <script>
+                            // Define an empty array to store the selected checkbox values
+                                var selectedValues = [];
+
+                                // Get all checkboxes with the 'tag[]' name
+                                var checkboxes = document.getElementsByName('tag[]');
+
+                                // Loop through the checkboxes and add an onchange event listener
+                                for (var i = 0; i < checkboxes.length; i++) {
+                                    checkboxes[i].addEventListener('change', function() {
+                                        // If the checkbox is checked, add its value to the selectedValues array
+                                        if (this.checked) {
+                                            selectedValues.push(this.value);
+                                        // alert(selectedValues);
+                                        }
+                                        // If the checkbox is unchecked, remove its value from the selectedValues array
+                                        else {
+                                            var index = selectedValues.indexOf(this.value);
+                                            if (index !== -1) {
+                                                selectedValues.splice(index, 1);
+                                            }
+                                        }
+                                        
+                                        if(selectedValues.length == 0){
+                                            $('.resource').html('Please Select One of More Tags');
+                                        }else{
+                                        //Send AJAX request to server
+                                        $.ajax({
+                                            url: '<?php echo URLROOT;?>/Questions/resourceName',
+                                            method: 'POST',
+                                            data: {selectedValues: selectedValues},
+                                            success: function(response) {
+                                                $('.resource').html(response);
+                                            }
+                                        });
+                                    }
+
+                                        
+                                    });
+                                }                       
+                                </script>
                             <tr>
                                 <td class="rp">
-
-                                    <!-- filter -->
                                     <div class="checkbox-1">
                                         <span class="checkbox-title" onclick="filter3()">
-                                            <h4>Resource People <span class="star">*</span>
+                                            <h4>Select Specific Experts(Optional)
                                                 <i class="arrow up" id="up3" style="margin-left: 4.3rem;"></i><i class="arrow down" id="down3" style="margin-left: 4.3rem;"></i>
                                             </h4>
                                         </span>
                                         <ul id="checkbox-3">
-                                            <?php
-
-
-                                            // $sql = "SELECT expert.expertID as ID, user.firstName, user.lastName FROM user, expert WHERE user.userID = expert.expertID;";
-                                            // $experts = mysqli_query($conn, $sql);
-                                            // while($expertrow = mysqli_fetch_assoc($experts)){
-
-                                            //     $fname = $expertrow['firstName'];
-                                            //     $lname = $expertrow['lastName'];
-                                            //     echo '<li>';
-                                            //     echo '<label for="checkbox1">';
-                                            //     echo '<input type="checkbox" value="resource person" name="rp[]" id="checkbox1"/>';
-                                            //     echo $fname.' '.$lname;
-                                            //     echo '</label>';
-                                            //     echo '</li>';
-
-                                            // }
-
-                                            ?>
+                                            <div class="resource">
+                                                <?php foreach($data['resourceID'] as $d){
+                                                    echo '<li>';
+                                                        echo '<label for="checkbox1">';
+                                                            echo '<input type="checkbox" value="'. $d->expertID .'" name="rp[]" id="checkbox1" checked/>';
+                                                            echo '<span class="checkbox">'. $d->fName ." ". $d->lName . '</span>';
+                                                        echo '</label>';
+                                                    echo '</li>';
+                                                }?>
+                                            </div>
                                         </ul>
                                     </div>
                                 </td>

@@ -1,7 +1,7 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 
 <style>
-    <?php if (($_SESSION['role']) == 'seeker') : ?><?php elseif (($_SESSION['role']) == 'expert') : ?>.nav {
+    <?php if (($_SESSION['role']) == 'seeker') : ?><?php elseif (($_SESSION['role']) == 'expert' || $_SESSION['role'] == 'premium') : ?>.nav {
         grid-template-columns: 5% 6% 6% 6% 51% 10% 4% 4% 4%;
     }
 
@@ -25,7 +25,7 @@
     <?php endif; ?>
 
 
-    <!-- body content -->
+    <!-- body content --> 
     <div class="container-div">
         <div class="content-body">
             <div class="LHS">
@@ -51,7 +51,7 @@
                             <div class="tags">
                                 <label>Category</label><br>
                                 <?php $tagArray = explode(",", $question->tags); ?>
-                                <?php foreach ($tagArray as $tag) : ?>
+                                <?php foreach ($tagArray as $tag) : ?> 
                                     <div class="tag"><?php echo $tag ?></div>
                                 <?php endforeach; ?>
                                 <br><br>

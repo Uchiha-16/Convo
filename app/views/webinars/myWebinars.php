@@ -21,57 +21,49 @@
 
 
     <!-- body content -->
+    <div class="alert success">
+        <?php flash('reg_flash'); ?>
+    </div>
     <div class="container-div">
         <div class="content-body">
             <div class="LHS webinar-stat">
                 <h3>Webinar Content</h3>
                 <div class="table">
                     <table class="webinar-table">
-                        <!-- TH -->
+                        <!-- TH --> 
                         <tr>
                             <th colspan="2">Video</th>
-                            <th colspan="3" style="padding-left:2rem;">Date</th>
+                            <th colspan="3">Date</th>
                         </tr>
                         <!-- section -->
-                        <tr>
-                            <td class="table-thumbnail"><img src="<?php echo URLROOT; ?>/img/1.png"></td>
-                            <td>Fortnite 2022 01 15 00 01 48 06 DVR<br><span>hgjhhj</span></td>
-                            <td class="table-date">Feb 6, 2021<br><span>Published</span></td>
-                            <td class="edit" style="font-size: 16px;font-weight: 500;width: 6%;">Edit</td>
-                            <td class="edit remove" style="font-size: 16px;font-weight: 500;width: 13%;">Remove</td>
-                        </tr>
-                        <!-- section -->
-                        <tr>
-                            <td class="table-thumbnail"><img src="<?php echo URLROOT; ?>/img/6.png"></td>
-                            <td>Shingeki no Kyojin | Attack on Titan - MUST WATCH<br><span>At the beginning, there was Hope... Light... and Joy... But now, there's no hope in their eyes... Its just Dark...</span></td>
-                            <td class="table-date">Feb 6, 2021<br><span>Published</span></td>
-                            <td class="edit" style="font-size: 16px;font-weight: 500;">Edit</td>
-                            <td class="edit remove" style="font-size: 16px;font-weight: 500;">Remove</td>
-                        </tr>
-                        <!-- section -->
-                        <tr>
-                            <td class="table-thumbnail"><img src="<?php echo URLROOT; ?>/img/3.png"></td>
-                            <td>Mikasa Ackerman FAN ART<br><span>Hey again everyone! This video is also inspired by Attack On Titan anime. If you haven't checked out ...</span></td>
-                            <td class="table-date">Feb 4, 2021<br><span>Published</span></td>
-                            <td class="edit" style="font-size: 16px;font-weight: 500;">Edit</td>
-                            <td class="edit remove" style="font-size: 16px;font-weight: 500;">Remove</td>
-                        </tr>
-                        <!-- section -->
-                        <tr>
-                            <td class="table-thumbnail"><img src="<?php echo URLROOT; ?>/img/4.png"></td>
-                            <td>EREN YEAGER fan art in 4 min!<br><span>Hey again everyone! I'm uploading my second video which is inspired by Attack On Titan anime. The artwork ...</span></td>
-                            <td class="table-date">Dec 27, 2020<br><span>Published</span></td>
-                            <td class="edit" style="font-size: 16px;font-weight: 500;">Edit</td>
-                            <td class="edit remove" style="font-size: 16px;font-weight: 500;">Remove</td>
-                        </tr>
-                        <!-- section -->
-                        <tr>
-                            <td class="table-thumbnail"><img src="<?php echo URLROOT; ?>/img/5.png"></td>
-                            <td>Amazing Genshin Impact Fanart!<br><span>Hey everyone! I'm uploading my first video which is inspired by the most popular game among otakus, Genshin ...</span></td>
-                            <td class="table-date">Nov 17, 2020<br><span>Published</span></td>
-                            <td class="edit" style="font-size: 16px;font-weight: 500;">Edit</td>
-                            <td class="edit remove" style="font-size: 16px;font-weight: 500;">Remove</td>
-                        </tr>
+                        <?php foreach ($data['mywebinars'] as $mywebinar) : ?>
+                            <tr>
+                                <td class="table-thumbnail"><img src="<?php echo URLROOT; ?>/img/thumbnails/<?php echo $mywebinar->thumbnail ?>"></td>
+                                <td class="cell"><?php echo $mywebinar->title ?><br>
+                                    <span><b>Playlist: </b>
+                                    <?php foreach($data['myplaylist'] as $playlist) {
+                                        if($playlist->webinarID == $mywebinar->webinarID) {
+                                            echo $playlist->playlistName;
+                                        }
+                                    } ?></span><br>
+                                </td>
+                                <td class="table-date"><?php echo $mywebinar->date ?><br>
+                                    <?php if($mywebinar->published) : ?><span>Published</span>
+                                    <?php else : ?><span>Draft</span>
+                                    <?php endif; ?>
+                                </td>
+                                <td class="edit" style="font-size: 16px;font-weight: 500;width: 9%;">
+                                    <form action="<?php echo URLROOT; ?>/webinars/edit/<?php echo $mywebinar->webinarID; ?>">
+                                        <button class="edit" type="submit">Edit</button>
+                                    </form>    
+                                </td>
+                                <td style="font-size: 16px;font-weight: 500;width: 13%;">
+                                    <form action="<?php echo URLROOT; ?>/webinars/delete/<?php echo $mywebinar->webinarID; ?>">
+                                        <button class="remove" onclick="return confirm('Are you sure you want to delete this record?')">Remove</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
                     </table>
                 </div>
             </div>
@@ -268,7 +260,13 @@
                             <div class="checkbox-1">
                                 <span class="checkbox-title" onclick="filter4()">Playlist <i class="arrow up" id="up4" style="margin-left: 6.5rem;"></i><i class="arrow down" id="down4" style="margin-left: 6.5rem;"></i></span>
                                 <ul id="checkbox-4">
-
+                                    <?php foreach ($data['myplaylist'] as $myplaylist) : ?>
+                                        <li>
+                                            <label for="checkbox1">
+                                                <input type="checkbox" value="last 3 months" name="publishDate[]" id="checkbox1" /><?php echo $myplaylist->playlistName ?>
+                                            </label>
+                                        </li>
+                                    <?php endforeach; ?>
                                 </ul>
                             </div>
 

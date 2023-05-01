@@ -145,9 +145,11 @@ toggle between hiding and showing the dropdown content */
 function drop() {
   document.getElementById("myDropdown").classList.toggle("show");
 }
-
 function drop2() {
   document.getElementById("myDropdown2").classList.toggle("show");
+}
+function drop3() {
+  document.getElementById("myDropdown3").classList.toggle("show3");
 }
 
 // Close the dropdown if the user clicks outside of it
@@ -155,6 +157,7 @@ window.onclick = function (e) {
   if (!e.target.matches('.dropbtn')) {
     var myDropdown = document.getElementById("myDropdown");
     var myDropdown2 = document.getElementById("myDropdown2");
+    var myDropdown3 = document.getElementById("myDropdown3");
     if (myDropdown.classList.contains('show')) {
       myDropdown.classList.remove('show');
     }
@@ -259,7 +262,7 @@ function cancel() {
 //   }
 // }
 
-//========================================== playlist
+//========================================== playlist 
 
 function showDiv(divId, element) {
 
@@ -277,4 +280,62 @@ function show2() {
   document.getElementById("dropdown2").style.display = "grid";
 }
 
+
+//================================Search Bar===========================================//
+$(document).ready(function(){
+  $("#live_search").keyup(function(){
+    var input = $(this).val();
+    //alert(input);
+    if(input != ""){
+      // alert(input);
+    $.ajax({
+      url: URLROOT + '/Pages/search/',
+      method: 'post',
+      data: {keywords:input},
+      dataType: 'text',
+      success: function (response) {
+        $("#LHS").html(response);
+        //alert(ROLE);
+      }
+      
+    })
+    }else{
+      //redirect  to index controller
+    
+      if(ROLE == 'seeker'){
+        window.location = URLROOT + "/pages/seeker";
+      }else if(ROLE == 'expert'){
+        window.location = URLROOT + "/pages/expert";
+      }else{
+        window.location = URLROOT + "/pages/index";
+      }
+
+    }
+  })
+});
+
+//================================ Search Bar - EVENT ===========================================//
+$(document).ready(function () {
+  $("#live_search_event").keyup(function () {
+    var input = $(this).val();
+    //alert(input);
+    if (input != "") {
+      // alert(input);
+      $.ajax({
+        url: URLROOT + '/Events/search/',
+        method: 'post',
+        data: { keywords: input },
+        dataType: 'text',
+        success: function (response) {
+          $("#LHS").html(response);
+          //alert(ROLE);
+        }
+
+      })
+    } else {
+      //redirect  to index controller
+      window.location = URLROOT + "/events/index";
+    }
+  })
+});
 

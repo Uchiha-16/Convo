@@ -87,56 +87,56 @@
                                         <div>
                                             <div class="options">
                                                 <!-- Text Format -->
-                                                <button id="bold" class="option-button format" title="Bold">
+                                                <button id="bold" class="option-button format" title="Bold" type="button">
                                                     <i class="fa-solid fa-bold"></i>
                                                 </button>
-                                                <button id="italic" class="option-button format" title="Italic">
+                                                <button id="italic" class="option-button format" title="Italic" type="button">
                                                     <i class="fa-solid fa-italic"></i>
                                                 </button>
-                                                <button id="underline" class="option-button format" title="Underline">
+                                                <button id="underline" class="option-button format" title="Underline" type="button">
                                                     <i class="fa-solid fa-underline"></i>
                                                 </button>
-                                                <button id="strikethrough" class="option-button format" title="Strike-through">
+                                                <button id="strikethrough" class="option-button format" title="Strike-through" type="button">
                                                     <i class="fa-solid fa-strikethrough"></i>
                                                 </button>
-                                                <button id="superscript" class="option-button script" title="Superscript">
+                                                <button id="superscript" class="option-button script" title="Superscript" type="button">
                                                     <i class="fa-solid fa-superscript"></i>
                                                 </button>
-                                                <button id="subscript" class="option-button script" title="Subscript">
+                                                <button id="subscript" class="option-button script" title="Subscript" type="button">
                                                     <i class="fa-solid fa-subscript"></i>
                                                 </button>
                                                 <!-- List -->
-                                                <button id="insertOrderedList" class="option-button" title="Ordered list">
+                                                <button id="insertOrderedList" class="option-button" title="Ordered list" type="button">
                                                     <div class="fa-solid fa-list-ol"></div>
                                                 </button>
-                                                <button id="insertUnorderedList" class="option-button" title="Unordered list">
+                                                <button id="insertUnorderedList" class="option-button" title="Unordered list" type="button">
                                                     <i class="fa-solid fa-list"></i>
                                                 </button>
                                                 <!-- Undo/Redo -->
-                                                <button id="undo" class="option-button" title="Undo">
+                                                <button id="undo" class="option-button" title="Undo" type="button">
                                                     <i class="fa-solid fa-rotate-left"></i>
                                                 </button>
-                                                <button id="redo" class="option-button" title="Redo">
+                                                <button id="redo" class="option-button" title="Redo" type="button">
                                                     <i class="fa-solid fa-rotate-right"></i>
                                                 </button>
                                                 <!-- Link -->
-                                                <button id="createLink" class="adv-option-button" title="Create link">
+                                                <button id="createLink" class="adv-option-button" title="Create link" type="button">
                                                     <i class="fa fa-link"></i>
                                                 </button>
-                                                <button id="unlink" class="option-button" title="Unlink">
+                                                <button id="unlink" class="option-button" title="Unlink" type="button">
                                                     <i class="fa fa-unlink"></i>
                                                 </button>
                                                 <!-- Alignment -->
-                                                <button id="justifyLeft" class="option-button align" title="Justify left">
+                                                <button id="justifyLeft" class="option-button align" title="Justify left" type="button">
                                                     <i class="fa-solid fa-align-left"></i>
                                                 </button>
-                                                <button id="justifyCenter" class="option-button align" title="Justify center">
+                                                <button id="justifyCenter" class="option-button align" title="Justify center" type="button">
                                                     <i class="fa-solid fa-align-center"></i>
                                                 </button>
-                                                <button id="justifyRight" class="option-button align" title="Justify right">
+                                                <button id="justifyRight" class="option-button align" title="Justify right" type="button">
                                                     <i class="fa-solid fa-align-right"></i>
                                                 </button>
-                                                <button id="justifyFull" class="option-button align" title="Justify full">
+                                                <button id="justifyFull" class="option-button align" title="Justify full" type="button">
                                                     <i class="fa-solid fa-align-justify"></i>
                                                 </button>
                                                 <!-- Headings -->
@@ -161,7 +161,7 @@
                                                     <label for="backColor">Highlight Color</label>
                                                 </div>
                                             </div>
-                                            <textarea id="text-input" contenteditable="true" title="Enter text..." name="content"></textarea>
+                                            <div id="text-input" contenteditable="true" title="Enter text..." name="content"></div>
                                             <!-- <textarea id="text-input" name="content"></textarea> -->
                                             <span class="error"><?php echo $data['content_err']; ?></span>
                                         </div>
@@ -178,7 +178,7 @@
                                         <label style="color: #117ea6; font-size:13px; margin-left:3.2rem"><b>Embeded Link Example:</b> https://www.youtube.com/embed/2ybLD6_2gKM</label></label><br><br>
                                     <label class="steps"><b>Step 3:</b> Paste the link to the following field.</label><br><br>
                                     <label class="steps">Make sure that it is the <b>‘Shared/ Embeded video link’</b>.</label><br><br>
-                                    <input class="inputform" type="text" name="link" placeholder="Please include the video link here.">
+                                    <input class="inputform" type="text" name="link" placeholder="Please include the video link here." required>
 
                                 </td>
                             <tr>
@@ -191,7 +191,7 @@
                                             <!-- Add image section -->                                   
                                             <div class="avatar-upload">
                                                 <div class="avatar-edit">
-                                                    <input type='file' name="image" id="imageUpload" accept=".png, .jpg, .jpeg" />
+                                                    <input type='file' name="image" id="imageUpload" accept=".png, .jpg, .jpeg" required/>
                                                     <label for="imageUpload"></label>
                                                 </div>
                                                 <div class="avatar-preview">
@@ -233,7 +233,3 @@
     <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="arrow up"></i><br></button>
 
     <?php require APPROOT . '/views/inc/footer.php'; ?>
-
-    <script>
-        ClassicEditor.create(document.querySelector('#text-input'));
-    </script>

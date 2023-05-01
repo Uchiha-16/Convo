@@ -16,6 +16,8 @@
                 $tag = isset($_POST['tag']) ? $_POST['tag'] : '0';
                 $resourceID = isset($_POST['rp']) ? $_POST['rp'] : '0';
 
+                //print_r($resourceID);
+
                 if($resourceID != '0'){
                     $resourceID = implode(',', $resourceID);
                 }
@@ -31,6 +33,7 @@
                     'visibility' => $checkbox_value,
                     'rating' => 0,
                     'resourceID' => $resourceID,    
+                    'answercount'=> 0,
                     'title_err' => '',
                     'content_err' => '',
                     'tag_err' => '',
@@ -95,12 +98,38 @@
                     'date' => '',
                     'visibility' => '',
                     'rating' => '',
+                    'answercount'=> '',
                     'resourceID' => '',
                     'title_err' => '',
                     'content_err' => '',
                     'tag_err' => '',
                 ];
                 $this->view('questions/add', $data);
+            }
+        }
+
+
+        public function resourceName(){
+
+            $selectedValues = $_POST['selectedValues'];
+
+            $str = '';
+
+            foreach($selectedValues as $tag) {
+                $str = $str . 'usertag.tag = "' . $tag . '" OR ';
+
+            }
+            $str = substr($str, 0, -4);
+
+            $data = $this->questionModel->resourceName($str);
+            
+            foreach($data as $d){
+                echo '<li>';
+                    echo '<label for="checkbox1">';
+                        echo '<input type="checkbox" value="'. $d->expertID .'" name="rp[]" id="checkbox1"/>';
+                        echo '<span class="checkbox">'. $d->fName ." ". $d->lName . '</span>';
+                    echo '</label>';
+                echo '</li>';
             }
         }
 
@@ -122,8 +151,10 @@
                 date_default_timezone_set('Asia/Colombo');
                 $checkbox_value = isset($_POST['visibility']) ? 'anonymus' : 'public';
                 $tag = isset($_POST['tag']) ? $_POST['tag'] : '0';
-                $resourceID = isset($_POST['resourceID']) ? $_POST['resourceID'] : '0';
-                
+                $resourceID = isset($_POST['rp']) ? $_POST['rp'] : '0';
+                if($resourceID != '0'){
+                    $resourceID = implode(',', $resourceID);
+                }
                 //Input Data
                 $data = [
                     'QID' => $QID,
@@ -163,7 +194,7 @@
                 //     }
                 // }
 
-                // Make sure errors are empty
+                // Make sure errors are empty 
                 if(empty($data['title_err']) && empty($data['content_err']) && empty($data['tag_err'])) {
                     // Updating the Question
                     $this->questionModel->deleteQuestionTag($QID);
@@ -189,10 +220,15 @@
 
                 $question = $this->questionModel->getQuestionByID($QID);
                 
-                //check the owner of the question
+                
+                //check the owner of the question 
                 if($question->userID != $_SESSION['userID']){
                     redirect('questions/myQuestions');
                 }
+                
+                $Experts = $this->questionModel->getExperts($question->expertID);
+           
+                
 
                 $data = [
                     'QID' => $QID,
@@ -200,6 +236,7 @@
                     'content' => $question->content,
                     'tag' =>  $question->tags,
                     'visibility' => $question->visibility,
+                    'resourceID' => $Experts,
                     'title_err' => '',
                     'content_err' => '',
                     'tag_err' => '',
@@ -209,7 +246,7 @@
         }
 
         public function delete($QID) {
-                // Get existing post from model
+                // Get existing post from model 
                 $question = $this->questionModel->getQuestionByID($QID);
                 //check the owner of the question
                 if($question->userID != $_SESSION['userID']){

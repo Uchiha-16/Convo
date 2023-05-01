@@ -5,13 +5,14 @@
 .info input[type=search]{
     width: 15rem;
         height: 2rem;
-font-size: 13px;
+    font-size: 13px;
 }
 .chat{
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
     padding: 1rem;
     font-size: 14px;
+    cursor: pointer;
 }
 
 .selected{
@@ -55,19 +56,40 @@ font-size: 13px;
     box-shadow: inset 0px 4.69318px 14.0795px rgb(0 0 0 / 9%);
     color: white;
     display: flex;
+    position: absolute;
+    top: 26.7rem;
+    border-radius: 0.6rem;
+    height: 3rem;
 }
-.send input[type=search]{
+.send input[type=text]{
     background: transparent;  
     box-shadow: none;
         height: 100%;
     font-size: 14px;
     color: white;
+    border:none;
+    width: 37.9rem;
+text-align: left;
+padding-left: 1rem;
 }
-.send input[type=search]::placeholder{
+.send input[type=text]::placeholder{
     color: white;
+    text-align: left;
+}
+.submit-btn{
+    cursor: pointer;
+    background: transparent;
+border: none;
+border-left: 1px solid aliceblue;
+}
+.submit-btn:hover{
+    background-color: #19758d;
+    /* transition: .3s all; */
+    border-top-right-radius: 0.6rem;
+    border-bottom-right-radius: 0.6rem;
 }
 .submit{
-    cursor: pointer;
+    height: 3rem;
 }
 .dlg-box{
     display: flex;
@@ -79,4 +101,201 @@ align-items: center;
 }
 .message p{
         margin-bottom: 0;
+}
+.chatname {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.question-div {
+    margin-bottom: 0;
+}
+
+#results{
+    height: 19rem;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.result-img{
+    height: 16rem;
+    margin-left: auto;
+    margin-right: auto;
+    display: grid;
+    opacity: 0.2;
+}
+.result-text{
+    text-align: center;
+    display: grid;
+}
+#popup {
+    position: absolute;
+    top: 6rem;
+    left: 9rem;
+    width: 66.5%;
+    height: 24rem;
+    justify-content: center;
+    align-items: center;
+    z-index: 998;
+    background: white;
+    cursor: pointer;
+    display:none;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+/* Drop Down */
+
+.dropdown-div {
+    user-select: none;
+    font-size: 14px;
+}
+
+ul.dropdown {
+    list-style: none;
+    height: auto;
+    padding: 15px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+ul.dropdown li {
+    display: inline;
+}
+
+ul.dropdown li label {
+    display: inline-block;
+    background-color: rgba(255, 255, 255, .9);
+    border: 2px solid rgba(139, 139, 139, .3);
+    color: #828282;
+    border-radius: 25px;
+    white-space: nowrap;
+    margin: 3px 0px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    transition: all .2s;
+}
+
+ul.dropdown li label {
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+ul.dropdown li label::before {
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    padding: 2px 6px 2px 2px;
+    content: "\f067";
+    transition: transform .3s ease-in-out;
+}
+
+ul.dropdown li input[type="checkbox"]:checked+label::before {
+    content: "\f00c";
+    transform: rotate(-360deg);
+    transition: transform .3s ease-in-out;
+}
+
+ul.dropdown li input[type="checkbox"]:checked+label {
+    background-color: #19758d;
+    color: #fff;
+    transition: all .2s;
+}
+
+ul.dropdown li input[type="checkbox"] {
+    display: none;
+    position: absolute;
+    top: 36rem;
+    opacity: 0;
+}
+
+ul.dropdown li input[type="checkbox"]:focus+label {
+    border: 2px solid #9fa4a8;
+}
+
+/* Create form */
+
+.star {
+    color: darkred;
+}
+
+.add-event {
+    grid-template-rows: 100%;
+}
+
+.desc {
+    color: #848484;
+    font-size: 14px;
+    border-bottom: 1px solid rgba(128, 128, 128, .2);
+    padding-bottom: 1rem;
+}
+
+.inputform {
+    width: 95%;
+    height: 40px;
+    background-color: #EFEFEF;
+    box-shadow: inset 0px 0px 3px #8a9091;
+    border-radius: 4px;
+    margin-bottom: 6px;
+    box-shadow: #8a9091;
+    border: none;
+    font-size: 14px;
+    text-align: left;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.time, .date {
+    width: 30%;
+    font-size: 14px;
+    float: right;
+}
+
+.time, .date, .rp {
+    padding-right: 4rem;
+}
+
+.time {
+    border: 1px solid;
+    color: black;
+    width: auto;
+    height: 1.5rem;
+    text-align: center;
+    font-size: 12px;
+    padding: 0px 25px 0px 25px;
+}
+
+.inputform::placeholder {
+    font-size: 14px;
+    text-align: left;
+    color: #A6A6A6;
+}
+
+.add-event textarea {
+    font-family: "Inter";
+    padding: 1rem;
+    height: 10rem;
+    width: 98%;
+}
+
+.checkbox-title h4 {
+    font-size: 16px;
+}
+
+.info {
+    padding-right: 30px;
+}
+
+.chatgroups{
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 13rem;
 }
