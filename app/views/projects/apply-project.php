@@ -59,11 +59,12 @@
                 <div class="screen">
                     <h3 class="screen-title">Apply for the Project</h3>
                     <div><hr></div>
-                    <form action="<?php echo URLROOT; ?>/Projects/apply<?php echo $data['PID']?>" method="POST" enctype="multipart/form-data">
+                    <form action="<?php echo URLROOT;?>/Projects/apply/<?php echo $data['PID']?>" method="POST" enctype="multipart/form-data">
                         <div class="form-group">
                             <div>
                                 <label for="description">Cover Letter:</label><br>
                                 <textarea name="description" id="description" class="form-textarea" placeholder="Enter what you want to tell recruiter" value="<?php echo $data['description']?>" required></textarea><br><br>
+                                <span class="error"><?php echo $data['description_err']?></span>
                             </div>
                             <style>
                                 input, textarea{
@@ -84,7 +85,7 @@
                             <div class="custom-file-upload">
                                 <input type="file" id="cv_file" name="cv_file" value="<?php echo $data['cv_file']?>">
                                 <label for="cv_file" id="custom-file-label">Upload your resume</label>
-                                <span class="error"><?php echo $data['cv_file_err']?></span>
+                                <span class="error"><?php echo $data['file_err']?></span>
                             </div>
 
                             <style>
@@ -110,9 +111,9 @@
                                 const fileInput = document.getElementById('cv_file');
                                 const customFileLabel = document.getElementById('custom-file-label');
 
-                                customFileLabel.addEventListener('click', function() {
-                                fileInput.click();
-                                });
+                                // customFileLabel.addEventListener('click', function() {
+                                // fileInput.click();
+                                // });
 
                                 fileInput.addEventListener('change', function() {
                                 customFileLabel.innerHTML = fileInput.files[0].name;

@@ -109,17 +109,18 @@
 
     //--------------------------------Edit Projects---------------------------------------------------------------
     public function editProject($data) {
-        $this->db->query('UPDATE project SET title = :title, description = :description, deadline = :deadline, availableslot = :slot, type = :type, availability = :availability, payment = :payment, duration = :duration WHERE PID = :PID');
+        $this->db->query('UPDATE project SET title = :title, description = :description, deadline = :deadline, availableslot = :availableslot, type = :type, availability = :availability, payment = :payment, duration = :duration WHERE PID = :PID');
         // Bind values
+        $this->db->bind(':PID', $data['PID']);
         $this->db->bind(':title', $data['title']);
         $this->db->bind(':description', $data['description']);
         $this->db->bind(':deadline', $data['deadline']);
-        $this->db->bind(':slot', $data['slot']);
+        $this->db->bind(':availableslot', $data['availableslot']);
         $this->db->bind(':type', $data['type']);
         $this->db->bind(':availability', $data['availability']);
         $this->db->bind(':payment', $data['payment']);
         $this->db->bind(':duration', $data['duration']);
-        $this->db->bind(':PID', $data['PID']);
+        $this->db->bind(':userID', $_SESSION['userID']);
         
         // Execute
         if($this->db->execute()) {
@@ -164,6 +165,13 @@
         } else {
             return false;
         }
+    }
+
+    public function getApplications($PID){
+        $this->db->query('SELECT * FROM applyproject inner join user ON user.userID=applyproject.userID WHERE PID = :PID');
+        $this->db->bind(':PID', $PID);
+        $row = $this->db->resultSet();
+        return $row;
     }
 }
 ?>

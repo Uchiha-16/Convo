@@ -16,6 +16,8 @@
         <link href="<?php echo URLROOT; ?>/css/style.css" rel="stylesheet" type="text/css"/>
         <link href="<?php echo URLROOT; ?>/css/landing.css" rel="stylesheet" type="text/css"/>
         <link href="<?php echo URLROOT; ?>/css/page.css" rel="stylesheet" type="text/css"/>
+        <link href="<?php echo URLROOT; ?>/css/add-project.css" rel="stylesheet" type="text/css"/>
+
         <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
         <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
         <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/mobile.css" rel="stylesheet" type="text/css">
@@ -75,41 +77,113 @@
                                 <div class="form-div">
                                     <label for="fname">First Name</label>
                                     <img class="normal-icon" src="<?php echo URLROOT; ?>/img/edit.png" alt="edit">
-                                    <input type="text" id="fname" name="fname" class="form-control" placeholder="<?php echo $data['profile']->firstName ?>">
+                                    <input type="text" id="fname" name="fname" class="form-control" value="<?php echo $data['profile']->firstName ?>">
                                 </div>
                                 <div class="form-div">
                                     <label for="fname">Last Name</label>
                                     <img class="normal-icon" src="<?php echo URLROOT; ?>/img/edit.png" alt="edit">
-                                    <input type="text" id="lname" name="lname" class="form-control" placeholder="<?php echo $data['profile']->lastName ?>">
+                                    <input type="text" id="lname" name="lname" class="form-control" value="<?php echo $data['profile']->lastName ?>">
                                 </div>
 
                                 <div class="form-div">
                                 <label for="lname">Email</label>
                                 <img class="normal-icon" src="<?php echo URLROOT; ?>/img/edit.png" alt="edit">
-                                <input type="text" id="email" name="email" class="form-control" placeholder="<?php echo $data['profile']->email ?>">
+                                <input type="text" id="email" name="email" class="form-control" value="<?php echo $data['profile']->email ?>">
                                 </div>
 
                                 <div class="form-div">
                                 <label for="lname">Username</label>
                                 <img class="normal-icon" src="<?php echo URLROOT; ?>/img/edit.png" alt="edit">
-                                <input type="text" id="username" name="username" class="form-control" placeholder="<?php echo $data['profile']->uname ?>">
+                                <input type="text" id="username" name="username" class="form-control" value="<?php echo $data['profile']->uname ?>">
                                 </div>
 
                                 <div class="form-div">
-                                    <label for="lname">Old Password</label>
-                                    <img class="normal-icon" src="<?php echo URLROOT; ?>/img/edit.png" alt="edit">
-                                    <input type="password" id="password" name="password" class="form-control" placeholder="***********">
+                                    <div class="button-field">
+                                        <button id="changePasswordButton" class="submit-btn"><center>Change Password</center></button><br>
+                                    
+                                    <script>
+                                        document.getElementById("changePasswordButton").addEventListener("click", function() {
+                                        // Open the popup window here
+                                        });
+                                    </script>
+                                    </div>
+                                <div id="popup">
+                                    <form onsubmit="event.preventDefault();">
+                                        <div class="form-div">
+                                            <label for="oldPassword">Old Password</label>
+                                            <!-- <img class="normal-icon" src="<?php echo URLROOT; ?>/img/edit.png" alt="edit"> -->
+                                            <input type="password" id="oldPassword" name="password" class="form-control" placeholder="Enter your old password">
+                                        </div>
+                                        <div class="form-div">
+                                            <label for="newPassword">New Password</label>
+                                            <!-- <img class="normal-icon" src="<?php echo URLROOT; ?>/img/edit.png" alt="edit"> -->
+                                            <input type="password" id="newPassword" name="password" class="form-control" placeholder="**************">
+                                        </div>
+                                        <div class="form-div">
+                                            <label for="confirmPassword">Rewrite New Password</label>
+                                            <!-- <img class="normal-icon" src="<?php echo URLROOT; ?>/img/edit.png" alt="edit"> -->
+                                            <input type="password" id="confirmPassword" name="password" class="form-control" placeholder="**************">
+                                        </div>
+                                        <button type="submit" onclick="changePassword()">Change Password</button>
+                                    </form>
                                 </div>
-                                <div class="form-div">
-                                    <label for="lname">New Password</label>
-                                    <img class="normal-icon" src="<?php echo URLROOT; ?>/img/edit.png" alt="edit">
-                                    <input type="password" id="password" name="password" class="form-control" placeholder="**************">
-                                </div>
-                                <div class="form-div">
-                                    <label for="lname">Rewrite New Password</label>
-                                    <img class="normal-icon" src="<?php echo URLROOT; ?>/img/edit.png" alt="edit">
-                                    <input type="password" id="password" name="password" class="form-control" placeholder="**************">
-                                </div>
+                                <style>
+                                    #popup {
+                                    display: none;
+                                    position: fixed;
+                                    top: 50%;
+                                    left: 50%;
+                                    transform: translate(-50%, -50%);
+                                    padding: 20px;
+                                    background-color: white;
+                                    border: 1px solid black;
+                                    z-index: 1;
+                                    }
+
+                                    #popup form {
+                                    display: flex;
+                                    flex-direction: column;
+                                    }
+
+                                    #popup label {
+                                    margin-bottom: 5px;
+                                    }
+
+                                    #popup input {
+                                    margin-bottom: 10px;
+                                    }
+                                </style>
+                                
+                                <script>
+                                    function changePassword() {
+                                    var oldPassword = document.getElementById("oldPassword").value;
+                                    var newPassword = document.getElementById("newPassword").value;
+                                    var confirmPassword = document.getElementById("confirmPassword").value;
+
+                                    if (newPassword != confirmPassword) {
+                                        alert("New password and confirm password do not match!");
+                                        return false;
+                                    } else {
+                                        // Update the password here
+                                        alert("Password updated successfully!");
+                                        closePopup();
+                                        return true;
+                                    }
+                                    }
+
+                                    function openPopup() {
+                                    document.getElementById("popup").style.display = "block";
+                                    }
+
+                                    function closePopup() {
+                                    document.getElementById("popup").style.display = "none";
+                                    }
+
+                                    document.getElementById("changePasswordButton").addEventListener("click", function() {
+                                    openPopup();
+                                    });
+                                </script>
+
                                 <div class="form-div">
                                     <label for="lname">Designation</label>
                                     <img class="normal-icon" src="<?php echo URLROOT; ?>/img/edit.png" alt="edit">

@@ -50,7 +50,7 @@
                     
                     <!-- Event 1 -->
                     <div class="question-div add-event">
-                        <form action="" method="POST">
+                        <form action="<?php echo URLROOT; ?>/blogs/add" method="POST">
                             <table>
                                 <tr>
                                     <td colspan="3">
@@ -62,69 +62,80 @@
                                 <tr>
                                     <td colspan="3">
                                         <h4 style="margin-bottom:.5rem">Title <span class="star">*</span></h4>
-                                        <input class="inputform" type="text" name="title" placeholder="This is the title that will be displayed at the top of your blog                                                                                                                        0/100" required>
+                                        <input class="inputform" type="text" name="title" placeholder="This is the title that will be displayed at the top of your blog <?php echo "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" ?> 0/100" value="<?php echo $data['title']; ?>" required>
+                                        <span class="error"><?php echo $data['title_err']; ?></span>
                                     </td>
                                 </tr>
                                 
                                 <tr>
                                     <td colspan="3">
                                         <h4 style="margin-bottom:.5rem">Tags <span class="star">*</span></h4>
-                                        <div class="dropdown-div">
-
-                                            <label>Please Select <b>all the Tags</b> which are Related to the blog.</label>
-                                            <ul class="dropdown" id="dropdown">
-
-                                                <li><input type="checkbox" value="agricultureScience" name="tag[]" id="checkbox1"/><label for="checkbox1">Agriculture Science</label></li>
-
-                                                <li><input type="checkbox" value="anthropology" name="tag[]" id="checkbox2"/><label for="checkbox2">Anthropology</label></li>
-
-                                                <li><input type="checkbox" value="biology" name="tag[]" id="checkbox3"/><label for="checkbox3">Biology</label></li>
-
-                                                <li><input type="checkbox" value="Chemistry" name="tag[]" id="checkbox4"/><label for="checkbox4">Chemistry</label></li>
-
-                                                <li><input type="checkbox" value="CS" name="tag[]" id="checkbox5"/><label for="checkbox5">Computer Science</label></li>
-
-                                                <li><input type="checkbox" value="design" name="tag[]" id="checkbox6"/><label for="checkbox6">Design</label></li>
-
-                                                <li><input type="checkbox" value="economics" name="tag[]" id="checkbox7"/><label for="checkbox7">Economics</label></li>
-
-                                                <li><input type="checkbox" value="education" name="tag[]" id="checkbox8"/><label for="checkbox8">Education</label></li>
-
-                                                <li><input type="checkbox" value="engineering" name="tag[]" id="checkbox9"/><label for="checkbox9">Engineering</label></li>
-
-                                                <li><input type="checkbox" value="EA" name="tag[]" id="checkbox10"/><label for="checkbox10">Entertaintment &amp; Arts</label></li>
-
-                                                <li><input type="checkbox" value="geoscience" name="tag[]" id="checkbox11"/><label for="checkbox11">Geoscience</label></li>
-
-                                                <li><input type="checkbox" value="history" name="tag[]" id="checkbox12"/><label for="checkbox12">History</label></li>
-
-                                                <li><input type="checkbox" value="law" name="tag[]" id="checkbox13"/><label for="checkbox13">Law</label></li>
-
-                                                <li><input type="checkbox" value="linguistics" name="tag[]" id="checkbox14"/><label for="checkbox14">Linguistics</label></li>
-
-                                                <li><input type="checkbox" value="literature" name="tag[]" id="checkbox15"/><label for="checkbox15">literature</label></li>
-
-                                                <li><input type="checkbox" value="mathematics" name="tag[]" id="checkbox16"/><label for="checkbox16">Mathematics</label></li>
-
-                                                <li><input type="checkbox" value="Medicine" name="tag[]" id="checkbox17"/><label for="checkbox17">Medicine</label></li>
-
-                                                <li><input type="checkbox" value="linguistics" name="tag[]" id="checkbox18"/><label for="checkbox18">Linguistics</label></li>
-
-                                                <li><input type="checkbox" value="philosophy" name="tag[]" id="checkbox19"/><label for="checkbox19">Philosophy</label></li>
-
-                                                <li><input type="checkbox" value="physics" name="tag[]" id="checkbox20"/><label for="checkbox20" for="checkbox1">Physics</label></li>
-
-                                                <li><input type="checkbox" value="PS" name="tag[]" id="checkbox21"/><label for="checkbox21">Political Science</label></li>
-
-                                                <li><input type="checkbox" value="psychology" name="tag[]" id="checkbox22"/><label for="checkbox22">Psychology</label></li>
-
-                                                <li><input type="checkbox" value="RS" name="tag[]" id="checkbox23"/><label for="checkbox23">Religious Studies</label></li>
-
-                                                <li><input type="checkbox" value="socialScience" name="tag[]" id="checkbox24"/><label for="checkbox24">Social Science</label></li>
-
-                                                <li><input type="checkbox" value="spaceScience" name="tag[]" id="checkbox25"/><label for="checkbox25">Space Science</label></li>
-                                            </ul>
                                         
+                                        <div class="dropdown-div">
+                                            <form method="POST" id="innerform">
+                                                <label>Please Select <b>all the Tags</b> which are Related to the Event.</label>
+                                                <ul class="dropdown" id="dropdown">
+
+                                                    <li><input type="checkbox" value="agricultureScience" name="tag[]" id="checkbox1" value="<?php echo $data['tag']; ?>" /><label for="checkbox1">Agriculture Science</label></li>
+
+                                                    <li><input type="checkbox" value="anthropology" name="tag[]" id="checkbox2" value="<?php echo $data['tag']; ?>" /><label for="checkbox2">Anthropology</label></li>
+
+                                                    <li><input type="checkbox" value="biology" name="tag[]" id="checkbox3" value="<?php echo $data['tag']; ?>" /><label for="checkbox3">Biology</label></li>
+
+                                                    <li><input type="checkbox" value="Chemistry" name="tag[]" id="checkbox4" value="<?php echo $data['tag']; ?>" /><label for="checkbox4">Chemistry</label></li>
+
+                                                    <li><input type="checkbox" value="CS" name="tag[]" id="checkbox5" value="<?php echo $data['tag']; ?>" /><label for="checkbox5">Computer Science</label></li>
+
+                                                    <li><input type="checkbox" value="design" name="tag[]" id="checkbox6" value="<?php echo $data['tag']; ?>" /><label for="checkbox6">Design</label></li>
+
+                                                    <li><input type="checkbox" value="economics" name="tag[]" id="checkbox7" value="<?php echo $data['tag']; ?>" /><label for="checkbox7">Economics</label></li>
+
+                                                    <li><input type="checkbox" value="education" name="tag[]" id="checkbox8" value="<?php echo $data['tag']; ?>" /><label for="checkbox8">Education</label></li>
+
+                                                    <li><input type="checkbox" value="engineering" name="tag[]" id="checkbox9" value="<?php echo $data['tag']; ?>" /><label for="checkbox9">Engineering</label></li>
+
+                                                    <li><input type="checkbox" value="EA" name="tag[]" id="checkbox10" value="<?php echo $data['tag']; ?>" /><label for="checkbox10">Entertaintment &amp; Arts</label></li>
+
+                                                    <li><input type="checkbox" value="geoscience" name="tag[]" id="checkbox11" value="<?php echo $data['tag']; ?>" /><label for="checkbox11">Geoscience</label></li>
+
+                                                    <li><input type="checkbox" value="history" name="tag[]" id="checkbox12" value="<?php echo $data['tag']; ?>" /><label for="checkbox12">History</label></li>
+
+                                                    <li><input type="checkbox" value="law" name="tag[]" id="checkbox13" value="<?php echo $data['tag']; ?>" /><label for="checkbox13">Law</label></li>
+
+                                                    <li><input type="checkbox" value="linguistics" name="tag[]" id="checkbox14" value="<?php echo $data['tag']; ?>" /><label for="checkbox14">Linguistics</label></li>
+
+                                                    <li><input type="checkbox" value="literature" name="tag[]" id="checkbox15" value="<?php echo $data['tag']; ?>" /><label for="checkbox15">literature</label></li>
+
+                                                    <li><input type="checkbox" value="mathematics" name="tag[]" id="checkbox16" value="<?php echo $data['tag']; ?>" /><label for="checkbox16">Mathematics</label></li>
+
+                                                    <li><input type="checkbox" value="Medicine" name="tag[]" id="checkbox17" value="<?php echo $data['tag']; ?>" /><label for="checkbox17">Medicine</label></li>
+
+                                                    <li><input type="checkbox" value="linguistics" name="tag[]" id="checkbox18" value="<?php echo $data['tag']; ?>" /><label for="checkbox18">Linguistics</label></li>
+
+                                                    <li><input type="checkbox" value="philosophy" name="tag[]" id="checkbox19" value="<?php echo $data['tag']; ?>" /><label for="checkbox19">Philosophy</label></li>
+
+                                                    <li><input type="checkbox" value="physics" name="tag[]" id="checkbox20" value="<?php echo $data['tag']; ?>" /><label for="checkbox20" for="checkbox1">Physics</label></li>
+
+                                                    <li><input type="checkbox" value="PS" name="tag[]" id="checkbox21" value="<?php echo $data['tag']; ?>" /><label for="checkbox21">Political Science</label></li>
+
+                                                    <li><input type="checkbox" value="psychology" name="tag[]" id="checkbox22" value="<?php echo $data['tag']; ?>" /><label for="checkbox22">Psychology</label></li>
+
+                                                    <li><input type="checkbox" value="RS" name="tag[]" id="checkbox23" value="<?php echo $data['tag']; ?>" /><label for="checkbox23">Religious Studies</label></li>
+
+                                                    <li><input type="checkbox" value="socialScience" name="tag[]" id="checkbox24" value="<?php echo $data['tag']; ?>" /><label for="checkbox24">Social Science</label></li>
+
+                                                    <li><input type="checkbox" value="spaceScience" name="tag[]" id="checkbox25" value="<?php echo $data['tag']; ?>" /><label for="checkbox25">Space Science</label></li>
+                                                </ul>
+
+                                                <div class="select">
+                                                    <label>All tags selected?</label>
+                                                    <button style="float:right" class="read-more submit mybutton" type="submit" name="tagcomplete" value="search">Yes, I'm good.</button>
+                                                    <button style="float:right" class="read-more submit" type="reset" name="reset">No</button>
+                                                </div>
+                                            </form>
+                                            <?php
+                                            // display experts of the relavant tags
+                                            ?>
                                         </div>
                                     </tda>
                                 </tr>
@@ -173,7 +184,7 @@
                                             <br>
                                             <div class="row row1">
                                                 <div class="col col1">
-                                                    <textarea class="inputform" type="text" name="desc" placeholder="Description..." style="height: 300px;"></textarea>
+                                                    <textarea class="inputform" type="text" name="desc" placeholder="Description..." value="<?php echo $data['content']; ?>" style="height: 300px;"></textarea>
                                                 </div>
                                             </div>
                                         </section>

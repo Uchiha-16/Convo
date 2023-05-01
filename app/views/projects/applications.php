@@ -73,58 +73,36 @@
                 <div class="LHS">
                     <br><br>
                     <div class="home-item1-1">
-                        <h3 class="home-head">Connecting People with a Passion for doing...</h3>
+                        <h3 class="home-head">Applications you got for your project...</h3>
                     </div>
 
-                    <?php foreach($data['projects'] as $project) : ?> 
+                    <?php foreach($data['applications'] as $applications) : ?> 
                         <div class="question-card">
                             <div class="tag-top">
-                                    <img class="icon-1" src="<?php echo URLROOT;?>/img/pfp/<?php echo $_SESSION['pfp']?>">
+                                    <img class="icon-1" src="<?php echo URLROOT;?>/img/pfp/<?php echo $applications->pfp?>">
                                 <div class="name-tag">
-                                    <p class="name-field"><?php echo $_SESSION['firstName']," ",$_SESSION['lastName'];?></p>
-                                    <label class="qdp-1-2">Lecturer, Faculty of Medicine, University of Colombo</label>
-                                    <!-- <p class="ins-field">University of Colombo School of Computing</p> -->
+                                    <p class="name-field"><?php echo $applications->firstName," ",$applications->lastName;?></p>
                                 </div>
                                 <div></div>
                             </div>
                             <div class="tag-question">
-                                <h2 class="question"><?php echo $project->title;?></h2>
+                                <p class="description"><?php echo $applications->description;?></p>
                             </div>
                             <div class="tag-question">
-                                <p class="description"><?php echo $project->description;?></p>
+                                <p class="description">Email: <a href="mailto: <?php echo $applications->email;?>"><?php echo $applications->email;?></a></p>
                             </div>
-                            
-                            <div class="tag-detail">
-                                <p><b>Deadline: </b><?php echo $project->deadline;?></p>
-                                <p><b>Slots available: </b><?php echo $project->availableslot;?></p>
-                                <p><b>Type: </b><?php echo $project->type;?></p>
-                                <p><b>Availability: </b><?php echo $project->availability;?></p>
-                                <p><b>Payment: </b>LKR <?php echo $project->payment;?></p>
-                            </div>
-                            <div class="tag-field">
-                                <button class="tag-button">
-                                    <?php echo $project->tag?>
-                                </button>
-                            </div>
-                            <form action="<?php echo URLROOT;?>/Projects/edit/<?php echo $project->PID; ?>" style="width: 50%; float:left">
-                                <button class="read-more edit-btn" type="submit"> <img style="width: 17px;" src="../img/edit.png">Edit</button>
-                            </form>
-                            <form action="" style="width: 40%; float:left"></form>
-                            <form action="<?php echo URLROOT;?>/Projects/delete/<?php echo $project->PID;?>" style="width: 50%; float:left">
-                                <button class="read-more edit-btn" onclick="return confirm('Are you sure you want to delete this record?')"> <img style="width: 17px;" src="../img/delete.png">Delete</button>
-                            </form>
                             <div class="tag-bottom">
-                                <label class="qdp-1-2">Published: October 25, 2022<br>Project duration: <?php echo $project->duration;?></label>
-                                <a href="<?php echo URLROOT;?>/Projects/applications/<?php echo $project->PID;?>"><button class="answer-btn" formaction="#">View Applications</button></a>  
-                            </div>
-
+                                <a href="<?php echo URLROOT;?>/files/cv/<?php echo $applications->cv?>"><button class="answer-btn" formaction="#" src="<?php echo URLROOT;?>/files/cv/<?php echo $applications->cv_file?>">View Resume</button></a>  
+                            </div>    
                         </div>
+                            
                     <?php endforeach; ?>
-            
                 </div>
+            
+                
                 <div class="RHS">
-                    <form action="<?php echo URLROOT;?>/projects/viewAllProjects"><button type="submit" style="float:right" class="read-more attend">All Projects</button></form>
-                    <form action="addProject.php"><button type="submit" style="float:right" class="read-more attend">Add Project</button></form><br><br>
+                    <form action="<?php echo URLROOT;?>/projects/viewMyProjects"><button type="submit" style="float:right" class="read-more attend">My Project</button></form>
+                    <form action="<?php echo URLROOT;?>/projects/add"><button type="submit" style="float:right" class="read-more attend">Add Project</button></form><br><br>
                     <div class="filter-div">
                         <div style="display:flex">
                             <img src="../images/filter.png">

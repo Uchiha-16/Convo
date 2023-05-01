@@ -59,7 +59,7 @@
                 <div class="screen">
                     <h3 class="screen-title">Edit Project</h3>
                     <div><hr></div>
-                    <form action="<?php echo URLROOT; ?>/Projects/edit" method="POST">
+                    <form action="<?php echo URLROOT; ?>/Projects/edit/<?php echo $data['PID']?>" method="POST">
                         <div class="form-group">
                             <label for="title">Title</label><br>
                             <div class="form-field-div">
@@ -69,50 +69,51 @@
 
                             <div class="form-field-1">
                                 <div class="form-field-div">
-                                    <label for="tag">Field</label><br>
-                                    <select name="tag" id="tag" class="form-control" required>
-                                        <!-- <option value="Computer Science">Computer Science</option>
-                                        <option value="Information Technology">Information Technology</option>
-                                        <option value="Software Engineering">Software Engineering</option>
-                                        <option value="Data Science">Data Science</option> -->
+                                    <label for="tags">Field</label><br>
+                                    <select name="tags" id="tag" class="form-control" required>
                                         <?php $tagArray = explode(",", $data['tags']->tags); ?>
                                         <?php foreach ($tagArray as $tag) : ?>
-                                            <option value="<?php echo $tag; ?>"><?php echo $tag; ?></option>
+                                            <option value="<?php echo $tag;?>"><?php echo $tag;?></option>
                                         <?php endforeach; ?>
-                                        <?php 
-                                            // $result1=mysqli_query ($conn,"SELECT tag FROM usertag WHERE $_SESSION[userID]=usertag.userID");
-                                            // while($row1=mysqli_fetch_array($result1)){
-                                            //     echo "<option value='$row1[tag]'>$row1[tag]</option>";
-                                            // }
-                                        ?>
+                                        <?php ?>
                                     </select><br><br>
                                 </div>
                                 
                                 <div class="form-field-div">
                                     <label for="slot">Available Slots</label><br>
-                                    <input type="text" name="slot" id="slot" class="form-control" required><br><br>
+                                    <input type="text" name="slot" id="slot" class="form-control" value="<?php echo $data['slot']; ?>" required><br><br>
                                 </div>
                             </div>
                             
                             <div class="form-field-2">
                                 <div class="form-field-div">
                                     <label for="deadline">Deadline</label><br>
-                                    <input type="date" name="deadline" id="deadline" class="form-control" required><br><br>
+                                    <input type="date" name="deadline" id="deadline" class="form-control" value="<?php echo $data['deadline']; ?>" required><br><br>
                                 </div>
                                 
                                 <div class="form-field-div">
                                     <label for="type">Type</label><br>
                                     <select name="type" id="type" class="form-control">
-                                        <option value="Project">Project</option>
-                                        <option value="Research">Research</option>
+                                        <?php if($data['type'] == 'Project') : ?>
+                                            <option value="Project" selected>Project</option>
+                                            <option value="Research">Research</option>
+                                        <?php else : ?>
+                                            <option value="Project">Project</option>
+                                            <option value="Research" selected>Research</option>
+                                        <?php endif; ?>
                                     </select><br><br>
                                 </div>
                                 
                                 <div class="form-field-div">
                                     <label for="availability">Availability</label><br>
                                     <select name="availability" id="availability" class="form-control">
-                                        <option value="Part-time">Part-time</option>
-                                        <option value="Full-time">Full-time</option>
+                                    <?php if($data['type'] == 'Part-time') : ?>
+                                            <option value="Project" selected>Part-time</option>
+                                            <option value="Research">Full-time</option>
+                                        <?php else : ?>
+                                            <option value="Project">Part-time</option>
+                                            <option value="Research" selected>Full-time</option>
+                                        <?php endif; ?>
                                     </select><br><br>
                                 </div>
                             </div>
@@ -120,15 +121,32 @@
                             <div class="form-field-1">
                                 <div class="form-field-div">
                                     <label for="payment">Payment</label><br>
-                                    <input type="currency" name="payment" id="payment" class="form-control" required><br><br>
+                                    <input type="currency" name="payment" id="payment" class="form-control" value="<?php echo $data['payment']; ?>" required><br><br>
                                 </div>
                                 <div class="form-field-div">
                                     <label for="duration">Duration</label><br>
                                     <select name="duration" id="duration" class="form-control">
-                                        <option value="3 months">3 months</option>
-                                        <option value="6 months">6 months</option>
-                                        <option value="1 year">1 year</option>
-                                        <option value="more than a year">More than a year</option>
+                                        <?php if($data['duration'] == '3 months') : ?>
+                                            <option value="3 months" selected>3 month</option>
+                                            <option value="6 months">6 months</option>
+                                            <option value="1 year">1 year</option>
+                                            <option value="more than a year">More than a year</option>
+                                        <?php elseif($data['duration'] == '6 months') : ?>
+                                            <option value="3 months">3 months</option>
+                                            <option value="6 months" selected>6 months</option>
+                                            <option value="1 year">1 year</option>
+                                            <option value="more than a year">More than a year</option>
+                                        <?php elseif($data['duration'] == '1 year') : ?>
+                                            <option value="3 months">3 months</option>
+                                            <option value="6 months">6 months</option>
+                                            <option value="1 year" selected>1 year</option>
+                                            <option value="more than a year">More than a year</option>
+                                        <?php else : ?>
+                                            <option value="3 months">3 months</option>
+                                            <option value="6 months">6 months</option>
+                                            <option value="1 year">1 year</option>
+                                            <option value="more than a year" selected>More than a year</option>
+                                        <?php endif; ?>
                                     </select><br><br>
                                 </div>
                                 
@@ -136,7 +154,7 @@
                             
                             <div>
                                 <label for="description">Description</label><br>
-                                <textarea name="description" id="description" class="form-textarea" placeholder="Enter description" required></textarea><br><br>
+                                <textarea name="description" id="description" class="form-textarea" placeholder="Enter description" required><?php echo $data['description']; ?></textarea><br><br>
                             </div>
                             <style>
                                 input, textarea{
