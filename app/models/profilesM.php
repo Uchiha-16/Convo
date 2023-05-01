@@ -74,7 +74,7 @@
             $this->db->bind(':email', $data['email']);
             $this->db->bind(':uname', $data['uname']);
             $this->db->bind(':password', $data['password']);
-            $this->db->bind(':pfp', $data['pfp_name']);
+            $this->db->bind(':pfp', $data['pfp']);
 
             $row = $this->db->execute();
             return $row;

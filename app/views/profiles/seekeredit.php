@@ -94,16 +94,16 @@
                     <div class="container-edit-profile">
                         <div class="left-profile-edit">
                         <div class="user-img">
-                        <label for="file" id="uploadbtn">
+                        <label for="file" id="imageUpload">
                             <img src="<?php echo URLROOT; ?>/img/pfp/<?php echo $data['profile']->pfp ?>" id="photo">
-                            <input type="file" id="file" name="pfp" value="">
+                            <input type="file" id="file" name="pfp" value="<?php echo $data['profile']->pfp; ?>">
                         </label>
                     </div>
                             <!-- <div class="profile-picture-sec">
                                 <img src="<?php echo URLROOT; ?>/img/pfp/<?php //echo $data['profile']->pfp ?>" alt="profile" class="profile-picture" id="photo">
                                 <input type="file" id="file" name="pfp" value="">
                             </div> -->
-                            <button class="read-more" style="width:70%">Click on the image to Edit</button>
+                            <div class="tag">Click on the image to Edit</div>
                         </div>
                         
                         <script>

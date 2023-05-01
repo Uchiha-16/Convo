@@ -46,6 +46,7 @@
 
         public function seekeredit(){
             $profile = $this->profilesModel->getprofile();
+            $old_filename = $profile->pfp;
             
             $tags = $this->profilesModel->getUsertags();
             if($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -53,13 +54,29 @@
                 // Validate the data
                 $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
                 $tag = isset($_POST['tag']) ? $_POST['tag'] : '0';
+                // Check if a new file has been uploaded
+                if($_FILES['pfp']['error'] == 0) {
+                    // Generate a unique filename for the uploaded file
+                    $new_filename = time() . '_' . $_FILES['pfp']['name'];
+                        
+                    // Move the uploaded file to its new location on the server and Validate thumbnail
+                    if($_FILES['pfp']['size'] > 0){
+                        if(uploadImage($_FILES['pfp']['tmp_name'], $new_filename, '/img/pfp/')) {
+                            // Uploaded Successfully
+                            // Delete the old profile picture file from the server
+                            unlink('/img/pfp/' . $old_filename);
+                        }else{
+                            $_FILES['pfp_err'] = 'Something Went Wrong when uploading the image';
+                        }
+                    }else{
+                        $_FILES['pfp_err'] = 'Please Select a Profile Picture';
+                    }
 
                 //Input Data
                 $data = [
                     'profile' => $profile,
                     'tags' => $tags->tags,
-                    'pfp' => ($_FILES['pfp']),
-                    'pfp_name' => time().'_'.($_FILES['pfp']['name']),
+                    'pfp' => $new_filename,
                     'fname' => trim($_POST['fname']),
                     'lname' => trim($_POST['lname']),
                     'email' => trim($_POST['email']),
@@ -77,16 +94,31 @@
                     'confirm_password_err' => '',
                     'tag_err' => ''
                 ];
+            }else{
+                //Input Data
+                $data = [
+                    'profile' => $profile,
+                    'tags' => $tags->tags,
+                    'pfp' => $old_filename,
+                    'fname' => trim($_POST['fname']),
+                    'lname' => trim($_POST['lname']),
+                    'email' => trim($_POST['email']),
+                    'uname' => trim($_POST['uname']),
+                    'oldpassword' => trim($_POST['passwordold']),
+                    'password' => trim($_POST['password']),
+                    'confirm_password' => trim($_POST['confirm_password']),
+                    'tag' => $tag,
+                    'fname_err' => '',
+                    'lname_err' => '',
+                    'email_err' => '',
+                    'uname_err' => '',
+                    'oldpassword_err' => '',
+                    'password_err' => '',
+                    'confirm_password_err' => '',
+                    'tag_err' => ''
+                ];
+            }
 
-
-                // Validate Image
-                if(uploadImage($data['pfp']['tmp_name'], $data['pfp_name'], '/img/pfp/')) {
-                    $data['pfp'] = $data['pfp_name'];
-                } else {
-                    $data['pfp'] = 'user.jpg';
-                }
-                //validate each inputs
-                // Validate fName
                 if(empty($data['fname'])) {
                     $data['fname_err'] = 'Please enter First name';
                 }
