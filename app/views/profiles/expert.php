@@ -43,9 +43,6 @@
                     <?php endif; ?>
 
         <!-- body content -->
-        <div class="alert success">
-                    <?php flash('reg_flash'); ?>
-                </div>
         <div class="container-div">
             <div class="content-body">
                 <div class="LHS">

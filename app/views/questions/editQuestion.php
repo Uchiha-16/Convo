@@ -106,10 +106,13 @@
                                 <td colspan="3">
                                     <h4 style="margin-bottom:.5rem">Tags <span class="star">*</span></h4>
                                     <div class="dropdown-div">
-                                        <label>Please Select <b>all the Tags</b> which are Related to the Event.</label>
+                                        <label>Please Select <b>all the Tags</b> which are Related to the Question.</label>
                                         <ul class="dropdown" id="dropdown">
+                                    
                                             <?php $tagarray = explode(",", $data['tag']); ?>
                                             <?php $tagarrayjson = json_encode($tagarray); ?>
+                                       
+                                            
 
                                             <li><input type="checkbox" value="agricultureScience" name="tag[]" id="checkbox1" /><label for="checkbox1">Agriculture Science</label></li>
 
@@ -176,7 +179,9 @@
 
 
                                     <script>
+                                        
                                         for (var i = 0; i < checkboxValues.length; i++) {
+                                            // alert(checkboxValues);
                                             var checkbox = document.querySelector("input[type='checkbox'][value='" + checkboxValues[i] + "']");
                                             if (checkbox) {
                                                 checkbox.checked = true;
