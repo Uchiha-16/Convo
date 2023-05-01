@@ -159,8 +159,9 @@
                     'title' => trim($_POST['title']),
                     'description' => trim($_POST['description']),
                     'slot' => trim($_POST['slot']),
-                    'tags' => $tag,
-                    'deadline' => date('Y-m-d H:i:s'),
+                    'tag' => $tag,
+                    'tags' =>$tags,
+                    'deadline' => trim($_POST['deadline']),
                     'type' => $_POST['type'],
                     'availability' => $_POST['availability'],
                     'duration' => $_POST['duration'],
@@ -184,7 +185,7 @@
                 }
 
                 // Validate Tag
-                if($data['tags'] == '0') {
+                if($data['tag'] == '0') {
                     $data['tag_err'] = 'Please Select One Specific Tag';
                 }
 
@@ -209,9 +210,9 @@
                 if(empty($data['title_err']) && empty($data['content_err']) && empty($data['tag_err'])) {
                     // Adding Question
                     if($this->projectModel->editProject($data)) {
-                        $LastID = $this->projectModel->getLastID();
-                        $tag = $data['tags'];
-                           if(!($this->projectModel->projecttag($tag, $LastID->$PID)))
+                       // $LastID = $this->projectModel->getLastID();
+                        $tag = $data['tag'];
+                           if(!($this->projectModel->updateTag($tag, $PID)))
                             {
                                 die('Something went wrong with inserting the tags');
                             }
@@ -248,6 +249,7 @@
                     'duration' => $project->duration,
                     'payment' => $project->payment,
                     'deadline' => $project->deadline,
+                    'tag' => $project->tag,
                     'title_err' => '',
                     'content_err' => '',
                     'tag_err' => '',

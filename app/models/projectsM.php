@@ -109,18 +109,18 @@
 
     //--------------------------------Edit Projects---------------------------------------------------------------
     public function editProject($data) {
-        $this->db->query('UPDATE project SET title = :title, description = :description, deadline = :deadline, availableslot = :availableslot, type = :type, availability = :availability, payment = :payment, duration = :duration WHERE PID = :PID');
+        $this->db->query('UPDATE project SET title = :title, description = :description, deadline = :deadline, availableslot = :slot, type = :type, availability = :availability, payment = :payment, duration = :duration WHERE PID = :PID');
         // Bind values
         $this->db->bind(':PID', $data['PID']);
         $this->db->bind(':title', $data['title']);
         $this->db->bind(':description', $data['description']);
         $this->db->bind(':deadline', $data['deadline']);
-        $this->db->bind(':availableslot', $data['availableslot']);
+        $this->db->bind(':slot', $data['slot']);
         $this->db->bind(':type', $data['type']);
         $this->db->bind(':availability', $data['availability']);
         $this->db->bind(':payment', $data['payment']);
         $this->db->bind(':duration', $data['duration']);
-        $this->db->bind(':userID', $_SESSION['userID']);
+       // $this->db->bind(':userID', $_SESSION['userID']);
         
         // Execute
         if($this->db->execute()) {
@@ -137,6 +137,19 @@
         return $row;
     }
     
+    public function updateTag($tag,$PID){
+        $this->db->query('UPDATE projecttag SET tag = :tag WHERE projectID = :PID');
+        // Bind values
+        $this->db->bind(':PID', $PID);
+        $this->db->bind(':tag', $tag);
+        
+        // Execute
+        if($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     //--------------------------------Delete Projects---------------------------------------------------------------
     public function deleteProject($PID) {

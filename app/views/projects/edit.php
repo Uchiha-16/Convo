@@ -70,10 +70,16 @@
                             <div class="form-field-1">
                                 <div class="form-field-div">
                                     <label for="tags">Field</label><br>
-                                    <select name="tags" id="tag" class="form-control" required>
+                                    <select name="tag" id="tag" class="form-control" required>
+                                            <option value="<?php echo $data['tag'];?>" selected><?php echo $data['tag'];?></option>
+                                         
                                         <?php $tagArray = explode(",", $data['tags']->tags); ?>
+
                                         <?php foreach ($tagArray as $tag) : ?>
-                                            <option value="<?php echo $tag;?>"><?php echo $tag;?></option>
+                                            <?php if($tag == $data['tag']) : ?>
+                                                <?php continue; ?>
+                                            <?php endif; ?>
+                                            <option value="<?php echo $tag;?>" ><?php echo $tag;?></option>
                                         <?php endforeach; ?>
                                         <?php ?>
                                     </select><br><br>
@@ -88,7 +94,7 @@
                             <div class="form-field-2">
                                 <div class="form-field-div">
                                     <label for="deadline">Deadline</label><br>
-                                    <input type="date" name="deadline" id="deadline" class="form-control" value="<?php echo $data['deadline']; ?>" required><br><br>
+                                    <input type="date" name="deadline" id="deadline" class="form-control" value="<?php echo $data['deadline']; ?>"  required><br><br>
                                 </div>
                                 
                                 <div class="form-field-div">
