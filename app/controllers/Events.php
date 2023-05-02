@@ -491,7 +491,7 @@
                             <p>'.$event->content.'</p><br>';
                             foreach($Etstatus as $eventstatus) :
                                 if($eventstatus->EID == $event->EID) :
-                                    echo '<label class="name-label">'.$eventstatus->fName.'" "'. $eventstatus->lName.'</label>';
+                                    echo '<label class="name-label">'.$eventstatus->fName.' '. $eventstatus->lName.'</label>';
                                     if($eventstatus->status == 'pending') :
                                         echo '<label class="time-label" style="background-color: lightgoldenrodyellow;color: black;">Pending</label>';
                                     else :
