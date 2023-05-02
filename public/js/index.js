@@ -138,7 +138,7 @@ function removedownRating(answerID){
     }
   })
 }
-//=========================================== Navbar Drop Down
+//=========================================== Navbar Drop Down ==================================
 
 /* When the user clicks on the button, 
 toggle between hiding and showing the dropdown content */
