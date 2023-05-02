@@ -1,5 +1,6 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 <link href="<?php echo URLROOT; ?>/css/event.css" rel="stylesheet" type="text/css" />
+<link href="<?php echo URLROOT; ?>/css/consultpage.css" rel="stylesheet" type="text/css"/>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 
@@ -175,58 +176,82 @@ function confirmation() {
     <div class="container-div">
         <div class="content-body">
             <div class="LHS" id="LHS">
-                <h3>Join online sessions that are conducted in your fields....</h3><br>
+                <h3>Invitations for online sessions...</h3><br>
 
-                <!-- Events -->
-                <?php foreach ($data['events'] as $event) : ?>
-                <div class="question-div" style="margin-bottom: 3rem;">
-                    <div class="info">
-                        <div>
-                            <p>TOPIC</p>
-                            <h3><?php echo $event->title ?></h3>
-                            <span><?php echo $event->content ?></span>
-                        </div>
-                        <div class="tags">
-                            <label>Category</label><br>
-                            <?php for ($i = 0; $i < count($data['tags']); $i++) : ?>
-                            <?php if ($data['tags'][$i]->EID == $event->EID) : ?>
-                            <?php $tagArray = explode(",", $data['tags'][$i]->tags); ?>
-                            <?php foreach ($tagArray as $tag) : ?>
-                            <div class="tag"><?php echo $tag ?></div>
-                            <?php endforeach; ?>
-                            <?php endif; ?>
-                            <?php endfor; ?>
-                        </div>
-                    </div>
-                    <div class="content-display">
-                        <div class="flex">
-                            <button
-                                class="read-more webinar"><?php echo date("D, M j, Y", strtotime($event->date)) ?></button>
-                            <button
-                                class="read-more webinar time"><?php echo date("h:i A", strtotime($event->time)) ?></button>
-                        </div><br>
-                        <p>Resource person</p>
-                        <div class="flex">
-                            <?php foreach ($data['resourcePerson'] as $RP) : ?>
-                            <?php if ($RP->EID == $event->EID) : ?>
-                            <div class="qdp">
-                                <div>
-                                    <img src="<?php echo URLROOT; ?>/img/pfp/<?php echo $RP->pfp ?>" />
+                <!-- Invitations -->
+                <?php foreach($data['invites'] as $invites) : ?>
+                    <div class="question-div">
+                        <div class="info">
+                            <?php 
+                            $dateString = $invites->date;
+                            $dateTime = new DateTime($dateString);
+
+                            $year = $dateTime->format('Y');
+                            $month = $dateTime->format('M');
+                            $day = $dateTime->format('d');
+?>
+                            <div class="calander">
+                                <div class="cal1">
+                                    <label><?php echo $month ?></label>
                                 </div>
-                                <div class="qdp-1" style="margin-left: 1rem;">
-                                    <label><?php echo $RP->name ?></label><br>
-                                    <label class="qdp-1-2"><?php echo $RP->qual ?></label>
+                                <div class="cal2">
+                                    <label><?php echo $day?></label>
                                 </div>
                             </div>
-                            <?php endif; ?>
-                            <?php endforeach; ?>
                         </div>
-                        <button style="float:right" class="read-more attend">ATTEND</button>
-                    </div>
-                </div>
-                <?php endforeach; ?>
 
+                        <?php date_default_timezone_set('Asia/Colombo'); 
+                        
+                        // Convert the future date to a Unix timestamp
+                            $futureTimestamp = strtotime($dateString);
+
+                            // Get the current Unix timestamp
+                            $currentTimestamp = time();
+
+                            // Calculate the time difference between the future and current timestamps
+                            $timeDifference = $futureTimestamp - $currentTimestamp;
+
+                            // Convert the time difference to days
+                            $daysRemaining = ceil($timeDifference / (60 * 60 * 24));
+                        ?>
+                        <div class="content-display">
+                            <h3><?php echo $invites->title ?></h3>
+                            <p><?php echo $invites->content ?></p>
+                            <?php foreach($data['mod'] as $moderator) : ?>
+                                <?php if($moderator->EID == $invites->EID) : ?>
+                                    <p style="font-size: 12px;color: gray;">Invited by <?php echo $moderator->name; ?></p>
+                                <?php endif; ?>
+                            <?php endforeach; ?><br>
+                            <?php foreach($data['eventstatus'] as $eventstatus) : ?>
+                                <?php if($eventstatus->EID == $invites->EID) : ?>
+                                    <label class="name-label"><?php echo $eventstatus->fName. " ". $eventstatus->lName; ?></label>
+                                    <?php if($eventstatus->status == 'pending') : ?>
+                                        <label class="time-label" style="background-color: lightgoldenrodyellow;color: black;">Pending</label>
+                                    <?php else : ?>
+                                        <label class="time-label">Accepted</label>
+                                    <?php endif; ?>
+                                    <br> <br>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                            <div class="date-count" style="margin-top: 1rem;">
+                            <form action="<?php echo URLROOT; ?>/events/myEvents/<?php echo $invites->EID; ?>">
+                                <button style="float:left" class="accept" type="submit" name="accept">Accept</button>
+                            </form>
+                            <form action="<?php echo URLROOT; ?>/events/eventRequests/<?php echo $invites->EID; ?>">
+                                <button style="float:right" class="decline" type="submit" name="decline">Decline</button>
+                            </form>
+                            </div>
+                        </div>
+                        <div class="appointment" style="text-align: right;height: 39px;">
+                            <label>
+                                <?php echo $daysRemaining ?> Days Remaining<br>
+                                <span style="font-size: 11px;color:lightsteelblue"><?php echo date("D, M j, Y", strtotime($invites->date)) ?> | <?php echo date("h:i A", strtotime($invites->time)) ?></span>
+                            </label>
+                        </div>
+                    </div> 
+                    <?php endforeach; ?>
             </div>
+
             <div class="RHS">
 
                 <?php if(isset($_SESSION['userID'])) : ?>
@@ -238,8 +263,8 @@ function confirmation() {
                 <br><br>
                 <?php endif; ?>
                 <?php if($_SESSION['role'] == 'expert') : ?>
-                <form action="<?php echo URLROOT; ?>/events/eventRequests"><button type="submit" style="float:right"
-                        class="read-more attend">Invitations</button></form>
+                <form action="<?php echo URLROOT; ?>/events/index"><button type="submit" style="float:right"
+                        class="read-more attend">Events</button></form>
                 <form action="<?php echo URLROOT; ?>/events/myEvents"><button type="submit" style="float:right"
                         class="read-more attend">My Events</button></form>
                 <br><br>

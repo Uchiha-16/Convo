@@ -20,6 +20,14 @@
             return $row;
         }
 
+        //get moderators
+        public function getMod(){
+            $this->db->query('SELECT DISTINCT event.eventID as EID, user.userID as userID, CONCAT(user.firstName, " ", user.lastName) as name FROM user 
+            JOIN event ON user.userID = event.userID;');
+            $row = $this->db->resultSet();
+            return $row;
+        }
+
         //****************************************************************Retrive Events************************************************************************************************************* */
 
         //getEvents for index
@@ -51,12 +59,12 @@
         }
 
         //get pending events of moderator
-        public function getPendingEvents(){
+        public function getPendingEvents($userID){
             $this->db->query('SELECT DISTINCT event.eventID as EID, event.eventTitle as title, event.date as date, event.time as time, 
-            event.zoomlink as zoomlink, event.description as content, event.userID as userID FROM event JOIN eventhandling ON 
+            event.zoomlink as link, event.description as content, event.userID as userID FROM event JOIN eventhandling ON 
             eventhandling.moderatorID = event.userID JOIN user ON eventhandling.expertID = user.userID WHERE 
             event.eventID = eventhandling.eventID AND event.status = "pending" AND event.userID = :userID ORDER BY event.date ASC;');
-            $this->db->bind(':userID', $_SESSION['userID']);
+            $this->db->bind(':userID', $userID);
             $row = $this->db->resultSet();
             return $row;
         }
@@ -89,9 +97,38 @@
         }
 
         public function getEventExperts($EID){
-            $this->db->query('SELECT user.userID as userID, user.firstName as fName, user.lastName as lName FROM user JOIN eventhandling 
-            ON eventhandling.expertID = user.userID WHERE eventhandling.eventID = :EID;');
+            $this->db->query('SELECT user.userID as userID, user.firstName as fName, user.lastName as lName, user.pfp as pfp, expert.qualification 
+            as qual FROM user JOIN eventhandling ON eventhandling.expertID = user.userID JOIN expert ON user.userID = expert.expertID WHERE 
+            eventhandling.eventID = :EID;');
             $this->db->bind(':EID', $EID);
+            $row = $this->db->resultSet();
+            return $row;
+        }
+
+        public function getInvitations($userID){
+            $this->db->query('SELECT event.eventID as EID, event.eventTitle as title, event.date as date, event.time as time, 
+            event.zoomlink as link, event.description as content, event.userID as userID FROM event JOIN eventhandling ON 
+            eventhandling.eventID = event.eventID WHERE eventhandling.expertID = :userID AND eventhandling.status = "pending" ORDER BY event.date ASC;');
+            $this->db->bind(':userID', $userID);
+            $row = $this->db->resultSet();
+            return $row;
+        }
+
+        public function eventstatusInvites(){
+            $this->db->query('SELECT eventhandling.eventID as EID, eventhandling.expertID as expertID, eventhandling.moderatorID as userID, 
+            eventhandling.status as status, user.firstName as fName, user.lastName as lName FROM eventhandling JOIN user ON 
+            eventhandling.expertID = user.userID JOIN event ON eventhandling.eventID = event.eventID;');
+            $row = $this->db->resultSet();
+            return $row;
+        }
+
+        public function getMyEvents($userID, $currentDate){
+            $this->db->query('SELECT DISTINCT event.eventID as EID, event.eventTitle as title, event.date as date, event.time as time, 
+            event.zoomlink as link, event.description as content, event.userID as userID FROM event JOIN eventhandling ON 
+            eventhandling.eventID = event.eventID JOIN user ON eventhandling.expertID = user.userID WHERE 
+            event.status = "approved" AND eventhandling.expertID = :userID AND event.date >= :currentDate ORDER BY event.date ASC;');
+            $this->db->bind(':userID', $userID);
+            $this->db->bind(':currentDate', $currentDate);
             $row = $this->db->resultSet();
             return $row;
         }
@@ -178,31 +215,71 @@
 
         //*************************************************************** SEARCH ****************************************************************//
         //get search results
-        public function search($search) {
+        public function search($search, $currentDate) {
             $this->db->query('SELECT DISTINCT event.eventID as EID, event.eventTitle as title, event.description as content, event.date as date, 
-            event.time as time, event.zoomlink as link FROM event JOIN eventtag ON event.eventID = eventtag.eventID WHERE event.status = "approved" 
-            AND (event.eventTitle LIKE :search OR event.description LIKE :search OR eventtag.tag LIKE :search) ORDER BY event.date ASC;');
+            event.time as time, event.zoomlink as link FROM event JOIN eventtag ON event.eventID = eventtag.eventID JOIN eventhandling ON 
+            event.eventID = eventhandling.eventID JOIN user ON eventhandling.expertID = user.userID WHERE event.status = "approved" 
+            AND event.date >= :currentDate AND (event.eventTitle LIKE :search OR event.description LIKE :search OR eventtag.tag LIKE :search OR 
+            user.firstName LIKE :search OR user.lastName LIKE :search OR CONCAT(user.firstName, " ", user.lastName) LIKE :search) ORDER BY event.date ASC;');
             $this->db->bind(':search', '%' . $search . '%');
+            $this->db->bind(':currentDate', $currentDate);
+            $row = $this->db->resultSet();
+            return $row;
+        }
+
+        public function searchPending($search, $currentDate, $userID) {
+            $this->db->query('SELECT DISTINCT event.eventID as EID, event.eventTitle as title, event.description as content, event.date as date, 
+            event.time as time, event.zoomlink as link FROM event JOIN eventtag ON event.eventID = eventtag.eventID JOIN eventhandling ON 
+            event.eventID = eventhandling.eventID JOIN user ON eventhandling.expertID = user.userID WHERE event.userID = :userID AND event.status = "pending" 
+            AND event.date >= :currentDate AND (event.eventTitle LIKE :search OR event.description LIKE :search OR eventtag.tag LIKE :search OR 
+            user.firstName LIKE :search OR user.lastName LIKE :search OR CONCAT(user.firstName, " ", user.lastName) LIKE :search) ORDER BY event.date ASC;');
+            $this->db->bind(':search', '%' . $search . '%');
+            $this->db->bind(':currentDate', $currentDate);
+            $this->db->bind(':userID', $userID);
             $row = $this->db->resultSet();
             return $row;
         }
 
         //get filter results
-        // public function filter($date,$QA1,$QA2,$rating,$tags) {
-        //     $this->db->query('SELECT DISTINCT question.QID as QID, question.title as title, question.content as content, 
-        //     question.date as date, question.rating as rating, question.visibility as visibility, user.uname as uname, user.firstName as fName, user.lastName as lName, user.pfp as pfp
-        //     FROM question JOIN user on question.userID = user.userID JOIN questiontag ON question.QID = questiontag.QID WHERE question.status = "approved" AND (' . $tags .') AND question.date >= DATE_SUB(NOW(), INTERVAL '.$date.' MONTH) AND question.rating <= '.$rating.' AND question.answercount BETWEEN '.$QA1.' AND '.$QA2.' ORDER BY question.rating DESC');
-        //     $row = $this->db->resultSet();
-        //     return $row;
-        // }
+        public function filter($start, $end, $tags) {
+            $this->db->query('SELECT DISTINCT event.eventID as EID, event.eventTitle as title, event.description as content, event.date as date, 
+            event.time as time, event.zoomlink as link FROM event JOIN eventtag on event.eventID = eventtag.eventID WHERE event.status = "approved" 
+            AND (' . $tags .') AND event.date BETWEEN "'. $start .'" AND "'. $end .'" ORDER BY event.date ASC;');
+            $row = $this->db->resultSet();
+            return $row;
+        }
 
-        //get filter results for index
-        // public function filterIndex($date,$QA1,$QA2,$rating) {
-        //     $this->db->query('SELECT DISTINCT question.QID as QID, question.title as title, question.content as content, 
-        //     question.date as date, question.rating as rating, question.visibility as visibility, user.uname as uname, user.firstName as fName, user.lastName as lName, user.pfp as pfp
-        //     FROM question JOIN user on question.userID = user.userID JOIN questiontag ON question.QID = questiontag.QID WHERE question.status = "approved" AND question.date >= DATE_SUB(NOW(), INTERVAL '.$date.' MONTH) AND question.rating <= '.$rating.' AND question.answercount BETWEEN '.$QA1.' AND '.$QA2.' ORDER BY question.rating DESC');
-        //     $row = $this->db->resultSet();
-        //     return $row;
-        // }
+        public function filterPending($start, $end, $tags) {
+            $this->db->query('SELECT DISTINCT event.eventID as EID, event.eventTitle as title, event.description as content, event.date as date, 
+            event.time as time, event.zoomlink as link FROM event JOIN eventtag on event.eventID = eventtag.eventID WHERE event.status = "pending" 
+            AND (' . $tags .') AND event.date BETWEEN "'. $start .'" AND "'. $end .'" ORDER BY event.date ASC;');
+            $row = $this->db->resultSet();
+            return $row;
+        }
+
+        //*************************************************************** OTHER ****************************************************************//
+
+        public function acceptEvent($EID, $userID){
+            $this->db->query('UPDATE eventhandling SET status = "accepted" WHERE eventID = :EID AND expertID = :userID');
+            $this->db->bind(':EID', $EID);
+            $this->db->bind(':userID', $userID);
+            if($this->db->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        public function rejectEvent($EID, $userID){
+            $this->db->query('UPDATE eventhandling SET status = "rejected" WHERE eventID = :EID AND expertID = :userID');
+            $this->db->bind(':EID', $EID);
+            $this->db->bind(':userID', $userID);
+            if($this->db->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
     }
 ?>

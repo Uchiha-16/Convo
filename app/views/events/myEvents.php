@@ -175,7 +175,7 @@ function confirmation() {
     <div class="container-div">
         <div class="content-body">
             <div class="LHS" id="LHS">
-                <h3>Join online sessions that are conducted in your fields....</h3><br>
+                <h3>My Events....</h3><br>
 
                 <!-- Events -->
                 <?php foreach ($data['events'] as $event) : ?>
@@ -185,6 +185,11 @@ function confirmation() {
                             <p>TOPIC</p>
                             <h3><?php echo $event->title ?></h3>
                             <span><?php echo $event->content ?></span>
+                            <?php foreach($data['mod'] as $moderator) : ?>
+                                <?php if($moderator->EID == $event->EID) : ?>
+                                    <p style="font-size: 12px;color: gray;">Moderator: <?php echo $moderator->name; ?></p>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
                         </div>
                         <div class="tags">
                             <label>Category</label><br>
@@ -238,10 +243,10 @@ function confirmation() {
                 <br><br>
                 <?php endif; ?>
                 <?php if($_SESSION['role'] == 'expert') : ?>
+                <form action="<?php echo URLROOT; ?>/events/index"><button type="submit" style="float:right"
+                        class="read-more attend">Events</button></form>
                 <form action="<?php echo URLROOT; ?>/events/eventRequests"><button type="submit" style="float:right"
                         class="read-more attend">Invitations</button></form>
-                <form action="<?php echo URLROOT; ?>/events/myEvents"><button type="submit" style="float:right"
-                        class="read-more attend">My Events</button></form>
                 <br><br>
                 <?php endif; ?>
                 <?php endif; ?>

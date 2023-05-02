@@ -90,7 +90,7 @@
     box-shadow: 0px 4px 21px rgb(0 0 0 / 7%);
     border-radius: 20px;
     padding: 2rem;
-    height: 85.6%;
+    height: auto;
 }
 .filter-div img{
     width: 22px;

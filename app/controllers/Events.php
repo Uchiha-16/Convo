@@ -145,8 +145,6 @@
 
             $resourcePerson = $this->eventsModel->getResourcePerson();
 
-            // $qualifications = $this->eventsModel->getQualification();
-            
             $data = [
                 'events' => $events,
                 'tags' => $tags,
@@ -173,6 +171,23 @@
             ];
 
             $this->view('events/pending', $data);
+        }
+
+        public function eventRequests(){
+            $userID = $_SESSION['userID'];
+
+            $invites = $this->eventsModel->getInvitations($userID);
+            $eventstatus = $this->eventsModel->eventstatusInvites();
+            $mod = $this->eventsModel->getMod();
+
+            $data = [
+                'userID' => $userID,
+                'invites' => $invites,
+                'eventstatus' => $eventstatus,
+                'mod' => $mod,
+            ];
+
+            $this->view('events/eventRequests', $data);
         }
 
         public function editEvent($EID){
@@ -308,13 +323,72 @@
             }
         }
 
+        public function myEvents(){
+            $userID = $_SESSION['userID'];
+
+            $usertag = $this->eventsModel->getUserTag();
+            $str = '';
+            foreach($usertag as $tag) {
+                $str = $str . 'eventtag.tag = "' . $tag->tag . '" OR ';
+            }
+            $str = substr($str, 0, -4);
+
+            $currentDate = date('Y-m-d'); // get the current date in the format "YYYY-MM-DD"
+            $events = $this->eventsModel->getMyEvents($userID, $currentDate); 
+            $tags = $this->eventsModel->getEventTags();
+            $resourcePerson = $this->eventsModel->getResourcePerson();
+            $mod = $this->eventsModel->getMod();
+
+            $data = [
+                'events' => $events,
+                'tags' => $tags,
+                'resourcePerson' => $resourcePerson,
+                // 'qualifications' => $qualifications,
+                'usertag' => $usertag,
+                'mod' => $mod,
+            ];
+
+
+            $this->view('events/myEvents', $data);
+        }
+
+        public function invite($EID){
+            if($_SERVER['REQUEST_METHOD'] == 'POST') {
+                // Form is submitting
+                // Validate the data
+                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+                date_default_timezone_set('Asia/Colombo');
+
+                $userID = $_SESSION['userID'];
+
+                if (isset($_POST['accept'])) {
+
+                    if($this->eventsModel->acceptEvent($EID, $userID)){
+                        flash('reg_flash','Event Accepted Successfully');
+                        redirect('events/myEvents');
+                    }else{
+                        die('Something went wrong');
+                    }
+                }elseif (isset($_POST['reject'])) {
+
+                    if($this->eventsModel->rejectEvent($EID, $userID)){
+                        flash('reg_flash','Event Rejected');
+                        redirect('events/eventRequests');
+                    }else{
+                        die('Something went wrong');
+                    }
+                }
+            }
+        }
+
         //get search results
         public function search() {
             $search = $_POST['keywords'];
             
             // print($str);
             if(isset($_SESSION['userID'])){
-                $events = $this->eventsModel->search($search);
+                $currentDate = date("Y-m-d");
+                $events = $this->eventsModel->search($search, $currentDate);
             }
             
             // print_r($search);
@@ -347,17 +421,17 @@
                         <div class="flex">';
                             $resourcePerson = $this->eventsModel->getEventExperts($event->EID);
                             foreach ($resourcePerson as $RP) :
-                                if ($RP->EID == $event->EID) :
+                                
                                     echo '<div class="qdp">
                                         <div>
                                             <img src="'.URLROOT.'/img/pfp/'.$RP->pfp.'" />
                                         </div>
                                         <div class="qdp-1" style="margin-left: 1rem;">
-                                            <label>'.$RP->name.'</label><br>
+                                            <label>'.$RP->fName.' '.$RP->lName.'</label><br>
                                             <label class="qdp-1-2">'.$RP->qual.'</label>
                                         </div>
                                     </div>';
-                                endif;
+                                
                             endforeach;
                         echo '</div>
                         <button style="float:right" class="read-more attend">ATTEND</button>
@@ -366,146 +440,194 @@
             }        
         }
 
-        //filter by category
-        // public function filter() {
+        //get pending search results
+        public function searchPending() {
+            $search = $_POST['keywords'];
+            $userID = $_SESSION['userID'];
             
-        //     $date = isset($_POST['publishDate']) ? $_POST['publishDate'] : '0';
-        //     $QA = isset($_POST['QA']) ? $_POST['QA'] : '0';
-        //     $rating = isset($_POST['rating']) ? $_POST['rating'] : '0';
-
-        //     // print_r($date);
-        //     // print_r($QA);
-        //     // print_r($rating);
-           
-        //     if($date == 0 && $QA == 0 && $rating == 0){
-        //         if(isset($_SESSION['userID'])){
-        //             if($_SESSION['role'] == 'seeker'){
-        //                 $this->seeker();
-        //             }elseif($_SESSION['role'] == 'expert'){
-        //                 $this->expert();
-        //             }elseif($_SESSION['role'] == 'company'){
-        //                 $this->company();
-        //             }    
-        //         }else{
-        //             $this->index();
-        //         }
-                
-        //     }else{
-        //         if($date != 0){
-        //             if(in_array('last year', $date)){
-        //                 $date = 12;
-        //             }elseif(in_array('last 6 months', $date)){
-        //                 $date = 6;
-        //             }elseif(in_array('last 3 months', $date)){
-        //                 $date = 3;
-        //             }else{
-        //                 $date = 24;
-        //         }
-        //     }else{
-        //         $date = 24;
-        //     }
+            if(isset($_SESSION['userID'])){
+                $currentDate = date("Y-m-d");
+                $events = $this->eventsModel->searchPending($search, $currentDate, $userID);
+                $Etstatus = $this->eventsModel->eventstatus();
+            }
             
-        //     if($rating != 0){
-        //         if(in_array(5,$rating)){
-        //             $rating = 5;
-        //         }elseif(in_array(4,$rating)){
-        //             $rating = 4;
-        //         }
-        //         elseif(in_array(3,$rating)){
-        //             $rating = 3;
-        //         }
-        //         elseif(in_array(2,$rating)){
-        //             $rating = 2;
-        //         }
-        //         elseif(in_array(1,$rating)){
-        //             $rating = 1;
-        //         }else{
-        //             $rating = 5;
-        //         }
-        //     }else{
-        //         $rating = 5;
-        //     }
-        //     if($QA != 0){
-        //         if(in_array('Answered',$QA)){
-        //             $QA1 = 1;
-        //             $QA2 = 1000;
-        //             if((in_array('Not Answered',$QA))){
-        //                 $QA1 = 0;
-        //             }
-        //         }   
-        //         elseif(in_array('Not Answered',$QA)){
-        //             $QA1 = 0;
-        //             $QA2 = 0;
-    
-        //         }else{
-        //             $QA1 = 0;
-        //             $QA2 = 1000;
-        //         }
-        //     }else{
-        //         $QA1 = 0;
-        //         $QA2 = 1000;
-        //     }
-    
-        //         // print_r($date);
-        //         // print_r($QA1);
-        //         // print_r($QA2);
-        //         // print_r($rating);
+            // print_r($search);
+            echo '<h3>Search Results for "'.$search.'"</h3><br>';
+            foreach($events as $event):
+                echo '<div class="question-div" style="margin-bottom: 3rem;">
+                        <div class="info">';
+                            $dateString = $event->date;
+                            $dateTime = new DateTime($dateString);
 
-        //         if(isset($_SESSION['userID'])){
-        //             $usertag = $this->pagesM->getUserTag();
+                            $year = $dateTime->format('Y');
+                            $month = $dateTime->format('M');
+                            $day = $dateTime->format('d');
 
-        //             $str = '';
-    
-        //             foreach($usertag as $tag) {
-        //                 $str = $str . 'questiontag.tag = "' . $tag->tag . '" OR ';
-    
-        //             }
-    
-        //             $str = substr($str, 0, -4);
-    
-        //             $questions = $this->pagesM->filter($date,$QA1,$QA2,$rating,$str);
-        //         }else{
-        //             $questions = $this->pagesM->filterIndex($date,$QA1,$QA2,$rating);
-        //         }
-                
+                        echo'<div class="calander">
+                                <div class="cal1">
+                                    <label>'.$month.'</label>
+                                </div>
+                                <div class="cal2">
+                                    <label>'.$day.'</label>
+                                </div>
+                            </div>
+                        </div>';
+                        date_default_timezone_set('Asia/Colombo'); 
+                        
+                        // Convert the future date to a Unix timestamp
+                        $futureTimestamp = strtotime($dateString);
 
-        //         $tags = $this->pagesM->getQuestionTags();
+                        // Get the current Unix timestamp
+                        $currentTimestamp = time();
 
-        //         $count = array();
-        //         $c = 0;
-        //         foreach($questions as $question) {
-        //             $count[$c] = $this->pagesM->answerCount($question->QID);
-        //             $count[$c]->QID = $question->QID;
-        //             $c++;
-        //         }
+                        // Calculate the time difference between the future and current timestamps
+                        $timeDifference = $futureTimestamp - $currentTimestamp;
 
-                
-        //         $data = [
-        //             'questions' => $questions,
-        //             'tags' => $tags,
-        //             'count' => $count,
-        //             'date' => $_POST['publishDate'],
-        //             'rating' => $_POST['rating'],
-        //             'QA' => $_POST['QA']
-        //         ];
-                
-        //         // print_r($questions);
-        //         if(isset($_SESSION['userID'])){
-        //             if($_SESSION['role'] == 'seeker'){
-        //                 $this->view('pages/seeker', $data);
-        //             }
-        //             elseif($_SESSION['role'] == 'expert'){
-        //                 $this->view('pages/expert', $data);
-        //             }else{
-        //                 $this->view('pages/company', $data);
-        //             }
-        //         }else{
-        //             $this->view('pages/index', $data);
-        //         }
-
+                        // Convert the time difference to days
+                        $daysRemaining = ceil($timeDifference / (60 * 60 * 24));
                     
-        //     }
-        // }
+                        echo '<div class="content-display">
+                            <h3>'.$event->title.'</h3>
+                            <p>'.$event->content.'</p><br>';
+                            foreach($Etstatus as $eventstatus) :
+                                if($eventstatus->EID == $event->EID) :
+                                    echo '<label class="name-label">'.$eventstatus->fName.'" "'. $eventstatus->lName.'</label>';
+                                    if($eventstatus->status == 'pending') :
+                                        echo '<label class="time-label" style="background-color: lightgoldenrodyellow;color: black;">Pending</label>';
+                                    else :
+                                        echo '<label class="time-label">Accepted</label>';
+                                    endif;
+                                    echo '<br> <br>';
+                                endif;
+                            endforeach;
+                            echo '<div class="date-count" style="margin-top: 1rem;">
+                            <form action="'.URLROOT.'/events/editEvent/'.$event->EID.'">
+                                <button type="submit" style="float:left" class="decline">Re-schedule</button>
+                            </form>
+                            </div>
+                        </div>
+                        <div class="appointment">
+                            <label>'.$daysRemaining.' Days Remaining</label>
+                        </div>
+                </div>';
+            endforeach;        
+        }
+
+        //filter by category
+        public function filter() {
+            
+            $date = isset($_POST['publishDate']) ? $_POST['publishDate'] : '0';
+            $hostEvent = isset($_POST['hostEvent']) ? $_POST['hostEvent'] : '0';
+
+            // print_r($date);
+            // print_r($hostEvent);
+            if($date == '0' && $hostEvent == '0'){
+                $this->index();
+            }
+            else{
+                if($date != '0'){
+                    if($date == 'Today'){
+                        $date = 1;
+                    }elseif($date == 'This week'){
+                        $date = 7;
+                    }elseif($date == 'This month'){
+                        $date = 31;
+                    }else{
+                        $date = 365;
+                    }
+                }
+
+                if($hostEvent != '0'){
+                    if($hostEvent == 'past'){
+                        $hostEvent = 0; //past
+                    }else{
+                        $hostEvent = 1; //upcoming
+                    }
+                }
+
+                $now = date("Y-m-d");
+                $start = $now . " 00:00:00";
+                $end = date("Y-m-d", strtotime("+{$date} days")) . " 23:59:59";
+                
+                // print_r($date);
+
+                if(isset($_SESSION['userID'])){
+                    $usertag = $this->eventsModel->getUserTag();
+                    $str = '';
+                    foreach($usertag as $tag) {
+                        $str = $str . 'eventtag.tag = "' . $tag->tag . '" OR ';
+                    }
+                    $str = substr($str, 0, -4);
+                    $events = $this->eventsModel->filter($start,$end,$str);
+                }
+
+                $tags = $this->eventsModel->getEventTags();
+                $resourcePerson = $this->eventsModel->getResourcePerson();
+                    
+                $data = [
+                    'events' => $events,
+                    'tags' => $tags,
+                    'date' => $_POST['publishDate'],
+                    'resourcePerson' => $resourcePerson,
+                ];
+                    
+                // print_r($events);
+                    
+                $this->view('events/index', $data);
+            }
+        }
+
+        public function filterPending(){
+            $date = isset($_POST['publishDate']) ? $_POST['publishDate'] : '0';
+
+            // print_r($date);
+           
+            if($date != '0'){
+                if($date == 'Today'){
+                    $date = 1;
+                }elseif($date == 'This week'){
+                    $date = 7;
+                }elseif($date == 'This month'){
+                    $date = 31;
+                }else{
+                    $date = 365;
+                }
+
+                $now = date("Y-m-d");
+                $start = $now . " 00:00:00";
+                $end = date("Y-m-d", strtotime("+{$date} days")) . " 23:59:59";
+                
+                // print_r($date);
+
+                if(isset($_SESSION['userID'])){
+                    $usertag = $this->eventsModel->getUserTag();
+                    $str = '';
+                    foreach($usertag as $tag) {
+                        $str = $str . 'eventtag.tag = "' . $tag->tag . '" OR ';
+                    }
+                    $str = substr($str, 0, -4);
+                    $events = $this->eventsModel->filterPending($start,$end,$str);
+                }
+
+                $tags = $this->eventsModel->getEventTags();
+                $resourcePerson = $this->eventsModel->getResourcePerson();
+                $eventstatus = $this->eventsModel->eventstatus();
+                    
+                $data = [
+                    'pendingEvents' => $events,
+                    'tags' => $tags,
+                    'date' => $_POST['publishDate'],
+                    'resourcePerson' => $resourcePerson,
+                    'eventstatus' => $eventstatus,
+                ];
+                    
+                // print_r($events);
+                    
+                $this->view('events/pending', $data);
+            }else{
+                $this->pending();
+            }
+        }
     }
 
 ?>

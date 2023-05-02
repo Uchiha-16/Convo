@@ -30,9 +30,95 @@
     <?php elseif (($_SESSION['role']) == 'expert') : ?>
     <?php require APPROOT . '/views/inc/components/Enavbar.php'; ?>
     <?php elseif (($_SESSION['role']) == 'seeker/mod') : ?>
-    <?php require APPROOT . '/views/inc/components/SMnavbar.php'; ?>
-    <?php elseif (($_SESSION['role']) == 'expert/mod') : ?>
-    <?php require APPROOT . '/views/inc/components/EMnavbar.php'; ?>
+        <!-- nav bar -->
+        <div class="nav">
+
+            <?php if(isset($_SESSION['userID'])) : ?>
+            <div><a href="<?php echo URLROOT; ?>/Pages/seeker"><img
+                        src="<?php echo URLROOT; ?>/img/logo%20with%20name%20WHITE%201.png" id="logo"></a></div>
+            <div class="nav-hover"><a href="<?php echo URLROOT; ?>/Pages/seeker">Home</a></div>
+            <div class="nav-hover"><a href="<?php echo URLROOT; ?>/Webinars/home">Webinar</a></div>
+            <div><input id="live_search_pending" type="search" name="search" placeholder="Search by tag/ expert/ title" />
+            </div>
+
+            <div class="dropdown-list">
+                <button class="dropbtn dropbtn-1" onclick="drop()"><img src="<?php echo URLROOT; ?>/img/plus.png"
+                        class="icon"> Add New</button>
+                <div class="dropdown-content" id="myDropdown">
+                    <a href="<?php echo URLROOT; ?>/events/add">Event</a>
+                    <a href="<?php echo URLROOT;?>/Questions/add">Question</a>
+                    <a href="<?php echo URLROOT;?>/Blogs/add" style="border-bottom:none;">Blog</a>
+                </div>
+            </div>
+
+
+            <!-- notification bar -->
+            <div class="notify-count">
+                <span>10</span>
+            </div>
+            <div class="dropbtn dropbtn-1 notification" onclick="drop3()">
+                <img class="dropbtn" src="<?php echo URLROOT; ?>/img/notification.png" class="nav-icon"
+                    style="width: 25px;">
+            </div>
+            <div class="dropdown-content content3" id="myDropdown3" style="top: 5.5rem;">
+                <div class="head">
+                    <h4>Notifications</h4>
+                    <div class="check-box">
+                        <input type="checkbox">
+                    </div>
+                </div>
+                <div style="display:block">
+                    <div class="tabs">
+                        <P><b>New answer added to </b><span style="color:#00a7ae;">String Theory</span> by Varsha Wijethunge
+                        </P>
+                    </div>
+                    <div class="tabs">
+                        <P><b>Upcoming consultation </b>with <span style="color:#00a7ae;">Dilky Liyanage</span></P>
+                    </div>
+                    <div class="tabs">
+                        <P><b>Upcoming event </b>on <span style="color:#00a7ae;">Data Structures and Algorithms</span></P>
+                    </div>
+                    <div class="tabs">
+                        <P><b>You have been selected </b>to the <span style="color:#00a7ae;">A9 Project</span></P>
+                    </div>
+                </div>
+            </div>
+            <!-- notification bar end -->
+
+            <div class="nav-hover"><a href="<?php echo URLROOT; ?>/Chats/index"><img
+                        src="<?php echo URLROOT; ?>/img/chat.png" class="nav-icon"></a></div>
+
+            <div class="dropbtn" onclick="drop2()">
+                <img class="dropbtn" src="<?php echo URLROOT; ?>/img/profile.png" class="nav-icon" style="width: 25px;">
+                <div class="dropdown-content dropdown-content2" id="myDropdown2">
+                    <a href="<?php echo URLROOT;?>/Profiles/seeker">Profile</a>
+                    <a href="<?php echo URLROOT;?>/Moderators/approve">Approvals</a>
+                    <a href="<?php echo URLROOT;?>/Blogs/index">Blogs</a>
+                    <a href="<?php echo URLROOT;?>/Events/index">Events</a>
+                    <a href="<?php echo URLROOT;?>/Projects/index">Projects</a>
+                    <a href="<?php echo URLROOT;?>/SkillTest/index">Skill Test</a>
+                    <a href="<?php echo URLROOT;?>/Subscriptions/index">Subscription</a>
+                    <a href="<?php echo URLROOT?>/Users/logout" style="border-bottom:none">Log-out</a>
+                </div>
+            </div>
+            <?php else : ?>
+            <div><a href="<?php echo URLROOT; ?>/Pages/index"><img
+                        src="<?php echo URLROOT; ?>/img/logo%20with%20name%20WHITE%201.png" id="logo"></a></div>
+            <div class="nav-hover"><a href="<?php echo URLROOT; ?>/Pages/index">Home</a></div>
+            <div class="nav-hover"><a href="<?php echo URLROOT; ?>/Webinars/home">Webinar</a></div>
+            <div><input type="search" name="search" placeholder="Search for questions..." /></div>
+            <style>
+            .nav {
+                grid-template-columns: 5% 6% 6% 57% 6% 6% 8% 6%;
+            }
+            </style>
+            <div class="nav-hover"><a href="<?php echo URLROOT;?>/Users/login">Login</a></div>
+            <div class="nav-hover"><a href="<?php echo URLROOT;?>/Users/signup">Register</a></div>
+            <div class="nav-hover"><a href="<?php echo URLROOT; ?>/Pages/about">About us</a></div>
+            <?php endif; ?>
+
+        </div>
+        <!-- nav bar end -->
     <?php elseif (($_SESSION['role']) == 'premium') : ?>
     <?php require APPROOT . '/views/inc/components/Pnavbar.php'; ?>
     <?php elseif (($_SESSION['role']) == 'admin') : ?>
@@ -42,7 +128,7 @@
         <!-- body content -->
         <div class="container-div">
             <div class="content-body">
-                <div class="LHS">
+                <div class="LHS" id="LHS">
                     <h3>Pending Events</h3><br>
 
                     <?php foreach($data['pendingEvents'] as $pendingEvents) : ?>
@@ -88,6 +174,8 @@
                                     <label class="name-label"><?php echo $eventstatus->fName. " ". $eventstatus->lName; ?></label>
                                     <?php if($eventstatus->status == 'pending') : ?>
                                         <label class="time-label" style="background-color: lightgoldenrodyellow;color: black;">Pending</label>
+                                    <?php elseif($eventstatus->status == 'rejected') : ?>
+                                        <label class="time-label" style="background-color:lightcoral;color: black;">Rejected</label>
                                     <?php else : ?>
                                         <label class="time-label">Accepted</label>
                                     <?php endif; ?>
@@ -100,8 +188,11 @@
                             </form>
                             </div>
                         </div>
-                        <div class="appointment">
-                            <label><?php echo $daysRemaining ?> Days Remaining</label>
+                        <div class="appointment" style="text-align: right;height: 39px;">
+                            <label>
+                                <?php echo $daysRemaining ?> Days Remaining<br>
+                                <span style="font-size: 11px;color:lightsteelblue"><?php echo date("D, M j, Y", strtotime($pendingEvents->date)) ?> | <?php echo date("h:i A", strtotime($pendingEvents->time)) ?></span>
+                            </label>
                         </div>
                     </div> 
                     <?php endforeach; ?>
@@ -119,93 +210,52 @@
                         <?php endif; ?>
                         <?php if($_SESSION['role'] == 'expert') : ?>
                             <form action="<?php echo URLROOT; ?>/events/eventRequests"><button type="submit" style="float:right"
-                                    class="read-more attend">Event Requests</button></form>
+                                    class="read-more attend">Invitations</button></form>
                             <form action="<?php echo URLROOT; ?>/events/myEvents"><button type="submit" style="float:right"
                                     class="read-more attend">My Events</button></form>
                             <br><br>
                         <?php endif; ?>
                     <?php endif; ?>
-                <br><br><br><br><br>
+                <br><br><br>
                     <div class="filter-div">
-                        <div style="display:flex">
-                            <img src="<?php echo URLROOT; ?>/img/filter.png">
-                            <label>Filters</label><button class="read-more go">Go</button>
-                        </div>
-                        <div>
-                            <form action="" method="POST">
-                            
+                        <form action="<?php echo URLROOT; ?>/events/filterPending" method="POST">
+                            <div style="display:flex">
+                                <img src="<?php echo URLROOT; ?>/img/filter.png">
+                                <label>Filters</label><button class="read-more go">Go</button>
+                            </div>
+                            <div>
                                 <!-- Filter 1 -->
-                                
-                                
-                                <!-- Filter 2 -->
                                 <div class="checkbox-1">
-                                    <span class="checkbox-title" onclick="filter2()">Publish date <i class="arrow up" id="up2" style="margin-left: 4.3rem;"></i><i class="arrow down" id="down2" style="margin-left: 4.3rem;"></i></span>
+                                    <span class="checkbox-title" onclick="filter2()">Happening <i class="arrow up"
+                                            id="up2" style="margin-left: 6.7rem;"></i><i class="arrow down" id="down2"
+                                            style="margin-left: 6.7rem;"></i></span>
                                     <ul id="checkbox-2">
                                         <li>
                                             <label for="checkbox1">
-                                                <input type="checkbox" value="last 3 months" name="publishDate[]" id="checkbox1"/>Last 3 months
-                                            </label>
-                                        </li>     
-                                        <li>
-                                            <label for="checkbox2">
-                                                <input type="checkbox" value="last 6 months" name="publishDate[]" id="checkbox2"/>Last 6 months
-                                            </label>
-                                        </li>        
-                                        <li>
-                                            <label for="checkbox3">
-                                                <input type="checkbox" value="last year" name="publishDate[]" id="checkbox3"/>Last year
+                                                <input type="radio" value="Today" name="publishDate"
+                                                    id="checkbox1" />Today
                                             </label>
                                         </li>
-                                    </ul>
-                                </div>
-                                
-                                <!-- Filter 3 -->
-                                <div class="checkbox-1">
-                                    <span class="checkbox-title" onclick="filter3()">Questions &amp; answers <i class="arrow up" id="up3" style="margin-left: 0.7rem;"></i><i class="arrow down" id="down3" style="margin-left: 0.7rem;"></i></span>
-                                    <ul id="checkbox-3">
                                         <li>
                                             <label for="checkbox1">
-                                                <input type="checkbox" value="last 3 months" name="QA[]" id="checkbox1"/>My questions
+                                                <input type="radio" value="This week" name="publishDate"
+                                                    id="checkbox1" />This week
                                             </label>
-                                        </li>     
+                                        </li>
                                         <li>
                                             <label for="checkbox2">
-                                                <input type="checkbox" value="last 6 months" name="QA[]" id="checkbox2"/>Answered
+                                                <input type="radio" value="This month" name="publishDate"
+                                                    id="checkbox2" />This month
                                             </label>
-                                        </li>        
+                                        </li>
                                         <li>
                                             <label for="checkbox3">
-                                                <input type="checkbox" value="last year" name="QA[]" id="checkbox3"/>Not answered
+                                                <input type="radio" value="This year" name="publishDate"
+                                                    id="checkbox3" />This year
                                             </label>
                                         </li>
                                     </ul>
                                 </div>
-
-                                
-                                <!-- Filter 4 -->
-                                <div class="checkbox-1">
-                                    <span class="checkbox-title" onclick="filter#()">Rating <i class="arrow up" id="up4" style="margin-left: 6.7rem;"></i><i class="arrow down" id="down4" style="margin-left: 6.7rem;"></i></span>
-<!--
-                                    <ul id="checkbox-3">
-                                        <li>
-                                            <label for="checkbox1">
-                                                <input type="checkbox" value="last 3 months" name="QA[]" id="checkbox1"/>My questions
-                                            </label>
-                                        </li>     
-                                        <li>
-                                            <label for="checkbox2">
-                                                <input type="checkbox" value="last 6 months" name="QA[]" id="checkbox2"/>Answered
-                                            </label>
-                                        </li>        
-                                        <li>
-                                            <label for="checkbox3">
-                                                <input type="checkbox" value="last year" name="QA[]" id="checkbox3"/>Not answered
-                                            </label>
-                                        </li>
-                                    </ul>
--->
-                                </div>
-                                
                             </form>
                         </div>
                     </div>
