@@ -140,12 +140,16 @@
             <div class="total_skill">Total Skill Tests: <?php echo count($data['score'])?></div>
 
             <div class="m_role">Moderator Roles: 
+              <div class="m_role_tag">
+
                <?php foreach ($data['score'] as $row) : ?>
                   <?php if($row['score']>=80):?>
-                    <?php echo $row['tag']?>
+                    <?php echo $row['tag']?><br><br>
                   <?php endif; ?>
                 <?php endforeach ;?>
+
               </div>
+            </div>
         </div>
 
 
