@@ -195,11 +195,51 @@ public function getTestQuestions($tag){
             $row = $this->db->single();
             return $row;
         } 
+//////////////////////////////////////////////////////////////////////////////////////
 
+        public function editQuestionData($data){
+            $this->db->query('UPDATE questionpool SET question= :question, difficulty= :difficulty,expertID= :expertID WHERE QPID=:QPID');
+            $this->db->bind(':question', $data['question']);
+            $this->db->bind(':difficulty', $data['difficulty']);
+            $this->db->bind(':expertID', $_SESSION['userID']);
+            $this->db->bind(':QPID', $data['QPID']);
+
+            if($this->db->execute()){
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        public function updateAnswerPool($data, $QPID) {
+            $this->db->query('DELETE FROM answerpool WHERE QPID=:QPID');
+
+            if( $this->db->execute()){
+                $options=$data['content'];
+                $validity= explode(',', $data['validity']);
+            
+                for($i = 0; $i < count($options); $i++) {
+                    $this->db->query('INSERT INTO answerpool (QPID, content, validity) VALUES (:QPID, :content, :validity)');
+                    $this->db->bind(':QPID', $data['QPID']);
+                    $this->db->bind(':content', $options[$i]);
+                    $this->db->bind(':validity', $validity[$i]);
+            
+                    $this->db->execute();
+                    return true;
+
+                }
+               
+            }else{
+
+            return false;
+
+            }
+        }
+        
 
         //Delete QuestionTag
-        public function deleteQuestionTag($QPID) {
-            $this->db->query('DELETE FROM questionpooltag WHERE QPID = :QPID');
+        public function deleteQuestionPoolTag($QPID) {
+            $this->db->query('DELETE  FROM questionpooltag WHERE QPID = :QPID');
             $this->db->bind(':QPID', $QPID);
             if($this->db->execute()) {
                 return true;
@@ -207,7 +247,18 @@ public function getTestQuestions($tag){
                 return false;
             }
         }
+        // public function editQuestionpoolTag($tag,$QPID){
+        //     $this->db->query('INSERT INTO questionpooltag (QPID,tag) VALUES (:QPID,:tag)');
+        //     $this->db->bind(':QPID',$QPID);
+        //     $this->db->bind(':tag',$tag);
 
+        //     if($this->db->execute()){
+        //         return true;
+        //     }else{
+        //         return false;
+        //     }
+        // }
+        
         ///////////////////////////////////////////////////////////////
         public function delete($QPID) {
             $this->db->query('DELETE FROM questionpool WHERE QPID = :QPID');
