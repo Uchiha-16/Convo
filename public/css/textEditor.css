@@ -44,8 +44,8 @@
   -moz-appearance: none;
   appearance: none;
   background-color: transparent;
-  width: 25px;
-  height: 28px;
+     width: 20px;
+    height: 27px;
   border: none;
   cursor: pointer;
 }
@@ -63,9 +63,39 @@
   padding: 20px;
   height: 50vh;
   width: 58.2vw;
-  font-size: 12px;
+  font-size: 14px;
   resize: vertical;
 }
 .textEditor .active {
   background-color: #e0e9ff;
+}
+.math-section{
+  font-family: 'Inter';
+  font-size:13px;
+}
+.math-section section, .math-section section option{
+  font-family: 'Inter';
+}
+.math-element{
+  border: 1px solid black;
+    margin-right: 10px;
+    border-radius: 3px
+}
+.math-element button{
+  width: 25px;
+    height: 25px;
+  font-size: 16px;
+}
+#basicMath{
+    display: inline-flex;
+    background-color: lightgrey;
+    padding: 6px;
+    border-radius: 4px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    row-gap: 10px;
+    -webkit-transition: all 250ms ease;
+    -moz-transition: all 250ms ease;
+    -o-transition: all 250ms ease;
+    transition: all 250ms ease;
 }

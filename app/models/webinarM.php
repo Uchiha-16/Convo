@@ -96,6 +96,16 @@
             return $row;
         }
 
+        //get webinars for index
+        public function getwebinarsIndex(){
+            $this->db->query('SELECT DISTINCT webinar.webinarID as webinarID, webinar.webinarTitle as title, webinar.date as date, webinar.videolink as videolink,
+            webinar.thumbnail as thumbnail, webinar.expertID as expertID, user.pfp as pfp, CONCAT(user.firstName, " ", user.lastName) as name 
+            FROM webinar JOIN user ON webinar.expertID = user.userID AND webinar.published = "1" ORDER BY webinar.date DESC;');
+
+            $row = $this->db->resultSet();
+            return $row;
+        }
+
         //getWebinarTags
         public function getWebinarTags() {
             $this->db->query('SELECT webinarID, GROUP_CONCAT(webinartag.tag SEPARATOR ",") as tags FROM webinartag GROUP BY webinarID;' );

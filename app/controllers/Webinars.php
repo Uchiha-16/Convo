@@ -370,42 +370,62 @@
         }
 
         public function home(){
-            $usertag = $this->webinarModel->getUserTag(); 
-
-            $str = '';
-    
-            foreach($usertag as $tag) {
-                $str = $str . 'webinartag.tag = "' . $tag->tag . '" OR ';
-    
-            }
-    
-            $str = substr($str, 0, -4);
-
-
-            $webinars = $this->webinarModel->getwebinars($str);
-            $wid = array();
-                for($i = 0; $i < count($webinars); $i++) {
-                    $wid[$i] = $webinars[$i]->webinarID;
-                }
-    
-                $str2 = '';
-    
-                foreach($wid as $id) {
-                    $str2 = $str2 . 'webinarID = "' . $id . '" OR ';
-                }
-    
-                $str2 = substr($str2, 0, -4);
+            if(isset($_SESSION['user_id'])){
                 
-                $tags = $this->webinarModel->getWebinarTags($str2);
+                $usertag = $this->webinarModel->getUserTag(); 
+                $str = '';
+                foreach($usertag as $tag) {
+                    $str = $str . 'webinartag.tag = "' . $tag->tag . '" OR ';
+                }
+                $str = substr($str, 0, -4);
 
-            
-            $data = [
-                'webinars' => $webinars,
-                'tags' => $tags,
-                'usertag' => $usertag
-            ];
-            
-            $this->view('webinars/home', $data);
+                $webinars = $this->webinarModel->getwebinars($str);
+                $wid = array();
+                    for($i = 0; $i < count($webinars); $i++) {
+                        $wid[$i] = $webinars[$i]->webinarID;
+                    }
+        
+                    $str2 = '';
+        
+                    foreach($wid as $id) {
+                        $str2 = $str2 . 'webinarID = "' . $id . '" OR ';
+                    }
+        
+                    $str2 = substr($str2, 0, -4);
+                    
+                    $tags = $this->webinarModel->getWebinarTags($str2);
+
+                $data = [
+                    'webinars' => $webinars,
+                    'tags' => $tags,
+                    'usertag' => $usertag
+                ];
+                
+                $this->view('webinars/home', $data);
+            }else{
+                $webinars = $this->webinarModel->getwebinarsIndex();
+                $wid = array();
+                    for($i = 0; $i < count($webinars); $i++) {
+                        $wid[$i] = $webinars[$i]->webinarID;
+                    }
+        
+                    $str2 = '';
+        
+                    foreach($wid as $id) {
+                        $str2 = $str2 . 'webinarID = "' . $id . '" OR ';
+                    }
+        
+                    $str2 = substr($str2, 0, -4);
+                    
+                    $tags = $this->webinarModel->getWebinarTags($str2);
+
+                $data = [
+                    'webinars' => $webinars,
+                    'tags' => $tags,
+                ];
+                
+                $this->view('webinars/home', $data);
+            }
         }
 
         //get search results
