@@ -214,28 +214,26 @@
                                         }
                                     ?>
                                 </td>
-    </tr>
+                                        </tr>
 
-    <tr>
-    <td colspan="3">
-        <h4 style="margin-bottom:.5rem">Select the correct answer <span class="star">*</span></h4>
-        <select class="inputform" name="validity" style="font-size:14px;" required>
-            <option value="option1" <?php echo $data['validity'][0] === 1 ? 'selected' : ''; ?>>Option 1</option>
-            <option value="option2" <?php echo $data['validity'][1]=== 1 ? 'selected' : ''; ?>>Option 2</option>
-            <option value="option3" <?php echo $data['validity'][2] === 1 ? 'selected' : ''; ?>>Option 3</option>
-            <option value="option4" <?php echo $data['validity'][3]=== 1 ? 'selected' : ''; ?>>Option 4</option>
-        </select>
-    </td>
-</tr>
+                                        <tr>
+                                        <td colspan="3">
+                                            <h4 style="margin-bottom:.5rem">Select the correct answer <span class="star">*</span></h4>
+                                            <select class="inputform" name="validity" style="font-size:14px;" required>
+                                                <option value="option1" <?php echo $data['validity'][0] === 1 ? 'selected' : ''; ?>>Option 1</option>
+                                                <option value="option2" <?php echo $data['validity'][1]=== 1 ? 'selected' : ''; ?>>Option 2</option>
+                                                <option value="option3" <?php echo $data['validity'][2] === 1 ? 'selected' : ''; ?>>Option 3</option>
+                                                <option value="option4" <?php echo $data['validity'][3]=== 1 ? 'selected' : ''; ?>>Option 4</option>
+                                            </select>
+                                        </td>
+                                    </tr>
 
-    </td>
-</tr>
+                                        </td>
+                                    </tr>
 
 
                                         </form>
-                                        <?php
-                                
-                                        ?>
+                                       
                                     </div>
                                     <!-- <span class="error"><?php echo $data['tag_err']; ?></span> -->
                                 </td>
