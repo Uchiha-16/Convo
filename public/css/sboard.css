@@ -34,6 +34,7 @@
       /* position: flex; */
         float:left;
         width:80%;
+        /* height: 60%; */
         margin-top: -5%;
 
     }
@@ -53,7 +54,9 @@
         margin-left: 5%;
         }
 .score_table{
-  overflow-y:scroll;
+  overflow:auto;
+  width:100%;
+  height: 150px;
 }
         .middle{
             background-color: white;
@@ -130,17 +133,18 @@
               .score table {
                 color:black;
                 position: relative;
-                margin-top: 5%;
+                margin-top:2%;
                 font-family: arial, sans-serif;
                 border-collapse: collapse;
                 width: 100%;
+                height: 100%;
               }
               .score th{
                 background-color:#15637C;
                 
               }
               
-              .scoree td, th {
+              .score td, th {
                 /* border: 1px solid #000000; */
                 border-radius: 2px;
                 text-align: center;
@@ -176,6 +180,11 @@
                 margin-top: 5%;
                 font-weight: 600;
                 margin-left: 10%;
+              }
+              .m_role_tag{
+                margin-top: -4%;
+                font-weight: 300;
+                margin-left: 35%;
               }
               .line
               {
