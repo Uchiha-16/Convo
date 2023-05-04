@@ -8,6 +8,7 @@
 
     <?php endif; ?>
 </style>
+
 </head>
 
 <body>
@@ -51,55 +52,294 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="3">
-                                    <h4 style="margin-bottom:.5rem">Content</h4>
-
-
-                                    <section>
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="first box">
-                                                    <input id="font-size" type="number" value="16" min="1" max="100" onchange="f1(this)">
+                                <td colspan="3" style="border-bottom: 1px solid rgba(128,128,128, .2); padding-bottom: 1rem;">
+                                    <h4 style="margin-bottom:1.5rem">Content <span class="star">*</span></h4>
+                                    <!-- Text Editor -->
+                                    <div class="textEditor">
+                                        <div>
+                                            <div class="options">
+                                                <!-- Text Format -->
+                                                <button id="boldBtn" class="option-button format" title="Bold" type="button" onclick="executeCommand('bold')">
+                                                    <i class="fa-solid fa-bold"></i>
+                                                </button>
+                                                <button id="italicBtn" class="option-button format" title="Italic" type="button" onclick="executeCommand('italic')">
+                                                    <i class="fa-solid fa-italic"></i>
+                                                </button>
+                                                <button id="underlineBtn" class="option-button format" title="Underline" type="button" onclick="executeCommand('underline')">
+                                                    <i class="fa-solid fa-underline"></i>
+                                                </button>
+                                                <button id="strikethroughBtn" class="option-button format" title="Strike-through" type="button" onclick="executeCommand('strikeThrough')">
+                                                    <i class="fa-solid fa-strikethrough"></i>
+                                                </button>
+                                                <button id="superscriptBtn" class="option-button script" title="Superscript" type="button" onclick="executeCommand('superscript')">
+                                                    <i class="fa-solid fa-superscript"></i>
+                                                </button>
+                                                <button id="subscriptBtn" class="option-button script" title="Subscript" type="button" onclick="executeCommand('subscript')">
+                                                    <i class="fa-solid fa-subscript"></i>
+                                                </button>
+                                                <!-- List -->
+                                                <button id="orderedListBtn" class="option-button" title="Ordered list" type="button" onclick="executeCommand('insertOrderedList')">
+                                                    <div class="fa-solid fa-list-ol"></div>
+                                                </button>
+                                                <button id="unorderedListBtn" class="option-button" title="Unordered list" type="button" onclick="executeCommand('insertUnorderedList')">
+                                                    <i class="fa-solid fa-list"></i>
+                                                </button>
+                                                <!-- Link -->
+                                                <button id="linkBtn" class="adv-option-button" title="Create link" type="button" onclick="createLink()">
+                                                    <i class="fa fa-link"></i>
+                                                </button>
+                                                <button id="unlinkBtn" class="option-button" title="Unlink" type="button" onclick="executeCommand('unlink')">
+                                                    <i class="fa fa-unlink"></i>
+                                                </button>
+                                                <select id="fontSize" class="adv-option-button" title="Font size" onchange="executeCommand('fontSize', this.value)" style="font-family: 'Inter';">
+                                                    <option value="">Font Size</option>
+                                                    <option value="1">8</option>
+                                                    <option value="2">10</option>
+                                                    <option value="3">12</option>
+                                                    <option value="4">14</option>
+                                                    <option value="5">18</option>
+                                                    <option value="6">24</option>
+                                                    <option value="7">36</option>
+                                                </select>
+                                                <!-- Color -->
+                                                <div class="input-wrapper">
+                                                    <input type="color" id="foreColor" class="adv-option-button" onchange="executeCommand('foreColor', this.value)"/>
+                                                    <label for="foreColor">Font Color</label>
                                                 </div>
-                                                <div class="second box">
-                                                    <button type="button" onclick="f2(this)">
-                                                        <i class="fa-solid fa-bold"></i>
-                                                    </button>
-                                                    <button type="button" onclick="f3(this)">
-                                                        <i class="fa-solid fa-italic"></i>
-                                                    </button>
-                                                    <button type="button" onclick="f4(this)">
-                                                        <i class="fa-solid fa-underline"></i>
-                                                    </button>
+                                                <div class="input-wrapper">
+                                                    <input type="color" id="backColor" class="adv-option-button" onchange="executeCommand('hiliteColor', this.value)"/>
+                                                    <label for="backColor">Highlight Color</label>
                                                 </div>
-                                                <div class="third box">
-                                                    <button type="button" onclick="f5(this)">
-                                                        <i class="fa-solid fa-align-left"></i>
-                                                    </button>
-                                                    <button type="button" onclick="f6(this)">
-                                                        <i class="fa-solid fa-align-center"></i>
-                                                    </button>
-                                                    <button type="button" onclick="f7(this)">
-                                                        <i class="fa-solid fa-align-right"></i>
-                                                    </button>
-                                                </div>
-                                                <div class="fourth box">
-                                                    <button type="button" onclick="f8(this)">aA</button>
-                                                    <button type="button" onclick="f9()">
-                                                        <i class="fa-solid fa-text-slash"></i>
-                                                    </button>
-                                                    <input type="color" onchange="f10(this)">
+                                                <div class="input-wrapper math-section">
+                                                    <select id="math" class="adv-option-button math-selector" title="Font size">
+                                                        <option value="" style="background-color:darkgray;color:white">Math Symbols</option>
+                                                        <option value="basicMath" class="apply4job">Basic Math</option>
+                                                        <option value="2">Greek Letters</option>
+                                                        <option value="3">Letter-Like Symbols</option>
+                                                        <option value="4">Operators</option>
+                                                        <option value="5">Arrows</option>
+                                                        <option value="6">Negated Relations</option>
+                                                        <option value="7">Scripts</option>
+                                                        <option value="8">Geometry</option>
+                                                    </select>
+                                                </div><br>
+                                                <div id="basicMath" class="content" style="display:none;">
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="plus or minus" type="button" onclick="insertSymbol('&#177;')">&#177;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="infinity" type="button" onclick="insertSymbol('&#8734;')">&#8734;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="equals" type="button" onclick="insertSymbol('&#61;')">&#61;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="not equals" type="button" onclick="insertSymbol('&#8800;')">&#8800;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="sine-wave" type="button" onclick="insertSymbol('&#8767;')">&#8767;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="multiply" type="button" onclick="insertSymbol('&#215;')">&#215;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="divide" type="button" onclick="insertSymbol('&#247;')">&#247;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="exclamation" type="button" onclick="insertSymbol('&#33;')">&#33;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="proportional" type="button" onclick="insertSymbol('&#8733;')">&#8733;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="less than" type="button" onclick="insertSymbol('&#60;')">&#60;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="more less than" type="button" onclick="insertSymbol('&#8810;')">&#8810;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="greater than" type="button" onclick="insertSymbol('&#62;')">&#62;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="more greater than" type="button" onclick="insertSymbol('&#8811;')">&#8811;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="less than or equal" type="button" onclick="insertSymbol('&#8734;')">&#8734;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="greater than or equal" type="button" onclick="insertSymbol('&#8805;')">&#8805;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="minus or plus" type="button" onclick="insertSymbol('&#8723;')">&#8723;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="aproximately equal to" type="button" onclick="insertSymbol('&#8773;')">&#8773;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="almost equal to" type="button" onclick="insertSymbol('&#8776;')">&#8776;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="identical" type="button" onclick="insertSymbol('&#8801;')">&#8801;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="for-all" type="button" onclick="insertSymbol('&#8704;')">&#8704;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="complement" type="button" onclick="insertSymbol('&#8705;')">&#8705;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="partial differential" type="button" onclick="insertSymbol('&#8706;')">&#8706;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="square-root" type="button" onclick="insertSymbol('&#8730;')">&#8730;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="cube-root" type="button" onclick="insertSymbol('&#8731;')">&#8731;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="fourth-root" type="button" onclick="insertSymbol('&#8732;')">&#8732;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="union" type="button" onclick="insertSymbol('&#8746;')">&#8746;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="intersection" type="button" onclick="insertSymbol('&#8745;')">&#8745;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="empty" type="button" onclick="insertSymbol('&#8709;')">&#8709;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="percentage" type="button" onclick="insertSymbol('&#37;')">&#37;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="degrees" type="button" onclick="insertSymbol('&#8728;')">&#8728;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="fahrenheit" type="button" onclick="insertSymbol('&#8457;')">&#8457;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="celsius" type="button" onclick="insertSymbol('&#8451;')">&#8451;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="increment" type="button" onclick="insertSymbol('&#8710;')">&#8710;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="nabla" type="button" onclick="insertSymbol('&#8711;')">&#8711;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="there exists" type="button" onclick="insertSymbol('&#8707;')">&#8707;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="there not exists" type="button" onclick="insertSymbol('&#8708;')">&#8708;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="element of" type="button" onclick="insertSymbol('&#8712;')">&#8712;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="contains" type="button" onclick="insertSymbol('&#8715;')">&#8715;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="left" type="button" onclick="insertSymbol('&#8592;')">&#8592;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="up" type="button" onclick="insertSymbol('&#8593;')">&#8593;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="right" type="button" onclick="insertSymbol('&#8594;')">&#8594;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="down" type="button" onclick="insertSymbol('&#8595;')">&#8595;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="left-right" type="button" onclick="insertSymbol('&#8596;')">&#8596;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="therefore" type="button" onclick="insertSymbol('&#8756;')">&#8756;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="plus" type="button" onclick="insertSymbol('&#43;')">&#43;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="minus" type="button" onclick="insertSymbol('&#8722;')">&#8722;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="not" type="button" onclick="insertSymbol('&#172;')">&#172;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="alpha" type="button" onclick="insertSymbol('&#945;')">&#945;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="beta" type="button" onclick="insertSymbol('&#946;')">&#946;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="gamma" type="button" onclick="insertSymbol('&#947;')">&#947;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="delta" type="button" onclick="insertSymbol('&#948;')">&#948;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="epsilon" type="button" onclick="insertSymbol('&#949;')">&#949;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="theta" type="button" onclick="insertSymbol('&#952;')">&#952;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="mu" type="button" onclick="insertSymbol('&#956;')">&#956;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="pi" type="button" onclick="insertSymbol('&#960;')">&#960;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="rho" type="button" onclick="insertSymbol('&#961;')">&#961;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="sigma" type="button" onclick="insertSymbol('&#963;')">&#963;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="tau" type="button" onclick="insertSymbol('&#964;')">&#964;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="phi" type="button" onclick="insertSymbol('&#966;')">&#966;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="omega" type="button" onclick="insertSymbol('&#969;')">&#969;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="asterisk" type="button" onclick="insertSymbol('&#8727;')">&#8727;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="bullet" type="button" onclick="insertSymbol('&#8901;')">&#8901;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="vertical ellipsis" type="button" onclick="insertSymbol('&#8942;')">&#8942;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="horizontal ellipsis" type="button" onclick="insertSymbol('&#8943;')">&#8943;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="up-right-diagonal ellipsis" type="button" onclick="insertSymbol('&#8944;')">&#8944;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="down-right-diagonal ellipsis" type="button" onclick="insertSymbol('&#8945;')">&#8945;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="alef" type="button" onclick="insertSymbol('&#8501;')">&#8501;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="bet" type="button" onclick="insertSymbol('&#8502;')">&#8502;</button>
+                                                    </div>
+                                                    <div class="input-wrapper math-element">
+                                                        <button id="createLink" class="adv-option-button" title="end of proof" type="button" onclick="insertSymbol('&#8718;')">&#8718;</button>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <br>
-                                        <div class="row row1">
-                                            <div class="col col1">
-                                                <textarea id="textarea1" class="inputform" type="text" name="content" placeholder="Describe the Question...."><?php echo $data['content']; ?></textarea>
-                                                <span class="error"><?php echo $data['content_err']; ?></span>
+                                            <div id="text-input" contenteditable="true" title="Enter text..." class="editor"><?php echo $data['content']; ?></div>
+                                            <input type="text" id="result" style="display:none;" name="content" contenteditable="true">
+                                                <!-- The HTML result will be displayed here -->
                                             </div>
+                                            <span class="error"><?php echo $data['content_err']; ?></span>
                                         </div>
-                                    </section>
+                                    </div>
                                 </td>
                             </tr>
                             <tr>
@@ -282,7 +522,7 @@
                                     <br><br>
                                     <div class="add">
                                         <button style="float:right" class="read-more attend submit" type="reset">Reset</button>
-                                        <button style="float:right" class="read-more attend submit" type="submit" name="update">Update Question</button>
+                                        <button style="float:right" class="read-more attend submit" type="submit" name="update" id="convertBtn">Update Question</button>
                                     </div>
                                 </td>
                             </tr>
@@ -305,10 +545,4 @@
 
     <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="arrow up"></i><br></button>
 
-    <div id="body"></div>
-
-
-</body>
-
-
-</html>
+    <?php require APPROOT . '/views/inc/footer.php'; ?>

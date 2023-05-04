@@ -22,12 +22,13 @@
                     $resourceID = implode(',', $resourceID);
                 }
 
-                
+                $content = trim($_POST['content']);
+                $content = nl2br($content);
 
                 //Input Data
                 $data = [
                     'title' => trim($_POST['title']),
-                    'content' => trim($_POST['content']),
+                    'content' => $content,
                     'tag' => $tag,
                     'date' => date('Y-m-d H:i:s'),
                     'visibility' => $checkbox_value,
@@ -155,11 +156,13 @@
                 if($resourceID != '0'){
                     $resourceID = implode(',', $resourceID);
                 }
+                $content = trim($_POST['content']);
+                $content = nl2br($content);
                 //Input Data
                 $data = [
                     'QID' => $QID,
                     'title' => trim($_POST['title']),
-                    'content' => trim($_POST['content']),
+                    'content' => $content,
                     'tag' => $tag,
                     'date' => date('Y-m-d H:i:s'),
                     'visibility' => $checkbox_value,
