@@ -99,3 +99,28 @@
     -o-transition: all 250ms ease;
     transition: all 250ms ease;
 }
+.imageupload input[type="file"] {
+/* Style the color of the message that says 'No file chosen' */
+    color: #878787;
+    width: 100%;
+    height: auto;
+    font-size: 13px;
+    border: none;
+}
+.imageupload input[type="file"]::-webkit-file-upload-button {
+  text-decoration: none;
+  border: none;
+  font-size: 13px;
+  border-radius: 4px;
+  color: black;
+  cursor: pointer;
+  outline: none;
+  padding: 10px 25px;
+  text-transform: uppercase;
+  transition: all 1s ease;
+}
+
+.imageupload input[type="file"]::-webkit-file-upload-button:hover {
+  background: #b7b6b6;
+  color: #000;
+}

@@ -34,7 +34,7 @@
                 <h3>Edit Question</h3><br>
 
                 <div class="question-div add-event">
-                    <form action="<?php echo URLROOT; ?>/Questions/edit/<?php echo $data['QID']; ?>" method="POST">
+                    <form action="<?php echo URLROOT; ?>/Questions/edit/<?php echo $data['QID']; ?>" method="POST" enctype="multipart/form-data">
 
                         <table>
                             <tr>
@@ -91,6 +91,7 @@
                                                 <button id="unlinkBtn" class="option-button" title="Unlink" type="button" onclick="executeCommand('unlink')">
                                                     <i class="fa fa-unlink"></i>
                                                 </button>
+                                                
                                                 <select id="fontSize" class="adv-option-button" title="Font size" onchange="executeCommand('fontSize', this.value)" style="font-family: 'Inter';">
                                                     <option value="">Font Size</option>
                                                     <option value="1">8</option>
@@ -101,14 +102,8 @@
                                                     <option value="6">24</option>
                                                     <option value="7">36</option>
                                                 </select>
-                                                <!-- Color -->
-                                                <div class="input-wrapper">
-                                                    <input type="color" id="foreColor" class="adv-option-button" onchange="executeCommand('foreColor', this.value)"/>
-                                                    <label for="foreColor">Font Color</label>
-                                                </div>
-                                                <div class="input-wrapper">
-                                                    <input type="color" id="backColor" class="adv-option-button" onchange="executeCommand('hiliteColor', this.value)"/>
-                                                    <label for="backColor">Highlight Color</label>
+                                                <div class="input-wrapper imageupload">
+                                                    <input type="file" name="image">
                                                 </div>
                                                 <div class="input-wrapper math-section">
                                                     <select id="math" class="adv-option-button math-selector" title="Font size">
@@ -333,10 +328,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div id="text-input" contenteditable="true" title="Enter text..." class="editor"><?php echo $data['content']; ?></div>
-                                            <input type="text" id="result" style="display:none;" name="content" contenteditable="true">
-                                                <!-- The HTML result will be displayed here -->
-                                            </div>
+                                            <div id="text-input" contenteditable="true" title="Enter text..." class="editor"><?php echo $data["content"]; ?></div>
+                                            <textarea id="result" style="display:none;" name="content"></textarea>
                                             <span class="error"><?php echo $data['content_err']; ?></span>
                                         </div>
                                     </div>
@@ -545,4 +538,5 @@
 
     <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="arrow up"></i><br></button>
 
+    
     <?php require APPROOT . '/views/inc/footer.php'; ?>

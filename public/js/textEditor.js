@@ -7,54 +7,19 @@ $(function () {
         $('#' + $(this).val()).show();
     });
 });
-// Execute a command on the editor
-// function executeCommand(command, value = null) {
-//     document.execCommand(command, false, value);
-//     editor.focus();
-// }
 
-// Create a link
-// function createLink() {
-//     console.log('createLink called'); // Add this line
-//     const url = prompt('Enter a URL:', 'https://');
-//     const selection = window.getSelection();
-//     if (url !== null && selection.toString() !== '') {
-//         const range = selection.getRangeAt(0);
-//         const link = document.createElement('a');
-//         link.setAttribute('href', url);
-//         link.setAttribute('target', '_blank');
-//         link.appendChild(range.extractContents());
-//         range.insertNode(link);
-//     }
-// }
-
-// Add event listener to create link button
-// const createLinkButton = document.getElementById('createLink');
-// createLinkButton.addEventListener('click', createLink);
-
-// Add event listener for key shortcuts
-// editor.addEventListener('keydown', (event) => {
-//     const key = event.key.toLowerCase();
-//     const isCtrl = event.ctrlKey || event.metaKey;
-//     if (isCtrl) {
-//         if (key === 'b') {
-//             executeCommand('bold');
-//             event.preventDefault();
-//         } else if (key === 'i') {
-//             executeCommand('italic');
-//             event.preventDefault();
-//         } else if (key === 'u') {
-//             executeCommand('underline');
-//             event.preventDefault();
-//         } else if (key === 's') {
-//             executeCommand('strikeThrough');
-//             event.preventDefault();
-//         } else if (key === 'k') {
-//             createLink();
-//             event.preventDefault();
-//         }
-//     }
-// });
+const fontSizeSelect = document.getElementById('fontSize');
+// Set the default font size to 3 (12px)
+fontSizeSelect.value = '3';
+// Listen for changes to the font size select
+fontSizeSelect.addEventListener('change', () => {
+    // Get the selected font size
+    const fontSize = fontSizeSelect.value;
+    // Apply the font size to the selected text
+    document.execCommand('fontSize', false, fontSize);
+    // Remove the selection after applying the font size
+    window.getSelection().removeAllRanges();
+});
 
 const text_input = document.getElementById('text-input');
 // Get the buttons
@@ -86,19 +51,16 @@ convertBtn.addEventListener('click', convertToHtml);
 // Function to add bold tags to selected text
 function addBold() {
     document.execCommand('bold', false, null);
-    editor.focus();
 }
 
 // Function to add italic tags to selected text
 function addItalic() {
     document.execCommand('italic', false, null);
-    editor.focus();
 }
 
 // Function to add underline tags to selected text
 function addUnderline() {
     document.execCommand('underline', false, null);
-    editor.focus();
 }
 
 // Function to add strikethrough tags to selected text
@@ -110,13 +72,11 @@ function addStrikethrough() {
 // Function to add subscript tags to selected text
 function addSubscript() {
     document.execCommand('subscript', false, null);
-    editor.focus();
 }
 
 // Function to add superscript tags to selected text
 function addSuperscript() {
     document.execCommand('superscript', false, null);
-    editor.focus();
 }
 
 // Function to add ordered list tags to selected text
@@ -128,20 +88,17 @@ function addOrderedList() {
 // Function to add unordered list tags to selected text
 function addUnorderedList() {
     document.execCommand('insertUnorderedList', false, null);
-    editor.focus();
 }
 
 // Function to add link to selected text
 function addLink() {
     const url = prompt('Enter the URL:');
     document.execCommand('createLink', false, url);
-    editor.focus();
 }
 
 // Function to remove link from selected text
 function removeLink() {
     document.execCommand('unlink', false, null);
-    editor.focus();
 }
 
 // Function to convert the edited text to HTML
@@ -150,28 +107,35 @@ function convertToHtml() {
     const editedText = text_input.innerHTML;
     // alert(editedText);
     // Replace the formatting tags with HTML tags
-    const htmlText = editedText
-        .replace(/<b>/g, '<strong>')
-        .replace(/<\/b>/g, '</strong>')
-        .replace(/<i>/g, '<em>')
-        .replace(/<\/i>/g, '</em>')
-        .replace(/<u>/g, '<u>')
-        .replace(/<\/u>/g, '</u>')
-        .replace(/<strike>/g, '<s>')
-        .replace(/<\/strike>/g, '</s>')
-        .replace(/<sup>/g, '<sup>')
-        .replace(/<\/sup>/g, '</sup>')
-        .replace(/<sub>/g, '<sub>')
-        .replace(/<\/sub>/g, '</sub>')
-        .replace(/<ol>/g, '<ol><li>')
-        .replace(/<\/ol>/g, '</li></ol>')
-        .replace(/<ul>/g, '<ul><li>')
-        .replace(/<\/ul>/g, '</li></ul>')
-        .replace(/<li><\/li>/g, '</li><li>');
+    // const htmlText = editedText
+    //     .replace(/<a\s+href="([^"]+)"[^>]*>(.*?)<\/a>/g, '<a href="$1">$2</a>')
+    //     .replace(/<div>/g, '<br>')
+    //     .replace(/<\/div>/g, '')
+    //     // .replace(/<br>/g, '\n')
+    //     // .replace(/\r?\n/g, '\n')
+    //     .replace(/&nbsp;/g, ' ')
+    //     .replace(/<b>/g, '<strong>')
+    //     .replace(/<\/b>/g, '</strong>')
+    //     .replace(/<i>/g, '<em>')
+    //     .replace(/<\/i>/g, '</em>')
+    //     .replace(/<u>/g, '<u>')
+    //     .replace(/<\/u>/g, '</u>')
+    //     .replace(/<strike>/g, '<s>')
+    //     .replace(/<\/strike>/g, '</s>')
+    //     .replace(/<sup>/g, '<sup>')
+    //     .replace(/<\/sup>/g, '</sup>')
+    //     .replace(/<sub>/g, '<sub>')
+    //     .replace(/<\/sub>/g, '</sub>')
+    //     .replace(/<ol>/g, '<ol><li>')
+    //     .replace(/<\/ol>/g, '</li></ol>')
+    //     .replace(/<ul>/g, '<ul><li>')
+    //     .replace(/<\/ul>/g, '</li></ul>')
+    //     .replace(/<li><\/li>/g, '</li><li>');
 
     // Display the HTML result
     const result = document.getElementById('result');
-    result.innerHTML = htmlText;
+    result.innerHTML = editedText;
+    alert(result.value);
 }
 
 function insertSymbol(symbol) {
@@ -188,6 +152,5 @@ function insertSymbol(symbol) {
     selection.addRange(range);
     editor.focus();
 }
-
 
 

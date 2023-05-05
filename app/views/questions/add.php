@@ -83,36 +83,36 @@
                                         <div>
                                             <div class="options">
                                                 <!-- Text Format -->
-                                                <button id="bold" class="option-button format" title="Bold" type="button" onclick="executeCommand('bold')">
+                                                <button id="boldBtn" class="option-button format" title="Bold" type="button" onclick="executeCommand('bold')">
                                                     <i class="fa-solid fa-bold"></i>
                                                 </button>
-                                                <button id="italic" class="option-button format" title="Italic" type="button" onclick="executeCommand('italic')">
+                                                <button id="italicBtn" class="option-button format" title="Italic" type="button" onclick="executeCommand('italic')">
                                                     <i class="fa-solid fa-italic"></i>
                                                 </button>
-                                                <button id="underline" class="option-button format" title="Underline" type="button" onclick="executeCommand('underline')">
+                                                <button id="underlineBtn" class="option-button format" title="Underline" type="button" onclick="executeCommand('underline')">
                                                     <i class="fa-solid fa-underline"></i>
                                                 </button>
-                                                <button id="strikethrough" class="option-button format" title="Strike-through" type="button" onclick="executeCommand('strikeThrough')">
+                                                <button id="strikethroughBtn" class="option-button format" title="Strike-through" type="button" onclick="executeCommand('strikeThrough')">
                                                     <i class="fa-solid fa-strikethrough"></i>
                                                 </button>
-                                                <button id="superscript" class="option-button script" title="Superscript" type="button" onclick="executeCommand('superscript')">
+                                                <button id="superscriptBtn" class="option-button script" title="Superscript" type="button" onclick="executeCommand('superscript')">
                                                     <i class="fa-solid fa-superscript"></i>
                                                 </button>
-                                                <button id="subscript" class="option-button script" title="Subscript" type="button" onclick="executeCommand('subscript')">
+                                                <button id="subscriptBtn" class="option-button script" title="Subscript" type="button" onclick="executeCommand('subscript')">
                                                     <i class="fa-solid fa-subscript"></i>
                                                 </button>
                                                 <!-- List -->
-                                                <button id="insertOrderedList" class="option-button" title="Ordered list" type="button" onclick="executeCommand('insertOrderedList')">
+                                                <button id="orderedListBtn" class="option-button" title="Ordered list" type="button" onclick="executeCommand('insertOrderedList')">
                                                     <div class="fa-solid fa-list-ol"></div>
                                                 </button>
-                                                <button id="insertUnorderedList" class="option-button" title="Unordered list" type="button" onclick="executeCommand('insertUnorderedList')">
+                                                <button id="unorderedListBtn" class="option-button" title="Unordered list" type="button" onclick="executeCommand('insertUnorderedList')">
                                                     <i class="fa-solid fa-list"></i>
                                                 </button>
                                                 <!-- Link -->
-                                                <button id="createLink" class="adv-option-button" title="Create link" type="button" onclick="createLink()">
+                                                <button id="linkBtn" class="adv-option-button" title="Create link" type="button" onclick="createLink()">
                                                     <i class="fa fa-link"></i>
                                                 </button>
-                                                <button id="unlink" class="option-button" title="Unlink" type="button" onclick="executeCommand('unlink')">
+                                                <button id="unlinkBtn" class="option-button" title="Unlink" type="button" onclick="executeCommand('unlink')">
                                                     <i class="fa fa-unlink"></i>
                                                 </button>
                                                 <select id="fontSize" class="adv-option-button" title="Font size" onchange="executeCommand('fontSize', this.value)" style="font-family: 'Inter';">
@@ -125,15 +125,6 @@
                                                     <option value="6">24</option>
                                                     <option value="7">36</option>
                                                 </select>
-                                                <!-- Color -->
-                                                <div class="input-wrapper">
-                                                    <input type="color" id="foreColor" class="adv-option-button" onchange="executeCommand('foreColor', this.value)"/>
-                                                    <label for="foreColor">Font Color</label>
-                                                </div>
-                                                <div class="input-wrapper">
-                                                    <input type="color" id="backColor" class="adv-option-button" onchange="executeCommand('hiliteColor', this.value)"/>
-                                                    <label for="backColor">Highlight Color</label>
-                                                </div>
                                                 <div class="input-wrapper math-section">
                                                     <select id="math" class="adv-option-button math-selector" title="Font size">
                                                         <option value="" style="background-color:darkgray;color:white">Math Symbols</option>
@@ -147,7 +138,7 @@
                                                         <option value="8">Geometry</option>
                                                     </select>
                                                 </div><br>
-                                                <div id="basicMath" class="content">
+                                                <div id="basicMath" class="content" style="display:none;">
                                                     <div class="input-wrapper math-element">
                                                         <button id="createLink" class="adv-option-button" title="plus or minus" type="button" onclick="insertSymbol('&#177;')">&#177;</button>
                                                     </div>
@@ -357,7 +348,9 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div id="text-input" contenteditable="true" title="Enter text..." name="content" class="editor" id="math"></div>
+                                            <div id="text-input" contenteditable="true" title="Enter text..." class="editor"><?php echo $data['content']; ?></div>
+                                            <input type="text" id="result" style="display:none;" name="content">
+                                                
                                             <span class="error"><?php echo $data['content_err']; ?></span>
                                         </div>
                                     </div>
@@ -495,7 +488,7 @@
                                     <br><br>
                                     <div class="add">
                                         <button style="float:right" class="read-more attend submit" type="reset">Reset</button>
-                                        <button style="float:right" class="read-more attend submit" type="submit" name="create">Add Question</button>
+                                        <button style="float:right" class="read-more attend submit" type="submit" name="create" id="convertBtn">Add Question</button>
                                     </div>
                                 </td>
                             </tr>

@@ -22,9 +22,9 @@
                     $resourceID = implode(',', $resourceID);
                 }
 
-                $content = trim($_POST['content']);
+                $content = $_POST['content'];
                 $content = nl2br($content);
-
+                print_r($content);
                 //Input Data
                 $data = [
                     'title' => trim($_POST['title']),
@@ -148,6 +148,8 @@
             if($_SERVER['REQUEST_METHOD'] == 'POST') {
                 // Form is submitting
                 // Validate the data
+                $content = htmlentities($_POST['content'], ENT_QUOTES);
+                
                 $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
                 date_default_timezone_set('Asia/Colombo');
                 $checkbox_value = isset($_POST['visibility']) ? 'anonymus' : 'public';
@@ -156,8 +158,7 @@
                 if($resourceID != '0'){
                     $resourceID = implode(',', $resourceID);
                 }
-                $content = trim($_POST['content']);
-                $content = nl2br($content);
+                
                 //Input Data
                 $data = [
                     'QID' => $QID,
@@ -172,7 +173,7 @@
                     'tag_err' => '',
                 ];
 
-                
+                print_r($data['content']);
 
                 //validate each inputs
                 // Validate Title
@@ -201,7 +202,7 @@
                 if(empty($data['title_err']) && empty($data['content_err']) && empty($data['tag_err'])) {
                     // Updating the Question
                     $this->questionModel->deleteQuestionTag($QID);
-                    if($this->questionModel->edit($data)) {
+                    if($this->questionModel->edit($data, $content)) {
                         foreach($data['tag'] as $tag){
                            if(!($this->questionModel->questionTag($tag, $QID)))
                             {
@@ -231,12 +232,13 @@
                 
                 $Experts = $this->questionModel->getExperts($question->expertID);
            
-                
+                $decodedContent = html_entity_decode($question->content);
+                $strippedContent = $decodedContent;
 
                 $data = [
                     'QID' => $QID,
                     'title' => $question->title,
-                    'content' => $question->content,
+                    'content' => $strippedContent,
                     'tag' =>  $question->tags,
                     'visibility' => $question->visibility,
                     'resourceID' => $Experts,

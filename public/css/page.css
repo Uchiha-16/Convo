@@ -355,6 +355,7 @@ border-left: 5px solid #ECECEC;
 .content-display{
     border-left: 1px solid rgba(128,128,128, .2);
     padding-left: 1rem;
+    font-size: 14px;
 }
 .content-display p{
     font-size: 14px;

@@ -68,7 +68,9 @@
                         </div>
                         <div class="content-display">
                             <h3><?php echo $question->title; ?></h3>
-                            <p><?php echo $question->content; ?></p>
+                            <?php $decodedContent = html_entity_decode($question->content); ?>
+                            <?php $strippedContent = $decodedContent; ?>
+                            <p id="mp"><?php echo $strippedContent; ?></p>
                             <div class="date-count">
                                 <label><?php echo convertTime($question->date); ?></label>
                                 <label style="font-weight:600; float:right"><?php echo $question->rating; ?></label><br>
@@ -323,10 +325,4 @@
 
     <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="arrow up"></i><br></button>
 
-    <div id="body"></div>
-
-</body>
-
-</html>
-
-<?php require APPROOT . '/views/inc/footer.php'; ?>
+    <?php require APPROOT . '/views/inc/footer.php'; ?>

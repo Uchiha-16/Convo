@@ -57,14 +57,6 @@
             $question = $this->answersM->getQuestion($QID);
             $Quser = $this->answersM->Quser($QID);
 
-            if(isset($_POST['content'])){
-                // Get the formatted text from the POST data
-                $content = $_POST['content'];
-                
-                // Encode the formatted text for safe storage in the database
-                $content = htmlentities($content);
-                
-
                 if($_SERVER['REQUEST_METHOD'] == 'POST') {
                     // Form is submitting
                     // Validate the data
@@ -76,6 +68,12 @@
                     $segments = explode('/', $path); // split the path into an array of segments
                     $last_segment = end($segments); // extract the last segment of the array
                     $interaction = 'new';
+
+                    // Get the formatted text from the POST data
+                    $content = $_POST['content'];
+                    
+                    // Encode the formatted text for safe storage in the database
+                    $content = htmlentities($content);
                     //Input Data
                     $data = [
                         'content' => $content,
@@ -148,7 +146,7 @@
                     ];
                     $this->view('answers/add', $data);
                 }
-            }
+            
         }
 
         public function upvote($threadID){
