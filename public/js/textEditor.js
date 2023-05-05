@@ -1,10 +1,26 @@
 // Get the editable div
 const editor = document.querySelector('.editor');
+
 $(function () {
-    $('.content').hide();
+    $('.basicEquations').hide();
+    $('.basicMath').hide();
+    $('.greekLetters').hide();
+    $('.letterLikeSymbols').hide();
+    $('.operators').hide();
+    $('.arrows').hide();
+    $('.negatedRelations').hide();
+    $('.geometry').hide();
     $('#math').change(function () {
-        $('.content').hide();
+        $('.basicEquations').hide();
+        $('.basicMath').hide();
+        $('.greekLetters').hide();
+        $('.letterLikeSymbols').hide();
+        $('.operators').hide();
+        $('.arrows').hide();
+        $('.negatedRelations').hide();
+        $('.geometry').hide();
         $('#' + $(this).val()).show();
+
     });
 });
 
@@ -22,6 +38,7 @@ fontSizeSelect.addEventListener('change', () => {
 });
 
 const text_input = document.getElementById('text-input');
+
 // Get the buttons
 const boldBtn = document.getElementById('boldBtn');
 const italicBtn = document.getElementById('italicBtn');
@@ -104,38 +121,11 @@ function removeLink() {
 // Function to convert the edited text to HTML
 function convertToHtml() {
     // Get the edited text
-    const editedText = text_input.innerHTML;
-    // alert(editedText);
-    // Replace the formatting tags with HTML tags
-    // const htmlText = editedText
-    //     .replace(/<a\s+href="([^"]+)"[^>]*>(.*?)<\/a>/g, '<a href="$1">$2</a>')
-    //     .replace(/<div>/g, '<br>')
-    //     .replace(/<\/div>/g, '')
-    //     // .replace(/<br>/g, '\n')
-    //     // .replace(/\r?\n/g, '\n')
-    //     .replace(/&nbsp;/g, ' ')
-    //     .replace(/<b>/g, '<strong>')
-    //     .replace(/<\/b>/g, '</strong>')
-    //     .replace(/<i>/g, '<em>')
-    //     .replace(/<\/i>/g, '</em>')
-    //     .replace(/<u>/g, '<u>')
-    //     .replace(/<\/u>/g, '</u>')
-    //     .replace(/<strike>/g, '<s>')
-    //     .replace(/<\/strike>/g, '</s>')
-    //     .replace(/<sup>/g, '<sup>')
-    //     .replace(/<\/sup>/g, '</sup>')
-    //     .replace(/<sub>/g, '<sub>')
-    //     .replace(/<\/sub>/g, '</sub>')
-    //     .replace(/<ol>/g, '<ol><li>')
-    //     .replace(/<\/ol>/g, '</li></ol>')
-    //     .replace(/<ul>/g, '<ul><li>')
-    //     .replace(/<\/ul>/g, '</li></ul>')
-    //     .replace(/<li><\/li>/g, '</li><li>');
-
+    // alert(text_input.innerHTML);
+    const editedText = text_input.innerHTML.replace(/</g, "&lt;").replace(/>/g, "&gt;");
     // Display the HTML result
     const result = document.getElementById('result');
     result.innerHTML = editedText;
-    alert(result.value);
 }
 
 function insertSymbol(symbol) {
@@ -152,5 +142,40 @@ function insertSymbol(symbol) {
     selection.addRange(range);
     editor.focus();
 }
+
+// code block
+var modal = document.getElementById("myModal");
+var codearea = document.getElementById("codearea");
+
+function openModal() {
+    modal.style.display = "block";
+}
+
+function closeModal() {
+    modal.style.display = "none";
+}
+
+function submitCode() {
+    var code = codearea.value;
+    code = "<pre><code>" + code + "</code></pre>";
+    // alert(code);
+    insertAtCursor(text_input, code);
+    closeModal();
+}
+
+function insertAtCursor(text_input, code) {
+    var selection = window.getSelection();
+    var range = selection.getRangeAt(0);
+    range.deleteContents();
+    var node = document.createTextNode(code);
+    range.insertNode(node);
+    range.setStartAfter(node);
+    range.setEndAfter(node);
+    selection.removeAllRanges();
+    selection.addRange(range);
+    text_input.focus();
+}
+
+
 
 

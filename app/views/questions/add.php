@@ -347,6 +347,7 @@
                                                         <button id="createLink" class="adv-option-button" title="end of proof" type="button" onclick="insertSymbol('&#8718;')">&#8718;</button>
                                                     </div>
                                                 </div>
+                                                
                                             </div>
                                             <div id="text-input" contenteditable="true" title="Enter text..." class="editor"><?php echo $data['content']; ?></div>
                                             <input type="text" id="result" style="display:none;" name="content">

@@ -148,7 +148,9 @@
             if($_SERVER['REQUEST_METHOD'] == 'POST') {
                 // Form is submitting
                 // Validate the data
-                $content = htmlentities($_POST['content'], ENT_QUOTES);
+
+                // sanitize the user input and prevent any HTML or JavaScript injection
+                $content = htmlspecialchars($_POST['content'], ENT_QUOTES, 'UTF-8');
                 
                 $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
                 date_default_timezone_set('Asia/Colombo');
