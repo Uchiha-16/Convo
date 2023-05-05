@@ -50,6 +50,7 @@ const orderedListBtn = document.getElementById('orderedListBtn');
 const unorderedListBtn = document.getElementById('unorderedListBtn');
 const linkBtn = document.getElementById('linkBtn');
 const unlinkBtn = document.getElementById('unlinkBtn');
+const codeBlockBtn = document.getElementById('codeBlockBtn');
 const convertBtn = document.getElementById('convertBtn');
 
 // Add event listeners to the buttons
@@ -63,7 +64,9 @@ orderedListBtn.addEventListener('click', addOrderedList);
 unorderedListBtn.addEventListener('click', addUnorderedList);
 linkBtn.addEventListener('click', addLink);
 unlinkBtn.addEventListener('click', removeLink);
+codeBlockBtn.addEventListener('click', addCodeBlock);
 convertBtn.addEventListener('click', convertToHtml);
+
 
 // Function to add bold tags to selected text
 function addBold() {
@@ -118,6 +121,11 @@ function removeLink() {
     document.execCommand('unlink', false, null);
 }
 
+// Function to add code block
+function addCodeBlock() {
+    document.execCommand('insertHTML', false, '<pre><code class="language-html"> </code></pre>');
+}
+
 // Function to convert the edited text to HTML
 function convertToHtml() {
     // Get the edited text
@@ -144,37 +152,7 @@ function insertSymbol(symbol) {
 }
 
 // code block
-var modal = document.getElementById("myModal");
-var codearea = document.getElementById("codearea");
 
-function openModal() {
-    modal.style.display = "block";
-}
-
-function closeModal() {
-    modal.style.display = "none";
-}
-
-function submitCode() {
-    var code = codearea.value;
-    code = "<pre><code>" + code + "</code></pre>";
-    // alert(code);
-    insertAtCursor(text_input, code);
-    closeModal();
-}
-
-function insertAtCursor(text_input, code) {
-    var selection = window.getSelection();
-    var range = selection.getRangeAt(0);
-    range.deleteContents();
-    var node = document.createTextNode(code);
-    range.insertNode(node);
-    range.setStartAfter(node);
-    range.setEndAfter(node);
-    selection.removeAllRanges();
-    selection.addRange(range);
-    text_input.focus();
-}
 
 
 

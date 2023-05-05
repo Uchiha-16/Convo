@@ -156,75 +156,42 @@
 }
 
 /*code block */
-.codeblock {
-  font-size: 15px;
-}
 
-.textarea {
-  border: 1px solid #ccc;
-  padding: 10px;
-  min-height: 200px;
-  width: 80%;
-  margin: 0 auto;
-  font-family: Arial, sans-serif;
-  font-size: 14px;
-  line-height: 1.5;
-  overflow: auto;
-  resize: none;
-  box-sizing: border-box;
-}
-
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.4);
-}
-
-.modal-content {
-  background-color: #fefefe;
-  margin: 15% auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-  min-height: 200px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  animation-name: zoom;
-  animation-duration: 0.6s;
-}
-
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-#codearea {
-  text-align: left;
-  font-size: 13px;
-  border-top: 1px solid lightblue;
+.codeeditor {
+  display: inline-flex;
+  gap: 10px;
   font-family: monospace;
+  line-height: 21px;
+  background: #282a3a;
+  border-radius: 2px;
+  padding: 20px 10px;
+  width: 97.5%;
 }
 
-@keyframes zoom {
-  from {
-    transform: scale(0)
-  }
+.line-numbers {
+  width: 20px;
+  text-align: right;
+}
 
-  to {
-    transform: scale(1)
-  }
+.line-numbers span {
+  counter-increment: linenumber;
+}
+
+.line-numbers span::before {
+  content: counter(linenumber);
+  display: block;
+  color: #506882;
+}
+
+.codeeditor textarea {
+  line-height: 21px;
+  overflow-y: hidden;
+  padding: 0;
+  border: 0;
+  background: #282a3a;
+  color: #FFF;
+  min-width: 500px;
+  outline: none;
+  resize: none;
+  height: auto;
 }

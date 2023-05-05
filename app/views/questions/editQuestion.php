@@ -92,20 +92,9 @@
                                                     <i class="fa fa-unlink"></i>
                                                 </button>
                                                 <div class="input-wrapper">
-                                                    <button onclick="openModal()" class="codeblock" type="button"><b>{ }</b></button>
+                                                    <button id="codeBlockBtn" class="option-button" title="Code block" type="button" onclick="executeCommand('formatBlock', '<pre>')">
+                                                    <i class="fa-solid fa-code"></i>
                                                 </div>
-                                                <!-- code block -->
-                                                    <div id="myModal" class="modal">
-                                                        <div class="modal-content">
-                                                            <span class="close" onclick="closeModal()">&times;</span>
-                                                            <div>
-                                                                <label for="codearea">Enter Your Code Here:</label>
-                                                                <textarea id="codearea" name="codearea" rows="10" cols="50"></textarea>
-                                                            </div>
-                                                            <button onclick="submitCode()" style="width: auto;" type="button">Submit</button>
-                                                        </div>
-                                                    </div>
-                                                <!-- end of code block -->
                                                 <select id="fontSize" class="adv-option-button" title="Font size" onchange="executeCommand('fontSize', this.value)" style="font-family: 'Inter';">
                                                     <option value="">Font Size</option>
                                                     <option value="1">8</option>
@@ -1352,7 +1341,45 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div id="text-input" contenteditable="true" title="Enter text..." class="editor"><?php echo $data["content"]; ?></div>
+                                            <div id="text-input" contenteditable="true" title="Enter text..." class="editor"><?php echo $data["content"]; ?>
+                                            <!-- code block -->
+                                                <div class="codeeditor">
+                                                    <div class="line-numbers">
+                                                        <span></span>
+                                                    </div>
+                                                    <textarea class="codetextarea" style=
+                                                    "height: auto;
+                                                    font-family: monospace;
+                                                    padding: 0;
+                                                    text-align: left;
+                                                    font-size: 14px;
+                                                    border-radius: 0;"></textarea>
+                                                </div>
+                                                <script>
+                                                    const textarea = document.querySelector('.codetextarea')
+                                                    const lineNumbers = document.querySelector('.line-numbers')
+
+                                                    textarea.addEventListener('keyup', event => {
+                                                        const numberOfLines = event.target.value.split('\n').length
+
+                                                        lineNumbers.innerHTML = Array(numberOfLines)
+                                                            .fill('<span></span>')
+                                                            .join('')
+                                                    })
+
+                                                    textarea.addEventListener('keydown', event => {
+                                                        if (event.key === 'Tab') {
+                                                            const start = textarea.selectionStart
+                                                            const end = textarea.selectionEnd
+
+                                                            textarea.value = textarea.value.substring(0, start) + '\t' + textarea.value.substring(end)
+
+                                                            event.preventDefault()
+                                                        }
+                                                    })
+                                                </script>
+                                            <!-- end of code block -->
+                                            </div>
                                             <textarea id="result" style="display:none;" name="content"></textarea>
                                             <span class="error"><?php echo $data['content_err']; ?></span>
                                         </div>
