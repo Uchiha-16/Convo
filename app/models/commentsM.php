@@ -27,5 +27,19 @@
             $results = $this->db->resultSet();
             return $results;
         }
+
+        public function notify($data){
+            $this->db->query('SELECT * FROM answer WHERE threadID = :threadID');
+            $this->db->bind(':threadID', $data['threadID']);
+            $results = $this->db->single();
+            $userID = $results->expertID;
+            $QID = $results->QID;
+            $this->db->query('INSERT INTO notification (userID, expertID, type, typeID) VALUES (:userID, :expertID, :type, :typeID)');
+            $this->db->bind(':userID', $userID);
+            $this->db->bind(':expertID', $data['userID']);
+            $this->db->bind(':type', 'comment');
+            $this->db->bind(':typeID', $QID);
+            $this->db->execute();
+        }
     }
 ?>

@@ -24,6 +24,7 @@
             echo $data['userID'] . $data['comment'] . $data['threadID'] . $data['date'];
 
             if($this->commentsM->add($data)){
+                $this->commentsM->notify($data);
                 flash('comment_message', 'Comment Added');
             } else {
                 die('Something went wrong');

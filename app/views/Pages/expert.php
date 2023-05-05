@@ -10,6 +10,7 @@
 </head>
 
 <body>
+
     <?php require APPROOT . '/views/inc/components/Enavbar.php'; ?>
 
     <!-- body content -->

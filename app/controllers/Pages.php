@@ -21,6 +21,8 @@
                 $i++;
             }
 
+            
+
                 $data = [
                     'questions' => $questions,
                     'tags' => $tags,
@@ -56,10 +58,13 @@
                     $c++;
                 }
 
+               // $notificationCount = $this->pagesM->notificationCount($_SESSION['userID']);
+
                 $data = [
                     'questions' => $questions,
                     'tags' => $tags,
-                    'count' => $count
+                    'count' => $count,
+                    //'notificationCount' => $notificationCount
                 ];
 
             $this->view('pages/seeker', $data);
@@ -90,13 +95,17 @@
                     $c++;
                 }
 
+                //$notificationCount = $this->pagesM->notificationCount($_SESSION['userID']);
+
                 $data = [
                     'questions' => $questions,
                     'tags' => $tags,
-                    'count' => $count
+                    'count' => $count,
+                    //'notificationCount' => $notificationCount
                 ];
 
             $this->view('pages/expert', $data);
+            ;
         }
 
         public function company() {
