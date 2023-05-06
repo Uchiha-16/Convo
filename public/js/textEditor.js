@@ -152,7 +152,11 @@ function insertSymbol(symbol) {
 }
 
 // code block
-
+$(document).ready(function () {
+    $("#codeBlockBtn").click(function () {
+        $(".codeeditor").toggle();
+    });
+});
 
 
 

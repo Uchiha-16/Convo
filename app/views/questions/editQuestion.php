@@ -1343,7 +1343,7 @@
                                             </div>
                                             <div id="text-input" contenteditable="true" title="Enter text..." class="editor"><?php echo $data["content"]; ?>
                                             <!-- code block -->
-                                                <div class="codeeditor">
+                                                <div class="codeeditor" style="display:none;">
                                                     <div class="line-numbers">
                                                         <span></span>
                                                     </div>
