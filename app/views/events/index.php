@@ -13,11 +13,13 @@
 </style>
 
 <script type="text/javascript">
-function confirmation() {
-    if (confirm("Are you sure you want to discard this blog?")) {
-        window.location.href = "<?php echo URLROOT; ?>/Blogs/index";
+    function confirmationAccept(EID){
+        if(confirm("Event Added to your profile")){
+            window.location.href = "<?php echo URLROOT; ?>/Events/attendEvent/" + EID;
+      }else {
+        return false;
+      }
     }
-}
 </script>
 
 </head>
@@ -177,7 +179,7 @@ function confirmation() {
             <div class="LHS" id="LHS">
                 <h3>Join online sessions that are conducted in your fields....</h3><br>
 
-                <!-- Events -->
+                <!-- Events --> 
                 <?php foreach ($data['events'] as $event) : ?>
                 <div class="question-div" style="margin-bottom: 3rem;">
                     <div class="info">
@@ -221,7 +223,7 @@ function confirmation() {
                             <?php endif; ?>
                             <?php endforeach; ?>
                         </div>
-                        <button style="float:right" class="read-more attend">ATTEND</button>
+                        <button style="float:right" class="read-more attend" onclick="confirmationAccept(<?php echo $event->EID;?>)">ATTEND</button>
                     </div>
                 </div>
                 <?php endforeach; ?>

@@ -146,6 +146,7 @@
                 </script>
                 <div class="RHS">
                     <!-- calendar -->
+                    
                     <div class="wrapper">
                         <header>
                             <p class="current-date"></p>
@@ -163,46 +164,42 @@
                             <ul class="days"></ul>
                         </div>
                     </div>
+                    <!-- end of calendar -->
                     <div class="col-3 score-board board-2">
                         <p><b>Upcoming Events</b></p>
-                        <!-- event 1 -->
-                        <div class="event">
-                            <div class="info">
-                                <div class="calander">
-                                    <div class="cal1">
-                                        <label>Jan</label>
+                        <!-- event -->
+                        <?php foreach($data['events'] as $event) : ?>
+                            <div class="event">
+                                <div class="info">
+                                    <?php 
+                                        $dateString = $event->date;
+                                        $dateTime = new DateTime($dateString);
+
+                                        $year = $dateTime->format('Y');
+                                        $month = $dateTime->format('M');
+                                        $day = $dateTime->format('d');
+                                    ?>
+                                    <div class="calander">
+                                        <div class="cal1">
+                                            <label><?php echo $month ?></label>
+                                        </div>
+                                        <div class="cal2">
+                                            <label><?php echo $day?></label>
+                                        </div>
                                     </div>
-                                    <div class="cal2">
-                                        <label>12</label>
-                                    </div>
+                                    <span><?php echo $event->title ?></span>
                                 </div>
-                                <span>How you should prepare for new Covid-19 Virus for upcoming months?</span>
-                            </div>
-                            <div class="content-display">
-                                <label class="name-label">Varsha Wijethunge</label>
-                                <label class="time-label">3.00PM - 4.00PM</label>
-                            </div>
-                            <div class="appointment">Join</div>
-                        </div>
-                        <!-- event 2 -->
-                        <div class="event">
-                            <div class="info">
-                                <div class="calander">
-                                    <div class="cal1">
-                                        <label>OCT</label>
-                                    </div>
-                                    <div class="cal2">
-                                        <label>22</label>
-                                    </div>
+                                <div class="content-display">
+                                    <?php foreach($data['resourcePerson'] as $rp) :
+                                        if($rp->EID == $event->EID): ?>
+                                            <label class="name-label"><?php echo $rp->name; ?></label>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                            <label class="time-label"><?php echo date("h:i A", strtotime($event->time)) ?></label>
                                 </div>
-                                <span>Photoshop Workshop</span>
+                                <div class="appointment" onclick="window.location.href=<?php echo $event->zoomlink ?>;">Join</div>
                             </div>
-                            <div class="content-display">
-                                <label class="name-label">Induwara Pathirana</label>
-                                <label class="time-label">4.00PM - 6.00PM</label>
-                            </div>
-                            <div class="appointment">Join</div>
-                        </div>
+                        <?php endforeach; ?>
                     </div>
                 </div>
             </div>

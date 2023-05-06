@@ -134,12 +134,22 @@
             $str = '';
             foreach($usertag as $tag) {
                 $str = $str . 'eventtag.tag = "' . $tag->tag . '" OR ';
-    
             }
             $str = substr($str, 0, -4);
 
             $currentDate = date('Y-m-d'); // get the current date in the format "YYYY-MM-DD"
-            $events = $this->eventsModel->getevents($str, $currentDate); 
+            
+            $attendEvents = $this->eventsModel->getAttendEvents($_SESSION['userID']);
+            if ($attendEvents == null){
+                $events = $this->eventsModel->getevents($str, $currentDate); 
+            }else{
+                $str2 = '';
+                foreach($attendEvents as $attend) {
+                    $str2 = $str2 . 'event.eventID != "' . $attend->eventID . '" AND ';
+                }
+                $str2 = substr($str2, 0, -5);
+                $events = $this->eventsModel->geteventuser($str, $currentDate, $str2); 
+            }
                 
             $tags = $this->eventsModel->getEventTags();
 
@@ -153,8 +163,19 @@
                 'usertag' => $usertag,
             ];
 
-
             $this->view('events/index', $data);
+        }
+
+        public function attendEvent($EID){
+            $userID = $_SESSION['userID'];
+            $eventID = $EID;
+
+            if($this->eventsModel->attendEvent($userID, $eventID)){
+                flash('reg_flash','Event Added');
+                redirect('events/index');
+            } else {
+                die('Something went wrong');
+            }
         }
 
         public function pending(){

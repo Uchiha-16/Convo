@@ -30,13 +30,30 @@
 
         //****************************************************************Retrive Events************************************************************************************************************* */
 
+        //get attend Events
+        public function getAttendEvents($userId){
+            $this->db->query('SELECT DISTINCT eventID FROM eventuser WHERE userID = :userID;');
+            $this->db->bind(':userID', $userId);
+            $row = $this->db->resultSet();
+            return $row;
+        }
         //getEvents for index
         public function getevents($tags, $currentDate) {
             $this->db->query('SELECT DISTINCT event.eventID as EID, event.eventTitle as title, event.date as date, event.time as time, 
             event.zoomlink as zoomlink, event.description as content, event.userID as userID, eventhandling.moderatorID as modID FROM event JOIN 
+            user ON event.userID = user.userID JOIN eventhandling ON event.eventID = eventhandling.eventID JOIN eventtag ON 
+            eventtag.eventID = event.eventID WHERE date >= :currentDate AND event.status = "approved" AND ('. $tags .') ORDER BY event.date ASC;');
+            $this->db->bind(':currentDate', $currentDate);
+            $row = $this->db->resultSet();
+            return $row;
+        }
+
+        public function geteventuser($tags, $currentDate, $attendEvents){
+            $this->db->query('SELECT DISTINCT event.eventID as EID, event.eventTitle as title, event.date as date, event.time as time, 
+            event.zoomlink as zoomlink, event.description as content, event.userID as userID, eventhandling.moderatorID as modID FROM event JOIN 
             user ON event.userID = user.userID JOIN eventhandling ON event.eventID = eventhandling.eventID AND 
-            eventhandling.moderatorID = event.userID join eventtag ON eventtag.eventID = event.eventID WHERE event.status = "approved" AND 
-            date >= :currentDate AND ' . $tags .' ORDER BY event.date ASC;');
+            eventhandling.moderatorID = event.userID JOIN eventtag ON eventtag.eventID = event.eventID WHERE event.status = "approved" AND 
+            date >= :currentDate AND ' . $attendEvents . ' AND ('. $tags .') ORDER BY event.date ASC;');
             $this->db->bind(':currentDate', $currentDate);
             $row = $this->db->resultSet();
             return $row;
@@ -274,6 +291,20 @@
             $this->db->query('UPDATE eventhandling SET status = "rejected" WHERE eventID = :EID AND expertID = :userID');
             $this->db->bind(':EID', $EID);
             $this->db->bind(':userID', $userID);
+            if($this->db->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        public function attendEvent($userID, $eventID){
+            $this->db->query('INSERT INTO eventuser (userID, eventID) VALUES(:userID, :eventID)');
+            // Bind values
+            $this->db->bind(':userID', $userID);
+            $this->db->bind(':eventID', $eventID);
+
+            // Execute
             if($this->db->execute()) {
                 return true;
             } else {
