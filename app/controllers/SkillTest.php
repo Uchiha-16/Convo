@@ -1,5 +1,6 @@
 <?php
     class Skilltest extends Controller {
+        private $skilltestModel;
         public function __construct() {
             $this->skilltestModel = $this -> model('skilltestM');
         }

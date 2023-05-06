@@ -370,42 +370,187 @@
         }
 
         public function home(){
-            $usertag = $this->webinarModel->getUserTag(); 
-
-            $str = '';
-    
-            foreach($usertag as $tag) {
-                $str = $str . 'webinartag.tag = "' . $tag->tag . '" OR ';
-    
-            }
-    
-            $str = substr($str, 0, -4);
-
-
-            $webinars = $this->webinarModel->getwebinars($str);
-            $wid = array();
-                for($i = 0; $i < count($webinars); $i++) {
-                    $wid[$i] = $webinars[$i]->webinarID;
-                }
-    
-                $str2 = '';
-    
-                foreach($wid as $id) {
-                    $str2 = $str2 . 'webinarID = "' . $id . '" OR ';
-                }
-    
-                $str2 = substr($str2, 0, -4);
+            if(isset($_SESSION['user_id'])){
                 
-                $tags = $this->webinarModel->getWebinarTags($str2);
+                $usertag = $this->webinarModel->getUserTag(); 
+                $str = '';
+                foreach($usertag as $tag) {
+                    $str = $str . 'webinartag.tag = "' . $tag->tag . '" OR ';
+                }
+                $str = substr($str, 0, -4);
 
+                $webinars = $this->webinarModel->getwebinars($str);
+                $wid = array();
+                    for($i = 0; $i < count($webinars); $i++) {
+                        $wid[$i] = $webinars[$i]->webinarID;
+                    }
+        
+                    $str2 = '';
+        
+                    foreach($wid as $id) {
+                        $str2 = $str2 . 'webinarID = "' . $id . '" OR ';
+                    }
+        
+                    $str2 = substr($str2, 0, -4);
+                    
+                    $tags = $this->webinarModel->getWebinarTags($str2);
+
+                $data = [
+                    'webinars' => $webinars,
+                    'tags' => $tags,
+                    'usertag' => $usertag
+                ];
+                
+                $this->view('webinars/home', $data);
+            }else{
+                $webinars = $this->webinarModel->getwebinarsIndex();
+                $wid = array();
+                    for($i = 0; $i < count($webinars); $i++) {
+                        $wid[$i] = $webinars[$i]->webinarID;
+                    }
+        
+                    $str2 = '';
+        
+                    foreach($wid as $id) {
+                        $str2 = $str2 . 'webinarID = "' . $id . '" OR ';
+                    }
+        
+                    $str2 = substr($str2, 0, -4);
+                    
+                    $tags = $this->webinarModel->getWebinarTags($str2);
+
+                $data = [
+                    'webinars' => $webinars,
+                    'tags' => $tags,
+                ];
+                
+                $this->view('webinars/home', $data);
+            }
+        }
+
+        //get search results
+        public function search() {
+            $search = $_POST['keywords'];
+
+            // print($str);
+            if(isset($_SESSION['userID'])){
+                $usertag = $this->webinarModel->getUserTag();
+                $str = '';
+                foreach($usertag as $tag) {
+                    $str = $str . 'webinartag.tag = "' . $tag->tag . '" OR ';
+                }
+                $str = substr($str, 0, -4);
+
+                $webinars = $this->webinarModel->search($search);
+                $tags = $this->webinarModel->getWebinarTags();
+            }else{
+                $webinars = $this->webinarModel->searchIndex($search);
+                $tags = $this->webinarModel->getQuestionTags();
+            }
             
-            $data = [
-                'webinars' => $webinars,
-                'tags' => $tags,
-                'usertag' => $usertag
-            ];
+            // print_r($search);
+            echo '<div>
+                    <h3>Search Results for "'.$search.'"</h3>
+                </div>
+                <div></div>
+                <div></div>';
+            foreach($webinars as $webinar):
+                echo '<div class="vid-slider">
+                        <div class="vid-wrapper">
+                            <div class="video vid item">
+                                <div>
+                                    <img src="'.URLROOT.'/img/thumbnails/'.$webinar->thumbnail.'" class="thumbnail">
+                                </div>
+                                <iframe style="display:none;" width="550" height="325" src="https://www.youtube.com/embed/'.$webinar->link.'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <div>
+                                    <div class="qdp">
+                                        <div style="height: 100%;">';
+                                            if ($webinar->pfp != NULL) :
+                                                echo '<img src="'.URLROOT.'/img/pfp/'.$webinar->pfp.'" />';
+                                            else :
+                                                echo '<img src="'.URLROOT.'/img/pfp/user.jpg" />';
+                                            endif;
+                                        echo '</div>
+                                        <div class="video-content">
+                                            <p class="text">'.$webinar->title.'</p>
+                                            <div class="webinar-details">
+                                                <div>
+                                                    <label class="qdp-1-2">'.$webinar->date.'</label>
+                                                </div>
+                                                <div style="text-align: right;">
+                                                    <span class="qdp-1-2 qdp-1-3">By '.$webinar->name.'</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>';
+            endforeach;
+                
+            echo '<!-- Popup -->
+                <div class="video-popup">
+                    <div class="iframe-wrapper">
+                        <iframe width="800" height="500" src="" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <span class="close-video"><i class="fa-solid fa-xmark"></i></span>
+                    </div>
+                </div>';
+        }
+
+         //filter by category
+        public function filter() {
             
-            $this->view('webinars/home', $data);
+            $date = isset($_POST['publishDate']) ? $_POST['publishDate'] : '0';
+
+            // print_r($date);
+           
+            if($date == 0){
+                $this->home();
+            }else{
+                if($date != 0){
+                    if(in_array('last year', $date)){
+                        $date = 12;
+                    }elseif(in_array('last 6 months', $date)){
+                        $date = 6;
+                    }elseif(in_array('last 3 months', $date)){
+                        $date = 3;
+                    }else{
+                        $date = 24;
+                }
+            }else{
+                $date = 24;
+            }
+            
+                // print_r($date);
+
+                if(isset($_SESSION['userID'])){
+                    $usertag = $this->webinarModel->getUserTag();
+                    $str = '';
+                    foreach($usertag as $tag) {
+                        $str = $str . 'webinar.tag = "' . $tag->tag . '" OR ';
+                    }
+                    $str = substr($str, 0, -4);
+    
+                    $webinars = $this->webinarModel->filter($date);
+                }
+                
+
+                $tags = $this->webinarModel->getWebinarTags();
+
+                $data = [
+                    'webinars' => $webinars,
+                    'tags' => $tags,
+                    'date' => $_POST['publishDate'],
+                ];
+                
+                // print_r($questions);
+                if(isset($_SESSION['userID'])){
+                    
+                        $this->view('webinars/home', $data);
+                    
+                } 
+            }
         }
     }
 ?>

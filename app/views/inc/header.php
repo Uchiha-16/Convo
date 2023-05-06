@@ -7,6 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0 shrink-to-fit=no">
         <meta name="description" content="Online Forum">
         <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         
         <title><?php echo SITENAME ?></title>
         <link rel="icon" type="images/icon" href="<?php echo URLROOT; ?>/img/logoIcon.png">
@@ -32,4 +33,5 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
         <script src="<?php echo URLROOT; ?>/js/comments.js" type="text/javascript"></script>
         <script src="<?php echo URLROOT; ?>/js/popup.js" type="text/javascript"></script>
+        <script src="<?php echo URLROOT; ?>/js/notifictaions.js" type="text/javascript"></script>
         

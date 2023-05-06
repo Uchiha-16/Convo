@@ -138,7 +138,7 @@ function removedownRating(answerID){
     }
   })
 }
-//=========================================== Navbar Drop Down
+//=========================================== Navbar Drop Down ==================================
 
 /* When the user clicks on the button, 
 toggle between hiding and showing the dropdown content */
@@ -352,12 +352,35 @@ $(document).ready(function () {
         dataType: 'text',
         success: function (response) {
           $("#LHS").html(response);
-          alert(input);
         }
       })
     } else {
       //redirect  to index controller
       window.location = URLROOT + "/events/pending";
+    }
+  })
+});
+
+//====================================================== SEARCH  WEBINAR ================================================//
+$(document).ready(function () {
+  $("#live_search_webinar").keyup(function () {
+    var input = $(this).val();
+    // alert(input);
+    if (input != "") {
+      // alert(input);
+      $.ajax({
+        url: URLROOT + '/Webinars/search/',
+        method: 'post',
+        data: { keywords: input },
+        dataType: 'text',
+        success: function (response) {
+          $("#LHS").html(response);
+          // alert(input);
+        }
+      })
+    } else {
+      //redirect  to index controller 
+      window.location = URLROOT + "/webinars/home";
     }
   })
 });

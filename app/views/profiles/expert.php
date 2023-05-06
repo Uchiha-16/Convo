@@ -51,11 +51,16 @@
                             
                             <img src="<?php echo URLROOT; ?>/img/pfp/<?php echo $data['profile']->pfp ?>" />
                             <h4><?php echo $data['profile']->userName ?></h4>
+<<<<<<< HEAD
                             <label class="qdp-1-2">BSc. Computer Science</label>
+=======
+                            <label class="qdp-1-2"><?php echo $data['profile']->uname ?></label>
+>>>>>>> main
                             <form action="<?php echo URLROOT; ?>/profiles/seekeredit"><button class="read-more">Edit</button></form>
                             <table>
                                 <tr>
                                     <td>Question Contribution</td>
+<<<<<<< HEAD
                                     <td class="align-right"><b>10</b></td>
                                 </tr>
                                 <tr>
@@ -64,19 +69,46 @@
                                 </tr>
                                 <tr>
                                     <td>Events Participated</td>
+=======
+                                    <td class="align-right"><b><?php echo(count($data['question']));?></b></td>
+                                </tr>
+                                <tr>
+                                    <td>Discussions</td>
+                                    <td class="align-right"><b><?php echo $data['chatgroups']->chatgroups;?></b></td>
+                                </tr>
+                                <tr>
+                                    <td>Projects Contribution</td>
+>>>>>>> main
                                     <td class="align-right"><b>5</b></td>
                                 </tr>
                                 <tr>
                                     <td><b>Remaining Skill Tests</b></td>
+<<<<<<< HEAD
                                     <td class="align-right"><b>5</b></td>
                                 </tr>
                                 <tr>
                                     <td><b>User Role</b></td>
                                     <td class="align-right"><b>Free</b></td>
+=======
+                                    <?php if($_SESSION['role'] != 'premium') : ?>
+                                    <td class="align-right"><b><?php echo 20-count($data['skilltest']);?></b></td>
+                                    <?php else : ?>
+                                    <td class="align-right"><b>Unlimited</b></td>
+                                    <?php endif; ?>
+                                </tr>
+                                <tr>
+                                    <td><b>User Role</b></td>
+                                    <td class="align-right"><b><?php echo ucfirst($data['profile']->role) ?></b></td>
+>>>>>>> main
                                 </tr>
                             </table>
                         </div>
                     </div>
+<<<<<<< HEAD
+=======
+                   
+                
+>>>>>>> main
                     <div class="col2">
                         <div class="score-board">
                             <div class="pie">
@@ -84,7 +116,11 @@
                                 <div class="outer">
                                     <div class="inner circular-progress">
                                         <h2 id="number" class="progress-value">
+<<<<<<< HEAD
                                             60%
+=======
+                                            <?php echo round($data['avgscore']);?>%
+>>>>>>> main
                                         </h2>
                                     </div>
                                 </div>
@@ -96,6 +132,7 @@
                                         <th>Score</th>
                                         <th>Grade</th>
                                     </tr>
+<<<<<<< HEAD
                                     <tr>
                                         <td>Chemistry</td>
                                         <td>10/20</td>
@@ -114,10 +151,30 @@
                                         <td>75%</td>
                                         <td>A</td>
                                     </tr>
+=======
+                                    <?php foreach($data['skilltest'] as $skilltest) : ?>
+                                    <tr>
+                                        <td><?php echo $skilltest->field;?></td>
+                                        <td><?php echo (($skilltest->score)*(20/100));?>/20</td>
+                                        <td><?php echo $skilltest->score;?>%</td>
+                                        <?php if($skilltest->score >= 80) : ?>
+                                            <td>A</td>
+                                        <?php elseif($skilltest->score >= 60) : ?>
+                                            <td>B</td>
+                                        <?php elseif($skilltest->score >= 40) : ?>
+                                        <td>C</td>
+                                        <?php else : ?>
+                                            <td>F</td>
+                                        <?php endif; ?>
+                                    </tr>
+                                    <?php endforeach; ?>
+                        
+>>>>>>> main
                                 </table>
                         </div>
                         <div class="score-board board-2">
                             <p><b>Your Questions</b></p>
+<<<<<<< HEAD
                             <div class="col-2-Q">
                                 <p>Can anyone tell me the syntax in Mathematica or MATLAB for finding the Lyapunov exponents for five-dimensional and six-dimensional systems?</p>
                                 <button class="read-more webinar">View</button>
@@ -133,6 +190,26 @@
                         </div>
                     </div>
                 </div>
+=======
+                            <?php foreach($data['question'] as $question) : ?>
+                            <div class="col-2-Q">
+                                <p><?php echo $question->title;?></p>
+                                <form action="<?php echo URLROOT; ?>/Answers/viewA/<?php echo $question->QID;?>" method="POST"><button class="read-more webinar">View</button></form>
+                                <button class="read-more webinar time"><?php echo $question->answercount;?> Answers</button>
+                                <label class="qdp-1-2"><?php echo $question->date;?></label>
+                            </div>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                </div>
+                <script>
+                        const myDiv = document.querySelector(".inner");
+                        const myDeg = document.querySelector(".progress-value").innerHTML;
+                        // alert(myDeg);
+
+                        myDiv.style.background = `conic-gradient(#15637C ${myDeg}deg, white 0deg)`;
+                </script>
+>>>>>>> main
                 <div class="RHS">
                     <!-- calendar -->
                     <div class="wrapper">

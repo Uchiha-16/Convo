@@ -80,11 +80,11 @@
 
 //****************************************************************Edit Question************************************************************************************************************* */
 
-        public function edit($data) {
+        public function edit($data, $content) {
             $this->db->query('UPDATE question SET title = :title, content = :content, date = :date, visibility = :visibility, expertID = :resourceID WHERE QID = :QID');
             // Bind values
             $this->db->bind(':title', $data['title']);
-            $this->db->bind(':content', $data['content']);
+            $this->db->bind(':content', $content);
             $this->db->bind(':date', $data['date']);
             $this->db->bind(':visibility', $data['visibility']);
             $this->db->bind(':QID', $data['QID']);

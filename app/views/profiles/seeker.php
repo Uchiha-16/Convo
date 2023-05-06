@@ -43,6 +43,9 @@
                     <?php endif; ?>
 
         <!-- body content -->
+        <div class="alert success">
+                    <?php flash('reg_flash'); ?>
+                </div>
         <div class="container-div">
             <div class="content-body">
                 <div class="LHS">
@@ -90,7 +93,7 @@
                                 <div class="outer">
                                     <div class="inner circular-progress">
                                         <h2 id="number" class="progress-value">
-                                            <?php echo round($data['avgscore']);?>
+                                            <?php echo round($data['avgscore']);?>%
                                         </h2>
                                     </div>
                                 </div>

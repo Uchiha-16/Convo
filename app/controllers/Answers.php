@@ -56,14 +56,7 @@
         public function add($QID){
             $question = $this->answersM->getQuestion($QID);
             $Quser = $this->answersM->Quser($QID);
-
-            if(isset($_POST['content'])){
-                // Get the formatted text from the POST data
-                $content = $_POST['content'];
-                
-                // Encode the formatted text for safe storage in the database
-                $content = htmlentities($content);
-                
+            //print_r($Quser);
 
                 if($_SERVER['REQUEST_METHOD'] == 'POST') {
                     // Form is submitting
@@ -76,9 +69,15 @@
                     $segments = explode('/', $path); // split the path into an array of segments
                     $last_segment = end($segments); // extract the last segment of the array
                     $interaction = 'new';
+
+                    // Get the formatted text from the POST data
+                    $content = $_POST['content'];
+                    
+                    // Encode the formatted text for safe storage in the database
+                    $content = htmlentities($content);
                     //Input Data
                     $data = [
-                        'content' => $content,
+                        'content' => $_POST['content'],
                         'date' => date('Y-m-d H:i:s'),
                         'embedlink' => $last_segment,
                         'image' => ($_FILES['image']),
@@ -116,6 +115,7 @@
                         if($this->answersM->add($data)) {
                             $LastID = $this->answersM->getLastID();
                             $users = $this->answersM->getUsers();
+                            $this->answersM->notify($Quser->userID,$_SESSION['userID'],$QID);
                             foreach($users as $user) {
                                 $this->answersM->addInteraction($LastID->threadID, $user->userID, $interaction);
                             }
@@ -147,8 +147,9 @@
                         'Quser' => $Quser,
                     ];
                     $this->view('answers/add', $data);
+                    //print_r($data);
                 }
-            }
+            
         }
 
         public function upvote($threadID){

@@ -48,6 +48,19 @@ class moderatorsM {
             $this->db->execute();
         }
 
+        public function notify($status, $QID, $expertID) {
+            $result = $this->db->query('SELECT userID FROM question WHERE QID = :QID');
+            $this->db->bind(':QID', $QID);
+            $row = $this->db->single();
+            $Quser = $row->userID;
+            $this->db->query('INSERT INTO notification (type,userID,expertID,typeID,status) VALUES (:status,:userID,:expertID,:QID,0)');
+            $this->db->bind(':expertID', $expertID);
+            $this->db->bind(':QID', $QID);
+            $this->db->bind(':status', $status);
+            $this->db->bind(':userID', $Quser);
+            $this->db->execute();
+        }
+
         
 
     }

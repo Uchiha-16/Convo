@@ -1,129 +1,163 @@
-let optionsButtons = document.querySelectorAll(".option-button");
-let advancedOptionButton = document.querySelectorAll(".adv-option-button");
-let fontName = document.getElementById("fontName");
-let fontSizeRef = document.getElementById("fontSize");
-let writingArea = document.getElementById("text-input");
-let linkButton = document.getElementById("createLink");
-let alignButtons = document.querySelectorAll(".align");
-let spacingButtons = document.querySelectorAll(".spacing");
-let formatButtons = document.querySelectorAll(".format");
-let scriptButtons = document.querySelectorAll(".script");
+// Get the editable div
+const editor = document.querySelector('.editor');
 
-//List of fontlist
-let fontList = [
-    "Arial",
-    "Verdana",
-    "Times New Roman",
-    "Garamond",
-    "Georgia",
-    "Courier New",
-    "cursive",
-];
+$(function () {
+    $('.basicEquations').hide();
+    $('.basicMath').hide();
+    $('.greekLetters').hide();
+    $('.letterLikeSymbols').hide();
+    $('.operators').hide();
+    $('.arrows').hide();
+    $('.negatedRelations').hide();
+    $('.geometry').hide();
+    $('#math').change(function () {
+        $('.basicEquations').hide();
+        $('.basicMath').hide();
+        $('.greekLetters').hide();
+        $('.letterLikeSymbols').hide();
+        $('.operators').hide();
+        $('.arrows').hide();
+        $('.negatedRelations').hide();
+        $('.geometry').hide();
+        $('#' + $(this).val()).show();
 
-//Initial Settings
-const initializer = () => {
-    //function calls for highlighting buttons
-    //No highlights for link, unlink,lists, undo,redo since they are one time operations
-    highlighter(alignButtons, true);
-    highlighter(spacingButtons, true);
-    highlighter(formatButtons, false);
-    highlighter(scriptButtons, true);
-
-    //create options for font names
-    fontList.map((value) => {
-        let option = document.createElement("option");
-        option.value = value;
-        option.innerHTML = value;
-        fontName.appendChild(option);
-    });
-
-    //fontSize allows only till 7
-    for (let i = 1; i <= 7; i++) {
-        let option = document.createElement("option");
-        option.value = i;
-        option.innerHTML = i;
-        fontSizeRef.appendChild(option);
-    }
-
-    //default size
-    fontSizeRef.value = 3;
-};
-
-//main logic
-const modifyText = (command, defaultUi, value) => {
-    //execCommand executes command on selected text
-    document.execCommand(command, defaultUi, value);
-};
-
-//For basic operations which don't need value parameter
-optionsButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-        modifyText(button.id, false, null);
     });
 });
 
-//options that require value parameter (e.g colors, fonts)
-advancedOptionButton.forEach((button) => {
-    button.addEventListener("change", () => {
-        modifyText(button.id, false, button.value);
+const fontSizeSelect = document.getElementById('fontSize');
+// Set the default font size to 3 (12px)
+fontSizeSelect.value = '3';
+// Listen for changes to the font size select
+fontSizeSelect.addEventListener('change', () => {
+    // Get the selected font size
+    const fontSize = fontSizeSelect.value;
+    // Apply the font size to the selected text
+    document.execCommand('fontSize', false, fontSize);
+    // Remove the selection after applying the font size
+    window.getSelection().removeAllRanges();
+});
+
+const text_input = document.getElementById('text-input');
+
+// Get the buttons
+const boldBtn = document.getElementById('boldBtn');
+const italicBtn = document.getElementById('italicBtn');
+const underlineBtn = document.getElementById('underlineBtn');
+const strikethroughBtn = document.getElementById('strikethroughBtn');
+const subscriptBtn = document.getElementById('subscriptBtn');
+const superscriptBtn = document.getElementById('superscriptBtn');
+const orderedListBtn = document.getElementById('orderedListBtn');
+const unorderedListBtn = document.getElementById('unorderedListBtn');
+const linkBtn = document.getElementById('linkBtn');
+const unlinkBtn = document.getElementById('unlinkBtn');
+const codeBlockBtn = document.getElementById('codeBlockBtn');
+const convertBtn = document.getElementById('convertBtn');
+
+// Add event listeners to the buttons
+boldBtn.addEventListener('click', addBold);
+italicBtn.addEventListener('click', addItalic);
+underlineBtn.addEventListener('click', addUnderline);
+strikethroughBtn.addEventListener('click', addStrikethrough);
+subscriptBtn.addEventListener('click', addSubscript);
+superscriptBtn.addEventListener('click', addSuperscript);
+orderedListBtn.addEventListener('click', addOrderedList);
+unorderedListBtn.addEventListener('click', addUnorderedList);
+linkBtn.addEventListener('click', addLink);
+unlinkBtn.addEventListener('click', removeLink);
+codeBlockBtn.addEventListener('click', addCodeBlock);
+convertBtn.addEventListener('click', convertToHtml);
+
+
+// Function to add bold tags to selected text
+function addBold() {
+    document.execCommand('bold', false, null);
+}
+
+// Function to add italic tags to selected text
+function addItalic() {
+    document.execCommand('italic', false, null);
+}
+
+// Function to add underline tags to selected text
+function addUnderline() {
+    document.execCommand('underline', false, null);
+}
+
+// Function to add strikethrough tags to selected text
+function addStrikethrough() {
+    document.execCommand('strikethrough', false, null);
+    editor.focus();
+}
+
+// Function to add subscript tags to selected text
+function addSubscript() {
+    document.execCommand('subscript', false, null);
+}
+
+// Function to add superscript tags to selected text
+function addSuperscript() {
+    document.execCommand('superscript', false, null);
+}
+
+// Function to add ordered list tags to selected text
+function addOrderedList() {
+    document.execCommand('insertOrderedList', false, null);
+    editor.focus();
+}
+
+// Function to add unordered list tags to selected text
+function addUnorderedList() {
+    document.execCommand('insertUnorderedList', false, null);
+}
+
+// Function to add link to selected text
+function addLink() {
+    const url = prompt('Enter the URL:');
+    document.execCommand('createLink', false, url);
+}
+
+// Function to remove link from selected text
+function removeLink() {
+    document.execCommand('unlink', false, null);
+}
+
+// Function to add code block
+function addCodeBlock() {
+    document.execCommand('insertHTML', false, '<pre><code class="language-html"> </code></pre>');
+}
+
+// Function to convert the edited text to HTML
+function convertToHtml() {
+    // Get the edited text
+    // alert(text_input.innerHTML);
+    const editedText = text_input.innerHTML.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    // Display the HTML result
+    const result = document.getElementById('result');
+    result.innerHTML = editedText;
+}
+
+function insertSymbol(symbol) {
+    // Get the current cursor position in the editable div element
+    var selection = window.getSelection();
+    var range = selection.getRangeAt(0);
+    var currentStart = range.startOffset;
+    // Insert the symbol at the current cursor position
+    range.insertNode(document.createTextNode(symbol));
+    // Move the cursor to the end of the inserted symbol
+    range.setStart(range.startContainer, currentStart + symbol.length);
+    range.setEnd(range.startContainer, currentStart + symbol.length);
+    selection.removeAllRanges();
+    selection.addRange(range);
+    editor.focus();
+}
+
+// code block
+$(document).ready(function () {
+    $("#codeBlockBtn").click(function () {
+        $(".codeeditor").toggle();
     });
 });
 
-//link
-linkButton.addEventListener("click", () => {
-    let userLink = prompt("Enter a URL");
-    //if link has http then pass directly else add https
-    if (/http/i.test(userLink)) {
-        modifyText(linkButton.id, false, userLink);
-    } else {
-        userLink = "http://" + userLink;
-        modifyText(linkButton.id, false, userLink);
-    }
-});
-
-//Highlight clicked button
-const highlighter = (className, needsRemoval) => {
-    className.forEach((button) => {
-        button.addEventListener("click", () => {
-            //needsRemoval = true means only one button should be highlight and other would be normal
-            if (needsRemoval) {
-                let alreadyActive = false;
-
-                //If currently clicked button is already active
-                if (button.classList.contains("active")) {
-                    alreadyActive = true;
-                }
-
-                //Remove highlight from other buttons
-                highlighterRemover(className);
-                if (!alreadyActive) {
-                    //highlight clicked button
-                    button.classList.add("active");
-                }
-            } else {
-                //if other buttons can be highlighted
-                button.classList.toggle("active");
-            }
-        });
-    });
-};
-
-const highlighterRemover = (className) => {
-    className.forEach((button) => {
-        button.classList.remove("active");
-    });
-};
-
-window.onload = initializer();
 
 
-// Set up a listener for the submit event
-// document.querySelector('form').addEventListener('submit', function (e) {
-//     // Get the text input element
-//     var textInput = document.getElementById('text-input');
-//     // Get the formatted text content of the div element
-//     var content = textInput.innerHTML;
 
-//     // Set the value of the hidden input field to the formatted text content
-//     document.querySelector('input[name="content"]').value = content;
-// });

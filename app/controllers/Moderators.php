@@ -38,6 +38,7 @@
         public function accept($QID){
             $this->moderatorsM->accept($QID);
             $this->moderatorsM->addID($_SESSION['userID'], $QID);
+            $this->moderatorsM->notify("Accepted",$QID,$_SESSION['userID'],);
             flash('reg_flash','Question Approved');
             header('Location: ' . URLROOT . '/moderators/approve');
         }
@@ -45,6 +46,7 @@
         public function decline($QID){
             $this->moderatorsM->decline($QID);
             $this->moderatorsM->addID($_SESSION['userID'], $QID);
+            $this->moderatorsM->notify("Declined",$QID,$_SESSION['userID'],);
             flash('reg_flash','Question Declined');
             header('Location: ' . URLROOT . '/moderators/approve');
         }
