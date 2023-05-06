@@ -86,6 +86,14 @@
             $row = $this->db->resultSet();
             return $row;
         }
+
+        //notificationCount
+        // public function notificationCount() {
+        //     $this->db->query('SELECT COUNT(NID) as count FROM notification WHERE userID = :userID AND status = 0');
+        //     $this->db->bind(':userID', $_SESSION['userID']);
+        //     $rows = $this->db->single();
+        //     return $rows;
+        // }
         
     }
 

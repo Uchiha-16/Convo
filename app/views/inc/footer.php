@@ -20,6 +20,7 @@
         <script type="text/JavaScript" src="<?php echo URLROOT; ?>/js/jQuery/jQuery.js"></script>
         <script src="<?php echo URLROOT; ?>/js/rating.js" type="text/javascript"></script>
         <script src="<?php echo URLROOT; ?>/js/textEditor.js" type="text/javascript"></script>
+        <script src="<?php echo URLROOT; ?>/js/notifictaions.js" type="text/javascript"></script>
 
         
 

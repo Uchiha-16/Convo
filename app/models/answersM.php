@@ -197,6 +197,13 @@
             return $row;
         }
 
+        public function notify($userID,$expert,$QID) {  
+            $this->db->query('INSERT INTO notification (type,userID, expertID, typeID,status) VALUES ("answer",:userID, :expert, :QID,0)');
+            $this->db->bind(':userID', $userID);
+            $this->db->bind(':expert', $expert);
+            $this->db->bind(':QID', $QID);
+            $this->db->execute();
+        }
     }   
 
 ?>

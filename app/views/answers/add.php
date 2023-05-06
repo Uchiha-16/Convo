@@ -161,8 +161,8 @@
                                                     <label for="backColor">Highlight Color</label>
                                                 </div>
                                             </div>
-                                            <div id="text-input" contenteditable="true" title="Enter text..." name="content"></div>
-                                            <!-- <textarea id="text-input" name="content"></textarea> -->
+                                            <!-- <div id="text-input" contenteditable="true" title="Enter text..." name="content"></div> -->
+                                            <textarea id="text-input" name="content"></textarea>
                                             <span class="error"><?php echo $data['content_err']; ?></span>
                                         </div>
                                     </div>

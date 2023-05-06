@@ -56,6 +56,7 @@
         public function add($QID){
             $question = $this->answersM->getQuestion($QID);
             $Quser = $this->answersM->Quser($QID);
+            //print_r($Quser);
 
                 if($_SERVER['REQUEST_METHOD'] == 'POST') {
                     // Form is submitting
@@ -76,7 +77,7 @@
                     $content = htmlentities($content);
                     //Input Data
                     $data = [
-                        'content' => $content,
+                        'content' => $_POST['content'],
                         'date' => date('Y-m-d H:i:s'),
                         'embedlink' => $last_segment,
                         'image' => ($_FILES['image']),
@@ -114,6 +115,7 @@
                         if($this->answersM->add($data)) {
                             $LastID = $this->answersM->getLastID();
                             $users = $this->answersM->getUsers();
+                            $this->answersM->notify($Quser->userID,$_SESSION['userID'],$QID);
                             foreach($users as $user) {
                                 $this->answersM->addInteraction($LastID->threadID, $user->userID, $interaction);
                             }
@@ -145,6 +147,7 @@
                         'Quser' => $Quser,
                     ];
                     $this->view('answers/add', $data);
+                    //print_r($data);
                 }
             
         }
