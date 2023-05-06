@@ -6,7 +6,7 @@
             $this->db = new Database;
         }
 
-        //****************************************************************Get User Details************************************************************************************************************* */
+        //**************************************************************** Get User Details************************************************************************************************************* */
 
         //getWebinars
         public function getprofile() {
@@ -87,6 +87,33 @@
             $this->db->bind(':tag', $tag);
 
             $row = $this->db->execute();
+            return $row;
+        }
+
+        //***************************************Events*****************************//
+
+        //get attend Events
+        public function getAttendEvents($userId){
+            $this->db->query('SELECT DISTINCT eventID FROM eventuser WHERE userID = :userID;');
+            $this->db->bind(':userID', $userId);
+            $row = $this->db->resultSet();
+            return $row;
+        }
+
+        //getevents
+        public function getEvent($EID){
+            $this->db->query('SELECT event.eventID as EID, event.eventTitle as title, event.zoomlink as zoomlink, event.date as date, 
+            event.time as time FROM event WHERE eventID = :eventID;');
+            $this->db->bind(':eventID', $EID);
+            $row = $this->db->single();
+            return $row;
+        }
+
+        //get event recource person
+        public function getResourcePerson() {
+            $this->db->query('SELECT eventhandling.eventID as EID, user.userID as userID, CONCAT(user.firstName, " ", user.lastName) as name FROM 
+            user JOIN eventhandling ON eventhandling.expertID = user.userID;');
+            $row = $this->db->resultSet();
             return $row;
         }
 

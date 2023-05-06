@@ -10,6 +10,14 @@
             $question = $this->profilesModel->getQuestions();
             $skilltest = $this->profilesModel->getSkilltest();
             $chatgroups = $this->profilesModel->chatgroups();
+            $events = $this->profilesModel->getAttendEvents($_SESSION['userID']);
+            $eventAttend = [];
+            $i = 0;
+            foreach($events as $event){
+                $eventAttend[$i] = $this->profilesModel->getEvent($event->eventID);
+                $i++;
+            }
+            $resourcePerson = $this->profilesModel->getResourcePerson();
 
             $avgscore = [];
             foreach($skilltest as $sk){
@@ -23,9 +31,11 @@
                 'question' => $question,
                 'skilltest' => $skilltest,
                 'avgscore' => $avgscore,
-                'chatgroups' => $chatgroups
+                'chatgroups' => $chatgroups,
+                'events' => $eventAttend,
+                'resourcePerson' => $resourcePerson
             ];
-            
+
             $this->view('profiles/seeker', $data);
         }
 

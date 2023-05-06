@@ -18,7 +18,7 @@ const renderCalendar = () => {
     lastDateofLastMonth = new Date(currYear, currMonth, 0).getDate(); // getting last date of previous month
     let liTag = "";
 
-    for (let i = firstDayofMonth; i > 0; i--) { // creating li of previous month last days
+    for (let i = firstDayofMonth; i > 0; i--) { // creating li of previous month last days 
         liTag += `<li class="inactive">${lastDateofLastMonth - i + 1}</li>`;
     }
 

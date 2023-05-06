@@ -183,13 +183,13 @@ function confirmation() {
                     <div class="question-div">
                         <div class="info">
                             <?php 
-                            $dateString = $invites->date;
-                            $dateTime = new DateTime($dateString);
+                                $dateString = $invites->date;
+                                $dateTime = new DateTime($dateString);
 
-                            $year = $dateTime->format('Y');
-                            $month = $dateTime->format('M');
-                            $day = $dateTime->format('d');
-?>
+                                $year = $dateTime->format('Y');
+                                $month = $dateTime->format('M');
+                                $day = $dateTime->format('d');
+                            ?>
                             <div class="calander">
                                 <div class="cal1">
                                     <label><?php echo $month ?></label>
