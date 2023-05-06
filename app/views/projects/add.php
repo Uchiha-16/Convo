@@ -70,11 +70,7 @@
                                 <div class="form-field-div">
                                     <label for="tag">Field</label><br>
                                     <select name="tag" id="tag" class="form-control" required>
-                                        <!-- <option value="Computer Science">Computer Science</option>
-                                        <option value="Information Technology">Information Technology</option>
-                                        <option value="Software Engineering">Software Engineering</option>
-                                        <option value="Data Science">Data Science</option> -->
-                                        <?php $tagArray = explode(",", $data['tags']->tags); ?>
+                                       <?php $tagArray = explode(",", $data['tags']->tags); ?>
                                         <?php foreach ($tagArray as $tag) : ?>
                                             <option value="<?php echo $tag; ?>"><?php echo $tag; ?></option>
                                         <?php endforeach; ?>

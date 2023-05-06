@@ -114,11 +114,11 @@
                                     <label for="availability">Availability</label><br>
                                     <select name="availability" id="availability" class="form-control">
                                     <?php if($data['type'] == 'Part-time') : ?>
-                                            <option value="Project" selected>Part-time</option>
-                                            <option value="Research">Full-time</option>
+                                            <option value="Part-time" selected>Part-time</option>
+                                            <option value="Full-time">Full-time</option>
                                         <?php else : ?>
-                                            <option value="Project">Part-time</option>
-                                            <option value="Research" selected>Full-time</option>
+                                            <option value="Part-time">Part-time</option>
+                                            <option value="Full-time" selected>Full-time</option>
                                         <?php endif; ?>
                                     </select><br><br>
                                 </div>

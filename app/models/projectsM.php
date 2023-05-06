@@ -27,6 +27,7 @@
         $this->db->bind(':payment', $data['payment']);
         $this->db->bind(':duration', $data['duration']);
         $this->db->bind(':userID', $_SESSION['userID']);
+        //$this->db->bind(':CID', $_SESSION['CID']);
         
         // Execute
         if($this->db->execute()) {

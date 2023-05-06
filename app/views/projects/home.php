@@ -106,7 +106,7 @@
                                 
                             </div>
                             <div class="tag-bottom">
-                                <label class="qdp-1-2">Published: October 25, 2022<br>Project duration: <?php echo $project->duration;?></label>
+                                <label class="qdp-1-2">published on: <?php echo $project->publishedDate;?><br>Project duration: <?php echo $project->duration;?></label>
                                 <a href="<?php echo URLROOT;?>/Projects/apply/<?php echo $project->PID?>"><button class="answer-btn" formaction="#">Apply Now!</button></a>  
                             </div>
 

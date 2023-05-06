@@ -114,7 +114,7 @@
                                 <button class="read-more edit-btn" onclick="return confirm('Are you sure you want to delete this record?')"> <img style="width: 17px;" src="../img/delete.png">Delete</button>
                             </form>
                             <div class="tag-bottom">
-                                <label class="qdp-1-2">Published: October 25, 2022<br>Project duration: <?php echo $project->duration;?></label>
+                                <label class="qdp-1-2">published on: <?php echo $project->publishedDate;?><br>Project duration: <?php echo $project->duration;?></label>
                                 <a href="<?php echo URLROOT;?>/Projects/applications/<?php echo $project->PID;?>"><button class="answer-btn" formaction="#">View Applications</button></a>  
                             </div>
 

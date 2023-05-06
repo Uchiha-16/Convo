@@ -50,7 +50,7 @@
                     
                     <!-- Event 1 -->
                     <div class="question-div add-event">
-                        <form action="<?php echo URLROOT; ?>/blogs/add" method="POST">
+                        <form name="" action="<?php echo URLROOT; ?>/blogs/add" method="POST" enctype="multipart/form-data">
                             <table>
                                 <tr>
                                     <td colspan="3">
@@ -66,13 +66,34 @@
                                         <span class="error"><?php echo $data['title_err']; ?></span>
                                     </td>
                                 </tr>
-                                
+                                <tr>
+                                        <td colspan="3" style="padding-top: 1rem;">
+                                            <h4 style="margin-bottom:.5rem">Add Header Image <img src="<?php echo URLROOT; ?>/img/thumbnail.png" style="width: 17px;"> <span class="star">*</span></h4>
+
+                                            <label style="font-size: 14px; color:black">Upload a picture that shows what's in your heading of the blog.
+                                                A good header image stands out and draws viewers' attention.<br><b>Make sure it is in 16:9 ratio</b>.</label><br><br>
+                                            <br>  
+                                            <!-- Add image section -->                                   
+                                            <div class="avatar-upload">
+                                                <div class="avatar-edit">
+                                                    <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" name="thumbnail" value="<?php echo $data['thumbnail']?>">
+                                                    <label for="imageUpload"></label>
+                                                </div>
+                                                <div class="avatar-preview">
+                                                    <div id="imagePreview" style="background-image: url(<?php echo URLROOT; ?>/img/thumbnailpic.png);">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- -->
+                                            <span class="error"><?php echo $data['thumbnail_err']; ?></span>
+                                        </td>
+                                    </tr>
                                 <tr>
                                     <td colspan="3">
                                         <h4 style="margin-bottom:.5rem">Tags <span class="star">*</span></h4>
                                         
                                         <div class="dropdown-div">
-                                            <form method="POST" id="innerform">
+                                            <!-- <form method="POST" id="innerform"> -->
                                                 <label>Please Select <b>all the Tags</b> which are Related to the Event.</label>
                                                 <ul class="dropdown" id="dropdown">
 
@@ -126,13 +147,15 @@
 
                                                     <li><input type="checkbox" value="spaceScience" name="tag[]" id="checkbox25" value="<?php echo $data['tag']; ?>" /><label for="checkbox25">Space Science</label></li>
                                                 </ul>
+                                        </div>
+                                        <span class="error"><?php echo $data['tag_err']; ?></span>
 
                                                 <div class="select">
                                                     <label>All tags selected?</label>
                                                     <button style="float:right" class="read-more submit mybutton" type="submit" name="tagcomplete" value="search">Yes, I'm good.</button>
                                                     <button style="float:right" class="read-more submit" type="reset" name="reset">No</button>
                                                 </div>
-                                            </form>
+                                            <!-- </form> -->
                                             <?php
                                             // display experts of the relavant tags
                                             ?>
@@ -184,7 +207,7 @@
                                             <br>
                                             <div class="row row1">
                                                 <div class="col col1">
-                                                    <textarea class="inputform" type="text" name="desc" placeholder="Description..." value="<?php echo $data['content']; ?>" style="height: 300px;"></textarea>
+                                                    <textarea class="inputform" type="text" name="content" placeholder="Description..." value="<?php echo $data['content']; ?>" style="height: 300px;"></textarea>
                                                 </div>
                                             </div>
                                         </section>
