@@ -56,7 +56,7 @@
 =======
                             <label class="qdp-1-2"><?php echo $data['profile']->uname ?></label>
 >>>>>>> main
-                            <form action="<?php echo URLROOT; ?>/profiles/seekeredit"><button class="read-more">Edit</button></form>
+                            <form action="<?php echo URLROOT; ?>/profiles/expertedit"><button class="read-more">Edit</button></form>
                             <table>
                                 <tr>
                                     <td>Question Contribution</td>

@@ -18,6 +18,15 @@
             return $row;
         }
 
+        //**************************************************************** Get Expert Details************************************************************************************************************* */
+        public function getexpertprofile() {
+            $this->db->query('SELECT user.userID AS userID, user.firstName as fName, user.lastName as lName, CONCAT(user.firstName , " " , user.lastName) AS userName, user.pfp AS pfp, user.password, user.uname, user.email, user.role, expert.expertID AS expertID, expert.linkedin AS linkedin, expert.qualification AS qualification, expert.designation AS designation FROM expert INNER JOIN user WHERE expert.expertID = user.userID AND user.userID = :userID;');
+
+            $this->db->bind(':userID', $_SESSION['userID']);
+
+            $row = $this->db->single();
+            return $row;
+        }
         //****************************************************************User Questions details************************************************************************************************************* *//
         public function getQuestions() {
             $this->db->query('SELECT QID, title, date, answercount FROM question WHERE userID = :userID ORDER BY date DESC;');
@@ -79,6 +88,18 @@
             $row = $this->db->execute();
             return $row;
         }
+
+        //update expert details
+        public function updateExpert($data){
+            $this->db->query('UPDATE expert SET linkedin = :linkedin, qualification = :qualification, designation = :designation WHERE expertID = :userID');
+            $this->db->bind(':userID', $_SESSION['userID']);
+            $this->db->bind(':linkedin', $data['linkedin']);
+            $this->db->bind(':qualification', $data['qualification']);
+            $this->db->bind(':designation', $data['designation']);            
+
+            $row = $this->db->execute();
+            return $row;
+        }
         
         //***************************************Insert UserTags*****************************//
         public function userTag($tag){
@@ -116,6 +137,22 @@
             $row = $this->db->resultSet();
             return $row;
         }
+
+        //find by user name
+        // public function findUserbyUsername($uname){
+        //     $this->db->query('SELECT * FROM user WHERE uname = :username');
+        //     // Bind value
+        //     $this->db->bind(':username', $username);
+
+        //     $row = $this->db->single();
+
+        //     // Check row
+        //     if($this->db->rowCount() > 0) {
+        //         return true;
+        //     } else {
+        //         return false;
+        //     }
+        // }
 
     }
 ?>
