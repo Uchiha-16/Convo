@@ -8,14 +8,15 @@
 
         // Register User
         public function register($data) {
-            $this->db->query('INSERT INTO user (firstName, lastName, email, uname, password) VALUES(:fname, :lname, :email, :uname, :password)');
+            $this->db->query('INSERT INTO user (firstName, lastName, email, uname, password, pfp, role) VALUES(:fname, :lname, :email, :uname, :password, :pfp, :role)');
             // Bind values
             $this->db->bind(':fname', $data['fname']);
             $this->db->bind(':lname', $data['lname']);
             $this->db->bind(':email', $data['email']);
             $this->db->bind(':uname', $data['uname']);
             $this->db->bind(':password', $data['password']);
-            
+            $this->db->bind(':pfp', $data['pfp']);
+            $this->db->bind(':role', $data['role']);
 
             // Execute
             if($this->db->execute()) {
@@ -90,6 +91,15 @@
             } else {
                 return false;
             }
+        }
+
+        // Role
+        public function userRole($username) {
+            $this->db->query('SELECT * FROM userinfo WHERE username = :username');
+            $this->db->bind(':username', $username);
+
+            $row = $this->db->single();
+            return $row->role;
         }
     }
 ?>
