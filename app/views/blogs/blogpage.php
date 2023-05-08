@@ -36,6 +36,16 @@
             
 
 
+                <style>
+                    .LHS{
+                        display: grid;
+                        grid-template-columns: 90% 10%;
+                        height: 100%;
+                        float: left;
+                        padding: 1rem;
+                        border-right: 1px solid rgba(128,128,128, .2);
+                    }
+                </style>
                 <!-- body content --> 
                 <div class="alert success">
                     <?php flash('reg_flash'); ?>
