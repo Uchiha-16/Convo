@@ -546,12 +546,11 @@
         public function hoverdate(){
             $dateValue = $_POST['Datevalue'];
 
-                            echo '<div class="hover-box">
-                            <h4>Consultation</h4>
+                            echo '<div id="cal-box">
+                                <h4>'.$dateValue.'</h4>
                                     <p>with Varsha Wijethunge</p>
                                     <span>@ 4.00pm</span>
                                     </div>';
-                    
             
         }
 
