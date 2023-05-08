@@ -401,7 +401,7 @@
                                             </div>
                                             
                                             <div id="text-input" contenteditable="true" title="Enter text..." class="editor"><?php echo $data['question']; ?> </div>
-                                            <input type="text" id="result" style="display:none;" name="question">
+                                            <input type="text" id="result"  style="display:none;" name="question">
                                                  
                                             <span class="error"><?php echo $data['question_err']; ?></span>
                                         </div>
@@ -466,7 +466,7 @@
                                 
                                         ?>
                                     </div>
-                                    <!-- <span class="error"><?php echo $data['tag_err']; ?></span> -->
+                                   
                                 </td>
                             </tr>
                             
@@ -548,7 +548,12 @@
         });
 
         const text_input = document.getElementById('text-input');
+        text_input.addEventListener('input', updateQuestionInput);
 
+        function updateQuestionInput() {
+    const inputValue = text_input.innerHTML;
+    document.getElementById('result').value = inputValue;
+  }
         // Get the buttons
         const boldBtn = document.getElementById('boldBtn');
         const italicBtn = document.getElementById('italicBtn');

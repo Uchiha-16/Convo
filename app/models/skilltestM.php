@@ -119,6 +119,26 @@ public function getTestQuestions($tag){
             return  $result->content;
         }
 
+        // public function getAnswerValidityByQPID($QPID, $selectedAnswer)
+        // {
+        //     $this->db->query('SELECT validity FROM answerpool WHERE QPID = :QPID AND content = :selectedAnswer');
+        //     $this->db->bind(':QPID', $QPID);
+        //     $this->db->bind(':selectedAnswer', $selectedAnswer);
+        
+        //     $result = $this->db->single();
+        //     return $result->validity;
+        // }
+
+        // public function isAnswerCorrect($QPID, $selectedAnswer)
+        // {
+        //     $this->db->query('SELECT validity FROM answerpool WHERE QPID = :QPID AND content = :selectedAnswer');
+        //     $this->db->bind(':QPID', $QPID);
+        //     $this->db->bind(':selectedAnswer', $selectedAnswer);
+
+        //     $result = $this->db->single();
+        //     return ($result && $result->validity == 1);
+        // }
+
 /////////////////////////////////////////////////////////////////////////////////////////////////
 
         public function add($data){
