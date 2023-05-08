@@ -25,8 +25,8 @@
                     $resourceID = implode(',', $resourceID);
                 }
 
-                $content = $_POST['content'];
-                $content = nl2br($content);
+                // $content = $_POST['content'];
+                // $content = nl2br($content);
                 //Input Data
                 $data = [
                     'title' => trim($_POST['title']),
