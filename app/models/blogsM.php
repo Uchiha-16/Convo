@@ -71,6 +71,21 @@
             $row = $this->db->resultSet();
             return $row;
         }
+
+        public function viewtheblog($BID){
+            $this->db->query('SELECT * FROM blog inner join user on blog.userID=user.userID where blog.BID=:BID;');
+            $this->db->bind(':BID', $BID);
+            $row = $this->db->resultSet();
+            return $row;
+        }
+
+        public function viewblogtags($BID){
+            $this->db->query('SELECT tag FROM blogtag where blogtag.BID=:BID;');
+            $this->db->bind(':BID', $BID);
+            $row = $this->db->resultSet();
+            return $row;
+        }
+        
 }
 
 ?>

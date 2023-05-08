@@ -82,7 +82,7 @@
                                     <img class="icon-1" src="<?php echo URLROOT;?>/img/pfp/<?php echo $_SESSION['pfp']?>">
                                 <div class="name-tag">
                                     <p class="name-field"><?php echo $_SESSION['firstName']," ",$_SESSION['lastName'];?></p>
-                                    <label class="qdp-1-2">Lecturer, Faculty of Medicine, University of Colombo</label>
+                                    <label class="qdp-1-2"><?php echo $project->designation; ?></label>
                                     <!-- <p class="ins-field">University of Colombo School of Computing</p> -->
                                 </div>
                                 <div></div>

@@ -121,9 +121,11 @@
 
         public function viewAllProjects(){
             $projects = $this->projectModel->getAllProjects();
+            //$getexpertdetails = $this->projectModel->getexpertdetails();
             //$userDetails = $this->projectModel->getAllUsers($userID);
             $data = [
                 'projects' => $projects,
+                //'expertdetails' => $getexpertdetails,
                 //'userDetails' => $userDetails
             ];
             $this->view('projects/home', $data);

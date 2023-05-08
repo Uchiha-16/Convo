@@ -114,6 +114,16 @@
             }
         }
 
+        public function viewblog($BID){
+            $blog = $this->blogsModel->viewtheblog($BID);
+            $blogtags = $this->blogsModel->viewblogtags($BID);
+            $data = [
+                'blogs' => $blog,
+                'viewtags' => $blogtags
+            ];
+            $this->view('blogs/blogpage', $data);
+        }
+
     }
 
 ?>

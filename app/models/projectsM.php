@@ -85,7 +85,7 @@
     //----------------------------------View All Projects-----------------------------------------------------------
     //get project
     public function getAllProjects() {
-        $this->db->query('SELECT * FROM project inner join user on project.expertID = user.userID inner join projecttag on projecttag.projectID=project.PID');
+        $this->db->query('SELECT * FROM project inner join user on project.expertID = user.userID inner join projecttag on projecttag.projectID=project.PID inner join expert on expert.expertID=project.expertID');
         $row = $this->db->resultSet();
         return $row;
     }
@@ -93,7 +93,7 @@
     //-------------------------------View My Projects---------------------------------------------------------------
     //get project
     public function getMyProjects() {
-        $this->db->query('SELECT * FROM project inner join user on project.expertID = user.userID inner join projecttag on projecttag.projectID=project.PID WHERE project.expertID = :userID');
+        $this->db->query('SELECT * FROM project inner join user on project.expertID = user.userID inner join projecttag on projecttag.projectID=project.PID inner join expert on expert.expertID=project.expertID WHERE project.expertID = :userID');
         $this->db->bind(':userID', $_SESSION['userID']);
         $row = $this->db->resultSet();
         return $row;
@@ -106,6 +106,12 @@
         return $row;
     }
 
+    public function getexpertdetails() {
+        $this->db->query('SELECT * FROM expert WHERE expertID = :userID');
+        $this->db->bind(':userID', $_SESSION('userID'));
+        $row = $this->db->resultSet();
+        return $row;
+    }
 
 
     //--------------------------------Edit Projects---------------------------------------------------------------

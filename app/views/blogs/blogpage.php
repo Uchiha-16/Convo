@@ -1,8 +1,6 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
             <link href="<?php echo URLROOT; ?>/css/event.css" rel="stylesheet" type="text/css" />
             <link href="<?php echo URLROOT; ?>/css/webinar.css" rel="stylesheet" type="text/css" />
-            <link rel='stylesheet' type='text/css' media='screen' href="<?php echo URLROOT; ?>/css/expert-home.css">
-            <link rel='stylesheet' type='text/css' media='screen' href="<?php echo URLROOT; ?>/css/project-home.css">
             <?php if (!isset($_SESSION['userID'])) : ?>
             <link href="<?php echo URLROOT; ?>/css/free.css" rel="stylesheet" type="text/css" />
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -45,76 +43,31 @@
                 <div class="container-div">
                     <div class="content-body">
                         <div class="LHS">
-                            <div>
-                                <h3>blogs Related to your fields...</h3>
-                            </div>
-                            <div></div>
-                            <div></div>
-
-                        
-                            <?php foreach ($data['blogs'] as $blog) : ?>
-                                
-                                <div class="vid-slider">
-                                    <div class="vid-wrapper">
-
-                                    <a href="<?php echo URLROOT;?>/blogs/viewblog/<?php echo $blog->BID;?>">
-                                        <div class="video vid item">
-                                            <div>
-                                                <img src="<?php echo URLROOT; ?>/img/headImg/<?php echo $blog->headImg?>" class="thumbnail">
-                                            </div>
-                                            
-                                            <div>
-                                                <div class="qdp">
-                                                    <div style="height: 100%;">
-                                                        <?php if ($blog->pfp != NULL) : ?>
-                                                            <img src="<?php echo URLROOT; ?>/img/pfp/<?php echo $blog->pfp ?>" />
-                                                        <?php else : ?>
-                                                            <img src="<?php echo URLROOT; ?>/img/pfp/user.jpg" />
-                                                        <?php endif; ?>
-                                                    </div>
-                                                    <div class="blog-content">
-                                                        <h3 class="blog-title"><?php echo $blog->title ?></h3>
-                                                        
-                                                        <div class="blog-details">
-                                                            <div style="text-align: left;">
-                                                                <span class="qdp-1-2 qdp-1-3">By <?php echo $blog->firstName?> <?php echo $blog->lastName ?></span>
-                                                            </div>
-                                                            <div>
-                                                                <label class="qdp-1-2">published date: <?php echo $blog->date?></label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <style>
-                                                            .blog-title{
-                                                                font-size: 1rem;
-                                                                font-weight: 600;
-                                                                margin: 0;
-                                                                padding-left: 10px;
-                                                                padding-top: 10px;
-                                                                color: #000;
-                                                            }
-                                                            .blog-content{
-                                                                display: grid;
-                                                                grid-template-rows: 1fr 1fr;
-                                                                padding:2px;
-                                                            }
-                                                            .blog-details{
-                                                                display: grid;
-                                                                grid-template-rows: 1fr 1fr;
-                                                                padding-left:7px;
-                                                                margin:0px;
-                                                            }
-                                                        </style>
-                                                </div>
-                                            </div>
-                                            <!-- <a href="<?php echo URLROOT;?>/blogs/viewblog/<?php echo $blog->BID;?>"><button class="answer-btn" type="submit">view blog</button></a> -->
-                                        </div>
-                                        </a>
-
+                            <div class="question-div">
+                                <div class="content-display">
+                                <?php foreach ($data['blogs'] as $blog): ?>
+                                    <h2><?php echo $blog->title; ?></h2>
+                                    <p style="font-size: 15px;">by <?php echo $blog->firstName?> <?php echo $blog->lastName ?>.</p>
+                                    <!-- <div class="qdp" style="padding-top: 1rem; border-top: 1px solid rgba(128,128,128, .2);"> -->
+                                        <!-- <div class="qdp-1"> -->
+                                            <h5><?php echo $blog->content;?></h5><br>
+                                        <!-- </div> -->
+                                    <!-- </div> -->
+                                    <?php endforeach; ?>
+                                    <div class="form-div">    
+                                        <?php $tagarray = explode(",", $data['viewtags']->tag); ?>
+                                        <?php $tagarrayjson = json_encode($tagarray); ?>
+                                        
+                                        <?php foreach($tagarray as $tags) : ?>
+                                            <div class="tag" ><?php echo  ucfirst($tags);?></div>
+                                        <?php endforeach;?>
                                     </div>
+                                    
+                                    
+                                    
                                 </div>
+                            </div>
 
-                            <?php endforeach; ?>
 
                         </div>
 
