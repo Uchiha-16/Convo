@@ -1,5 +1,7 @@
 <?php
     class Pages extends Controller{
+
+        private $pagesM;
         public function __construct() {
            $this->pagesM = $this -> model('pagesM');
 
