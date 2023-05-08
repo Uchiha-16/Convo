@@ -40,7 +40,10 @@
         }
 
         public function expert(){
-            $data = [];
+            $profile = $this->profilesModel->getprofile();
+            $data = [
+                'profile' => $profile
+            ];
             $this->view('profiles/expert', $data);
         }
 

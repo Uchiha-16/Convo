@@ -64,7 +64,18 @@
             //print_r($messages);
             
             foreach($messages as $msg){
-               echo '<div class="qdp dlg-box">
+                if($msg->userID == $_SESSION['userID']){
+                    echo '<div class="qdp dlg-box box1">
+                        <div class="message">
+                            <p>'.$msg -> content.'</p>
+                            <label class="qdp-1-2">'.$msg->date.'</label>
+                        </div>
+                        <div>
+                            <img src="'. URLROOT .'/img/pfp/' .$msg->pfp .'"/>
+                        </div>
+                    </div>';
+                }else{
+                        echo '<div class="qdp dlg-box">
                         <div>
                             <img src="'. URLROOT .'/img/pfp/' .$msg->pfp .'"/>
                         </div>
@@ -73,12 +84,14 @@
                             <label class="qdp-1-2">'.$msg->date.'</label>
                         </div>
                     </div>';
+                }
+               
             }
-            echo '<div id="chattyping"></div>';
-            echo '<div class="send">
-                                <input type="text" name="text" id="message" onkeyup="typing('.$_SESSION['firstName'].')" placeholder="Type Something..."/>
-                                <button type="submit" class="submit-btn" id="send-btn"><img src="'. URLROOT .'/img/submit.png" onclick="send('.$chatID.','.date('Y-m-d H:i:s').','.$_SESSION['firstName'].')" class="submit"></button>
-                            </div> ';
+
+            echo '<div class="send" id="send">
+            <input type="text" name="text" id="message" placeholder="Type Something..."/>
+            <button type="submit" class="submit-btn"><img src="'. URLROOT .'/img/submit.png" onclick="send('.$chatID.')" class="submit"></button>
+            </div> ';
             
         }
 
@@ -87,7 +100,19 @@
             $users = $this->chatsModel->getChatUsers($chatID);
             $admin = $this->chatsModel->getChatAdmin($chatID);
             //print_r($users);
-            echo '<div class="qdp">
+            if($_SESSION['userID'] == $admin->userID){
+                echo '<div class="qdp">
+                        <div>
+                            <img src="'. URLROOT .'/img/pfp/' .$admin->pfp .'"/>
+                        </div>
+                        <div class="qdp-1">
+                            <label>'.$admin->fName. " ". $admin->lName.'</label><br>
+                            <img src="'.URLROOT.'/img/comfort-zone.png" title="Delete Group" style="width: 30px;float: right; cursor:pointer;" onclick="deleteChat('.$chatID.')">
+                        </div>
+                    </div>';
+            }
+            else{
+                echo '<div class="qdp">
                         <div>
                             <img src="'. URLROOT .'/img/pfp/' .$admin->pfp .'"/>
                         </div>
@@ -95,7 +120,21 @@
                             <label>'.$admin->fName. " ". $admin->lName.'</label><br>
                         </div>
                     </div>';
+            }
+        
             foreach($users as $user){
+                if($_SESSION['userID'] == $user->userID){
+                    echo '<div class="qdp">
+                        <div>
+                            <img src="'. URLROOT .'/img/pfp/' .$user->pfp .'"/>
+                        </div>
+                        <div class="qdp-1">
+                            <label>'.$user->fName. " ". $user->lName.'</label><br>
+                            <img src="'.URLROOT.'/img/comfort-zone.png" title="Leave Group" style="width: 30px;float: right; cursor:pointer;" onclick="leaveChat('.$chatID.')">
+                            
+                        </div>
+                    </div>';
+                }else{
                 echo '<div class="qdp">
                         <div>
                             <img src="'. URLROOT .'/img/pfp/' .$user->pfp .'"/>
@@ -107,6 +146,7 @@
             }
             
         }
+    }
 
         //method to add a group chat
         public function create(){
@@ -214,37 +254,42 @@
                 $this->view('chats/index', $data);
             }
         }
+   
+    //method to send messages to the database
+        public function send($chatID){
+            $userID = $_SESSION['userID'];
+            $content = $_POST['message'];
+            date_default_timezone_set('Asia/Colombo');
+            $date = date('Y-m-d H:i:s');
 
-        //method to send messages to the database
-        public function send(){
-            $_POST = json_decode(file_get_contents('php://input'), true);
-            if(!isset($_POST)){
-                $array['Status']= "Post not set";
-                echo json_encode($array);
-                die();
+            $data = [
+                'chatID' => $chatID,
+                'userID' => $userID,
+                'content' => $content,
+                'date' => $date
+            ];
+
+            if($this->chatsModel->send($data)){
+                echo 'success';    
             }
-            $message = $_POST['message'];
-            $user = $_SESSION['Name'];
-            $chatID = $_POST['chatID'];
-            $date = $_POST['date'];
-            
-            $result = $this->chatsModel->send($chatID,$user,$message,$date);
-          if($result) {
-                // json encode sent
-                $array['Status']= "Message sent";
-                echo json_encode($array);
-            } else {
-            
-                $array['Status']= "Message not sent";
-                echo json_encode($array);
-            }
-            
-                
         }
 
+        public function delete(){
+            
+            $chatID = $_POST['chatID'];
+            echo($chatID);
+           if($this->chatsModel->deleteChat($chatID)){
+                echo 'succes Delete';
+           } 
 
-    }
+        }
 
-
+        public function leave(){
+            $chatID = $_POST['chatID'];
+            $userID = $_SESSION['userID'];
+            echo($chatID);           
+             $this->chatsModel->leaveGroup($chatID,$userID);
+        }
+}
 
 ?>

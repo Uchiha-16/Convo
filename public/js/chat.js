@@ -1,5 +1,7 @@
 //add the class selected to the existing class
+var intervalID; 
 function selected(chatID) {
+    clearInterval(intervalID);
     var element = document.getElementById("chat group-"+chatID);
     element.classList.add("selected");
     //unselect all other class
@@ -10,14 +12,16 @@ function selected(chatID) {
         }
     }
 
-    var conn = new WebSocket('ws://localhost:8080');
-    conn.onopen = function (e) {
-        console.log('Connection established!');
-        conn.send(JSON.stringify({
-            'newRoute': 'Personalchat'+chatID 
-        }));
+     //setInterval(5000,show(chatID));
 
-    };
+    // var conn = new WebSocket('ws://localhost:8080');
+    // conn.onopen = function (e) {
+    //     console.log('Connection established!');
+    //     conn.send(JSON.stringify({
+    //         'newRoute': 'Personalchat'+chatID 
+    //     }));
+
+    // };
 }
 
 //show the chat messages when clicked
@@ -61,47 +65,57 @@ function showCreate() {
     document.getElementById("popup").style.display = "none";
   }
 
-  function typing(name){
-    conn.send(JSON.stringify({
-        'typing': 'y',
-        'name': name
-    }));
-}
 
-  function send(chatID,datesent,commentor) {
-  
-    conn.send(JSON.stringify({
-        'msg': input.value,
-        'name': commentor,
-        'date': datesent
-    }));
+    function send(chatID) {
+        var message = document.getElementById("message").value;
+        //alert(message);
+        if (message != "") {
+            $.ajax({
+                url: URLROOT + '/Chats/send/'+chatID,
+                type: 'POST',
+                data: {message: message},
+                success: function(results) {
+                    //alert("success"+chatID);
+                    //$('#results').html(results);
+                }
+            });
+            showchat(chatID);  
+           
+        }
+    }
 
-    sendMessage(input.value, chatID,datesent);
+    function deleteChat(chatID){
+        //alert(URLROOT);
+        if (confirm("Are you sure you want to delete this chat?")) {
 
-    var chatWindow = document.getElementById('chattyping');
-    var newMessage = document.createElement('div');
-    newMessage.classList.add(
-        'qdp dlg-box'
-    );
-    newMessage.innerHTML = commentor + " : " + input.value + " " + datesent;
-    chatWindow.appendChild(newMessage);
-    input.value = '';
-}
+        $.ajax({
+            url: URLROOT + '/Chats/delete/',
+            type: 'POST',
+            data: {chatID: chatID},
+            success: function(results) {
+                //alert("success"+chatID);
+                //$('#results').html(results);
+                window.location.href = URLROOT + '/Chats';
+            }
+        });
+    }
+    }
 
-function sendMessage(message, chatID, date) {
-    let data = {
-        'message': message,
-        'chatID': chatID,
-        'date':date
-    };
-    fetch('<?php echo URLROOT;?>/Chats/send', {
-    method: "POST",
-    headers: {
-        "Content-Type": "application/json"
-    },
-    body: JSON.stringify(data)
-}).then(response => response.json())
-    .then(json => { 
-        console.log(json);
-    });
-}
+    function leaveChat(chatID){
+        if (confirm("Are you sure you want to leave this chat?")) {
+        $.ajax({
+            url: URLROOT + '/Chats/leave/',
+
+            type: 'POST',
+            data: {chatID: chatID},
+            
+            success: function(results) {
+                //alert("success"+chatID);
+                //$('#results').html(results);
+                window.location.href = URLROOT + '/Chats';
+            }
+        });
+    }
+       
+
+    }

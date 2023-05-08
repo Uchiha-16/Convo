@@ -16,7 +16,7 @@
 
         //getchat messages 
         public function getChatMessages($chatID) {
-            $this->db->query('SELECT chatmsg.content as content, chatmsg.date as date, user.pfp as pfp, user.firstName as fName, user.lastName as lName FROM chatmsg JOIN user on chatmsg.userID = user.userID WHERE chatID = :chatID');
+            $this->db->query('SELECT chatmsg.content as content, chatmsg.date as date, user.pfp as pfp, chatmsg.userID as userID, user.firstName as fName, user.lastName as lName FROM chatmsg JOIN user on chatmsg.userID = user.userID WHERE chatID = :chatID');
             $this->db->bind(':chatID', $chatID);
             $results = $this->db->resultSet();
             return $results;
@@ -69,12 +69,42 @@
         }
 
         //send messages to the database
-        public function send($chatID,$userID,$message,$date){
+        public function send($data){
             $this->db->query('INSERT INTO chatmsg (chatID, userID, content, date) VALUES (:chatID, :userID, :content, :date)');
+            $this->db->bind(':chatID', $data['chatID']);
+            $this->db->bind(':userID', $data['userID']);
+            $this->db->bind(':content', $data['content']);
+            $this->db->bind(':date', $data['date']);
+            if($this->db->execute()){
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        //delete chat
+        public function deleteChat($chatID){
+            $this->db->query('DELETE FROM chatgroup WHERE chatID = :chatID');
             $this->db->bind(':chatID', $chatID);
-            $this->db->bind(':userID', $userID);
-            $this->db->bind(':content', $message);
-            $this->db->bind(':date', $date);
+            if($this->db->execute()){
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        //leave group
+        public function leaveGroup($chatID, $userID){
+            $this->db->query('SELECT users FROM chatgroup WHERE chatID = :chatID');
+            $this->db->bind(':chatID', $chatID);
+            $row = $this->db->single();
+            $users = $row->users;
+            $users = explode(',', $users);
+            $users = array_diff($users, array($userID));
+            $users = implode(',', $users);
+            $this->db->query('UPDATE chatgroup SET users = :users WHERE chatID = :chatID');
+            $this->db->bind(':users', $users);
+            $this->db->bind(':chatID', $chatID);
             if($this->db->execute()){
                 return true;
             } else {

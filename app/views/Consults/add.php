@@ -232,11 +232,11 @@
                     
                 </div>
                 <div class="RHS">
-                    <form action="<?php echo URLROOT; ?>/Consults/requests"><button type="submit" style="float:right; width: 250px;" class="read-more attend">Pending Appointments</button></form>
-                    <form action="<?php echo URLROOT;?>/Consults/index"><button type="submit" style="float:right; width: 250px;" class="read-more attend">Upcoming Appointments</button></form>
+                    <form action="<?php echo URLROOT; ?>/Consults/requests"><button title="Waiting for approval" type="submit" style="float:right; width: 250px;" class="read-more attend">Schedules</button></form>
+                    <form action="<?php echo URLROOT;?>/Consults/index"><button title="Approved Appointments" type="submit" style="float:right; width: 250px;" class="read-more attend">Upcomings</button></form>
                     <?php if($_SESSION['role'] == 'expert'): ?>
-                    <form action="<?php echo URLROOT;?>/Consults/accepted"><button type="submit" style="float:right; width: 250px;" class="read-more attend">Accepted Appointments</button></form>
-                     <form action="<?php echo URLROOT;?>/Consults/accept"><button type="submit" style="float:right; width: 250px;" class="read-more attend">Accept Appointments</button></form>
+                    <form action="<?php echo URLROOT;?>/Consults/accepted"><button title="Appointments Accepted by you" type="submit" style="float:right; width: 250px;" class="read-more attend">Inquiries</button></form>
+                     <form action="<?php echo URLROOT;?>/Consults/accept"><button title="Awaiting approval from you" type="submit" style="float:right; width: 250px;" class="read-more attend">Appointments</button></form>
                     <?php endif; ?>
                     
                 </div>

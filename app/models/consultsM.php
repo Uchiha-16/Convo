@@ -85,5 +85,22 @@
                 return false;
             }
         }
+
+        public function Mysearch($search){
+            $this->db->query('SELECT DISTINCT consultation.title as title, consultation.date as date , consultation.time as time,consultation.status as status, user.firstName as fName, user.lastName as lName 
+            FROM consultation JOIN user ON consultation.expertID = user.userID WHERE consultation.title LIKE :search OR  FIND_IN_SET("$search", consultation.tags) > 0 OR consultation.tags LIKE :search OR consultation.date LIKE :search OR consultation.time LIKE :search');
+            $this->db->bind(':search', '%' . $search . '%');
+            $row = $this->db->resultSet();
+            return $row;
+        }
+
+        public function Notsearch($search){
+            $this->db->query('SELECT DISTINCT consultation.title as title, consultation.date as date , consultation.time as time,consultation.status as status, user.firstName as fName, user.lastName as lName 
+            FROM consultation JOIN user ON consultation.expertID = user.userID WHERE consultation.title LIKE :search OR  FIND_IN_SET("$search", consultation.tags) > 0 OR consultation.tags LIKE :search OR consultation.date LIKE :search OR consultation.time LIKE :search');
+            $this->db->bind(':search', '%' . $search . '%');
+            $row = $this->db->resultSet();
+            return $row;
+        }
+
     }
 ?>
