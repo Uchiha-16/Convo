@@ -53,7 +53,7 @@
                                             <h5><?php echo $blog->content;?></h5><br>
                                         <!-- </div> -->
                                     <!-- </div> -->
-                                    <?php endforeach; ?>
+                                    <!-- <?php endforeach; ?>
                                     <div class="form-div">    
                                         <?php $tagarray = explode(",", $data['viewtags']->tag); ?>
                                         <?php $tagarrayjson = json_encode($tagarray); ?>
@@ -61,7 +61,7 @@
                                         <?php foreach($tagarray as $tags) : ?>
                                             <div class="tag" ><?php echo  ucfirst($tags);?></div>
                                         <?php endforeach;?>
-                                    </div>
+                                    </div> -->
                                     
                                     
                                     
