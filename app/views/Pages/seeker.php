@@ -25,6 +25,39 @@
         <div class="content-body">
             <div class="LHS" id="LHS">
                 <h3>Questions and Discussions</h3><br>
+                <!-- <?php if($data['date'] == "3"): ?>
+                    <h4>Questions published in the last 3 months</h4>
+                <?php elseif($data['date'] == "6"): ?>
+                    <h4>Questions published in the last 6 months</h4>
+                <?php elseif($data['date'] == "12"): ?>
+                    <h4>Questions published in the last year</h4>
+                <?php else: ?>
+                    <h4>All time Questions</h4> -->
+
+                    <?php endif; ?>
+                    <!-- <?php if($data['rating'] == "1"): ?>
+                    <h4>Questions with rating <= 0</h4>
+                <?php elseif($data['rating'] == "2"): ?>
+                    <h4>Questions with rating <= 2</h4>
+                <?php elseif($data['rating'] == "3"): ?>
+                    <h4>Questions with rating <= 3</h4>
+                <?php elseif($data['rating'] == "4"): ?>
+                    <h4>Questions with rating <= 4</h4>
+                <?php elseif($data['rating'] == "5"): ?>
+                    <h4>Questions with rating <= 5</h4>
+                <?php else: ?>
+                    <h4>All rated Questions</h4> -->
+
+                    <?php endif; ?>
+
+                    <!-- <?php if($data['QA1'] == 0 && $data['QA2'] == 0): ?>
+                    <h4>Questions with No Answers</h4>
+                <?php elseif($data['QA1'] == 1 &&  $data['QA2'] == 1000): ?>   
+                    <h4>Answered Questions</h4>
+                <?php elseif($data['QA1'] == 0 && $data['QA2'] == 1000): ?>
+                    <h4>All Unanswered and Answered Questions.</h4>
+
+                    <?php endif; ?> -->
 
                 <?php foreach ($data['questions'] as $question) : ?>
 

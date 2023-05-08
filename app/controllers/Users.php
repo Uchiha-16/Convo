@@ -123,7 +123,20 @@
                     
                     // Register User
                     if($this->userModel->register($data)) {
+                        
                         $LastID = $this->userModel->getLastID();
+                        $QID = $this->userModel->getQIDs();
+                        print_r($QID);
+                        foreach($QID as $ID){
+                            $this->userModel->addQrating($ID->QID,$LastID->userID );
+                        }
+
+                        $threadID = $this->userModel->getAIDs();
+                        print_r($threadID);
+
+                        foreach($threadID as $ID){
+                            $this->userModel->addInteractions($ID->threadID,$LastID->userID, );
+                        }
                         foreach($data['tag'] as $tag){
                            if(!($this->userModel->registerTag($tag, $LastID->userID)))
                             {
@@ -290,6 +303,18 @@
                     // Register User
                     if($this->userModel->register($data)) {
                         $LastID = $this->userModel->getLastID();
+                        $QID = $this->userModel->getQIDs();
+                        print_r($QID);
+                        foreach($QID as $ID){
+                            $this->userModel->addQrating($ID->QID,$LastID->userID );
+                        }
+
+                        $threadID = $this->userModel->getAIDs();
+                        print_r($threadID);
+
+                        foreach($threadID as $ID){
+                            $this->userModel->addInteractions($ID->threadID,$LastID->userID, );
+                        }
                         $this->userModel->addexpert($LastID->userID, $data['linkedin']);
                         $this->userModel->addexpertQ($LastID->userID, $data['qualifications']);
                         foreach($data['tag'] as $tag){

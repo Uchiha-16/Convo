@@ -4,52 +4,12 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-            let timeoutHandle = window.setTimeout(function(){ 
-            document.getElementById('chattyping').innerHTML = '';
-        }, 2000);
-        
-        
-
-
-        conn.onmessage = function (e) {
-            let data = JSON.parse(e.data);
-            console.log(data);
-            if (typeof data.msg !== 'undefined') {
-
-                // document.getElementById('typing').innerHTML = '';
-                // let commentElem = document.createElement('div');
-                // commentElem.classList.add('col-11');
-                // commentElem.classList.add('fill-container');
-                // commentElem.innerHTML = \"<div class='row  no-gap padding-3 bg-white shadow-small border-rounded'><div class='col-12 fill-container left small bold'>\" + data.name + \"</div><div class='col-12 wordwrap fill-container left padding-bottom-2 '>\" + data.msg + \"</div><div class='col-12 fill-container right small grey '>\" +data.date + \"</div></div>\";
-
-                var chatWindow = document.getElementById('chattyping');
-
-                var newMessage = document.createElement('div');
-                newMessage.innerHTML = '<div><img src="<?php echo URLROOT;?>/img/pfp/${data.pfp} "/></div><p>${data.msg}</p><label class="qdp-1-2">${data.date}</label></div>';
-                newMessage.classList.add(
-                    'qdp dlg-box'
-                );
-                chatWindow.appendChild(newMessage);
-                document.getElementById('chattyping').appendChild(commentElem);
-            }
-            else if (typeof data.typing !== 'undefined') {
-                document.getElementById('chattyping').innerHTML = data.name + " is typing...";
-                window.clearTimeout(timeoutHandle);
-                timeoutHandle = window.setTimeout(function () {
-                    document.getElementById('chattyping').innerHTML = '';
-                }, 2000);
-            }
-        };
-        var input = document.getElementById('message');
-        input.addEventListener("keypress", function (event) {
+        document.getElementById("message").addEventListener("keydown", function(event) {
             if (event.key === "Enter") {
-                event.preventDefault();
-                document.getElementById("send-btn").click();
+            send();
             }
         });
-
-
-    </script>
+</script>
 <style>
     <?php if (($_SESSION['role']) == 'seeker') : ?>
     <?php elseif (($_SESSION['role']) == 'expert') : ?>
@@ -88,7 +48,7 @@
                     <!-- Question 1 -->
                     <div class="question-div">
                         <div class="info">
-                            <p>Your Chat Groups</p> 
+                            <p>Your User Disscussion Groups</p> 
                             <input type="search" name="search" placeholder="Search chat..."/>
                             <br>
                             <button class="read-more" onclick="showCreate()" style="margin-bottom: 10px;">Create a New Group</button>
@@ -191,8 +151,8 @@
                             <form action="" method="POST">
                                 <div class="info">
                             <p>Members</p>
-                            <input type="search" name="search" placeholder="Search members..."/>
-                            <br><br>
+                            <!-- <input type="search" name="search" placeholder="Search members..."/>
+                            <br><br> -->
                         </div>
                         <div id="members">
                        Select a group to reveal its members</div>

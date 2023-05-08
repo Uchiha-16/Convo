@@ -23,7 +23,7 @@
         }
 
         public function sendQuestion($userID,$expertID,$typeID){
-            $this->db->query('SELECT question.QID as QID, question.title as title, user.firstName as fName, user.lastName as lName FROM question INNER JOIN user ON question.userID = user.userID WHERE question.userID = :expertID AND question.expertID IN (:userID) AND question.QID = :QID');
+            $this->db->query('SELECT question.QID as QID, question.title as title, user.firstName as fName, user.lastName as lName FROM question INNER JOIN user ON question.userID = user.userID WHERE question.userID = :expertID AND FIND_IN_SET(:userID, question.expertID) AND question.QID = :QID');
             $this->db->bind(':userID', $userID);
             $this->db->bind(':expertID', $expertID);
             $this->db->bind(':QID', $typeID);
@@ -38,11 +38,9 @@
             return $row;
         }
 
-        public function getComment($userID,$expertID,$typeID){
-            $this->db->query('SELECT * FROM comment WHERE userID = :userID AND expertID = :expertID AND commentID = :typeID');
-            $this->db->bind(':userID', $userID);
+        public function getComment($expertID,){
+            $this->db->query('SELECT * FROM user WHERE userID = :expertID');
             $this->db->bind(':expertID', $expertID);
-            $this->db->bind(':typeID', $typeID);
             $results = $this->db->single();;
             return $results;
         }
@@ -52,7 +50,7 @@
             $this->db->bind(':userID', $userID);
             $this->db->bind(':expertID', $expertID);
             $this->db->bind(':typeID', $typeID);
-            $results = $this->db->single();;
+            $results = $this->db->single();
             return $results;
         }
 
@@ -61,7 +59,7 @@
             $this->db->bind(':userID', $userID);
             $this->db->bind(':expertID', $expertID);
             $this->db->bind(':typeID', $typeID);
-            $results = $this->db->single();;
+            $results = $this->db->single();
             return $results;
             
         }

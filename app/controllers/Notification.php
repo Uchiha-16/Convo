@@ -19,7 +19,7 @@
                 }elseif($notification->type == "answer"){
                     $answeradded[$i] = $this->notifyModel->getAnswer($notification->userID,$notification->expertID,$notification->typeID);
                 }elseif($notification->type == "comment"){
-                    $commentadded[$i] = $this->notifyModel->getComment($notification->userID,$notification->expertID,$notification->typeID);
+                    $commentadded[$i] = $this->notifyModel->getComment($notification->expertID);
                 }elseif($notification->type == "chat"){
                     $messageadded[$i] = $this->notifyModel->getChat($userID,$notification->expertID,$notification->typeID);
                 }elseif($notification->type == "consult"){
@@ -29,6 +29,9 @@
         }
         // print_r($notifications);
         //   print_r($answeradded);
+        //   print_r($commentadded);
+        //   print_r($SendToExpert);
+        //   print_r($questionApproval);
             $i1 = 0;
             foreach($notifications as $notification){
                 echo'<div class="tabs">';
@@ -47,7 +50,7 @@
                     echo '<P><b>'.$answeradded[$i1]->fName." ".$answeradded[$i1]->lName.'</b> Answered your Question on <span style="color:#00a7ae;">'.$answeradded[$i1]->title.'</span></P> ';
                 }
                 elseif($notification->type == "comment"){
-                    echo '<P><b>Varsha Wijethunge</b>Commented on your answer on<span style="color:#00a7ae;">String Theory was sent</span></P> ';
+                    echo '<P><b>'.$commentadded[$i1]->firstName." ".$commentadded[$i1]->lastName.'</b>Commented on your answer on<span style="color:#00a7ae;">  one of your answers</span></P> ';
                 }
                 elseif($notification->type == "chat"){
                     echo '<P><b>You have</b>unread messages on<span style="color:#00a7ae;">Chat group</span></P> ';

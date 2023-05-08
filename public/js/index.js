@@ -281,7 +281,7 @@ function show2() {
 }
 
 
-//================================Search Bar===========================================//
+//================================Search Bar - Pages===========================================//
 $(document).ready(function(){
   $("#live_search").keyup(function(){
     var input = $(this).val();
@@ -385,3 +385,26 @@ $(document).ready(function () {
   })
 });
 
+//====================================================== SEARCH  Consults ================================================//
+$(document).ready(function () {
+  $("#live_search_Consult").keyup(function () {
+    var input = $(this).val();
+    // alert(input);
+    if (input != "") {
+      // alert(input);
+      $.ajax({
+        url: URLROOT + '/Consults/search/',
+        method: 'post',
+        data: { keywords: input },
+        dataType: 'text',
+        success: function (response) {
+          $("#LHS").html(response);
+          // alert(input);
+        }
+      })
+    } else {
+      //redirect  to index controller 
+      window.location = URLROOT + "/Consults/index";
+    }
+  })
+});

@@ -31,12 +31,6 @@
                 if($tag != '0')
                     $tag = implode(",", $tag);
 
-                //echo $tag;
-
-                $resource = isset($_POST['rp']) ? $_POST['rp'] : '0';
-
-                if($resource != '0')
-                    $resource = implode(",", $resource);
 
                 //Input Data
                 $data = [
@@ -45,7 +39,7 @@
                     'tags' => $tag,
                     'date' => trim($_POST['date']),
                     'time' => trim($_POST['time']),
-                    'expertID' => $resource,    
+                    'expertID' => trim($_POST['rp']),  
                     'userID_err' => '',
                     'title_err' => '',
                     'tag_err' => '',
@@ -77,7 +71,7 @@
                 }
 
                 // Validate Resource
-                if($data['expertID'] == '0') {
+                if(empty($data['expertID'])) {
                     $data['expertID_err'] = 'Please Select One Resource Person';
                 }
 
@@ -146,7 +140,7 @@
             foreach($data as $d){
                 echo '<li>';
                     echo '<label for="checkbox1">';
-                        echo '<input type="checkbox" value="'. $d->expertID .'" name="rp[]" id="checkbox1"/>';
+                        echo '<input type="radio" value="'. $d->expertID .'" name="rp" id="checkbox1"/>';
                         echo '<span class="checkbox">'. $d->fName ." ". $d->lName . '</span>';
                     echo '</label>';
                 echo '</li>';
@@ -219,6 +213,71 @@
                     die('Something went wrong');
                     redirect('Consults/accept');
                 }
+        }
+
+        public function search(){
+            $search = $_POST['keywords'];
+
+            $userID = $_SESSION['userID'];
+            $Myconsults = $this->consultsModel->Mysearch($search);
+            $Notconsults = $this->consultsModel->Notsearch($search);
+            
+            $data = [
+                'consults' => $consults
+            ];
+
+            foreach($consults as $consults){
+                echo '<div class="question-div">
+                        <div class="info">';
+                          
+                            $dateString = $consults->date;
+                            $dateTime = new DateTime($dateString);
+
+                            $year = $dateTime->format('Y');
+                            $month = $dateTime->format('M');
+                            $day = $dateTime->format('d');
+
+                          echo'  <div class="calander">
+                                <div class="cal1">
+                                    <label>'. $month .'</label>
+                                </div>
+                                <div class="cal2">
+                                    <label>'. $day .'</label>
+                                </div>
+                            </div>
+                        </div>';
+
+                       date_default_timezone_set('Asia/Colombo'); 
+                        
+                        // Convert the future date to a Unix timestamp
+                            $futureTimestamp = strtotime($dateString);
+
+                            // Get the current Unix timestamp
+                            $currentTimestamp = time();
+
+                            // Calculate the time difference between the future and current timestamps
+                            $timeDifference = $futureTimestamp - $currentTimestamp;
+
+                            // Convert the time difference to days
+                            $daysRemaining = ceil($timeDifference / (60 * 60 * 24));
+
+                        echo'<div class="content-display">
+                            <h3><?php echo $consults->title ?></h3>
+                            <label class="name-label"> Approved By '. $consults->fName. " ". $consults->lName .'</label>
+                            <label class="time-label">'.$consults->time .'</label>
+                            <div class="date-count">';
+                            if($consults->date < date()){
+                                echo '<button style="float:left" class="decline">Expired</button>';
+                            }else{
+                                echo '<button style="float:left" class="decline">'. $daysRemaining .' Days Remaining</button>
+                        }
+                            </div>
+                        </div>
+                        <div class="appointment">
+                            <label>Upcoming</label>
+                        </div>
+                    </div> ';
+            }
         }
     }
 

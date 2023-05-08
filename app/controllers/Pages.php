@@ -26,7 +26,8 @@
                 $data = [
                     'questions' => $questions,
                     'tags' => $tags,
-                    'count' => $count
+                    'count' => $count,
+                    
                 ];
             $this->view('pages/index', $data);
         }
@@ -65,6 +66,10 @@
                     'tags' => $tags,
                     'count' => $count,
                     //'notificationCount' => $notificationCount
+                    'date' => 0,
+                    'rating' => 0,
+                    'QA1' => 0,
+                    'QA2' => 0
                 ];
 
             $this->view('pages/seeker', $data);
@@ -101,6 +106,7 @@
                     'questions' => $questions,
                     'tags' => $tags,
                     'count' => $count,
+
                     //'notificationCount' => $notificationCount
                 ];
 
@@ -331,9 +337,11 @@
                     'questions' => $questions,
                     'tags' => $tags,
                     'count' => $count,
-                    'date' => $_POST['publishDate'],
-                    'rating' => $_POST['rating'],
-                    'QA' => $_POST['QA']
+                    'date' => $date,
+                    'rating' => $rating,
+                    'QA1' => $QA1,
+                    'QA2' => $QA2
+
                 ];
                 
                 // print_r($questions);
