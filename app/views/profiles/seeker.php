@@ -146,7 +146,8 @@
                 </script>
                 <div class="RHS">
                     <!-- calendar -->
-                    
+                    <?php $date_array = $data['consultdates']; ?>
+                    <?php $consultdates = json_encode($date_array); ?>
                     <div class="wrapper">
                         <header>
                             <p class="current-date"></p>
@@ -164,6 +165,37 @@
                             <ul class="days"></ul>
                         </div>
                     </div>
+                    <?php echo "<script>var CONSULTDATES = " . $consultdates . ";</script>"; ?>
+                    <script src="<?php echo URLROOT; ?>/js/script.js"></script>
+                    <script>
+                        // Select all lis with class "active" or "reserve"
+                        const activeAndreserve = document.querySelectorAll('.active, .reserve');
+
+                        // Loop through the selected lis and add the onmouseover attribute
+                        activeAndreserve.forEach(li => {
+                            li.setAttribute('onmouseover', 'getValue(this)');
+                        });
+
+                        function getValue(li) {
+                            // Get the value of the li
+                            let Datevalue  = li.textContent;
+                            $.ajax({
+                                url: "<?php echo URLROOT;?>/Profiles/hoverdate",
+                                method: "POST",
+                                data: {Datevalue : Datevalue },
+                                success: function(response) {
+                                    $('.hover-box').html(response);
+                                },
+                                error: function(xhr, status, error) {
+                                    alert(error); // handle any errors that occur
+                                }
+                            });
+                        }
+                    </script>
+                   
+                           <div class="hover-box" style="display:none">
+                                    
+                            </div>
                     <!-- end of calendar -->
                     <div class="col-3 score-board board-2">
                         <p><b>Upcoming Events</b></p>
