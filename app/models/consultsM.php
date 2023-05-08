@@ -86,18 +86,20 @@
             }
         }
 
-        public function Mysearch($search){
+        public function Mysearch($search,$userID){
             $this->db->query('SELECT DISTINCT consultation.title as title, consultation.date as date , consultation.time as time,consultation.status as status, user.firstName as fName, user.lastName as lName 
-            FROM consultation JOIN user ON consultation.expertID = user.userID WHERE consultation.title LIKE :search OR  FIND_IN_SET("$search", consultation.tags) > 0 OR consultation.tags LIKE :search OR consultation.date LIKE :search OR consultation.time LIKE :search');
+            FROM consultation JOIN user ON consultation.expertID = user.userID WHERE consultation.userID = :userID AND (consultation.title LIKE :search OR  FIND_IN_SET("$search", consultation.tags) > 0 OR consultation.tags LIKE :search OR consultation.date LIKE :search OR consultation.time LIKE :search) ');
             $this->db->bind(':search', '%' . $search . '%');
+            $this->db->bind(':userID', $userID);
             $row = $this->db->resultSet();
             return $row;
         }
 
-        public function Notsearch($search){
+        public function Notsearch($search,$userID){
             $this->db->query('SELECT DISTINCT consultation.title as title, consultation.date as date , consultation.time as time,consultation.status as status, user.firstName as fName, user.lastName as lName 
-            FROM consultation JOIN user ON consultation.expertID = user.userID WHERE consultation.title LIKE :search OR  FIND_IN_SET("$search", consultation.tags) > 0 OR consultation.tags LIKE :search OR consultation.date LIKE :search OR consultation.time LIKE :search');
+            FROM consultation JOIN user ON consultation.expertID = user.userID WHERE consultation.expertID = :userID AND (consultation.title LIKE :search OR  FIND_IN_SET("$search", consultation.tags) > 0 OR consultation.tags LIKE :search OR consultation.date LIKE :search OR consultation.time LIKE :search)');
             $this->db->bind(':search', '%' . $search . '%');
+            $this->db->bind(':userID', $userID);
             $row = $this->db->resultSet();
             return $row;
         }

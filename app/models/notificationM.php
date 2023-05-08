@@ -55,7 +55,7 @@
         }
 
         public function getConsult($userID,$expertID,$typeID){
-            $this->db->query('SELECT * FROM consult WHERE userID = :userID AND expertID = :expertID AND consultID = :typeID');
+            $this->db->query('SELECT * FROM consultation WHERE userID = :userID AND expertID = :expertID AND consultID = :typeID');
             $this->db->bind(':userID', $userID);
             $this->db->bind(':expertID', $expertID);
             $this->db->bind(':typeID', $typeID);

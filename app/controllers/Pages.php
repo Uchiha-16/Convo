@@ -121,10 +121,9 @@
         }
         
         public function about() {
-            //$questions = $this->pagesM->getQuestions();
-
+            
             $data = [
-                // 'question' => $questions
+                
             ];
             $this->view('pages/about', $data);
         }
