@@ -1343,7 +1343,7 @@
                                             </div>
                                             <div id="text-input" contenteditable="true" title="Enter text..." class="editor"><?php echo $data["content"]; ?>
                                             <!-- code block -->
-                                                <div class="codeeditor" style="display:none;">
+                                                <!-- <div class="codeeditor">
                                                     <div class="line-numbers">
                                                         <span></span>
                                                     </div>
@@ -1377,7 +1377,7 @@
                                                             event.preventDefault()
                                                         }
                                                     })
-                                                </script>
+                                                </script> -->
                                             <!-- end of code block -->
                                             </div>
                                             <textarea id="result" style="display:none;" name="content"></textarea>
