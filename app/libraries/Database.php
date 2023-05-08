@@ -76,5 +76,14 @@
         public function rowCount() {
             return $this->statement->rowCount();
         }
+
+        public function fetchAll(){
+            return $this->statement->fetchAll(PDO::FETCH_ASSOC);
+        }
+        public function prepare($query) {
+           $database= new Database();
+           $database->query($query);
+           return $database->statement;
+        }
     }
 ?>

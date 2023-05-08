@@ -30,9 +30,11 @@
     }
     .gridleft
     {
+      overflow: auto;
       /* position: flex; */
         float:left;
         width:80%;
+        /* height: 60%; */
         margin-top: -5%;
 
     }
@@ -51,7 +53,11 @@
         margin-top: 15%;
         margin-left: 5%;
         }
-
+.score_table{
+  overflow:auto;
+  width:100%;
+  height: 150px;
+}
         .middle{
             background-color: white;
             color: black;
@@ -93,10 +99,11 @@
                 clip: rect(0px, 75px, 150px, 0px);
                 background-color:#15637C;
               }
+/*               
               .circle-wrap .circle .mask.full,
               .circle-wrap .circle .fill {
                 animation: fill ease-in-out 2s;
-                transform: rotate(126deg);
+                transform: rotate(<?php echo $data['average_score']* 1.8 ?>deg);
               }
                
               @keyframes fill {
@@ -104,9 +111,10 @@
                   transform: rotate(0deg);
                 }
                 100% {
-                  transform: rotate(126deg);
+                  transform: rotate(<?php echo $data['average_score'] * 1.8 ?>deg);
+                  
                 }
-              }
+              } */
               .circle-wrap .inside-circle {
                 width: 130px;
                 height: 130px;
@@ -125,17 +133,18 @@
               .score table {
                 color:black;
                 position: relative;
-                margin-top: 5%;
+                margin-top:2%;
                 font-family: arial, sans-serif;
                 border-collapse: collapse;
                 width: 100%;
+                height: 100%;
               }
               .score th{
                 background-color:#15637C;
                 
               }
               
-              .scoree td, th {
+              .score td, th {
                 /* border: 1px solid #000000; */
                 border-radius: 2px;
                 text-align: center;
@@ -171,6 +180,11 @@
                 margin-top: 5%;
                 font-weight: 600;
                 margin-left: 10%;
+              }
+              .m_role_tag{
+                margin-top: -4%;
+                font-weight: 300;
+                margin-left: 35%;
               }
               .line
               {
@@ -256,37 +270,5 @@
           color: black;
         }
 
+      
 
-
-
-
-
-        /* .progress-circle {
-          width: 100px;
-          height: 100px;
-          position: relative;
-          border-radius: 50%;
-          background: #ddd;
-        }
-        
-        .progress-bar {
-          width: 100%;
-          height: 100%;
-          border-radius: 50%;
-          background: green;
-          position: absolute;
-          top: 0;
-          left: 0;
-          transform: rotate(-90deg);
-          transform-origin: 50% 50%;
-          animation: progress 1s linear forwards;
-        }
-        
-        @keyframes progress {
-          0% {
-            transform: rotate(-90deg);
-          }
-          100% {
-            transform: rotate(270deg);
-          }
-        } */
