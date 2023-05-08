@@ -1,5 +1,6 @@
 <?php
     class Subscriptions extends Controller {
+        private $subscriptionsModel;
         public function __construct() {
             $this->subscriptionsModel = $this -> model('subscriptionsM');
         }

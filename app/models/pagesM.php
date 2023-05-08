@@ -52,7 +52,7 @@
             $this->db->query('SELECT DISTINCT question.QID as QID, question.title as title, question.content as content, 
             question.date as date, question.rating as rating, question.visibility as visibility, user.uname as uname, user.firstName as fName, user.lastName as lName, user.pfp as pfp
             FROM question JOIN user on question.userID = user.userID JOIN questiontags ON question.QID = questiontags.QID JOIN questiontag ON question.QID = questiontag.QID WHERE question.status = "approved"  AND (' . $tags .') AND 
-            (question.title LIKE :search OR question.content LIKE :search OR questiontags.tags LIKE :search) ORDER BY question.rating DESC');
+            (question.title LIKE :search OR question.content LIKE :search OR questiontags.tags LIKE :search OR question.date LIKE :search) ORDER BY question.rating DESC');
             $this->db->bind(':search', '%' . $search . '%');
             $row = $this->db->resultSet();
             return $row;
@@ -63,7 +63,7 @@
             $this->db->query('SELECT DISTINCT question.QID as QID, question.title as title, question.content as content, 
             question.date as date, question.rating as rating, question.visibility as visibility, user.uname as uname, user.firstName as fName, user.lastName as lName, user.pfp as pfp
             FROM question JOIN user on question.userID = user.userID JOIN questiontags ON question.QID = questiontags.QID WHERE question.status = "approved" AND 
-            (question.title LIKE :search OR question.content LIKE :search OR questiontags.tags LIKE :search) ORDER BY question.rating DESC');
+            (question.title LIKE :search OR question.content LIKE :search OR questiontags.tags LIKE :search OR question.date LIKE :search) ORDER BY question.rating DESC');
             $this->db->bind(':search', '%' . $search . '%');
             $row = $this->db->resultSet();
             return $row;

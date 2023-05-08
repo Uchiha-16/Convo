@@ -64,10 +64,9 @@
             return $row;
         }
 
-        public function DeclineConsults($consultID, $expertID){
-            $this->db->query('UPDATE consultation SET status = "declined", approvedBy = :expertID WHERE consultID = :consultID');
+        public function DeclineConsults($consultID){
+            $this->db->query('UPDATE consultation SET status = "declined" WHERE consultID = :consultID');
             $this->db->bind(':consultID', $consultID);
-            $this->db->bind(':expertID', $expertID);
             if($this->db->execute()) {
                 return true;
             } else {
@@ -75,10 +74,9 @@
             }
         }
 
-        public function Accept($consultID, $expertID){
-            $this->db->query('UPDATE consultation SET status = "approved", approvedBy = :expertID WHERE consultID = :consultID');
+        public function Accept($consultID){
+            $this->db->query('UPDATE consultation SET status = "approved"  WHERE consultID = :consultID');
             $this->db->bind(':consultID', $consultID);
-            $this->db->bind(':expertID', $expertID);
             if($this->db->execute()) {
                 return true;
             } else {

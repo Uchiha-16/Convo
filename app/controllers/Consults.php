@@ -175,8 +175,7 @@
         
         public function declineAccept($consultID){
 
-                $userID = $_SESSION['userID'];
-                $consults = $this->consultsModel->DeclineConsults($consultID, $userID);
+                $consults = $this->consultsModel->DeclineConsults($consultID);
     
                 if($consults) {
                     flash('reg_flash', 'Appointment Declined!');
@@ -189,8 +188,7 @@
 
         public function decline($consultID){
 
-            $userID = $_SESSION['userID'];
-            $consults = $this->consultsModel->DeclineConsults($consultID, $userID);
+            $consults = $this->consultsModel->DeclineConsults($consultID);
 
             if($consults) {
                 flash('reg_flash', 'Appointment Declined!');
