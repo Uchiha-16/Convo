@@ -70,7 +70,7 @@
                             </div>
                         </div>
                         <div class="appointment">
-                            <label>Pending</label>
+                            <label>Schedules</label>
                         </div>
                     </div> 
                     <?php endforeach; ?>
@@ -79,11 +79,11 @@
                    
                 </div>
                 <div class="RHS">
-                <form action="<?php echo URLROOT; ?>/Consults/index"><button type="submit" style="float:right" class="read-more attend">Upcoming Appointments</button></form>
-                <form action="<?php echo URLROOT; ?>/Consults/add"><button type="submit" style="float:right" class="read-more attend">Add Appointment</button></form>
+                <form action="<?php echo URLROOT; ?>/Consults/index"><button title="Approved Appointments" type="submit" style="float:right" class="read-more attend">Upcomings</button></form>
+                <form action="<?php echo URLROOT; ?>/Consults/add"><button title="Add a new Appointment" type="submit" style="float:right" class="read-more attend">Add an Appointment</button></form>
                 <?php if($_SESSION['role'] == 'expert'): ?>
-                    <form action="<?php echo URLROOT;?>/Consults/accepted"><button type="submit" style="float:right" class="read-more attend">Accepted Appointments</button></form>
-                     <form action="<?php echo URLROOT;?>/Consults/accept"><button type="submit" style="float:right" class="read-more attend">Accept Appointments</button></form>
+                    <form action="<?php echo URLROOT;?>/Consults/accepted"><button title="Appointments Accepted by you" type="submit" style="float:right" class="read-more attend">Inquiries</button></form>
+                     <form action="<?php echo URLROOT;?>/Consults/accept"><button title="Awaiting approval from you" type="submit" style="float:right" class="read-more attend">Appointments</button></form>
                      <br><br><br><br>
                      <?php endif; ?>
                    

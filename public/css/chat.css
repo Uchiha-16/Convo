@@ -96,6 +96,10 @@ border-left: 1px solid aliceblue;
     column-gap: 1rem;
 align-items: center;
 }
+.box1{
+    justify-content: end;
+    text-align: right;
+}
 .dlg-box img{
         width: 2rem;
 }
