@@ -190,20 +190,50 @@ a:hover:after{
     border-right: none;
 }
 
-.flash-msg {
-    color: black;
-    padding: 10px;
-    cursor: pointer;
-    text-align: center;
-    margin-top: -17px;
-}
-
 .error {
     color: red;
     font-size: 12px;
     margin-top: 1rem;
     margin-left: 1rem;
 }
+/*========================= Alert Box =======================*/
+
+.flash-msg {
+    padding: 20px;
+    background-color: #19758D;
+    color: white;
+    opacity: 1;
+    border-radius: 10px;
+    width: auto;
+    position: absolute;
+    top: 6rem;
+    left: 38rem;
+    z-index: 100;
+    animation-duration: 1s;
+    animation-fill-mode: both;
+    display: inline-block;
+    animation-name: fadeInBottom;
+}
+
+@keyframes fadeInBottom {
+    0% {
+        opacity: 0;
+    }
+    90% {
+        opacity: 1;
+        transform: translateY(70%);
+    }
+    100% { 
+        opacity: 0; 
+        transform: translateY(0%);
+    }
+}
+/*============================== Playlist ==========================*/
+
+#hidden_div {
+    display: none;
+}
+
 /*==================================================== FOOTER ===================================================*/
 footer{
     z-index: 1;

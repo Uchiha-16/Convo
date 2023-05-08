@@ -1,79 +1,163 @@
-const textarea = document.getElementById("textarea1");
+// Get the editable div
+const editor = document.querySelector('.editor');
 
-function f1(e) {
-    let value = e.value;
-    textarea.style.fontSize = value + "px";
-}
+$(function () {
+    $('.basicEquations').hide();
+    $('.basicMath').hide();
+    $('.greekLetters').hide();
+    $('.letterLikeSymbols').hide();
+    $('.operators').hide();
+    $('.arrows').hide();
+    $('.negatedRelations').hide();
+    $('.geometry').hide();
+    $('#math').change(function () {
+        $('.basicEquations').hide();
+        $('.basicMath').hide();
+        $('.greekLetters').hide();
+        $('.letterLikeSymbols').hide();
+        $('.operators').hide();
+        $('.arrows').hide();
+        $('.negatedRelations').hide();
+        $('.geometry').hide();
+        $('#' + $(this).val()).show();
 
-function f2(e) {
-    if (textarea.style.fontWeight == "bold") {
-        textarea.style.fontWeight = "normal";
-        e.classList.remove("active");
-    }
-    else {
-        textarea.style.fontWeight = "bold";
-        e.classList.add("active");
-    }
-}
-
-function f3(e) {
-    if (textarea.style.fontStyle == "italic") {
-        textarea.style.fontStyle = "normal";
-        e.classList.remove("active");
-    }
-    else {
-        textarea.style.fontStyle = "italic";
-        e.classList.add("active");
-    }
-}
-
-function f4(e) {
-    if (textarea.style.textDecoration == "underline") {
-        textarea.style.textDecoration = "none";
-        e.classList.remove("active");
-    }
-    else {
-        textarea.style.textDecoration = "underline";
-        e.classList.add("active");
-    }
-}
-
-function f5(e) {
-    textarea.style.textAlign = "left";
-}
-
-function f6(e) {
-    textarea.style.textAlign = "center";
-}
-
-function f7(e) {
-    textarea.style.textAlign = "right";
-}
-
-function f8(e) {
-    if (textarea.style.textTransform == "uppercase") {
-        textarea.style.textTransform = "none";
-        e.classList.remove("active");
-    }
-    else {
-        textarea.style.textTransform = "uppercase";
-        e.classList.add("active");
-    }
-}
-
-function f9() {
-    textarea.style.fontWeight = "normal";
-    textarea.style.textAlign = "left";
-    textarea.style.fontStyle = "normal";
-    textarea.style.textTransform = "capitalize";
-    textarea.value = "";
-}
-
-function f10(e) {
-    let value = e.value;
-    textarea.style.color = value;
-}
-
-window.addEventListener('load', () => {
-    textarea.value = "";
+    });
 });
+
+const fontSizeSelect = document.getElementById('fontSize');
+// Set the default font size to 3 (12px)
+fontSizeSelect.value = '3';
+// Listen for changes to the font size select
+fontSizeSelect.addEventListener('change', () => {
+    // Get the selected font size
+    const fontSize = fontSizeSelect.value;
+    // Apply the font size to the selected text
+    document.execCommand('fontSize', false, fontSize);
+    // Remove the selection after applying the font size
+    window.getSelection().removeAllRanges();
+});
+
+const text_input = document.getElementById('text-input');
+
+// Get the buttons
+const boldBtn = document.getElementById('boldBtn');
+const italicBtn = document.getElementById('italicBtn');
+const underlineBtn = document.getElementById('underlineBtn');
+const strikethroughBtn = document.getElementById('strikethroughBtn');
+const subscriptBtn = document.getElementById('subscriptBtn');
+const superscriptBtn = document.getElementById('superscriptBtn');
+const orderedListBtn = document.getElementById('orderedListBtn');
+const unorderedListBtn = document.getElementById('unorderedListBtn');
+const linkBtn = document.getElementById('linkBtn');
+const unlinkBtn = document.getElementById('unlinkBtn');
+const codeBlockBtn = document.getElementById('codeBlockBtn');
+const convertBtn = document.getElementById('convertBtn');
+
+// Add event listeners to the buttons
+boldBtn.addEventListener('click', addBold);
+italicBtn.addEventListener('click', addItalic);
+underlineBtn.addEventListener('click', addUnderline);
+strikethroughBtn.addEventListener('click', addStrikethrough);
+subscriptBtn.addEventListener('click', addSubscript);
+superscriptBtn.addEventListener('click', addSuperscript);
+orderedListBtn.addEventListener('click', addOrderedList);
+unorderedListBtn.addEventListener('click', addUnorderedList);
+linkBtn.addEventListener('click', addLink);
+unlinkBtn.addEventListener('click', removeLink);
+codeBlockBtn.addEventListener('click', addCodeBlock);
+convertBtn.addEventListener('click', convertToHtml);
+
+
+// Function to add bold tags to selected text
+function addBold() {
+    document.execCommand('bold', false, null);
+}
+
+// Function to add italic tags to selected text
+function addItalic() {
+    document.execCommand('italic', false, null);
+}
+
+// Function to add underline tags to selected text
+function addUnderline() {
+    document.execCommand('underline', false, null);
+}
+
+// Function to add strikethrough tags to selected text
+function addStrikethrough() {
+    document.execCommand('strikethrough', false, null);
+    editor.focus();
+}
+
+// Function to add subscript tags to selected text
+function addSubscript() {
+    document.execCommand('subscript', false, null);
+}
+
+// Function to add superscript tags to selected text
+function addSuperscript() {
+    document.execCommand('superscript', false, null);
+}
+
+// Function to add ordered list tags to selected text
+function addOrderedList() {
+    document.execCommand('insertOrderedList', false, null);
+    editor.focus();
+}
+
+// Function to add unordered list tags to selected text
+function addUnorderedList() {
+    document.execCommand('insertUnorderedList', false, null);
+}
+
+// Function to add link to selected text
+function addLink() {
+    const url = prompt('Enter the URL:');
+    document.execCommand('createLink', false, url);
+}
+
+// Function to remove link from selected text
+function removeLink() {
+    document.execCommand('unlink', false, null);
+}
+
+// Function to add code block
+function addCodeBlock() {
+    document.execCommand('insertHTML', false, '<pre><code class="language-html"> </code></pre>');
+}
+
+// Function to convert the edited text to HTML
+function convertToHtml() {
+    // Get the edited text
+    // alert(text_input.innerHTML);
+    const editedText = text_input.innerHTML.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    // Display the HTML result
+    const result = document.getElementById('result');
+    result.innerHTML = editedText;
+}
+
+function insertSymbol(symbol) {
+    // Get the current cursor position in the editable div element
+    var selection = window.getSelection();
+    var range = selection.getRangeAt(0);
+    var currentStart = range.startOffset;
+    // Insert the symbol at the current cursor position
+    range.insertNode(document.createTextNode(symbol));
+    // Move the cursor to the end of the inserted symbol
+    range.setStart(range.startContainer, currentStart + symbol.length);
+    range.setEnd(range.startContainer, currentStart + symbol.length);
+    selection.removeAllRanges();
+    selection.addRange(range);
+    editor.focus();
+}
+
+// code block
+$(document).ready(function () {
+    $("#codeBlockBtn").click(function () {
+        $(".codeeditor").toggle();
+    });
+});
+
+
+
+

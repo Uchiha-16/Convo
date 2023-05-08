@@ -3,7 +3,7 @@
         private $db;
 
         public function __construct() {
-            $this->db = new Database;
+            $this->db = new Database; 
         }
 
         public function getUsers() {
@@ -11,12 +11,12 @@
             $results = $this->db->resultSet();
             return $results;
         }
-
+ 
         public function getAnswers($QID) {
             $this->db->query('SELECT answer.threadID as threadID, answer.content as content, answer.embedlink as link, answer.attachment as attachment, answer.date as date, 
-            answer.rating as rating, user.userID as userID, user.uname as uname, user.firstName as fName, user.lastName as lName, user.pfp as pfp, 
-            GROUP_CONCAT(expertqualification.qualification SEPARATOR ",") as qualifications FROM answer JOIN user ON answer.expertID = user.userID 
-            JOIN expertqualification ON expertqualification.expertID = answer.expertID WHERE answer.QID = :QID GROUP BY answer.threadID ORDER BY answer.rating DESC;');
+            answer.rating as rating, user.userID as userID, user.uname as uname, user.firstName as fName, user.lastName as lName, user.pfp as pfp  
+            FROM answer JOIN user ON answer.expertID = user.userID 
+            JOIN expert ON expert.expertID = answer.expertID WHERE answer.QID = :QID GROUP BY answer.threadID ORDER BY answer.rating DESC;');
             $this->db->bind(':QID', $QID);
             $rows = $this->db->resultSet();
             return $rows;
@@ -197,6 +197,13 @@
             return $row;
         }
 
+        public function notify($userID,$expert,$QID) {  
+            $this->db->query('INSERT INTO notification (type,userID, expertID, typeID,status) VALUES ("answer",:userID, :expert, :QID,0)');
+            $this->db->bind(':userID', $userID);
+            $this->db->bind(':expert', $expert);
+            $this->db->bind(':QID', $QID);
+            $this->db->execute();
+        }
     }   
 
 ?>

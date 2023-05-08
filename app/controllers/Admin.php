@@ -1,11 +1,12 @@
 <?php
     class Admin extends Controller {
+        private $adminModel;
         public function __construct() {
             $this->adminModel = $this -> model('adminM');
         }
 
         public function index(){
-        
+        // echo("Hi");
             if(isset($_GET['role']) && !empty($_GET['role'])) {
                 $users = $this->adminModel->getUsersByRole($_GET['role']);
             } else{
@@ -46,7 +47,7 @@
 
         public function add(){
             $data = [];
-            $this->view('admin/index', $data);
+            $this->view('admin/add', $data);
         }
 
     }

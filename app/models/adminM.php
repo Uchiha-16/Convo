@@ -14,7 +14,7 @@
         public function getUserById($userID) {
             $this->db->query('SELECT * FROM user WHERE userID = :userID');
             $this->db->bind(':userID', $userID);
-            return $this->db->single(PDO:: FETCH_OBJ);
+            return $this->db->single();
         }
 
         public function getAllUsers(){

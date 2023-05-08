@@ -1,5 +1,5 @@
 <?php require APPROOT .'/views/inc/header.php'; ?> 
-<link href="<?php echo URLROOT;?>/css/event.css" rel="stylesheet" type="text/css"/>
+<!-- <link href="<?php //echo URLROOT;?>/css/event.css" rel="stylesheet" type="text/css"/> -->
 <link href="<?php echo URLROOT; ?>/css/skill.css" rel="stylesheet" type="text/css" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
@@ -16,7 +16,6 @@
 </script>
 
 </head>
-
 
 <?php if (($_SESSION['role']) == 'seeker') : ?>
         <?php require APPROOT . '/views/inc/components/Snavbar.php'; ?>

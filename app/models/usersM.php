@@ -101,5 +101,73 @@
             $row = $this->db->single();
             return $row->role;
         }
+
+        //addExpert 
+        public function addexpert($userID, $linkedin, $qualification) {
+            $this->db->query('INSERT INTO expert (expertID, linkedin, qualification) VALUES(:expertID, :linkedin, :qualification)');
+            // Bind values
+            $this->db->bind(':expertID', $userID,);
+            $this->db->bind(':linkedin', $linkedin);
+            $this->db->bind(':qualification', $qualification);
+
+            // Execute
+            if($this->db->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        //addexpertQualification
+        public function addexpertQ($userID, $qualification) {
+            $this->db->query('INSERT INTO expertqualification (expertID, qualification) VALUES(:expertID, :qualification)');
+            // Bind values
+            $this->db->bind(':expertID', $userID,);
+            $this->db->bind(':qualification', $qualification);
+
+            // Execute
+            if($this->db->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        public function getQIDs(){
+            $this->db->query('SELECT QID FROM question');
+            $results = $this->db->resultSet();
+            return $results;
+        }
+
+        public function getAIDs(){
+            $this->db->query('SELECT threadID FROM answer');
+            $results = $this->db->resultSet();
+            return $results;
+        }
+
+        public function addInteractions($AID,$userID){
+                $this->db->query('INSERT INTO interactions (threadID,interaction, userID) VALUES(:AID,"new", :userID)');
+                $this->db->bind(':AID', $AID);
+                $this->db->bind(':userID', $userID);
+                
+                if($this->db->execute()) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+
+        public function addQrating($QID,$userID){
+                $this->db->query('INSERT INTO questionrating (rating,QID,userID) VALUES(0,:QID,:userID)');
+                $this->db->bind(':QID', $QID);
+                $this->db->bind(':userID', $userID);
+
+                if($this->db->execute()) {
+                    return true;
+                } else {
+                    return false;
+                }
+        }
+    
     }
 ?>

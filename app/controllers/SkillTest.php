@@ -106,6 +106,7 @@
 
             $totalQuestions = count($_POST['answers']);
             $correctAnswers = 0;
+            echo($totalQuestions);
 
             foreach ($_POST['answers'] as $QPID => $selectedAnswer) {
                 //find the correct answer for this question
