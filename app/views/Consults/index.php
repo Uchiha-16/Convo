@@ -435,8 +435,8 @@
 
                                 
                                 <!-- Filter 4 -->
-                                <div class="checkbox-1">
-                                    <span class="checkbox-title" onclick="filter#()">Rating <i class="arrow up" id="up4" style="margin-left: 6.7rem;"></i><i class="arrow down" id="down4" style="margin-left: 6.7rem;"></i></span>
+                                <!-- <div class="checkbox-1">
+                                    <span class="checkbox-title" onclick="filter#()">Rating <i class="arrow up" id="up4" style="margin-left: 6.7rem;"></i><i class="arrow down" id="down4" style="margin-left: 6.7rem;"></i></span> -->
 <!--
                                     <ul id="checkbox-3">
                                         <li>
