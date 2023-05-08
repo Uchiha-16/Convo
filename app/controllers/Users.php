@@ -6,13 +6,6 @@
            
         }
 
-        public function about() {
-            $data = [
-                'title' => 'About Us'
-            ];
-            $this->view('pages/about', $data);
-        }
-
         public function signup(){
                 //Input Data
                 $data = [];

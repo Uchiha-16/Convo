@@ -217,16 +217,13 @@
 
         public function search(){
             $search = $_POST['keywords'];
-
             $userID = $_SESSION['userID'];
-            $Myconsults = $this->consultsModel->Mysearch($search);
-            $Notconsults = $this->consultsModel->Notsearch($search);
+            $Myconsults = $this->consultsModel->Mysearch($search,$userID);
+            $Notconsults = $this->consultsModel->Notsearch($search,$userID);
             
-            $data = [
-                'consults' => $consults
-            ];
-
-            foreach($consults as $consults){
+        
+            echo '<h3>Search Results for "'.$search.'"</h3><br>';
+            foreach($Myconsults as $consults){
                 echo '<div class="question-div">
                         <div class="info">';
                           
@@ -262,19 +259,93 @@
                             $daysRemaining = ceil($timeDifference / (60 * 60 * 24));
 
                         echo'<div class="content-display">
-                            <h3><?php echo $consults->title ?></h3>
-                            <label class="name-label"> Approved By '. $consults->fName. " ". $consults->lName .'</label>
-                            <label class="time-label">'.$consults->time .'</label>
+                            <h3>'.$consults->title.'</h3>';
+                            if($consults->status == "pending"){
+                                echo '<label class="name-label"> Waiting for Approval '. $consults->fName. " ". $consults->lName .'</label>';
+                            }else{
+                                echo '<label class="name-label"> Approved By '. $consults->fName. " ". $consults->lName .'</label>';
+                            }
+                            
+                            echo '<label class="time-label">'.$consults->time .'</label>
                             <div class="date-count">';
-                            if($consults->date < date()){
+                            if($consults->date < date('Y-m-d')){
                                 echo '<button style="float:left" class="decline">Expired</button>';
                             }else{
-                                echo '<button style="float:left" class="decline">'. $daysRemaining .' Days Remaining</button>
+                                echo '<button style="float:left" class="decline">'. $daysRemaining .' Days Remaining</button>';
                         }
-                            </div>
+                          echo'  </div>
                         </div>
-                        <div class="appointment">
-                            <label>Upcoming</label>
+                        <div class="appointment">';
+                        if($consults->status == "pending"){
+                            echo '<label>Pending</label>';
+                        }else{
+                            echo '<label>Upcoming</label>';
+                        }
+                         echo'
+                        </div>
+                    </div> ';
+            }
+
+            foreach($Notconsults as $consults){
+                echo '<div class="question-div">
+                        <div class="info">';
+                          
+                            $dateString = $consults->date;
+                            $dateTime = new DateTime($dateString);
+
+                            $year = $dateTime->format('Y');
+                            $month = $dateTime->format('M');
+                            $day = $dateTime->format('d');
+
+                          echo'  <div class="calander">
+                                <div class="cal1">
+                                    <label>'. $month .'</label>
+                                </div>
+                                <div class="cal2">
+                                    <label>'. $day .'</label>
+                                </div>
+                            </div>
+                        </div>';
+
+                       date_default_timezone_set('Asia/Colombo'); 
+                        
+                        // Convert the future date to a Unix timestamp
+                            $futureTimestamp = strtotime($dateString);
+
+                            // Get the current Unix timestamp
+                            $currentTimestamp = time();
+
+                            // Calculate the time difference between the future and current timestamps
+                            $timeDifference = $futureTimestamp - $currentTimestamp;
+
+                            // Convert the time difference to days
+                            $daysRemaining = ceil($timeDifference / (60 * 60 * 24));
+
+                        echo'<div class="content-display">
+                            <h3>'.$consults->title.'</h3>
+                            <label class="name-label"> Requested For '. $consults->fName. " ". $consults->lName .'</label>
+                            <label class="time-label">'.$consults->time .'</label>
+                            <div class="date-count">';
+                            if($consults->date < date('Y-m-d')){
+                                echo '<button style="float:left" class="decline">Expired</button>';
+                            }else{
+                                if($consults->status == "pending"){
+                                    echo'<button style="float:left" class="accept" onclick="confirmationAccept('. $consults->consultID.')">Accept</button>
+                                        <button style="float:right" class="decline" onclick="confirmationDecline('. $consults->consultID.')">Decline</button>';
+                                }else{
+                                    echo '<button style="float:left" class="decline">'. $daysRemaining .' Days Remaining</button>';
+                                }
+                                
+                        }
+                          echo'  </div>
+                        </div>
+                        <div class="appointment">';
+                        if($consults->status == "pending"){
+                            echo '<label>Appointments</label>';
+                        }else{
+                            echo '<label>Inquiries</label>';
+                        }
+                         echo'
                         </div>
                     </div> ';
             }

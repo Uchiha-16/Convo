@@ -53,10 +53,10 @@
                     echo '<P><b>'.$commentadded[$i1]->firstName." ".$commentadded[$i1]->lastName.'</b>Commented on your answer on<span style="color:#00a7ae;">  one of your answers</span></P> ';
                 }
                 elseif($notification->type == "chat"){
-                    echo '<P><b>You have</b>unread messages on<span style="color:#00a7ae;">Chat group</span></P> ';
+                    echo '<P><b>You have</b>unread messages on<span style="color:#00a7ae;"> Chat group</span></P> ';
                 }
                 elseif($notification->type == "consult"){
-                    echo '<P><b>Your Consultation</b><span style="color:#00a7ae;">String Theory was Approved</span> by Varsha Wijethunge</P>';
+                    echo '<P><b>Your Consultation</b><span style="color:#00a7ae;"> String Theory was Approved</span> by Varsha Wijethunge</P>';
                 }
                 $i1++;
 

@@ -32,7 +32,7 @@
             <div class="nav-hover"><a href="<?php echo URLROOT;?>/Pages/expert">Home</a></div>
             <div class="nav-hover"><a href="<?php echo URLROOT;?>/Consults/index">Consult</a></div>
             <div class="nav-hover"><a href="<?php echo URLROOT;?>/Webinars/home">Webinar</a></div>
-            <div><input id="live_search_Consult" type="search" name="search" placeholder="Search for questions..."/></div>
+            <div><input id="live_search_Consult" type="search" name="search" placeholder="Search for consultations..."/></div>
             <?php if(isset($_SESSION['userID'])) : ?>
             <div class="dropdown-list">
                 <button class="dropbtn dropbtn-1" onclick="drop()"><img src="<?php echo URLROOT;?>/img/plus.png" class="icon"> Add New</button>
@@ -110,7 +110,7 @@
             <div class="nav-hover"><a href="<?php echo URLROOT;?>/Pages/seeker">Home</a></div>
             <div class="nav-hover"><a href="<?php echo URLROOT;?>/Consults/index">Consult</a></div>
             <div class="nav-hover"><a href="<?php echo URLROOT;?>/Webinars/home">Webinar</a></div>
-            <div><input id="live_search_Consult" type="search" name="search" placeholder="Search for questions..."/></div>
+            <div><input id="live_search_Consult" type="search" name="search" placeholder="Search for consultations..."/></div>
             <?php if(isset($_SESSION['userID'])) : ?>
             <div class="dropdown-list">
                 <button class="dropbtn dropbtn-1" onclick="drop()"><img src="<?php echo URLROOT;?>/img/plus.png" class="icon"> Add New</button>
@@ -135,7 +135,7 @@
                         </div>
                     </div>
                     <div style="display:block" id="notificationBlock">
-                        <div class="tabs">
+                        <!-- <div class="tabs">
                             <P><b>New answer added to </b><span style="color:#00a7ae;">String Theory</span> by Varsha Wijethunge</P>
                         </div>
                         <div class="tabs">
@@ -145,7 +145,7 @@
                             <P><b>Upcoming event </b>on <span style="color:#00a7ae;">Data Structures and Algorithms</span></P>
                         </div>
                         <div class="tabs">
-                            <P><b>You have been selected </b>to the <span style="color:#00a7ae;">A9 Project</span></P>
+                            <P><b>You have been selected </b>to the <span style="color:#00a7ae;">A9 Project</span></P> -->
                         </div>
                     </div>
                 </div>
@@ -181,9 +181,12 @@
     <?php endif; ?>
         
         <!-- body content -->
+        <div class="alert success">
+                    <?php flash('reg_flash'); ?>
+                </div>
         <div class="container-div">
             <div class="content-body">
-                <div class="LHS">
+                <div class="LHS" id="LHS">
                     <h3>My Appointments</h3><br>
 
                     <?php foreach($data['consults'] as $consults) : ?>
@@ -468,13 +471,30 @@
         <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="arrow up"></i><br></button>
             
         <div id="body"></div>
-        
+         
+        <script type="text/JavaScript">
+            var URLROOT = '<?php echo URLROOT; ?>';
+        </script>
+
+        <script type="text/JavaScript">
+            <?php if(isset($_SESSION['userID'])): ?>
+                var ROLE = '<?php echo $_SESSION['role']; ?>';
+                <?php else : ?>
+                var ROLE = 'guest';
+            <?php endif; ?>
+            
+        </script>
+
+
+        <script src="<?php echo URLROOT; ?>/js/comments.js" type="text/javascript"></script>
+        <script src="<?php echo URLROOT; ?>/js/imageUpload.js"></script>
+        <script type="text/JavaScript" src="<?php echo URLROOT; ?>/js/jQuery/jQuery.js"></script>
+        <script src="<?php echo URLROOT; ?>/js/rating.js" type="text/javascript"></script>
+        <script src="<?php echo URLROOT; ?>/js/textEditor.js" type="text/javascript"></script>
+        <script src="<?php echo URLROOT; ?>/js/notifictaions.js" type="text/javascript"></script>
+
     </body>
-    <?php
-// }else{ echo "<h1>Please login first .</h1>";?>
-<!--  <a href="../login.php" style="color: white;">Login</a> or <a href="signup.php" style="color: white;">Signup</a> -->
- <?php //}
-?>
+
 
 </html>
 

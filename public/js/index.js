@@ -389,9 +389,9 @@ $(document).ready(function () {
 $(document).ready(function () {
   $("#live_search_Consult").keyup(function () {
     var input = $(this).val();
-    // alert(input);
+    //alert(input);
     if (input != "") {
-      // alert(input);
+      //alert(URLROOT);
       $.ajax({
         url: URLROOT + '/Consults/search/',
         method: 'post',
@@ -399,7 +399,7 @@ $(document).ready(function () {
         dataType: 'text',
         success: function (response) {
           $("#LHS").html(response);
-          // alert(input);
+         // alert(input);
         }
       })
     } else {
