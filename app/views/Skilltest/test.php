@@ -17,7 +17,6 @@
 
 </head>
 
-
 <?php if (($_SESSION['role']) == 'seeker') : ?>
         <?php require APPROOT . '/views/inc/components/Snavbar.php'; ?>
     <?php elseif (($_SESSION['role']) == 'expert') : ?>

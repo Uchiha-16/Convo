@@ -1,0 +1,197 @@
+.textEditor {
+  padding: 1rem;
+  border: 1px solid;
+  border-radius: 5px;
+}
+
+.textEditor .options {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 15px;
+}
+
+.textEditor button {
+  height: 28px;
+  width: 28px;
+  display: grid;
+  place-items: center;
+  border-radius: 3px;
+  border: none;
+  background-color: #ffffff;
+  outline: none;
+  color: #020929;
+  cursor: pointer;
+}
+
+.adv-option-button {
+  cursor: pointer;
+}
+
+.textEditor button:hover {
+  background-color: #b6e1e2;
+  transition: .3s all;
+}
+
+.textEditor select {
+  padding: 7px;
+  border: 1px solid #020929;
+  border-radius: 3px;
+}
+
+.textEditor .input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.textEditor input[type="color"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: transparent;
+  width: 20px;
+  height: 27px;
+  border: none;
+  cursor: pointer;
+}
+
+.textEditor input[type="color"]::-webkit-color-swatch {
+  border-radius: 15px;
+  box-shadow: 0 0 0 2px #ffffff, 0 0 0 3px #020929;
+}
+
+.textEditor input[type="color"]::-moz-color-swatch {
+  border-radius: 15px;
+  box-shadow: 0 0 0 2px #ffffff, 0 0 0 3px #020929;
+}
+
+#text-input {
+  margin-top: 10px;
+  border: 1px solid #dddddd;
+  padding: 20px;
+  height: 50vh;
+  width: 58.2vw;
+  font-size: 14px;
+  resize: vertical;
+}
+
+.textEditor .active {
+  background-color: #e0e9ff;
+}
+
+.math-section {
+  font-family: 'Inter';
+  font-size: 13px;
+}
+
+.math-section section, .math-section section option {
+  font-family: 'Inter';
+}
+
+.math-element {
+  border: 1px solid black;
+  margin-right: 10px;
+  border-radius: 3px
+}
+
+.math-element button {
+  width: 25px;
+  height: 25px;
+  font-size: 16px;
+}
+
+#basicMath, #greekLetters, #letterLikeSymbols, #operators, #arrows, #negatedRelations, #geometry, #basicEquations {
+  display: inline-flex;
+  background-color: lightgrey;
+  padding: 6px;
+  border-radius: 4px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  row-gap: 10px;
+  -webkit-transition: all 250ms ease;
+  -moz-transition: all 250ms ease;
+  -o-transition: all 250ms ease;
+  transition: all 250ms ease;
+}
+
+.greekLetters span, .operators span {
+  font-size: 12px;
+  width: 100%;
+}
+
+.basicEquations .math-element button {
+  font-size: 12px;
+  width: auto;
+  font-family: 'Inter';
+  padding: 5px;
+}
+
+.imageupload input[type="file"] {
+  /* Style the color of the message that says 'No file chosen' */
+  color: #878787;
+  width: 100%;
+  height: auto;
+  font-size: 13px;
+  border: none;
+}
+
+.imageupload input[type="file"]::-webkit-file-upload-button {
+  text-decoration: none;
+  border: none;
+  font-size: 13px;
+  border-radius: 4px;
+  color: black;
+  cursor: pointer;
+  outline: none;
+  padding: 10px 25px;
+  text-transform: uppercase;
+  transition: all 1s ease;
+}
+
+.imageupload input[type="file"]::-webkit-file-upload-button:hover {
+  background: #b7b6b6;
+  color: #000;
+}
+
+/*code block */
+
+.codeeditor {
+  display: inline-flex;
+  gap: 10px;
+  font-family: monospace;
+  line-height: 21px;
+  background: #282a3a;
+  border-radius: 2px;
+  padding: 20px 10px;
+  width: 97.5%;
+}
+
+.line-numbers {
+  width: 20px;
+  text-align: right;
+}
+
+.line-numbers span {
+  counter-increment: linenumber;
+}
+
+.line-numbers span::before {
+  content: counter(linenumber);
+  display: block;
+  color: #506882;
+}
+
+.codeeditor textarea {
+  line-height: 21px;
+  overflow-y: hidden;
+  padding: 0;
+  border: 0;
+  background: #282a3a;
+  color: #FFF;
+  min-width: 500px;
+  outline: none;
+  resize: none;
+  height: auto;
+}
