@@ -124,7 +124,7 @@
                 </div>
                 <div class="RHS">
                     <form action="<?php echo URLROOT;?>/projects/viewAllProjects"><button type="submit" style="float:right" class="read-more attend">All Projects</button></form>
-                    <form action="addProject.php"><button type="submit" style="float:right" class="read-more attend">Add Project</button></form><br><br>
+                    <form action="<?php echo URLROOT;?>/projects/add"><button type="submit" style="float:right" class="read-more attend">Add Project</button></form><br><br>
                     <div class="filter-div">
                         <div style="display:flex">
                             <img src="../images/filter.png">
