@@ -149,16 +149,10 @@ header .current-date {
     background: white;
     padding: 10px 20px 10px 20px;
     border-top: 1px solid lightgrey;
-    -webkit-transition: all 500ms ease-in-out;
-    -moz-transition: all 500ms ease-in-out;
-    -ms-transition: all 500ms ease-in-out;
-    -o-transition: all 500ms ease-in-out;
-    transition: all 500ms ease-in-out;
+    display: none;
 }
 
 .hover-box h4, .hover-box p, .hover-box span {
     margin: 0;
 }
-.reserve:hover + .hover-box {
-    display: block;
-}
+
