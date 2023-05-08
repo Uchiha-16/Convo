@@ -15,6 +15,8 @@
 
         public function add(){
             if($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+                $content = htmlspecialchars($_POST['content'], ENT_QUOTES, 'UTF-8');
                 // Form is submitting
                 // Validate the data
                 $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -29,7 +31,7 @@
                     'tag'=>$tag,
                     'thumbnail' => ($_FILES['thumbnail']),
                     'thumbnail_name' => time().'_'.($_FILES['thumbnail']['name']),
-                    'rating' => 0,
+                    //'rating' => 0,
                     'title_err' => '',
                     'thumbnail_err' => '',
                     'content_err' => '',
@@ -104,7 +106,7 @@
                     'tag' => '',
                     'thumbnail' => '',
                     'thumbnail_name' => '',
-                    'rating' => '',
+                    //'rating' => '',
                     'title_err' => '',
                     'content_err' => '',
                     'thumbnail_err' => '',

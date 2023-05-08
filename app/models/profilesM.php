@@ -153,6 +153,7 @@
         //         return false;
         //     }
         // }
+
         //*********************************** CALENDAR **************************************** */
         public function getConsultDates($userID, $current_month, $current_year){
             $this->db->query('SELECT consultation.consultID as consultID, consultation.userID as userID, consultation.expertID as expertID, 

@@ -32,7 +32,7 @@
                     'description' => trim($_POST['description']),
                     'slot' => trim($_POST['slot']),
                     'tags' => $tag,
-                    'deadline' => date('Y-m-d H:i:s'),
+                    'deadline' =>  trim($_POST['deadline']),
                     'type' => $_POST['type'],
                     'availability' => $_POST['availability'],
                     'duration' => $_POST['duration'],
