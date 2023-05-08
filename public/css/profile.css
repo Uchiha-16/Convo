@@ -232,6 +232,7 @@
 .info span {
     font-size: 12px;
     margin-left: 1rem;
+    padding-right: 20px;
 }
 
 .content-display {

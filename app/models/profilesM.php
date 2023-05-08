@@ -154,5 +154,18 @@
         //     }
         // }
 
+        //*********************************** CALENDAR **************************************** */
+        public function getConsultDates($userID, $current_month, $current_year){
+            $this->db->query('SELECT consultation.consultID as consultID, consultation.userID as userID, consultation.expertID as expertID, 
+            consultation.title as title, consultation.date as date, consultation.time as time, user.lastName as lName, user.firstName as fName 
+            FROM consultation JOIN user ON user.userID = consultation.expertID WHERE consultation.status = "approved" AND consultation.userID = :userID 
+            AND MONTH(consultation.date) = :current_month AND YEAR(consultation.date) = :current_year;');
+            $this->db->bind(':userID', $userID);
+            $this->db->bind(':current_month', $current_month);
+            $this->db->bind(':current_year', $current_year);
+            $row = $this->db->resultSet();
+            return $row;
+        }
+
     }
 ?>

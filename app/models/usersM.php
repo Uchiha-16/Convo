@@ -103,11 +103,12 @@
         }
 
         //addExpert 
-        public function addexpert($userID, $linkedin) {
-            $this->db->query('INSERT INTO expert (expertID, linkedin) VALUES(:expertID, :linkedin)');
+        public function addexpert($userID, $linkedin, $qualification) {
+            $this->db->query('INSERT INTO expert (expertID, linkedin, qualification) VALUES(:expertID, :linkedin, :qualification)');
             // Bind values
             $this->db->bind(':expertID', $userID,);
             $this->db->bind(':linkedin', $linkedin);
+            $this->db->bind(':qualification', $qualification);
 
             // Execute
             if($this->db->execute()) {

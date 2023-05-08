@@ -1367,7 +1367,7 @@
                                             </div>
                                             <div id="text-input" contenteditable="true" title="Enter text..." class="editor"><?php echo $data["content"]; ?>
                                             <!-- code block -->
-                                                <div class="codeeditor" style="display:none;">
+                                                <!-- <div class="codeeditor">
                                                     <div class="line-numbers">
                                                         <span></span>
                                                     </div>
@@ -1401,7 +1401,7 @@
                                                             event.preventDefault()
                                                         }
                                                     })
-                                                </script>
+                                                </script> -->
                                             <!-- end of code block -->
                                             </div>
                                             <textarea id="result" style="display:none;" name="content"></textarea>
@@ -1469,7 +1469,6 @@
 
                                                 <li><input type="checkbox" value="spaceScience" name="tag[]" id="checkbox25" value="<?php echo $data['tag']; ?>" /><label for="checkbox25">Space Science</label></li>
                                             </ul>
-
                                     </div>
                                     <span class="error"><?php echo $data['tag_err']; ?></span>
                                 </td>

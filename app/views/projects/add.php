@@ -165,7 +165,7 @@
             </div>
                 <div class="RHS">
                     <form action="<?php echo URLROOT;?>/projects/viewAllProjects"><button type="submit" style="float:right" class="read-more attend">Projects</button></form>
-                    <form action="myProjects.php"><button type="submit" style="float:right" class="read-more attend">My Projects</button></form>
+                    <form action="<?php echo URLROOT;?>/projects/viewMyProjects"><button type="submit" style="float:right" class="read-more attend"><button type="submit" style="float:right" class="read-more attend">My Projects</button></form>
                     
                     <br><br>
                     <div class="filter-div">

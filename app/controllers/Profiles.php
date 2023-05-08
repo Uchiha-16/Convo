@@ -17,6 +17,7 @@
                 $eventAttend[$i] = $this->profilesModel->getEvent($event->eventID);
                 $i++;
             }
+            // print_r($eventAttend);
             $resourcePerson = $this->profilesModel->getResourcePerson();
 
             $avgscore = [];
@@ -24,8 +25,17 @@
                 $avgscore[] = $sk->score;
             }
 
-            $avgscore = array_sum($avgscore)/count($avgscore);
+            //$avgscore = array_sum($avgscore)/count($avgscore);
+            $avgscore = 70%
 
+            //Calendar
+            $current_month = date("m");
+            $current_year = date("Y");
+            $consultations = $this->profilesModel->getConsultDates($_SESSION['userID'], $current_month, $current_year);
+            $consultdates = [];
+            foreach($consultations as $consultation){
+                $consultdates[] = date("d", strtotime($consultation->date));
+            }
             $data = [
                 'profile' => $profile,
                 'question' => $question,
@@ -33,17 +43,75 @@
                 'avgscore' => $avgscore,
                 'chatgroups' => $chatgroups,
                 'events' => $eventAttend,
-                'resourcePerson' => $resourcePerson
+                'resourcePerson' => $resourcePerson,
+                'monthlyConsultations' => $consultations,
+                'consultdates' => $consultdates,
+                
             ];
-
+            // if(isset($_POST['Datevalue'])){
+            //                 $Datevalue  = $_POST['Datevalue'];
+            //                 echo '<script>alert("' . $Datevalue . '");</script>';
+            //                 echo '<div class="hover-box">
+            //                         <h4>Consultation</h4>
+            //                         <p>with Varsha Wijethunge</p>
+            //                         <span>@ 4.00pm</span>
+            //                     </div>';
+            //             }
             $this->view('profiles/seeker', $data);
         }
 
         public function expert(){
             $profile = $this->profilesModel->getprofile();
+            $question = $this->profilesModel->getQuestions();
+            $skilltest = $this->profilesModel->getSkilltest();
+            $chatgroups = $this->profilesModel->chatgroups();
+            $events = $this->profilesModel->getAttendEvents($_SESSION['userID']);
+            $eventAttend = [];
+            $i = 0;
+            foreach($events as $event){
+                $eventAttend[$i] = $this->profilesModel->getEvent($event->eventID);
+                $i++;
+            }
+            // print_r($eventAttend);
+            $resourcePerson = $this->profilesModel->getResourcePerson();
+
+            $avgscore = [];
+            foreach($skilltest as $sk){
+                $avgscore[] = $sk->score;
+            }
+
+            //$avgscore = array_sum($avgscore)/count($avgscore);
+            $avgscore = 70%
+
+            //Calendar
+            $current_month = date("m");
+            $current_year = date("Y");
+            $consultations = $this->profilesModel->getConsultDates($_SESSION['userID'], $current_month, $current_year);
+            $consultdates = [];
+            foreach($consultations as $consultation){
+                $consultdates[] = date("d", strtotime($consultation->date));
+            }
             $data = [
-                'profile' => $profile
+                'profile' => $profile,
+                'question' => $question,
+                'skilltest' => $skilltest,
+                'avgscore' => $avgscore,
+                'chatgroups' => $chatgroups,
+                'events' => $eventAttend,
+                'resourcePerson' => $resourcePerson,
+                'monthlyConsultations' => $consultations,
+                'consultdates' => $consultdates,
+                
             ];
+            // if(isset($_POST['Datevalue'])){
+            //                 $Datevalue  = $_POST['Datevalue'];
+            //                 echo '<script>alert("' . $Datevalue . '");</script>';
+            //                 echo '<div class="hover-box">
+            //                         <h4>Consultation</h4>
+            //                         <p>with Varsha Wijethunge</p>
+            //                         <span>@ 4.00pm</span>
+            //                     </div>';
+            //             }
             $this->view('profiles/expert', $data);
         }
 
@@ -473,6 +541,18 @@
         $this->view('profiles/expertedit', $data);
     }
     }
+
+        public function hoverdate(){
+            $dateValue = $_POST['Datevalue'];
+
+                            echo '<div class="hover-box">
+                            <h4>Consultation</h4>
+                                    <p>with Varsha Wijethunge</p>
+                                    <span>@ 4.00pm</span>
+                                    </div>';
+                    
+            
+        }
 
     }
 

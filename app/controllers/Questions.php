@@ -175,7 +175,7 @@
                     'tag_err' => '',
                 ];
 
-                //print_r($data['content']);
+                // print_r($data['content']);
 
                 //validate each inputs
                 // Validate Title
