@@ -39,7 +39,8 @@
 
         //****************************************************************Skill Test details************************************************************************************************************* *//
         public function getSkilltest() {
-            $this->db->query('SELECT skilltesttag.tag, skilltest.score date FROM skilltest INNER JOIN skilltesttag ON skilltest.STID = skilltesttag.STID WHERE userID = :userID ORDER BY date DESC;');
+            $this->db->query('SELECT skilltesttag.tag as field, skilltest.score as score, skilltest.date as date FROM skilltest INNER JOIN skilltesttag ON 
+                                skilltest.STID = skilltesttag.STID WHERE userID = :userID ORDER BY date DESC;');
 
             $this->db->bind(':userID', $_SESSION['userID']);
 

@@ -85,7 +85,6 @@
                         </div>
                     </div>
                    
-                
                     <div class="col2">
                         <div class="score-board">
                             <div class="pie">
@@ -93,7 +92,11 @@
                                 <div class="outer">
                                     <div class="inner circular-progress">
                                         <h2 id="number" class="progress-value">
+                                            <?php if($data['avgscore'] == 0);?>
+                                            <?php echo "Particpiate in at leaset one Skill Test";?>
+                                            <?php else : ?>
                                             <?php echo round($data['avgscore']);?>%
+                                           
                                         </h2>
                                     </div>
                                 </div>
