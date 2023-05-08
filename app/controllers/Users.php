@@ -308,8 +308,8 @@
                         foreach($threadID as $ID){
                             $this->userModel->addInteractions($ID->threadID,$LastID->userID, );
                         }
-                        $this->userModel->addexpert($LastID->userID, $data['linkedin']);
-                        $this->userModel->addexpertQ($LastID->userID, $data['qualifications']);
+                        $this->userModel->addexpert($LastID->userID, $data['linkedin'],$data['qualifications']);
+                        //$this->userModel->addexpertQ($LastID->userID, $data['qualifications']);
                         foreach($data['tag'] as $tag){
                            if(!($this->userModel->registerTag($tag, $LastID->userID)))
                             {
