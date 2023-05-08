@@ -8,7 +8,7 @@
         public function seeker(){
             $profile = $this->profilesModel->getprofile();
             $question = $this->profilesModel->getQuestions();
-            $skilltest = $this->profilesModel->getSkilltest();
+            //$skilltest = $this->profilesModel->getSkilltest();
             $chatgroups = $this->profilesModel->chatgroups();
             $events = $this->profilesModel->getAttendEvents($_SESSION['userID']);
             $eventAttend = [];
@@ -20,10 +20,10 @@
             // print_r($eventAttend);
             $resourcePerson = $this->profilesModel->getResourcePerson();
 
-            $avgscore = [];
-            foreach($skilltest as $sk){
-                $avgscore[] = $sk->score;
-            }
+            // $avgscore = [];
+            // foreach($skilltest as $sk){
+            //     $avgscore[] = $sk->score;
+            // }
 
             //$avgscore = array_sum($avgscore)/count($avgscore);
             $avgscore = 70%
@@ -39,7 +39,7 @@
             $data = [
                 'profile' => $profile,
                 'question' => $question,
-                'skilltest' => $skilltest,
+                //'skilltest' => $skilltest,
                 'avgscore' => $avgscore,
                 'chatgroups' => $chatgroups,
                 'events' => $eventAttend,
@@ -75,6 +75,7 @@
             // print_r($eventAttend);
             $resourcePerson = $this->profilesModel->getResourcePerson();
 
+            print_r($skilltest);
             $avgscore = [];
             foreach($skilltest as $sk){
                 $avgscore[] = $sk->score;
