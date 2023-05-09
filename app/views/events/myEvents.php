@@ -48,7 +48,7 @@ function confirmation() {
             <div class="dropbtn" onclick="drop2()">
                 <img class="dropbtn" src="<?php echo URLROOT;?>/img/profile.png" class="nav-icon" style="width: 25px;">
                 <div class="dropdown-content dropdown-content2" id="myDropdown2">
-                    <a href="<?php echo URLROOT;?>/Profiles/seeker">Profile</a>
+                    <a href="<?php echo URLROOT;?>/Profiles/expert">Profile</a>
                     <!-- <a href="<?php echo URLROOT;?>/Moderator/approve">Approvals</a> -->
                     <a href="<?php echo URLROOT;?>/Blogs/index">Blogs</a>
                     <a href="<?php echo URLROOT;?>/Events/index">Events</a>
