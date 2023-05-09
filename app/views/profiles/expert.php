@@ -107,6 +107,11 @@
                                         <th>Score</th>
                                         <th>Grade</th>
                                     </tr>
+                                    <tr>
+                                            <?php if($data['avgscore'] == 0):?>
+                                            <?php echo "No Skill Tests Done";?>
+                                            <?php endif; ?>
+                                    </tr>
                                     <?php foreach($data['skilltest'] as $skilltest) : ?>
                                     <tr>
                                         <td><?php echo $skilltest->field;?></td>
@@ -241,7 +246,7 @@
                                     <?php endforeach; ?>
                                             <label class="time-label"><?php echo date("h:i A", strtotime($event->time)) ?></label>
                                 </div>
-                                <div class="appointment" onclick="window.location.href=<?php echo $event->zoomlink ?>;">Join</div>
+                                <div class="appointment" onclick="window.location.href='<?php echo $event->zoomlink ?>';">Join</div>
                             </div>
                         <?php endforeach; ?>
                     </div>
