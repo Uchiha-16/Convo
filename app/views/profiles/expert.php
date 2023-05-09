@@ -90,7 +90,12 @@
                                 <div class="outer">
                                     <div class="inner circular-progress">
                                         <h2 id="number" class="progress-value">
+                                        <?php if($data['avgscore'] == 0):?>
+                                            <?php echo "Non";?>
+                                            <?php else : ?>
                                             <?php echo round($data['avgscore']);?>%
+                                            <?php endif; ?>
+                                           
                                         </h2>
                                     </div>
                                 </div>
