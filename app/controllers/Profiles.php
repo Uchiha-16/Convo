@@ -2,7 +2,7 @@
     class Profiles extends Controller {
         private $profilesModel;
         public function __construct() {
-            $this->profilesModel = $this -> model('profilesM');
+            $this->profilesModel = $this->model('profilesM');
         }
 
         public function seeker(){
@@ -137,7 +137,7 @@
             $profile = $this->profilesModel->getprofile();
            
             $old_filename = $profile->pfp;
-            print_r($Atags);
+            
             
             $tags = $this->profilesModel->getUsertags();
             if($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -184,8 +184,7 @@
                     'password_err' => '',
                     'confirm_password_err' => '',
                     'tag_err' => '',
-                    'newTag' => trim($_POST['newTag']),
-                    'Atags' => $Atags
+                    
                 ];
             }else{
                 //Input Data
@@ -324,7 +323,7 @@
                 'confirm_password_err' => '',
                 'tag_err' => '',
             ];
-            print_r($data);
+            //print_r($data);
             $this->view('profiles/seekeredit', $data);
         }
     }
@@ -514,7 +513,7 @@
                      }
                     // Redirect to login
                     flash('reg_flash', 'Profile Updated');
-                    redirect('profiles/seeker');
+                    redirect('profiles/expert');
                 } else {
                     die('Something went wrong');
                 }
