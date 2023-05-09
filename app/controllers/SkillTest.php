@@ -213,7 +213,7 @@
                         $LastID = $this->skilltestModel->lastInsertId();
                         if (($this->skilltestModel->addAnswerpool($LastID, $data)) && ($this->skilltestModel->setQuestionpoolTag($tag,$LastID))){
                             flash('reg_flash','Question Added Successfully');
-                            redirect('skilltest/add');
+                            redirect('skilltest/sQuestions');
                         } else {
                             die('Something went wrong');
                         }

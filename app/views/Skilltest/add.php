@@ -548,7 +548,12 @@
         });
 
         const text_input = document.getElementById('text-input');
+        text_input.addEventListener('input', updateQuestionInput);
 
+        function updateQuestionInput() {
+        const inputValue = text_input.innerHTML;
+        document.getElementById('result').value = inputValue;
+        }
         // Get the buttons
         const boldBtn = document.getElementById('boldBtn');
         const italicBtn = document.getElementById('italicBtn');

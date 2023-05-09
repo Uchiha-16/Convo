@@ -55,6 +55,7 @@
                     <a href="<?php echo URLROOT;?>/Projects/index">Projects</a>
                     <a href="<?php echo URLROOT;?>/SkillTest/index">Skill Test</a>
                     <a href="<?php echo URLROOT;?>/Subscriptions/index">Subscription</a>
+                    <a href="<?php echo URLROOT;?>/report/addReport">Report or Complaint</a>
                     <a href="<?php echo URLROOT?>/Users/logout" style="border-bottom:none">Log-out</a>
                 </div>
                 </div>

@@ -593,7 +593,7 @@
                         }elseif($loggedUser->role == 'premium'){ //PREMIUM DANNOOOOOOOOO !!!!!!!!!!!!!!!
                             redirect('pages/seeker');
                         }else {
-                            redirect('pages/admin');
+                            redirect('admin/index');
                         }
 
                     } else {
