@@ -286,19 +286,19 @@
                                                 <li>
                                                     <label for="checkbox1">
                                                         <input type="checkbox" value="last 3 months"
-                                                            name="publishDate[]" id="checkbox1" />Last 3 months
+                                                            name="publishDate[]" id="checkbox1" />Within last 3 months
                                                     </label>
                                                 </li>
                                                 <li>
                                                     <label for="checkbox2">
                                                         <input type="checkbox" value="last 6 months"
-                                                            name="publishDate[]" id="checkbox2" />Last 6 months
+                                                            name="publishDate[]" id="checkbox2" />Within Last 6 months
                                                     </label>
                                                 </li>
                                                 <li>
                                                     <label for="checkbox3">
                                                         <input type="checkbox" value="last year" name="publishDate[]"
-                                                            id="checkbox3" />Last year
+                                                            id="checkbox3" />Within last year
                                                     </label>
                                                 </li>
                                             </ul>
@@ -310,38 +310,16 @@
                                                     id="up3" style="margin-left: 6.66rem;"></i><i class="arrow down"
                                                     id="down3" style="margin-left: 6.66rem;"></i></span>
                                             <ul id="checkbox-3">
+                                                <?php foreach ($data['expert'] as $expert) : ?>
                                                 <li>
                                                     <label for="checkbox1">
-                                                        <input type="checkbox" value="last 3 months"
-                                                            name="publishDate[]" id="checkbox1" />Varsha Wijethunge
+                                                        <input type="checkbox" value="<?php echo $expert->userID ?>"
+                                                            name="rp[]" id="checkbox1" /><?php echo $expert->name ?>
                                                     </label>
                                                 </li>
-                                                <li>
-                                                    <label for="checkbox2">
-                                                        <input type="checkbox" value="last 6 months"
-                                                            name="publishDate[]" id="checkbox2" />Induwara Pathirana
-                                                    </label>
-                                                </li>
-                                                <li>
-                                                    <label for="checkbox3">
-                                                        <input type="checkbox" value="last year" name="publishDate[]"
-                                                            id="checkbox3" />John Silva
-                                                    </label>
-                                                </li>
+                                                <?php endforeach; ?>
                                             </ul>
                                         </div>
-
-                                        <!-- Filter 4 -->
-                                        <div class="checkbox-1">
-                                            <span class="checkbox-title" onclick="filter4()">Playlist <i
-                                                    class="arrow up" id="up4" style="margin-left: 6.5rem;"></i><i
-                                                    class="arrow down" id="down4"
-                                                    style="margin-left: 6.5rem;"></i></span>
-                                            <ul id="checkbox-4">
-
-                                            </ul>
-                                        </div>
-
                                 </form>
                             </div>
                         </div>

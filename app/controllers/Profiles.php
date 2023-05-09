@@ -505,7 +505,6 @@
 
                 //update user details
                 $this->profilesModel->deleteUserTag();
-                $this->profilesModel->addTag($data['newTag']);
                 if($this->profilesModel->updateUser($data) && $this->profilesModel->updateExpert($data)) {
                     foreach($data['tag'] as $tag){
                         if(!($this->profilesModel->userTag($tag)))
@@ -567,11 +566,11 @@
 
         public function hoverdate(){
             $dateValue = $_POST['Datevalue'];
-
+            $consults = $this->profilesModel->getConsultCal($dateValue);
                             echo '<div id="cal-box">
-                                <h4>'.$dateValue.'</h4>
-                                    <p>with Varsha Wijethunge</p>
-                                    <span>@ 4.00pm</span>
+                                <h4>'.$consults->title.'</h4>
+                                    <p>with '.$consults->fName.' '.$consults->lName.'</p>
+                                    <span>@ '.date('g:i A', strtotime($consults->time)).'</span>
                                     </div>';
             
         }

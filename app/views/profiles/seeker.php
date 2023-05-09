@@ -72,7 +72,7 @@
                                 <tr>
                                     <td><b>Remaining Skill Tests</b></td>
                                     <?php if($_SESSION['role'] != 'premium') : ?>
-                                    <td class="align-right"><b><?php echo 20-count($data['skilltest']);?></b></td>
+                                    <td class="align-right"><b><?php //echo 20-count($data['skilltest']);?></b></td>
                                     <?php else : ?>
                                     <td class="align-right"><b>Unlimited</b></td>
                                     <?php endif; ?>

@@ -370,7 +370,7 @@
         }
 
         public function home(){
-            if(isset($_SESSION['user_id'])){
+            if(isset($_SESSION['userID'])){
                 
                 $usertag = $this->webinarModel->getUserTag(); 
                 $str = '';
@@ -394,13 +394,13 @@
                     $str2 = substr($str2, 0, -4);
                     
                     $tags = $this->webinarModel->getWebinarTags($str2);
-
+                    $rp = $this->webinarModel->getExperts();
                 $data = [
                     'webinars' => $webinars,
                     'tags' => $tags,
-                    'usertag' => $usertag
+                    'usertag' => $usertag,
+                    'expert' => $rp,
                 ];
-                
                 $this->view('webinars/home', $data);
             }else{
                 $webinars = $this->webinarModel->getwebinarsIndex();
@@ -502,6 +502,7 @@
         public function filter() {
             
             $date = isset($_POST['publishDate']) ? $_POST['publishDate'] : '0';
+            $expert = isset($_POST['rp']) ? $_POST['rp'] : '0';
 
             // print_r($date);
            
