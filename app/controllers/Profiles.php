@@ -185,7 +185,7 @@
                     'confirm_password_err' => '',
                     'tag_err' => '',
                     'newTag' => trim($_POST['newTag']),
-                    'Atags' => $Atags
+                    //'Atags' => $Atags
                 ];
             }else{
                 //Input Data
