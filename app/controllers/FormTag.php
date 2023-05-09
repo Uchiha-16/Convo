@@ -1,48 +1,25 @@
 <?php
 
-// class FormTag extends Controller {
+class FormTag extends Controller {
     
-//     private $formtagM;
+    private $formtagM;
   
-//   public function __construct() {
-//     $this->formtagM = $this -> model('formtagM');
-//   }
-  
-//   public function submitForm() {
-//     $usertag = $_POST['tag'];
+  public function __construct() {
+    $this->formtagM = $this -> model('formtagM');
+  }
 
-//     print_r($usertag);
+  public function add(){
+    $Tags =  $_POST['tags'];
+    $Value = $_POST['value'];
+    $this->formtagM->submitTag($Tags,$Value);
 
-//     $str = '';
+    $data = [
 
+    ];
+    $this->view('FormTag/add', $data);
 
-//             foreach($usertag as $tag) {
-//                 $str = $str . 'usertag.tag = "' . $tag . '" OR ';
+  }
+}
 
-//             }
-
-//             $str = substr($str, 0, -4);
-
-    
-//     $response = $this->formtagM->submitForm($usertag);
-    
-//     $data = [
-//         'response' => $response,
-//     ];
-
-//     $this->view('questions/add', $data);
-    
-//     header('Content-Type: application/json');
-//     echo json_encode($response);
-//   }
-// }
-
-// $controller = new FormTag();
-
-// if (isset($_GET['action'])) {
-//   if ($_GET['action'] === 'submit_form') {
-//     $controller->submitForm();
-//   }
-// }
 
 ?>

@@ -24,12 +24,14 @@
             foreach($skilltest as $sk){
                 $avgscore[] = $sk->score;
             }
-
             if(count($avgscore) == 0){
                 $avgscore = 0;
             }else{
                 $avgscore = array_sum($avgscore)/count($avgscore);
             }
+            
+            //$avgscore = array_sum($avgscore)/count($avgscore);
+            //$avgscore = 70%
 
             //Calendar
             $current_month = date("m");
@@ -133,7 +135,9 @@
 
         public function seekeredit(){
             $profile = $this->profilesModel->getprofile();
+           
             $old_filename = $profile->pfp;
+            print_r($Atags);
             
             $tags = $this->profilesModel->getUsertags();
             if($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -179,7 +183,9 @@
                     'oldpassword_err' => '',
                     'password_err' => '',
                     'confirm_password_err' => '',
-                    'tag_err' => ''
+                    'tag_err' => '',
+                    'newTag' => trim($_POST['newTag']),
+                    'Atags' => $Atags
                 ];
             }else{
                 //Input Data
@@ -202,7 +208,8 @@
                     'oldpassword_err' => '',
                     'password_err' => '',
                     'confirm_password_err' => '',
-                    'tag_err' => ''
+                    'tag_err' => '',
+                    
                 ];
             }
 
@@ -270,6 +277,7 @@
 
                     //update user details
                     $this->profilesModel->deleteUserTag();
+                    
                     if($this->profilesModel->updateUser($data)) {
                         foreach($data['tag'] as $tag){
                             if(!($this->profilesModel->userTag($tag)))
@@ -314,14 +322,16 @@
                 'oldpassword_err' => '',
                 'password_err' => '',
                 'confirm_password_err' => '',
-                'tag_err' => ''
+                'tag_err' => '',
             ];
+            print_r($data);
             $this->view('profiles/seekeredit', $data);
         }
     }
 
     public function expertedit(){
         $profile = $this->profilesModel->getprofile();
+        $Atags = $this->profilesModel->getAllTags();
         $expertprofile = $this->profilesModel->getexpertprofile();
         $old_filename = $profile->pfp;
         
@@ -376,7 +386,9 @@
                 'linkedin_err' => '',
                 'qualification_err' => '',
                 'designation_err' => '',
-                'tag_err' => ''
+                'tag_err' => '',
+                'newTag' => trim($_POST['newTag']),
+                'Atags' => $Atags
             ];
         }else{
             //Input Data
@@ -406,7 +418,9 @@
                 'oldpassword_err' => '',
                 'password_err' => '',
                 'confirm_password_err' => '',
-                'tag_err' => ''
+                'tag_err' => '',
+                'newTag' => trim($_POST['newTag']),
+                'Atags' => $Atags
             ];
         }
 
@@ -491,6 +505,7 @@
 
                 //update user details
                 $this->profilesModel->deleteUserTag();
+                $this->profilesModel->addTag($data['newTag']);
                 if($this->profilesModel->updateUser($data) && $this->profilesModel->updateExpert($data)) {
                     foreach($data['tag'] as $tag){
                         if(!($this->profilesModel->userTag($tag)))
@@ -542,7 +557,9 @@
             'oldpassword_err' => '',
             'password_err' => '',
             'confirm_password_err' => '',
-            'tag_err' => ''
+            'tag_err' => '',
+            'newTag' => '',
+            'Atags' => $Atags
         ];
         $this->view('profiles/expertedit', $data);
     }

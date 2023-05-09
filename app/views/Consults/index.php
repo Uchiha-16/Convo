@@ -183,7 +183,7 @@
         <!-- body content -->
         <div class="alert success">
                     <?php flash('reg_flash'); ?>
-        </div>
+                </div>
         <div class="container-div">
             <div class="content-body">
                 <div class="LHS" id="LHS">
@@ -464,7 +464,7 @@
                 </div>
             </div>
             <div>
-                <a href="<?php echo URLROOT; ?>/Pages/about">About Us</a> <p> | </p> &copy; Convo 2022 All rights reserved.</footer>
+                <a href="<?php echo URLROOT; ?>/Pages/about">About Us</a> <p> | </p> &copy; Convo 2022 All rights reserved.
             </div>
         </div>
         
