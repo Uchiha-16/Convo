@@ -25,8 +25,11 @@
                 $avgscore[] = $sk->score;
             }
 
-            $avgscore = array_sum($avgscore)/count($avgscore);
-            //$avgscore = 70%
+            if(count($avgscore) == 0){
+                $avgscore = 0;
+            }else{
+                $avgscore = array_sum($avgscore)/count($avgscore);
+            }
 
             //Calendar
             $current_month = date("m");
@@ -547,11 +550,11 @@
 
         public function hoverdate(){
             $dateValue = $_POST['Datevalue'];
-
+            $consults = $this->profilesModel->getConsultCal($dateValue);
                             echo '<div id="cal-box">
-                                <h4>'.$dateValue.'</h4>
-                                    <p>with Varsha Wijethunge</p>
-                                    <span>@ 4.00pm</span>
+                                <h4>'.$consults->title.'</h4>
+                                    <p>with '.$consults->fName.' '.$consults->lName.'</p>
+                                    <span>@ '.date('g:i A', strtotime($consults->time)).'</span>
                                     </div>';
             
         }
