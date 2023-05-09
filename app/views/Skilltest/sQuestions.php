@@ -57,9 +57,9 @@
                                
                                 <br>
                                
-                                    <form action="<?php echo URLROOT; ?>/SkillTest/edit/<?php echo $question->QPID; ?>" style="width: 50%; float:left">
+                                    <!-- <form action="<?php echo URLROOT; ?>/SkillTest/edit/<?php echo $question->QPID; ?>" style="width: 50%; float:left">
                                         <button class="read-more edit-btn" type="submit"> <img style="width: 13px; padding-right: 8px;" src="../img/edit.png">Edit</button>
-                                    </form>
+                                    </form> -->
                                     <form action="" style="width: 40%; float:left"></form>
                                     <form action="<?php echo URLROOT; ?>/SkillTest/delete/<?php echo $question->QPID; ?>" style="width: 50%; float:left">
                                         <button class="read-more edit-btn" onclick="return confirm('Are you sure you want to delete this question?')"> <img style="width: 13px; padding-right: 8px;" src="../img/delete.png">Delete</button>
