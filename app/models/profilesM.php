@@ -168,5 +168,16 @@
             return $row;
         }
 
+        public function getConsultCal($dateValue){
+            $fullDate = date('Y-m-') . $dateValue;
+            $this->db->query('SELECT consultation.consultID as consultID, consultation.userID as userID, consultation.expertID as expertID, 
+            consultation.title as title, consultation.date as date, consultation.time as time, user.lastName as lName, user.firstName as fName 
+            FROM consultation JOIN user ON user.userID = consultation.expertID WHERE consultation.status = "approved" AND consultation.userID = :userID 
+            AND consultation.date = :fullDate;');
+            $this->db->bind(':userID', $_SESSION['userID']);
+            $this->db->bind(':fullDate', $fullDate);
+            $row = $this->db->single();
+            return $row;
+        }
     }
 ?>
