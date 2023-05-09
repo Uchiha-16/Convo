@@ -18,6 +18,9 @@
         <div class="content-body">
             <div class="LHS" id="LHS">
                 <h3>Questions and Discussions</h3><br>
+                <div class="alert success">
+                    <?php flash('reg_flash'); ?>
+                </div>
 
                 <?php foreach ($data['questions'] as $question) : ?>
 

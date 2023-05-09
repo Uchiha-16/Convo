@@ -168,5 +168,17 @@
             return $row;
         }
 
+        public function addTag($tag){
+            $this->db->query('INSERT INTO tags (name,value) VALUES (:tag, :tag)');
+            $this->db->bind(':tag', $tag);
+            $row = $this->db->execute();
+            return $row;
+        }
+
+        public function getAllTags(){
+            $this->db->query('SELECT * FROM tags');
+            $row = $this->db->resultSet();
+            return $row;
+        }
     }
 ?>

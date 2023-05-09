@@ -31,7 +31,9 @@
             <div class="LHS">
 
                 <h3><?php echo $_SESSION['firstName'] . ' ' . $_SESSION['lastName']; ?>'s Questions</h3><br>
-
+                <div class="alert success">
+                    <?php flash('reg_flash'); ?>
+                </div>
 
                 <?php foreach ($data['questions'] as $question) : ?>
                     <div class="alert success">

@@ -294,7 +294,7 @@
                 </div>
             </div>
             <div>
-                <footer><a href="index.php">About Us</a> <p> | </p> &copy; Convo 2022 All rights reserved.</footer>
+                <a href="index.php">About Us</a> <p> | </p> &copy; Convo 2022 All rights reserved.
             </div>
         </div>
         

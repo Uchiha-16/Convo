@@ -90,7 +90,12 @@
                                 <div class="outer">
                                     <div class="inner circular-progress">
                                         <h2 id="number" class="progress-value">
+                                        <?php if($data['avgscore'] == 0):?>
+                                            <?php echo "Non";?>
+                                            <?php else : ?>
                                             <?php echo round($data['avgscore']);?>%
+                                            <?php endif; ?>
+                                           
                                         </h2>
                                     </div>
                                 </div>
@@ -101,6 +106,11 @@
                                         <th>Correct Answers</th>
                                         <th>Score</th>
                                         <th>Grade</th>
+                                    </tr>
+                                    <tr>
+                                            <?php if($data['avgscore'] == 0):?>
+                                            <?php echo "No Skill Tests Done";?>
+                                            <?php endif; ?>
                                     </tr>
                                     <?php foreach($data['skilltest'] as $skilltest) : ?>
                                     <tr>
