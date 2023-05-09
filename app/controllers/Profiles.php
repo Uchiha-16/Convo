@@ -25,8 +25,8 @@
                 $avgscore[] = $sk->score;
             }
 
-            //$avgscore = array_sum($avgscore)/count($avgscore);
-            $avgscore = 70%
+            $avgscore = array_sum($avgscore)/count($avgscore);
+            //$avgscore = 70%
 
             //Calendar
             $current_month = date("m");
@@ -75,14 +75,17 @@
             // print_r($eventAttend);
             $resourcePerson = $this->profilesModel->getResourcePerson();
 
+            //print_r($skilltest);
             $avgscore = [];
             foreach($skilltest as $sk){
                 $avgscore[] = $sk->score;
             }
-
-            //$avgscore = array_sum($avgscore)/count($avgscore);
-            $avgscore = 70%
-
+            if(count($avgscore) == 0){
+                $avgscore = 0;
+            }else{
+                $avgscore = array_sum($avgscore)/count($avgscore);
+            }
+            
             //Calendar
             $current_month = date("m");
             $current_year = date("Y");
@@ -545,12 +548,11 @@
         public function hoverdate(){
             $dateValue = $_POST['Datevalue'];
 
-                            echo '<div class="hover-box">
-                            <h4>Consultation</h4>
+                            echo '<div id="cal-box">
+                                <h4>'.$dateValue.'</h4>
                                     <p>with Varsha Wijethunge</p>
                                     <span>@ 4.00pm</span>
                                     </div>';
-                    
             
         }
 

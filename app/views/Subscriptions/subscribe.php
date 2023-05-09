@@ -83,7 +83,9 @@
                 <div class="question-div">
   
               <h2>My Subscription</h2>
+              <?php if($_SESSION['role'] == "premium") : ?>
               <div class="due"><p>Next Payment Due: December 25, 2022 09:32 (E-mail Service)</p></div>
+              <?php endif; ?>
               <div class="h_line"></div>
               
               <div class="plan">
@@ -93,9 +95,13 @@
                   <tr>
                     <th style="font-size: 18px;font-weight: bold;">Premium Subscription Amount</th>
                   <tr>  
+                    <?php if(!($_SESSION['role'] == "premium")) : ?>
                       <th style="color: #00A7AE">Status</th>  
-                      <th style="color: #00A7AE">Active</th>  
-                        
+                      <th style="color: #00A7AE">Inactive</th>  
+                    <?php else : ?>
+                      <th style="color: #00A7AE">Status</th>  
+                      <th style="color: #00A7AE">active</th>
+                    
                   </tr>
                   
                   <tr>
@@ -112,6 +118,7 @@
                     <td style="border-bottom: 2px solid rgba(0, 0, 0, 0.08);">Subscrption Type</td>
                     <td style="border-bottom: 2px solid rgba(0, 0, 0, 0.08);"><p class="p1">Monthly Payment</p></td>
                   </tr>
+                  <?php endif; ?>
                 </table>
 
               </div>

@@ -50,7 +50,6 @@ const orderedListBtn = document.getElementById('orderedListBtn');
 const unorderedListBtn = document.getElementById('unorderedListBtn');
 const linkBtn = document.getElementById('linkBtn');
 const unlinkBtn = document.getElementById('unlinkBtn');
-const codeBlockBtn = document.getElementById('codeBlockBtn');
 const convertBtn = document.getElementById('convertBtn');
 
 // Add event listeners to the buttons
@@ -64,7 +63,6 @@ orderedListBtn.addEventListener('click', addOrderedList);
 unorderedListBtn.addEventListener('click', addUnorderedList);
 linkBtn.addEventListener('click', addLink);
 unlinkBtn.addEventListener('click', removeLink);
-codeBlockBtn.addEventListener('click', addCodeBlock);
 convertBtn.addEventListener('click', convertToHtml);
 
 
@@ -121,16 +119,11 @@ function removeLink() {
     document.execCommand('unlink', false, null);
 }
 
-// Function to add code block
-function addCodeBlock() {
-    document.execCommand('insertHTML', false, '<pre><code class="language-html"> </code></pre>');
-}
-
 // Function to convert the edited text to HTML
 function convertToHtml() {
     // Get the edited text
-    // alert(text_input.innerHTML);
-    const editedText = text_input.innerHTML.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    alert(text_input.innerHTML);
+    const editedText = text_input.innerHTML;
     // Display the HTML result
     const result = document.getElementById('result');
     result.innerHTML = editedText;
@@ -151,12 +144,7 @@ function insertSymbol(symbol) {
     editor.focus();
 }
 
-// code block
-$(document).ready(function () {
-    $("#codeBlockBtn").click(function () {
-        $(".codeeditor").toggle();
-    });
-});
+
 
 
 

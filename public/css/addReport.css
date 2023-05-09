@@ -11,7 +11,7 @@ html {
 .screen {
     background-color: white;
     position: relative;
-    height: 700px;
+    height: auto;
     width: 860px;
     box-shadow: 0px 0px 24px #8a9091;
     left: 40px;
@@ -251,4 +251,6 @@ ul.dropdown li input[type="checkbox"]:focus + label {
     margin-left: -3px;
 
 }
-
+input[type="color"]{
+    
+}

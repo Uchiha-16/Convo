@@ -10,6 +10,9 @@
             if($_SERVER['REQUEST_METHOD'] == 'POST') {
                 // Form is submitting
                 // Validate the data
+                // sanitize the user input and prevent any HTML or JavaScript injection
+                $content = htmlspecialchars($_POST['content'], ENT_QUOTES, 'UTF-8');
+
                 $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
                 date_default_timezone_set('Asia/Colombo');
                 $checkbox_value = isset($_POST['visibility']) ? 'anonymus' : 'public';
@@ -22,9 +25,8 @@
                     $resourceID = implode(',', $resourceID);
                 }
 
-                $content = $_POST['content'];
-                $content = nl2br($content);
-                print_r($content);
+                // $content = $_POST['content'];
+                // $content = nl2br($content);
                 //Input Data
                 $data = [
                     'title' => trim($_POST['title']),
@@ -151,7 +153,7 @@
 
                 // sanitize the user input and prevent any HTML or JavaScript injection
                 $content = htmlspecialchars($_POST['content'], ENT_QUOTES, 'UTF-8');
-                
+                // echo '<script>alert("'.$content.'");</script>';
                 $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
                 date_default_timezone_set('Asia/Colombo');
                 $checkbox_value = isset($_POST['visibility']) ? 'anonymus' : 'public';

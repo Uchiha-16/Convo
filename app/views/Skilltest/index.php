@@ -15,13 +15,6 @@
     <?php endif; ?>
 </style>
 
-<script type="text/javascript">
-    function confirmation(){
-      if(confirm("Are you sure you want to discard this blog?")){
-        window.location.href = "<?php echo URLROOT; ?>/Blogs/index";
-      }
-    }
-</script>
 
 </head>
 
@@ -41,39 +34,6 @@
     <?php endif; ?>
 
 
-        <script>
-            /* When the user clicks on the button, 
-            toggle between hiding and showing the dropdown content */
-            function drop() {
-              document.getElementById("myDropdown").classList.toggle("show");
-            }
-            // Close the dropdown if the user clicks outside of it
-            window.onclick = function(e) {
-              if (!e.target.matches('.dropbtn')) {
-              var myDropdown = document.getElementById("myDropdown");
-                if (myDropdown.classList.contains('show')) {
-                  myDropdown.classList.remove('show');
-                }
-              }
-            }
-            </script>
-
-            <script>
-            /* When the user clicks on the button, 
-            toggle between hiding and showing the dropdown content */
-            function drop2() {
-              document.getElementById("myDropdown2").classList.toggle("show");
-            }
-            // Close the dropdown if the user clicks outside of it
-            window.onclick = function(e) {
-              if (!e.target.matches('.dropbtn')) {
-              var myDropdown = document.getElementById("myDropdown2");
-                if (myDropdown.classList.contains('show')) {
-                  myDropdown.classList.remove('show');
-                }
-              }
-            }
-            </script>
 
     <div class="grid">
       <h1 style="color:black">Skill Test</h1>
@@ -98,58 +58,108 @@
                             </div>
         
                           <div class="inside-circle">
-                               70%
+                          <?php echo $data['average_score'] ?>%
+
                           </div>
         
                          </div>
                     </div>
 
-<!-- <div class="progress-circle">
-  <div class="progress-bar" style="width: 70%;"></div>
-</div> -->
+                    <div class="score_table">
+                      <?php if (!empty($data['score'])): ?>
+                      <table>
+                          <thead>
+                              <tr>
+                                  <th>Field</th>
+                                  <th>Score</th>
+                                  <th>Grade</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                          <?php if (is_array($data['score']) || is_object($data['score'])) : ?>
+                              <?php foreach ($data['score'] as $row) : ?>
+                                  <tr>
+                                      <td><?= $row['tag'] ?></td>
+                                      <td><?= $row['score'] ?></td>
 
-                <table>
-                  <tr>
-                    <th>Field</th>
-                    <th>Correct Answers</th>
-                    <th>Score</th>
-                    <th>Grade</th>
-                  </tr>
-                  <tr>
-                    <td>Chemistry</td>
-                    <td>15/20</td>
-                    <td>75%</td>
-                    <td>A</td>
-                  </tr>
-                  <tr>
-                    <td>Neurology</td>
-                    <td>13/20</td>
-                    <td>65%</td>
-                    <td>B</td>
-                  </tr>
-                  
+                                      <td>
+                                        <?php if ($row['score'] >= 90) {
+                                            echo 'A';
+                                        } elseif ($row['score'] >= 80) {
+                                            echo 'B';
+                                        } elseif ($row['score'] >= 70) {
+                                            echo 'C';
+                                        } elseif ($row['score'] >= 60) {
+                                            echo 'D';
+                                        } else {
+                                            echo 'F';
+                                        } ?>
+                                    </td>
+                                  </tr>
+                              <?php endforeach; ?>
+                          <?php endif; ?> 
+                          </tbody>
+                      </table>
+                  <?php else: ?>
+                      <p><?= $score_error ?? 'No scores found for this user' ?></p>
+                  <?php endif; ?>
+                  </div>
+
+                    
+                  </tbody> 
                 </table>
               </div>
 
           </div>
+          
         <div class="middle">
             <h3>Select a Tag to begin a Skill Test!<br>
                     Good Luck :)</h3>
-            <div class="tags">
-              <div class="flex-tag"> Mathematics</div> 
-              <div class="flex-tag"> Syntax</div> 
-              <div class="flex-tag"> MatLab</div> 
-              
-            </div>
- 
-            <button class="start" > <a href="<?php echo URLROOT; ?>/Skilltest/test"> START</a></button>
-            
-            <div class="total_skill"> Total Skill Tests:</div>
+                    <?php if (!empty($data['tag'])): ?>
+                     
+                <form method="POST" action="<?php echo URLROOT; ?>/SkillTest/test">
+        
+                    <?php foreach ($data['tag'] as $tag): ?>
+                      <ul>
+                      
+                          <input type="radio" name="tag" value="<?= $tag->tag ?>" id="<?= $tag->tag ?>">
+                          <label for="<?= $tag->tag ?>"><?= $tag->tag ?></label>
+                      
+                    </ul>
+                    <?php endforeach; ?>
+                    <button class="start" type="submit">START</button>
+                  </form>
 
-            <div class="m_role">Moderator Roles:</div>
+                  <?php else: ?> 
+                    <p><?= $tag_error ?? 'No tags found for this user' ?></p>
+                  <?php endif; ?>
+
+            <!-- <button class="start" > <a href="<?php echo URLROOT; ?>/Skilltest/test"> START</a></button> -->
+            
+            <div class="total_skill">Total Skill Tests: <?php echo count($data['score'])?></div>
+
+            <div class="m_role">Moderator Roles: 
+              <div class="m_role_tag">
+
+               <?php foreach ($data['score'] as $row) : ?>
+                  <?php if($row['score']>=80):?>
+                    <?php echo $row['tag']?><br><br>
+                  <?php endif; ?>
+                <?php endforeach ;?>
+
+              </div>
+            </div>
         </div>
+
+
           
         <div class="line"></div>
+
+
+
+
+
+
         <div class="gridright">
         <div class="c4">  
             <div class="tagbox">
@@ -161,24 +171,52 @@
                             <td colspan="2"  class="taghead" ><p style="margin-left:15px; font-size:18px">Tags <img src="<?php echo URLROOT; ?>/img/question.png" alt="question"  width="17px" height="17px"></p></td>
                         </tr>
                     </table>
-                <div class="tags1">
-                    <a href="#"><button class="btn2" href="#">Mathematics</button></a>
-                    <a href="#"><button class="btn2" href="#">Syntax</button></a>
-                    <a href="#"><button class="btn2" href="#">MATLAB</button></a>
-                    <a href="#"><button class="btn2" href="#">PHP</button></a>
-                </div>
+               <div class="tags1">
+        <?php foreach($data['tag'] as $tag): ?>
+            <a href="#"><button class="btn2"><?php echo $tag->tag; ?></button></a>
+        <?php endforeach; ?>
+    </div>
             </div>
           </div>
 
 
-        <!-- <div class="c4">
-        
-       <h3>Your Tags</h3>
-       <div class="tags">
-              <div class="flex-tag"> Mathematics</div> 
-              <div class="flex-tag"> Syntax</div> 
-              <div class="flex-tag"> MatLab</div> 
-              
-            </div>
-       </div> -->
+    
+
+
+
+
+<style>
+        /* Style for radio buttons */
+        input[type="radio"] {
+        width: 15px;
+        height: 15px;
+        margin-right: 5px;
+                        }
+    .circle-wrap .circle .mask.full,
+    .circle-wrap .circle .fill {
+    animation: fill ease-in-out 2s;
+    transform: rotate(<?php echo $data['average_score'] * 1.8 ?>deg);
+      }
+
+      @keyframes fill {
+                0% {
+                  transform: rotate(0deg);
+                }
+                100% {
+                  transform: rotate(<?php echo $data['average_score'] * 1.8 ?>deg);
+                  
+                }
+              }
+                        
+</style>
+
+
+
+
+
+
+
+
+
+
     </div>

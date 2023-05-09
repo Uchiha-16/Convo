@@ -129,7 +129,7 @@
 //****************************************************************Delete Question************************************************************************************************************* */
     
             public function delete($QID) {
-                $this->db->query('DELETE * FROM question WHERE QID = :QID');
+                $this->db->query('DELETE FROM question WHERE QID = :QID');
                 $this->db->bind(':QID', $QID);
                 if($this->db->execute()) {
                     return true;

@@ -85,7 +85,7 @@
                             <?php if(isset($_SESSION['userID'])) : ?>
                                 <?php if($_SESSION['role'] == 'expert') : ?>
                                     <form action="<?php echo URLROOT; ?>/blogs/add"><button type="submit" style="float:right" class="read-more attend">Create</button></form>
-                                    <form action="<?php echo URLROOT; ?>/blogs/myblogs"><button type="submit" style="float:right" class="read-more attend">My Videos</button></form>
+                                    <form action="<?php echo URLROOT; ?>/blogs/myblogs"><button type="submit" style="float:right" class="read-more attend">My Blogs</button></form>
                                     <br><br><br><br><br>
                                 <?php endif; ?>
                                     
