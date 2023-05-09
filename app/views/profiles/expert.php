@@ -246,7 +246,7 @@
                                     <?php endforeach; ?>
                                             <label class="time-label"><?php echo date("h:i A", strtotime($event->time)) ?></label>
                                 </div>
-                                <div class="appointment" onclick="window.location.href=<?php echo $event->zoomlink ?>;">Join</div>
+                                <div class="appointment" onclick="window.location.href='<?php echo $event->zoomlink ?>';">Join</div>
                             </div>
                         <?php endforeach; ?>
                     </div>
