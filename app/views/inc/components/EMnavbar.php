@@ -25,7 +25,7 @@
                     <a href="<?php echo URLROOT;?>/Blogs/index">Blogs</a>
                     <a href="<?php echo URLROOT;?>/Events/index">Events</a>
                     <a href="<?php echo URLROOT;?>/Projects/index">Projects</a>
-                    <a href="<?php echo URLROOT;?>/SkillTest/index">Skill Test</a>
+                    <a href="<?php echo URLROOT;?>/SkillTest/add">Add Skill Test Question</a>
                     <a href="<?php echo URLROOT;?>/Subscriptions/index">Subscription</a>
                     <a href="<?php echo URLROOT?>/Users/logout" style="border-bottom:none">Log-out</a>
                 </div>
