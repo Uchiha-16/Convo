@@ -428,8 +428,8 @@
                                 <!-- Filter 4 -->
                                 <!-- <div class="checkbox-1">
                                     <span class="checkbox-title" onclick="filter#()">Rating <i class="arrow up" id="up4" style="margin-left: 6.7rem;"></i><i class="arrow down" id="down4" style="margin-left: 6.7rem;"></i></span>
-<!-- -->
-                                    <ul id="checkbox-3">
+ -->
+                                    <!-- <ul id="checkbox-3">
                                         <li>
                                             <label for="checkbox1">
                                                 <input type="checkbox" value="last 3 months" name="QA[]" id="checkbox1"/>My questions
@@ -445,8 +445,8 @@
                                                 <input type="checkbox" value="last year" name="QA[]" id="checkbox3"/>Not answered
                                             </label>
                                         </li>
-                                    </ul>
--->
+                                    </ul> -->
+
                                 </div>
                                 
                             </form>
@@ -455,36 +455,11 @@
                 </div>
             </div>
             <div>
-                <footer><a href="<?php echo URLROOT; ?>/Pages/about">About Us</a> <p> | </p> &copy; Convo 2022 All rights reserved.</footer>
+                <a href="<?php echo URLROOT; ?>/Pages/about">About Us</a> <p> | </p> &copy; Convo 2022 All rights reserved.
             </div>
         </div>
         
         <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="arrow up"></i><br></button>
-            
-        <div id="body"></div>
-        
-    </body>
-    
-    <script type="text/JavaScript">
-            var URLROOT = '<?php echo URLROOT; ?>';
-        </script>
 
-        <script type="text/JavaScript">
-            <?php if(isset($_SESSION['userID'])): ?>
-                var ROLE = '<?php echo $_SESSION['role']; ?>';
-                <?php else : ?>
-                var ROLE = 'guest';
-            <?php endif; ?>
-            
-        </script>
-
-    <script src="<?php echo URLROOT; ?>/js/comments.js" type="text/javascript"></script>
-        <script src="<?php echo URLROOT; ?>/js/imageUpload.js"></script>
-        <script type="text/JavaScript" src="<?php echo URLROOT; ?>/js/jQuery/jQuery.js"></script>
-        <script src="<?php echo URLROOT; ?>/js/rating.js" type="text/javascript"></script>
-        <script src="<?php echo URLROOT; ?>/js/textEditor.js" type="text/javascript"></script>
-        <script src="<?php echo URLROOT; ?>/js/notifictaions.js" type="text/javascript"></script>
-
-</html>
-
+<?php require APPROOT . '/views/inc/footer.php'; ?>
 

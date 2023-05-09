@@ -39,7 +39,8 @@
 
         //****************************************************************Skill Test details************************************************************************************************************* *//
         public function getSkilltest() {
-            $this->db->query('SELECT skilltesttag.tag, skilltest.score date FROM skilltest INNER JOIN skilltesttag ON skilltest.STID = skilltesttag.STID WHERE userID = :userID ORDER BY date DESC;');
+            $this->db->query('SELECT skilltesttag.tag as field, skilltest.score as score, skilltest.date as date FROM skilltest INNER JOIN skilltesttag ON 
+                                skilltest.STID = skilltesttag.STID WHERE userID = :userID ORDER BY date DESC;');
 
             $this->db->bind(':userID', $_SESSION['userID']);
 
@@ -167,5 +168,29 @@
             return $row;
         }
 
+        public function addTag($tag){
+            $this->db->query('INSERT INTO tags (name,value) VALUES (:tag, :tag)');
+            $this->db->bind(':tag', $tag);
+            $row = $this->db->execute();
+            return $row;
+        }
+
+        public function getAllTags(){
+            $this->db->query('SELECT * FROM tags');
+            $row = $this->db->resultSet();
+            return $row;
+        }
+        
+        public function getConsultCal($dateValue){
+            $fullDate = date('Y-m-') . $dateValue;
+            $this->db->query('SELECT consultation.consultID as consultID, consultation.userID as userID, consultation.expertID as expertID, 
+            consultation.title as title, consultation.date as date, consultation.time as time, user.lastName as lName, user.firstName as fName 
+            FROM consultation JOIN user ON user.userID = consultation.expertID WHERE consultation.status = "approved" AND consultation.userID = :userID 
+            AND consultation.date = :fullDate;');
+            $this->db->bind(':userID', $_SESSION['userID']);
+            $this->db->bind(':fullDate', $fullDate);
+            $row = $this->db->single();
+            return $row;
+        }
     }
 ?>

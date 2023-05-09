@@ -58,7 +58,9 @@
                     <h4>All Unanswered and Answered Questions.</h4>
 
                     <?php endif; ?> -->
-
+                    <div class="alert success">
+                    <?php flash('reg_flash'); ?>
+                </div>
                 <?php foreach ($data['questions'] as $question) : ?>
 
                     <div class="question-div">

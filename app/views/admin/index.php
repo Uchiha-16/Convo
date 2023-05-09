@@ -154,7 +154,7 @@
                                             <?php foreach($data['users'] as $user): ?>
                                                 <tr>
                                                     <td><?= $user->name ?></td>
-                                                    <td> <a href ="users/profile/<?= $user->userID ?>"><?= $user->uname ?></a></td>
+                                                    <td> <a href ="users/profiles/seeker"><?= $user->uname ?></a></td>
                                                     <td><?= $user->email ?></td>
                                                     <td><?= $user->role ?></td>
 

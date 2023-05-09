@@ -204,7 +204,12 @@
                                     <input type="text" id="designation" name="desigantion" class="form-control" placeholder="BSc. Computer Science">
                                 </div> -->
                                 <p>Tags
-
+                              
+                                    
+                                            <div id="">
+                                                <input class="inputform" type="text" name="newTag" id="playlist" placeholder="Add a New tag to your tag list">
+                                            </div>
+                                        
                                 <img class="normal-icon" src="<?php echo URLROOT; ?>/img/edit.png" alt="edit">
                                 </p>
                                 <div class="form-div">
@@ -222,11 +227,13 @@
                                 <div class="dropdown-div">
                                         <label style="margin-top: 20px;">Please Select &nbsp;<b>all the Tags </b> &nbsp;you want to add</label>
                                         <ul class="dropdown" id="dropdown">
-                                    
+                                        <?php $i = 1;?>
+                                        <?php foreach($data['Atags'] as $tags) : ?>
+                                            <li><input type="checkbox" value="<?php echo $tags->value;?>" name="tag[]" id="checkbox<?php echo $i;?>" /><label for="checkbox<?php echo $i;?>"><?php echo $tags->name;?></label></li>
+                                            <?php $i++;?>
+                                        <?php endforeach;?>
 
-                                            <li><input type="checkbox" value="agricultureScience" name="tag[]" id="checkbox1" /><label for="checkbox1">Agriculture Science</label></li>
-
-                                            <li><input type="checkbox" value="anthropology" name="tag[]" id="checkbox2" /><label for="checkbox2">Anthropology</label></li>
+                                            <!-- <li><input type="checkbox" value="anthropology" name="tag[]" id="checkbox2" /><label for="checkbox2">Anthropology</label></li>
 
                                             <li><input type="checkbox" value="biology" name="tag[]" id="checkbox3" /><label for="checkbox3">Biology</label></li>
 
@@ -272,7 +279,7 @@
 
                                             <li><input type="checkbox" value="socialScience" name="tag[]" id="checkbox24" /><label for="checkbox24">Social Science</label></li>
 
-                                            <li><input type="checkbox" value="spaceScience" name="tag[]" id="checkbox25" /><label for="checkbox25">Space Science</label></li>
+                                            <li><input type="checkbox" value="spaceScience" name="tag[]" id="checkbox25" /><label for="checkbox25">Space Science</label></li> -->
                                         </ul>
                                         <!--
                                                 <div class="select">

@@ -233,6 +233,13 @@
             $row = $this->db->resultSet();
             return $row;
         }
+
+        public function getExperts(){
+            $this->db->query('SELECT DISTINCT user.userID as userID, CONCAT(user.firstName, " ", user.lastName) as name FROM user JOIN expert ON 
+            user.userID = expert.expertID;');
+            $row = $this->db->resultSet();
+            return $row;
+        }
     }
 
 ?>

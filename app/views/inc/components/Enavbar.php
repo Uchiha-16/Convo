@@ -13,6 +13,7 @@
                     <a href="<?php echo URLROOT;?>/Consults/add">Consultation</a>
                     <a href="<?php echo URLROOT;?>/Blogs/add">Blog</a>
                     <a href="<?php echo URLROOT;?>/Projects/add">Project</a>
+                    <a href="<?php echo URLROOT;?>/FormTag/add">Tags</a>
                 </div>
             </div>
             <!-- notification bar -->
