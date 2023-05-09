@@ -122,7 +122,6 @@ function removeLink() {
 // Function to convert the edited text to HTML
 function convertToHtml() {
     // Get the edited text
-    alert(text_input.innerHTML);
     const editedText = text_input.innerHTML;
     // Display the HTML result
     const result = document.getElementById('result');
