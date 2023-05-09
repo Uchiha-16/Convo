@@ -360,148 +360,148 @@
         }
 
 
-        //filter by category
-        public function filter() {
+        // //filter by category
+        // public function filter() {
             
-            $date = isset($_POST['publishDate']) ? $_POST['publishDate'] : '0';
-            $QA = isset($_POST['QA']) ? $_POST['QA'] : '0';
-            $rating = isset($_POST['rating']) ? $_POST['rating'] : '0';
+        //     $date = isset($_POST['publishDate']) ? $_POST['publishDate'] : '0';
+        //     $QA = isset($_POST['QA']) ? $_POST['QA'] : '0';
+        //     $rating = isset($_POST['rating']) ? $_POST['rating'] : '0';
 
-            // print_r($date);
-            // print_r($QA);
-            // print_r($rating);
+        //     // print_r($date);
+        //     // print_r($QA);
+        //     // print_r($rating);
            
-            if($date == 0 && $QA == 0 && $rating == 0){
-                if(isset($_SESSION['userID'])){
-                    if($_SESSION['role'] == 'seeker'){
-                        $this->seeker();
-                    }elseif($_SESSION['role'] == 'expert'){
-                        $this->expert();
-                    }elseif($_SESSION['role'] == 'company'){
-                        $this->company();
-                    }    
-                }else{
-                    $this->index();
-                }
+        //     if($date == 0 && $QA == 0 && $rating == 0){
+        //         if(isset($_SESSION['userID'])){
+        //             if($_SESSION['role'] == 'seeker'){
+        //                 $this->seeker();
+        //             }elseif($_SESSION['role'] == 'expert'){
+        //                 $this->expert();
+        //             }elseif($_SESSION['role'] == 'company'){
+        //                 $this->company();
+        //             }    
+        //         }else{
+        //             $this->index();
+        //         }
                 
-            }else{
-                if($date != 0){
-                    if(in_array('last year', $date)){
-                        $date = 12;
-                    }elseif(in_array('last 6 months', $date)){
-                        $date = 6;
-                    }elseif(in_array('last 3 months', $date)){
-                        $date = 3;
-                    }else{
-                        $date = 24;
-                }
-            }else{
-                $date = 24;
-            }
+        //     }else{
+        //         if($date != 0){
+        //             if(in_array('last year', $date)){
+        //                 $date = 12;
+        //             }elseif(in_array('last 6 months', $date)){
+        //                 $date = 6;
+        //             }elseif(in_array('last 3 months', $date)){
+        //                 $date = 3;
+        //             }else{
+        //                 $date = 24;
+        //         }
+        //     }else{
+        //         $date = 24;
+        //     }
             
-            if($rating != 0){
-                if(in_array(5,$rating)){
-                    $rating = 5;
-                }elseif(in_array(4,$rating)){
-                    $rating = 4;
-                }
-                elseif(in_array(3,$rating)){
-                    $rating = 3;
-                }
-                elseif(in_array(2,$rating)){
-                    $rating = 2;
-                }
-                elseif(in_array(1,$rating)){
-                    $rating = 1;
-                }else{
-                    $rating = 5;
-                }
-            }else{
-                $rating = 5;
-            }
-            if($QA != 0){
-                if(in_array('Answered',$QA)){
-                    $QA1 = 1;
-                    $QA2 = 1000;
-                    if((in_array('Not Answered',$QA))){
-                        $QA1 = 0;
-                    }
-                }   
-                elseif(in_array('Not Answered',$QA)){
-                    $QA1 = 0;
-                    $QA2 = 0;
+        //     if($rating != 0){
+        //         if(in_array(5,$rating)){
+        //             $rating = 5;
+        //         }elseif(in_array(4,$rating)){
+        //             $rating = 4;
+        //         }
+        //         elseif(in_array(3,$rating)){
+        //             $rating = 3;
+        //         }
+        //         elseif(in_array(2,$rating)){
+        //             $rating = 2;
+        //         }
+        //         elseif(in_array(1,$rating)){
+        //             $rating = 1;
+        //         }else{
+        //             $rating = 5;
+        //         }
+        //     }else{
+        //         $rating = 5;
+        //     }
+        //     if($QA != 0){
+        //         if(in_array('Answered',$QA)){
+        //             $QA1 = 1;
+        //             $QA2 = 1000;
+        //             if((in_array('Not Answered',$QA))){
+        //                 $QA1 = 0;
+        //             }
+        //         }   
+        //         elseif(in_array('Not Answered',$QA)){
+        //             $QA1 = 0;
+        //             $QA2 = 0;
     
-                }else{
-                    $QA1 = 0;
-                    $QA2 = 1000;
-                }
-            }else{
-                $QA1 = 0;
-                $QA2 = 1000;
-            }
+        //         }else{
+        //             $QA1 = 0;
+        //             $QA2 = 1000;
+        //         }
+        //     }else{
+        //         $QA1 = 0;
+        //         $QA2 = 1000;
+        //     }
     
-                // print_r($date);
-                // print_r($QA1);
-                // print_r($QA2);
-                // print_r($rating);
+        //         // print_r($date);
+        //         // print_r($QA1);
+        //         // print_r($QA2);
+        //         // print_r($rating);
 
-                if(isset($_SESSION['userID'])){
-                    $usertag = $this->pagesM->getUserTag();
+        //         if(isset($_SESSION['userID'])){
+        //             $usertag = $this->projectsM->getUserTag();
 
-                    $str = '';
+        //             $str = '';
     
-                    foreach($usertag as $tag) {
-                        $str = $str . 'questiontag.tag = "' . $tag->tag . '" OR ';
+        //             foreach($usertag as $tag) {
+        //                 $str = $str . 'questiontag.tag = "' . $tag->tag . '" OR ';
     
-                    }
+        //             }
     
-                    $str = substr($str, 0, -4);
+        //             $str = substr($str, 0, -4);
     
-                    $questions = $this->pagesM->filter($date,$QA1,$QA2,$rating,$str);
-                }else{
-                    $questions = $this->pagesM->filterIndex($date,$QA1,$QA2,$rating);
-                }
+        //             $questions = $this->pagesM->filter($date,$QA1,$QA2,$rating,$str);
+        //         }else{
+        //             $questions = $this->pagesM->filterIndex($date,$QA1,$QA2,$rating);
+        //         }
                 
 
-                $tags = $this->pagesM->getQuestionTags();
+        //         $tags = $this->pagesM->getQuestionTags();
 
-                $count = array();
-                $c = 0;
-                foreach($questions as $question) {
-                    $count[$c] = $this->pagesM->answerCount($question->QID);
-                    $count[$c]->QID = $question->QID;
-                    $c++;
-                }
+        //         $count = array();
+        //         $c = 0;
+        //         foreach($questions as $question) {
+        //             $count[$c] = $this->pagesM->answerCount($question->QID);
+        //             $count[$c]->QID = $question->QID;
+        //             $c++;
+        //         }
 
                 
-                $data = [
-                    'questions' => $questions,
-                    'tags' => $tags,
-                    'count' => $count,
-                    'date' => $date,
-                    'rating' => $rating,
-                    'QA1' => $QA1,
-                    'QA2' => $QA2
+        //         $data = [
+        //             'questions' => $questions,
+        //             'tags' => $tags,
+        //             'count' => $count,
+        //             'date' => $date,
+        //             'rating' => $rating,
+        //             'QA1' => $QA1,
+        //             'QA2' => $QA2
 
-                ];
+        //         ];
                 
-                // print_r($questions);
-                if(isset($_SESSION['userID'])){
-                    if($_SESSION['role'] == 'seeker'){
-                        $this->view('projects/viewAllProjects', $data);
-                    }
-                    elseif($_SESSION['role'] == 'expert'){
-                        $this->view('projects/viewAllProjects', $data);
-                    }else{
-                        $this->view('projects/viewAllProjects', $data);
-                    }
-                }else{
-                    $this->view('projects/viewAllProjects', $data);
-                }
+        //         // print_r($questions);
+        //         if(isset($_SESSION['userID'])){
+        //             if($_SESSION['role'] == 'seeker'){
+        //                 $this->view('projects/viewAllProjects', $data);
+        //             }
+        //             elseif($_SESSION['role'] == 'expert'){
+        //                 $this->view('projects/viewAllProjects', $data);
+        //             }else{
+        //                 $this->view('projects/viewAllProjects', $data);
+        //             }
+        //         }else{
+        //             $this->view('projects/viewAllProjects', $data);
+        //         }
 
                     
-            }
-        }
+        //     }
+        // }
     }
 
 ?>

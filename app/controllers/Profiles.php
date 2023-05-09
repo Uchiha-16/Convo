@@ -137,7 +137,7 @@
             $profile = $this->profilesModel->getprofile();
            
             $old_filename = $profile->pfp;
-            print_r($Atags);
+           // print_r($Atags);
             
             $tags = $this->profilesModel->getUsertags();
             if($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -515,7 +515,7 @@
                      }
                     // Redirect to login
                     flash('reg_flash', 'Profile Updated');
-                    redirect('profiles/seeker');
+                    redirect('profiles/expert');
                 } else {
                     die('Something went wrong');
                 }
